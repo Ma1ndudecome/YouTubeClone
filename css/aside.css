@@ -2,7 +2,7 @@ aside{
     width: calc(12.5% + 10px);
     height: 855px;
     overflow-y: scroll;
-    
+    padding-left: 30px;
 }
 aside::-webkit-scrollbar {
     width: 10px;
@@ -24,7 +24,7 @@ aside::-webkit-scrollbar-thumb:hover{
 
 .aside_SignIn{
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     height: 120px;
     border-bottom: 2px solid rgba(0, 0, 0, 0.13);
