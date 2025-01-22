@@ -7,3 +7,44 @@ aside{
 aside::-webkit-scrollbar{
     width: 0px;
 }
+.aside_SignIn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.aside_SignIn_Container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.SignIn_paragraph{
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+.aside_SignIn_Container{
+    width: 180px;
+}
+.SignIn_element{
+    width: 100px;
+    border: 1px solid rgba(0, 0, 0, 0.13);
+    border-radius: 30px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.SignIn_element a{
+    text-decoration: none;
+    color:#065FD4;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+.mok1{
+    height: 145px;
+}
+.mok2{
+    height: 105px;
+}
