@@ -11,7 +11,7 @@ export function makeMarkingVideo(logoVideo, logoChannel, titleVideo, nameChannel
                             <h3 class="Main_container_video_title_paragraph">${titleVideo}</h3>
                             <div class="Main_container_video_title_info">
                                 <div class="Main_container_video_title_info_name">${nameChannel}</div>
-                                <div class="Main_container_video_title_info_statistic">${watch} ${date}</div>
+                                <div class="Main_container_video_title_info_statistic"><span class="watch">${watch}</span> <span class="date">${date}</span></div>
                             </div>
                         </div>
                     </div>
