@@ -1,0 +1,10 @@
+*{
+    text-decoration: none;
+    margin:0;
+    padding: 0;
+    list-style-type: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
