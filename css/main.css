@@ -1,6 +1,9 @@
 main{
     width: 87.5%;
 }
+ol, ul{
+    list-style-type: none;
+}
 .Main_container{
     height: 100%;
     width: 100%;

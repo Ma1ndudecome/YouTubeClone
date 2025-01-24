@@ -1,0 +1,22 @@
+.menu_Explore{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.13);
+    width: 100%;
+}
+.explore_Container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left:30px;
+    align-items: flex-start;
+}
+.Explore_paragraph{
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+}
+.Explore_element_menu li a{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+}
