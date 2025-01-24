@@ -1,8 +1,9 @@
 
-export function makeMarkingVideo(logoVideo, logoChannel, titleVideo, nameChannel, watch, date) {
+export function makeMarkingVideo(logoVideo, logoChannel, titleVideo, nameChannel, watch, date, duration) {
     return `
             <div class="Main_container_video">
                     <img src="${logoVideo}" alt="" class="Main_container_video_preview">
+                    <span class="time">${duration}</span>
                     <div class="Main_container_video_info">
                         <div class="Main_container_video_info_logo">
                             <img src="${logoChannel}" alt="">
@@ -15,6 +16,6 @@ export function makeMarkingVideo(logoVideo, logoChannel, titleVideo, nameChannel
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>    
     `
 }

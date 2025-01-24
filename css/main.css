@@ -11,21 +11,34 @@ main{
 .Main_container_video{
     width: 90%;
     height: 90%;
+    position: relative;
 }
 .Main_container_video_preview{
     max-height: 80%;
     object-fit: cover;
     border-radius: 20px;
     width: 100%;
+    z-index: 1;
 }
 .Main_container_video_info {
-    height: 35%;
+    height: 12%;
     display: flex;
     gap: 10px;
     margin-top: 10px;
 }
 .Main_container_video_info_logo{
-    width: 13%;
+    width: 12%;
+    
+}
+.time{
+    color: white;
+    position: absolute;
+    top: 183px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.404);
+    padding: 5px;
+    border-radius: 10px;
+    font-family:'Times New Roman', Times, serif
 }
 .Main_container_video_info_logo img {
     border-radius: 50%;
