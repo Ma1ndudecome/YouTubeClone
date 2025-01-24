@@ -2,7 +2,7 @@ aside{
     width: calc(12.5% + 10px);
     height: 855px;
     overflow-y: scroll;
-    padding-left: 30px;
+    
 }
 aside::-webkit-scrollbar {
     width: 10px;
@@ -33,6 +33,7 @@ aside::-webkit-scrollbar-thumb:hover{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-left:30px;
 }
 .SignIn_paragraph{
     font-family: "Poppins", serif;
