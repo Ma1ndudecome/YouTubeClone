@@ -2,3 +2,46 @@ header{
     height: 56px;
     width: 100%;
 }
+
+header{
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    gap: 30%;
+}
+
+header .menu_icon{
+    display: flex;
+    justify-content: space-around;
+    width: calc(12.5% + 10px);
+}
+header .menu{
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+}
+header .icon{border: 1px solid black;
+    height: 30px;
+}
+header .search_micro{
+    display: flex;
+}
+
+header .search{
+    
+    width: 300px;
+    height: 30px;
+}
+header .search input{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+header .micro{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
