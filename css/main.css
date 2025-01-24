@@ -9,8 +9,8 @@ main{
     row-gap: 80px;
 }
 .Main_container_video{
-    width: 90%;
-    height: 90%;
+    width: 95%;
+    height: 100%;
     position: relative;
 }
 .Main_container_video_preview{
@@ -21,7 +21,7 @@ main{
     z-index: 1;
 }
 .Main_container_video_info {
-    height: 12%;
+    height: 25%;
     display: flex;
     gap: 10px;
     margin-top: 10px;
@@ -45,7 +45,7 @@ main{
     
     margin-top: 10px;
     width: 100%;
-    height: 30%;
+    height: 45%;
 }
 .Main_container_video_title{
     width: 80%;
@@ -74,4 +74,16 @@ main{
     top: -3px;
     left: -10px;
     font-size: 20px;
+}
+@media (max-width:1900px){
+    .Main_container{
+       
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (max-width:1575px){
+    .Main_container{
+       
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
