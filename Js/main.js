@@ -2,7 +2,7 @@ import { makeMarkingVideo } from './markingVideo.js'
 import { formatDuration } from './FromISOToTime.js'
 
 
-function load(){
+
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video&eventType=none&key=${APIKEY}`;
   const container = document.querySelector(".Main_container")
   axios.get(url)
@@ -25,8 +25,8 @@ function load(){
   
     })
     .catch(error => console.log(error))
-}
-load()
+
+
 
 
 
