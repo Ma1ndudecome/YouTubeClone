@@ -1,15 +1,15 @@
 export function formatDuration(duration) {
-    // Проверяем, что строка начинается с "PT" — это базовое требование формата
+    
     if (!duration.startsWith("PT")) {
       console.error(`Invalid duration format: ${duration}`);
-      return "0:00"; // Возвращаем значение по умолчанию
+      return "0:00"; 
     }
   
-    // Пытаемся извлечь значения времени
+  
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!match) {
       console.error(`Failed to parse duration: ${duration}`);
-      return "0:00"; // Возвращаем значение по умолчанию
+      return "0:00"; 
     }
   
     const hours = match[1] || 0;
