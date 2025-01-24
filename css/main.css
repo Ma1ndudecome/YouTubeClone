@@ -77,13 +77,22 @@ main{
 }
 @media (max-width:1900px){
     .Main_container{
-       
         grid-template-columns: repeat(4, 1fr);
     }
 }
 @media (max-width:1575px){
     .Main_container{
-       
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width:1200px){
+    .Main_container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width:760px){
+    .Main_container{
+        grid-template-columns: repeat(1, 1fr);
     }
 }
