@@ -84,6 +84,17 @@ ol, ul{
     left: -10px;
     font-size: 20px;
 }
+iframe{
+    width: 80%;
+    height: 80%;
+    border-radius: 20px;
+}
+.block{
+    display: block;
+}
+.ytp-pause-overlay{
+    display:none;
+}
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);
