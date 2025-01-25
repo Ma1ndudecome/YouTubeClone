@@ -89,6 +89,52 @@ iframe{
     height: 80%;
     border-radius: 20px;
 }
+.Main_container_blockInfo{
+    height: 30%;
+    width: 80%;
+    font-family: "Roboto", "Arial", sans-serif;
+    padding-top: 20px;
+    
+}
+.Main_container_blockInfo h1{
+    font-size: 23px;
+}
+.Main_container_blockInfo_statistic{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    margin-top: 10px;
+}
+.Main_container_blockInfo_statistic_leftSide, .Main_container_blockInfo_statistic_rightSide{
+    width: 50%;
+    display: flex;
+}
+.leftSide_img{
+    width: 7%;
+    height: 100%;
+    height: 100%;
+}
+.leftSide_img img{
+    width: 100%;
+    border-radius: 50%;
+    height: 66%;
+}
+.leftSide_title{
+    width: 40%;
+    height: 100%;
+}
+.leftSide_title div{
+    width: 100%;
+    height: 50%;
+}
+.leftSide_title_nameAccount{
+    font-weight: 500;
+    font-size: 17px;
+}
+.leftSide_title_subscribe{
+    font-weight: 300;
+    font-size: 14px;
+}
 .block{
     display: block;
 }
