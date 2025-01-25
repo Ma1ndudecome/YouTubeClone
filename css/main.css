@@ -1,5 +1,7 @@
 main{
     width: 87.5%;
+    --bgcolorTransperent:#0000000e;
+    --bgColorTransperentHover:#00000017;
 }
 ol, ul{
     list-style-type: none;
@@ -109,6 +111,10 @@ iframe{
     width: 50%;
     display: flex;
 }
+.Main_container_blockInfo_statistic_rightSide{
+    gap:20px;
+    justify-content: center;
+}
 .Main_container_blockInfo_statistic_leftSide{
     gap: 10px;
 }
@@ -167,7 +173,7 @@ iframe{
 .rightSide_emotion_like, .rightSide_emotion_dislike{
     
     height: 50%;
-    background-color: #0000001f;
+    background-color: var(--bgcolorTransperent)
     
 }
 .rightSide_emotion_like{
@@ -180,8 +186,8 @@ iframe{
     width: 60%;
     gap: 10px; 
 }
-.rightSide_emotion_like:hover, .rightSide_emotion_dislike:hover {
-    background-color: #0000002d;
+.rightSide_emotion_like:hover, .rightSide_emotion_dislike:hover, .rightSide_share:hover, .rightSide_threeDots:hover {
+    background-color: var(--bgColorTransperentHover);
     cursor: pointer;
 }
 .rightSide_emotion_like svg{
@@ -205,12 +211,37 @@ iframe{
     margin-right: 5px;
     margin-top: 1px;
 }
+.rightSide_share{
+    width: 28%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bgcolorTransperent);
+    border-radius: 20px;
+}
+.rightSide_share svg{
+    height: 80%;
+}
+.rightSide_threeDots{
+    width: 6%;
+    height: 50%;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: var(--bgcolorTransperent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightSide_threeDots svg{
+    width: 50%;
+}
 .block{
     display: block;
 }
-.ytp-pause-overlay{
-    display:none;
-}
+
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);

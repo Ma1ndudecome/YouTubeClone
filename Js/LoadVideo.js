@@ -1,6 +1,6 @@
 import { makeMarkingVideo } from './markingVideo.js'
 import { formatDuration } from './FromISOToTime.js'
-
+export let dateRequest = []
 
 
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video&eventType=none&key=${APIKEY}`;
@@ -18,6 +18,7 @@ import { formatDuration } from './FromISOToTime.js'
               const date = new Date(el.snippet.publishedAt)
               const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
               container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, el.statistics.viewCount, result, formatDuration(el.contentDetails.duration), el.id))
+              dateRequest.push(el)
             }
           })
         })
