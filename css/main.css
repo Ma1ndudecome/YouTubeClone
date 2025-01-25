@@ -159,6 +159,52 @@ iframe{
 .leftSide_subscribe_button button:hover{
     background-color: rgba(0, 0, 0, 0.829);
 }
+.rightSide_emotion{
+    width: 20%;
+    display: flex;
+    
+}
+.rightSide_emotion_like, .rightSide_emotion_dislike{
+    
+    height: 50%;
+    background-color: #0000001f;
+    
+}
+.rightSide_emotion_like{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: 1px solid rgba(0, 0, 0, 0.233);
+    width: 60%;
+    gap: 10px; 
+}
+.rightSide_emotion_like:hover, .rightSide_emotion_dislike:hover {
+    background-color: #0000002d;
+    cursor: pointer;
+}
+.rightSide_emotion_like svg{
+    width: 20px;
+}
+.rightSide_emotion_like_count{
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 14px;
+}
+.rightSide_emotion_dislike{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightSide_emotion_dislike svg{
+    width: 20px;
+    margin-right: 5px;
+    margin-top: 1px;
+}
 .block{
     display: block;
 }
