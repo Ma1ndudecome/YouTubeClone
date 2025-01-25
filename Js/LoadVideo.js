@@ -14,10 +14,10 @@ import { formatDuration } from './FromISOToTime.js'
         .then(data => {
           data.data.items.forEach(el => {
             if (el.snippet.liveBroadcastContent === 'none') {
+              console.log(el.id.videoId)
               const date = new Date(el.snippet.publishedAt)
               const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
               container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, el.statistics.viewCount, result, formatDuration(el.contentDetails.duration)))
-  
             }
           })
         })
