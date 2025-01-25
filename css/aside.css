@@ -52,6 +52,11 @@ aside::-webkit-scrollbar-thumb:hover{
     align-items: center;
     justify-content: center;
     gap: 10px;
+    cursor: pointer;
+}
+.SignIn_element:hover{
+    background-color: rgb(220, 238, 245);
+
 }
 .SignIn_element a{
     text-decoration: none;
