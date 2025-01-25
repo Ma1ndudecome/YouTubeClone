@@ -1,15 +1,13 @@
 header{
     height: 56px;
     width: 100%;
-}
-
-header{
     display: flex;
      justify-content: space-between;
      align-items: center; 
     /* gap: 30%; */
     background-color: white;
-    position: fixed;
+    position: sticky;
+    top:0
 }
 
 header .menu_icon{
