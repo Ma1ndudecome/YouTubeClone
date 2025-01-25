@@ -1,5 +1,7 @@
 main{
     width: 87.5%;
+    --bgcolorTransperent:#0000000e;
+    --bgColorTransperentHover:#00000017;
 }
 ol, ul{
     list-style-type: none;
@@ -84,6 +86,162 @@ ol, ul{
     left: -10px;
     font-size: 20px;
 }
+iframe{
+    width: 80%;
+    height: 80%;
+    border-radius: 20px;
+}
+.Main_container_blockInfo{
+    height: 30%;
+    width: 80%;
+    font-family: "Roboto", "Arial", sans-serif;
+    padding-top: 20px;
+    
+}
+.Main_container_blockInfo h1{
+    font-size: 23px;
+}
+.Main_container_blockInfo_statistic{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    margin-top: 10px;
+}
+.Main_container_blockInfo_statistic_leftSide, .Main_container_blockInfo_statistic_rightSide{
+    width: 50%;
+    display: flex;
+}
+.Main_container_blockInfo_statistic_rightSide{
+    gap:20px;
+    justify-content: center;
+}
+.Main_container_blockInfo_statistic_leftSide{
+    gap: 10px;
+}
+.leftSide_img{
+    width: 6%;
+    height: 100%;
+    height: 100%;
+}
+.leftSide_img img{
+    width: 100%;
+    border-radius: 50%;
+    height: 53%;
+}
+.leftSide_title{
+    width: 40%;
+    height: 100%;
+}
+.leftSide_title div{
+    width: 100%;
+    
+}
+.leftSide_title_nameAccount{
+    font-weight: 500;
+    font-size: 17px;
+    height: 35%;
+}
+.leftSide_title_subscribe{
+    font-weight: 300;
+    font-size: 12px;
+    height: 50%;
+}
+.leftSide_subscribe_button{
+    width: 20%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.leftSide_subscribe_button button{
+    padding: 10px 15px 10px 15px;
+    background-color: black;
+    border-radius: 20px;
+    color:white;
+    border: none;
+    font-size: 15px;
+    font-family: "Roboto", "Arial", sans-serif;
+    cursor: pointer;
+}
+.leftSide_subscribe_button button:hover{
+    background-color: rgba(0, 0, 0, 0.829);
+}
+.rightSide_emotion{
+    width: 20%;
+    display: flex;
+    
+}
+.rightSide_emotion_like, .rightSide_emotion_dislike{
+    
+    height: 50%;
+    background-color: var(--bgcolorTransperent)
+    
+}
+.rightSide_emotion_like{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: 1px solid rgba(0, 0, 0, 0.233);
+    width: 60%;
+    gap: 10px; 
+}
+.rightSide_emotion_like:hover, .rightSide_emotion_dislike:hover, .rightSide_share:hover, .rightSide_threeDots:hover {
+    background-color: var(--bgColorTransperentHover);
+    cursor: pointer;
+}
+.rightSide_emotion_like svg{
+    width: 20px;
+}
+.rightSide_emotion_like_count{
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 14px;
+}
+.rightSide_emotion_dislike{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightSide_emotion_dislike svg{
+    width: 20px;
+    margin-right: 5px;
+    margin-top: 1px;
+}
+.rightSide_share{
+    width: 28%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--bgcolorTransperent);
+    border-radius: 20px;
+}
+.rightSide_share svg{
+    height: 80%;
+}
+.rightSide_threeDots{
+    width: 6%;
+    height: 50%;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: var(--bgcolorTransperent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightSide_threeDots svg{
+    width: 50%;
+}
+.block{
+    display: block;
+}
+
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);
