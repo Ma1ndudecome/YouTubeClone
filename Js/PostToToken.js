@@ -6,8 +6,8 @@ if(code){
     
     const data = new URLSearchParams()
     data.append('code', code); 
-    data.append('CI', );
-    data.append('CS',);
+    data.append('CI',);
+    data.append('CS', clientSecret);
     data.append('redirect_uri', 'http://localhost:5501');
     data.append('grant_type', 'authorization_code');
 
