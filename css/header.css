@@ -12,9 +12,10 @@ header{
 
 header .menu_icon{
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     width: calc(12.5% + 10px);
+    padding-left: 32px;
 }
 header .menu{
     
