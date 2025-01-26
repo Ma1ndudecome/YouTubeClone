@@ -34,7 +34,7 @@ header .menu .burger{
     position: relative;
 }
 header .menu .burger span {
-     height: 1px; 
+     height: 2px; 
     width: 80%;
     border-radius: 3px;
     background-color: rgb(74, 74, 74);
