@@ -70,7 +70,7 @@
 .shorts-btn-repost-conteiner-svg:hover,
 .shorts-btn-comment-conteiner-svg:hover {
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--hovColor);
     border-color: transparent;
 }
 
@@ -103,6 +103,6 @@
 .shorts-btn-down:hover,
 .shorts-btn-up:hover{
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--hovColor);
     border-color: transparent;
 }
