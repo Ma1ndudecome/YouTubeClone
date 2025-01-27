@@ -37,5 +37,5 @@
     padding: 10px;
 }
 .Explore_element_menu li:hover{
-    background-color: rgba(0, 0, 0, 0.103) ;
+    background-color:var(--hovColor);
 }

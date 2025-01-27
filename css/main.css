@@ -70,11 +70,13 @@ ol, ul{
     font-size: 17px;
     line-height: 20px;
     font-weight: 500;
+    color:var(--bordColor)
 }
 .Main_container_video_title_info{
     font-family: "Roboto", "Arial", sans-serif;
     font-weight: 400;
-    color:#606060
+    color:var(--bordColor);
+    opacity: 0.5;
 }
 .date{
     position: relative;
@@ -101,6 +103,7 @@ iframe{
 }
 .Main_container_blockInfo h1{
     font-size: 23px;
+    color:var(--bordColor)
 }
 .Main_container_blockInfo_statistic{
     width: 100%;
@@ -141,23 +144,26 @@ iframe{
     font-weight: 500;
     font-size: 17px;
     height: 35%;
+    color:var(--bordColor)
 }
 .leftSide_title_subscribe{
     font-weight: 300;
     font-size: 12px;
     height: 50%;
+    color:var(--bordColor)
 }
 .leftSide_subscribe_button{
     width: 20%;
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    
 }
 .leftSide_subscribe_button button{
     padding: 10px 15px 10px 15px;
-    background-color: black;
+    background-color: var(--bordColor);
+    color:var(--WhColor);
     border-radius: 20px;
-    color:white;
     border: none;
     font-size: 15px;
     font-family: "Roboto", "Arial", sans-serif;
@@ -197,6 +203,7 @@ iframe{
 .rightSide_emotion_like_count{
     font-family: "Roboto", "Arial", sans-serif;
     font-size: 14px;
+    color:var(--bordColor);
 }
 .rightSide_emotion_dislike{
     border-top-right-radius: 20px;
@@ -224,6 +231,9 @@ iframe{
 }
 .rightSide_share svg{
     height: 80%;
+}
+.rightSide_share div{
+    color:var(--bordColor)
 }
 .rightSide_threeDots{
     width: 6%;

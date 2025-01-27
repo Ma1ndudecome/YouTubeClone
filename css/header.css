@@ -87,9 +87,10 @@ header .search .glass{
     height: 100%;
     border-radius: 0 15px 15px 0;
     background-color: rgba(228, 228, 228, 0.671);
+    cursor: pointer;
 }
 header .glass:hover{
-    background-color:rgba(212, 211, 211, 0.671) ;
+    background-color:var(--headerColor)
 }
 
 header .micro{
@@ -98,9 +99,10 @@ header .micro{
     width: 40px;
     height: 40px;
     background-color: rgba(228, 228, 228, 0.671);
+    cursor: pointer;
 }
 header .micro:hover{
-    background-color:rgba(212, 211, 211, 0.671) ;
+    background-color:var(--headerColor)
 }
 
 header .sing_int{
