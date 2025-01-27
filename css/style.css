@@ -1,9 +1,31 @@
+html{
+    --WhColor:white;
+    --bordColor:#0f0f0f;
+    --hovColor:rgba(0, 0, 0, 0.103);
+    --headerColor:rgba(212, 211, 211, 0.871) ;
+    --hovSing:rgb(220, 238, 245);
+}
+html.black{
+    --WhColor:#0f0f0f;
+    --bordColor:white;
+    --hovColor:rgba(102, 102, 102, 0.303);
+    --headerColor:rgba(128, 128, 128, 0.871) ;
+    --hovSing:rgba(173, 224, 245, 0.212);
+}
+
+html.black svg path{
+    fill:white
+}
+html.black svg path[fill="#FF0033"]{
+    fill:#FF0033
+}
 body{
     display: flex;
     flex-direction: column;
 }
 
-.wrapp-mainAside{
+.wrapp-mainAside {
     display: flex;
     flex-direction: row;
+    background-color: var(--WhColor);
 }
