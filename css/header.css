@@ -107,8 +107,29 @@ header .micro:hover{
 
 header .sing_int{
     margin-right: 60px;
+    display: flex;
+    align-items: center;
+     gap: 20px; 
 }
-header .sing_int:hover{
+.sing_int .block_fon{
+    width: 10px;
+    height: 30px;
+    
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+.sing_int .block_fon div{
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin: 2px;
+    background-color: rgb(49, 49, 49);
+}
+
+
+header .sing_int svg:hover{
     background-color: rgb(220, 238, 245);
     border-radius: 15px;
     height: 36px;
