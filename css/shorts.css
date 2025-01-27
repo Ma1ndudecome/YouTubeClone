@@ -1,0 +1,108 @@
+.shorts-video-conteiner {
+    display: flex;
+    border-radius: 12px;
+    position: relative;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.shorts-video-inner {
+    background: linear-gradient(to bottom, #000000, #666666);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc((100vh - 96px) * 0.5625);
+    height: calc(100vh - 96px);
+}
+
+.Main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-items: flex-end;
+}
+
+.shorts-conteiner-control {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    pointer-events: auto;
+    width: 48px;
+    padding: 12px 12px 8px;
+}
+
+.shorts-btn-like-conteiner,
+.shorts-btn-dislike-conteiner,
+.shorts-btn-comment-conteiner,
+.shorts-btn-repost-conteiner,
+.shorts-btn-settings-conteiner {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 18px;
+}
+
+.shorts-btn-like-conteiner-svg,
+.shorts-btn-settings-conteiner-svg,
+.shorts-btn-dislike-conteiner-svg,
+.shorts-btn-repost-conteiner-svg,
+.shorts-btn-comment-conteiner-svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    transition: 400ms;
+}
+
+
+.shorts-btn-like-conteiner-svg:hover,
+.shorts-btn-settings-conteiner-svg:hover,
+.shorts-btn-dislike-conteiner-svg:hover,
+.shorts-btn-repost-conteiner-svg:hover,
+.shorts-btn-comment-conteiner-svg:hover {
+    cursor: pointer;
+    background: var(--hovColor);
+    border-color: transparent;
+}
+
+.shorts-btn-down,
+.shorts-btn-up {
+    background-color: rgba(0, 0, 0, 0.05000000074505806);
+    height: 56px;
+    width: 56px;
+    border-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 300ms;
+}
+
+.shorts-nav-btn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    top: 0;
+    right: 0px;
+    gap: 16px;
+    padding-right: 24px;
+    padding-left: 16px;
+
+}
+.shorts-btn-down:hover,
+.shorts-btn-up:hover{
+    cursor: pointer;
+    background: var(--hovColor);
+    border-color: transparent;
+}
