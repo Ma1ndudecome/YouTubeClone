@@ -2,6 +2,7 @@ main{
     width: 87.5%;
     --bgcolorTransperent:#0000000e;
     --bgColorTransperentHover:#00000017;
+    background-color: var(--WhColor);
 }
 ol, ul{
     list-style-type: none;

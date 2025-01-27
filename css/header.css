@@ -2,10 +2,9 @@ header{
     height: 56px;
     width: 100%;
     display: flex;
-     justify-content: space-between;
-     align-items: center; 
-    
-    background-color: white;
+    justify-content: space-between;
+    align-items: center; 
+    background-color: var(--WhColor);
     position: sticky;
     top:0
 }
@@ -69,15 +68,16 @@ header .search{
     align-items: center;
     width: 300px;
     height: 40px;
-    border: 1px solid black;
+    border: 1px solid var(--bordColor);
     border-radius: 15px 15px 15px 15px;
 }
 header .search input{
     width:calc(100% - 40px) ;
     height: 100%;
     border-radius: 15px 0 0 15px;
-   
+    background-color: var(--WhColor);
     border: none;
+    
 }
 header .search .glass{
     display: flex;
@@ -86,7 +86,6 @@ header .search .glass{
     width: 40px;
     height: 100%;
     border-radius: 0 15px 15px 0;
-    
     background-color: rgba(228, 228, 228, 0.671);
 }
 header .glass:hover{

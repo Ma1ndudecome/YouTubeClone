@@ -15,6 +15,7 @@
     font-size: 16px;
     font-weight: 500;
     padding-left: 10px;
+    color:var(--bordColor)
 }
 .Explore_element_menu{
     display: flex;
@@ -32,7 +33,7 @@
     font-size: 14px;
     font-weight: 400;
     font-family: "Roboto", serif;
-    color: #0F0F0F;
+    color: var(--bordColor);
     padding: 10px;
 }
 .Explore_element_menu li:hover{

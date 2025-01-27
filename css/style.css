@@ -1,3 +1,15 @@
+html{
+    --WhColor:white;
+    --bordColor:#0f0f0f;
+}
+html.black{
+    --WhColor:#0f0f0f;
+    --bordColor:white;
+}
+html.black svg path[fill="black"], svg path[fill="#030303"], svg path[fill="#000"] {
+    fill: white;
+}
+
 body{
     display: flex;
     flex-direction: column;

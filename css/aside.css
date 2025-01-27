@@ -2,6 +2,7 @@ aside{
     width: calc(12.5% + 10px);
     height: 855px;
     overflow-y: scroll;
+    background-color: var(--WhColor);
     
 }
 aside::-webkit-scrollbar {
@@ -39,6 +40,7 @@ aside::-webkit-scrollbar-thumb:hover{
     font-family: "Poppins", serif;
     font-weight: 400;
     font-size: 14px;
+    color:var(--bordColor)
 }
 .aside_SignIn_Container{
     width: 180px;
