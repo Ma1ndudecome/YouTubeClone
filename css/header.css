@@ -235,3 +235,142 @@ header .sing_int{
     cursor: pointer;
     background-color: var(--hoverBlack);
 }
+
+header{
+    height: 56px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    background-color: var(--WhColor);
+    position: sticky;
+    top:0
+}
+
+header .menu_icon{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: calc(12.5% + 10px);
+    padding-left: 32px;
+}
+header .menu{
+    
+    width: 25px;
+    height: 20px;
+}
+
+
+header .menu .burger{
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 25px;
+     height: 15px; 
+    
+    position: relative;
+}
+header .menu .burger span {
+     height: 2px; 
+    width: 80%;
+    border-radius: 3px;
+    background-color: rgb(74, 74, 74);
+    transform: scale(1);
+    
+}
+header .menu .burger::before, .burger::after{
+ content: '';
+ position: absolute;
+ /* height: 1px; */
+ width: 80%;
+ background-color: rgb(74, 74, 74);
+
+}
+
+.burger::before{
+    top:0 ;
+    height: 2px;
+}
+.burger::after{
+    bottom: 0;
+    height: 2px;
+}
+
+header .search_micro{
+    display: flex;
+     gap: 10px;
+    width: 370px;
+}
+
+header .search{
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+    border: 1px solid var(--bordColor);
+    border-radius: 15px 15px 15px 15px;
+}
+header .search input{
+    width:calc(100% - 40px) ;
+    height: 100%;
+    border-radius: 15px 0 0 15px;
+    background-color: var(--WhColor);
+    border: none;
+    
+}
+header .search .glass{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 100%;
+    border-radius: 0 15px 15px 0;
+    background-color: rgba(228, 228, 228, 0.671);
+    cursor: pointer;
+}
+header .glass:hover{
+    background-color:var(--headerColor)
+}
+
+header .micro{
+     border: 1px solid black; 
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(228, 228, 228, 0.671);
+    cursor: pointer;
+}
+header .micro:hover{
+    background-color:var(--headerColor)
+}
+
+header .sing_int{
+    margin-right: 60px;
+    display: flex;
+    align-items: center;
+     gap: 20px; 
+}
+.sing_int .block_fon{
+    width: 10px;
+    height: 30px;
+    
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+.sing_int .block_fon div{
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin: 2px;
+    background-color: rgb(49, 49, 49);
+}
+
+
+header .sing_int svg:hover{
+    background-color: rgb(220, 238, 245);
+    border-radius: 15px;
+    height: 36px;
+}
+
