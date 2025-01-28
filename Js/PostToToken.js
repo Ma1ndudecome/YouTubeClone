@@ -52,7 +52,7 @@ if(code){
             })
             .then(response=>{
                 console.log(response)
-                changeProfile(response.data.items[0].snippet.thumbnails.default.url)
+                changeProfile(response.data.items[0].snippet.thumbnails.default.url,response.data.items[0].snippet.title, response.data.items[0].snippet.customUrl )
             })
             .catch(error=>console.log('error'))
         })
