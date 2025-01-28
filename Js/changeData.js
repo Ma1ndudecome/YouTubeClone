@@ -31,7 +31,7 @@ export function changeProfile(profileImg, profileName, profileCustomUrl){
                             <p>Switch Account</p>
                        </div>
                     </div>
-                    <div class="left_box3">
+                    <div class="left_box3 dF aiC jcC">
                         <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="m9.4 18.4-.7-.7 5.6-5.6-5.7-5.7.7-.7 6.4 6.4-6.3 6.3z"></path></svg>
                     </div>
                 </div>
@@ -45,23 +45,31 @@ export function changeProfile(profileImg, profileName, profileCustomUrl){
                 </div>
             </div>
             <div class="Setting_theme">
-                <div class="theme">
-                    <div class=theme_box>
+                <div class="theme dF">
+                    <div class="theme_box dF aiC jcC">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                             <path d="M12 22C10.93 22 9.86998 21.83 8.83998 21.48L7.41998 21.01L8.83998 20.54C12.53 19.31 15 15.88 15 12C15 8.12 12.53 4.69 8.83998 3.47L7.41998 2.99L8.83998 2.52C9.86998 2.17 10.93 2 12 2C17.51 2 22 6.49 22 12C22 17.51 17.51 22 12 22ZM10.58 20.89C11.05 20.96 11.53 21 12 21C16.96 21 21 16.96 21 12C21 7.04 16.96 3 12 3C11.53 3 11.05 3.04 10.58 3.11C13.88 4.81 16 8.21 16 12C16 15.79 13.88 19.19 10.58 20.89Z"></path>
                         </svg>
                     </div>
-                    <div class="theme_box1"></div>
+                    <div class="theme_box1 dF aiC">
+                        <p>Apperance</p>
+                    </div>
+                    <div class="theme_arrow dF aiC jcC">
+                        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="m9.4 18.4-.7-.7 5.6-5.6-5.7-5.7.7-.7 6.4 6.4-6.3 6.3z"></path></svg>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     `
-    document.querySelector(".profileImg img").onclick = (e)=>{
-        const info = document.querySelector(".profileImg_Info")
-        if(e.target !== e.currentTarget){
+    document.body.onclick = (e)=>{
+        if(e.target.parentNode.classList.contains("profileImg")){
+             const info = document.querySelector(".profileImg_Info")
+            info.classList.toggle("show")
+        }else if(!e.target.closest(".profileImg_Info")){
+            
+            const info = document.querySelector(".profileImg_Info")
             info.classList.remove("show")
         }
-        info.classList.toggle("show")
     }
 }

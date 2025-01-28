@@ -125,12 +125,12 @@ header .sing_int{
     position: absolute;
     left: -208px;
     width: 300px;
-    height: 400px;
+    height: 300px;
     background-color: var(--hovColor);
 }
 .profileImg_Info_top{
     width: 100%;
-    height: 25%;
+    height: 34%;
     border-bottom: 1px solid white;
     padding: 20px 0px 0px 10px;
     box-sizing: border-box;
@@ -162,10 +162,10 @@ header .sing_int{
     display: block;
 }
 .Info_account{
-    height: 35%;
+    height: 45%;
     border-bottom: 1px solid white;
 }
-.Info_account svg{
+.Info_account svg, .theme_box svg, .theme_arrow svg{
     width: 22px;
     height: 53px;
 }
@@ -208,8 +208,30 @@ header .sing_int{
     color:var(--bordColor);
     font-family: "Poppins", serif;
 }
-.Info_account_google:hover, .Info_account_change:hover, .Info_account_exit:hover{
-    cursor: pointer;
-    background-color: var(--hovSing);
-}
 
+.Setting_theme{
+    height: 21%;
+}
+.theme{
+    height: 100%;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.theme_box{
+    height: 100%;
+    width: 20%;
+}
+.theme_box1{
+    width: 60%;
+}
+.theme_box1 p{
+    color:var(--bordColor);
+    font-family: "Poppins", serif;
+}
+.theme_arrow{
+    width: 20%;
+}
+.Info_account_google:hover, .Info_account_change:hover, .Info_account_exit:hover, .theme:hover{
+    cursor: pointer;
+    background-color: var(--hoverBlack);
+}
