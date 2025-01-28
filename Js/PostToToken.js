@@ -1,6 +1,7 @@
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
 const code = urlParams.get('code');
+import { changeProfile } from "./changeData.js";
 
 if(code){
     
@@ -18,6 +19,7 @@ if(code){
     })
     .then(response=>{
         if(response.data.refresh_token){
+            console.log('write successfuly')
             localStorage.setItem("Refresh_token", response.data.refresh_token)
         }
         
@@ -48,10 +50,13 @@ if(code){
                     'Authorization':`Bearer ${response.data.access_token}`
                 }
             })
-            .then(data=>console.log(data))
-            .catch(error=>console.log(error))
+            .then(response=>{
+                console.log(response)
+                changeProfile(response.data.items[0].snippet.thumbnails.default.url,response.data.items[0].snippet.title, response.data.items[0].snippet.customUrl )
+            })
+            .catch(error=>console.log('error'))
         })
-        .catch(error=>console.log(error))
+        .catch(error=>console.log('error'))
         
     })
 

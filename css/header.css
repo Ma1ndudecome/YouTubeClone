@@ -11,6 +11,244 @@ header{
 
 header .menu_icon{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(12.5% + 10px);
+}
+header .menu{
+    
+    width: 25px;
+    height: 20px;
+}
+
+
+header .menu .burger{
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 25px;
+     height: 15px; 
+    
+    position: relative;
+}
+header .menu .burger span {
+     height: 1px; 
+    width: 80%;
+    border-radius: 3px;
+    background-color: rgb(74, 74, 74);
+    transform: scale(1);
+    
+}
+header .menu .burger::before, .burger::after{
+ content: '';
+ position: absolute;
+ /* height: 1px; */
+ width: 80%;
+ background-color: rgb(74, 74, 74);
+
+}
+
+.burger::before{
+    top:0 ;
+    height: 2px;
+}
+.burger::after{
+    bottom: 0;
+    height: 2px;
+}
+
+header .search_micro{
+    display: flex;
+     gap: 10px;
+    width: 370px;
+}
+
+header .search{
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+    border: 1px solid var(--bordColor);
+    border-radius: 15px 15px 15px 15px;
+}
+header .search input{
+    width:calc(100% - 40px) ;
+    height: 100%;
+    border-radius: 15px 0 0 15px;
+    background-color: var(--WhColor);
+    border: none;
+    
+}
+header .search .glass{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 100%;
+    border-radius: 0 15px 15px 0;
+    background-color: rgba(228, 228, 228, 0.671);
+    cursor: pointer;
+}
+header .glass:hover{
+    background-color:var(--headerColor)
+}
+
+header .micro{
+     border: 1px solid black; 
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(228, 228, 228, 0.671);
+    cursor: pointer;
+}
+header .micro:hover{
+    background-color:var(--headerColor)
+}
+
+header .sing_int{
+    margin-right: 60px;
+}
+
+.profileImg{
+    width: 100%;
+    position: relative;
+}
+.profileImg img{
+    border-radius: 50%;
+    width: 35%;
+    cursor: pointer;
+}
+.profileImg_Info{
+    display: none;
+    border-radius: 20px;
+    top: 35px;
+    position: absolute;
+    left: -208px;
+    width: 300px;
+    height: 300px;
+    background-color: var(--hovColor);
+}
+.profileImg_Info_top{
+    width: 100%;
+    height: 34%;
+    border-bottom: 1px solid white;
+    padding: 20px 0px 0px 10px;
+    box-sizing: border-box;
+}
+.Info_top_img{
+    width: 20%;
+}
+.Info_top_img img{
+    width: 70%;
+}
+.Info_top_profileInfo{
+    width: 80%;
+    padding-left: 10px;
+}
+.profileInfo_title, .profileInfo_customUrl{
+    color:var(--bordColor);
+    font-family: "Poppins", serif;
+    font-weight: 300;
+    font-size: 15px;
+}
+.Info_top_profileInfo a{
+    color: #6ca3eb;
+    margin-top: 15px;
+    font-family: "Poppins", serif;
+    font-weight: 300;
+
+}
+.show{
+    display: block;
+}
+.Info_account{
+    height: 45%;
+    border-bottom: 1px solid white;
+}
+.Info_account svg, .theme_box svg, .theme_arrow svg{
+    width: 22px;
+    height: 53px;
+}
+.Info_account_google_box, .exit_box{
+    width: 20%;
+    height: 100%;
+}
+.Info_account_google_box1, .exit_box1{
+    width: 80%;
+    height: 100%;
+}
+.Info_account_left{
+    width: 80%;
+}
+.Info_account_google_box1 p{
+    color: var(--bordColor);
+    font-family: "Poppins", serif;
+}
+.Info_account_google, .Info_account_change, .Info_account_exit{
+    height: 33.333%;
+}
+.left_box{
+    width: 25%;
+    height: 100%;
+}
+.left_box1{
+    width: 60%;
+    height: 100%;
+}
+.left_box1 p{
+    color:var(--bordColor);
+    font-family: "Poppins", serif;
+
+}
+.left_box3{
+    width: 20%;
+    height: 100%;
+}
+.exit_box1 p {
+    color:var(--bordColor);
+    font-family: "Poppins", serif;
+}
+
+.Setting_theme{
+    height: 21%;
+}
+.theme{
+    height: 100%;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.theme_box{
+    height: 100%;
+    width: 20%;
+}
+.theme_box1{
+    width: 60%;
+}
+.theme_box1 p{
+    color:var(--bordColor);
+    font-family: "Poppins", serif;
+}
+.theme_arrow{
+    width: 20%;
+}
+.Info_account_google:hover, .Info_account_change:hover, .Info_account_exit:hover, .theme:hover{
+    cursor: pointer;
+    background-color: var(--hoverBlack);
+}
+
+header{
+    height: 56px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    background-color: var(--WhColor);
+    position: sticky;
+    top:0
+}
+
+header .menu_icon{
+    display: flex;
     justify-content: start;
     align-items: center;
     width: calc(12.5% + 10px);
