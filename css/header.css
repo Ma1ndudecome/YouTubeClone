@@ -108,9 +108,130 @@ header .micro:hover{
 header .sing_int{
     margin-right: 60px;
 }
-header .sing_int:hover{
-    background-color: rgb(220, 238, 245);
-    border-radius: 15px;
-    height: 36px;
+
+.profileImg{
+    width: 100%;
+    position: relative;
+}
+.profileImg img{
+    border-radius: 50%;
+    width: 35%;
+    cursor: pointer;
+}
+.profileImg_Info{
+    display: none;
+    border-radius: 20px;
+    top: 35px;
+    position: absolute;
+    left: -208px;
+    width: 300px;
+    height: 300px;
+    background-color: var(--hovColor);
+}
+.profileImg_Info_top{
+    width: 100%;
+    height: 34%;
+    border-bottom: 1px solid white;
+    padding: 20px 0px 0px 10px;
+    box-sizing: border-box;
+}
+.Info_top_img{
+    width: 20%;
+}
+.Info_top_img img{
+    width: 70%;
+}
+.Info_top_profileInfo{
+    width: 80%;
+    padding-left: 10px;
+}
+.profileInfo_title, .profileInfo_customUrl{
+    color:var(--bordColor);
+    font-family: "Poppins", serif;
+    font-weight: 300;
+    font-size: 15px;
+}
+.Info_top_profileInfo a{
+    color: #6ca3eb;
+    margin-top: 15px;
+    font-family: "Poppins", serif;
+    font-weight: 300;
+
+}
+.show{
+    display: block;
+}
+.Info_account{
+    height: 45%;
+    border-bottom: 1px solid white;
+}
+.Info_account svg, .theme_box svg, .theme_arrow svg{
+    width: 22px;
+    height: 53px;
+}
+.Info_account_google_box, .exit_box{
+    width: 20%;
+    height: 100%;
+}
+.Info_account_google_box1, .exit_box1{
+    width: 80%;
+    height: 100%;
+}
+.Info_account_left{
+    width: 80%;
+}
+.Info_account_google_box1 p{
+    color: var(--bordColor);
+    font-family: "Poppins", serif;
+}
+.Info_account_google, .Info_account_change, .Info_account_exit{
+    height: 33.333%;
+}
+.left_box{
+    width: 25%;
+    height: 100%;
+}
+.left_box1{
+    width: 60%;
+    height: 100%;
+}
+.left_box1 p{
+    color:var(--bordColor);
+    font-family: "Poppins", serif;
+
+}
+.left_box3{
+    width: 20%;
+    height: 100%;
+}
+.exit_box1 p {
+    color:var(--bordColor);
+    font-family: "Poppins", serif;
 }
 
+.Setting_theme{
+    height: 21%;
+}
+.theme{
+    height: 100%;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.theme_box{
+    height: 100%;
+    width: 20%;
+}
+.theme_box1{
+    width: 60%;
+}
+.theme_box1 p{
+    color:var(--bordColor);
+    font-family: "Poppins", serif;
+}
+.theme_arrow{
+    width: 20%;
+}
+.Info_account_google:hover, .Info_account_change:hover, .Info_account_exit:hover, .theme:hover{
+    cursor: pointer;
+    background-color: var(--hoverBlack);
+}
