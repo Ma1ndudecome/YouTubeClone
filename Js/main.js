@@ -1,3 +1,5 @@
+import "./PostToToken.js"
+
 // import "./LoadVideo.js"
 // import { dateRequest } from "./LoadVideo.js"
 // const main = document.querySelector(".Main_container")

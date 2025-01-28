@@ -1,0 +1,21 @@
+.dF{
+    display: flex;
+}
+.aiC{
+    align-items: center;
+}
+.aiS{
+    align-items: start;
+}
+.aiE{
+    align-items: end;
+}
+.jcC{
+    justify-content: center;
+}
+.jcS{
+    justify-content: flex-start;
+}
+.jcE{
+    justify-content: flex-end;
+}

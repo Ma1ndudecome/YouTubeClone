@@ -108,9 +108,12 @@ header .micro:hover{
 header .sing_int{
     margin-right: 60px;
 }
-header .sing_int:hover{
-    background-color: rgb(220, 238, 245);
-    border-radius: 15px;
-    height: 36px;
+
+.profileImg{
+    width: 100%;
+}
+.profileImg img{
+    border-radius: 50%;
+    width: 35%;
 }
 
