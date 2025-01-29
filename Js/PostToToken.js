@@ -1,5 +1,6 @@
 import { changeProfile } from "./changeData.js";
 import { makeMarkingVideo } from "./markingVideo.js";
+import { container } from "./LoadVideo.js";
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
 const code = urlParams.get('code');
@@ -21,7 +22,11 @@ if(code){
             if(response.data.refresh_token){
                 localStorage.setItem("Refresh_token", response.data.refresh_token);
             }
-           
+            const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
+                headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
+            })
+            changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl )
+
             return response
         }catch(err){
             const data = new URLSearchParams({
@@ -40,7 +45,11 @@ if(code){
                 })
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl )
                 
+                const subsribeAccount = await axios.get("https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&maxResults=200",{
+                    headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
+                })
                 
+                console.log(subsribeAccount)
             }catch(err){
                 console.log(err)
             }
@@ -60,13 +69,14 @@ if(code){
                 },
                 headers: { 'Authorization': `Bearer ${response.data.access_token}` }}
             )
+           
             Recomendation.data.items.forEach(el=>{
-                console.log(el.snippet)
-                makeMarkingVideo(el.snippet.thumbnails.default.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle )
+                
+                // container.insertAdjacentHTML('beforeend', makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle ))  
             })
-            console.log(data)
+          
 
-            changeProfile(data.data.items[0].snippet.thumbnails.default.url, data.data.items[0].snippet.title, data.data.items[0].snippet.customUrl, 34555, data.snippet.publishedAt )
+            changeProfile(data.data.items[0].snippet.thumbnails.default.url, data.data.items[0].snippet.title, data.data.items[0].snippet.customUrl)
         }catch(err){
             console.log(err)
         }
