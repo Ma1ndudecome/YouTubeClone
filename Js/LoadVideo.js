@@ -21,7 +21,7 @@ async function LoadVideo() {
         console.log(error)
     }
 }
-LoadVideo()
+
 
 
 //   axios.get(url)

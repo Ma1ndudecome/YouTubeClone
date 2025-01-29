@@ -1,4 +1,5 @@
 import { changeProfile } from "./changeData.js";
+import { makeMarkingVideo } from "./markingVideo.js";
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
 const code = urlParams.get('code');
@@ -50,8 +51,22 @@ if(code){
             const data = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                 headers:{'Authorization': `Bearer ${response.data.access_token}`}
             })
-            changeProfile(data.data.items[0].snippet.thumbnails.default.url, data.data.items[0].snippet.title, data.data.items[0].snippet.customUrl )
+            console.log(response.data.access_token)
+            const Recomendation = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+                params: {
+                    part: 'snippet',
+                    myRating: 'like', 
+                    maxResults: 10
+                },
+                headers: { 'Authorization': `Bearer ${response.data.access_token}` }}
+            )
+            Recomendation.data.items.forEach(el=>{
+                console.log(el.snippet)
+                makeMarkingVideo(el.snippet.thumbnails.default.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle )
+            })
+            console.log(data)
 
+            changeProfile(data.data.items[0].snippet.thumbnails.default.url, data.data.items[0].snippet.title, data.data.items[0].snippet.customUrl, 34555, data.snippet.publishedAt )
         }catch(err){
             console.log(err)
         }
