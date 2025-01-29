@@ -73,3 +73,15 @@ aside::-webkit-scrollbar-thumb:hover{
 .mok2{
     height: 105px;
 }
+@media (max-width:1680px){
+    .SignIn_paragraph{
+        font-size: 12px;
+    }
+    .SignIn_element a {
+        font-size: 13px;
+    }
+    .SignIn_element svg{
+        width: 18px;
+        height: 18px;
+    }
+}
