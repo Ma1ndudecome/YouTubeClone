@@ -1,63 +1,99 @@
+import { changeProfile } from "./changeData.js";
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
 const code = urlParams.get('code');
-import { changeProfile } from "./changeData.js";
+
 
 if(code){
-    
-    const data = new URLSearchParams()
-    data.append('code', code); 
-    data.append('client_id', cliendId);
-    data.append('client_secret', clientSecret);
-    data.append('redirect_uri', 'http://localhost:5501');
-    data.append('grant_type', 'authorization_code');
-
-    axios.post(urlToken, data, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
-    .then(response=>{
-        if(response.data.refresh_token){
-            console.log('write successfuly')
-            localStorage.setItem("Refresh_token", response.data.refresh_token)
-        }
-        
-        axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true', {
-            headers:{
-                'Authorization': `Bearer ${response.data.access_token}`,
-            }
+    async function requestToTakeToken(code) {
+        const data = new URLSearchParams({
+            code:code,
+            client_id: cliendId,
+            client_secret: clientSecret,
+            redirect_uri:redirectUri,
+            grant_type:'authorization_code'
         })
-        .then(data=>console.log(data))
-        .catch(error=>console.log(error))
-        
-        
-    })
-    .catch(error=>{
-        const data = new URLSearchParams()
-        data.append('client_id', cliendId)
-        data.append('client_secret', clientSecret);
-        data.append('refresh_token', localStorage.getItem("Refresh_token"))
-        data.append('grant_type', 'refresh_token');
-        axios.post(urlToken, data, {
-            headers:{
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        })
-        .then(response=>{
-            axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
-                headers:{
-                    'Authorization':`Bearer ${response.data.access_token}`
-                }
+        try{
+            const response = await axios.post(urlToken,data,{
+                headers: {'Content-Type': 'application/x-www-form-urlencoded' }
             })
-            .then(response=>{
-                console.log(response)
-                changeProfile(response.data.items[0].snippet.thumbnails.default.url,response.data.items[0].snippet.title, response.data.items[0].snippet.customUrl )
+            if(response.data.refresh_token){
+                localStorage.setItem("Refresh_token", response.data.refresh_token);
+            }
+           
+            return response
+        }catch(err){
+            const data = new URLSearchParams({
+                client_id:cliendId,
+                client_secret:clientSecret,
+                refresh_token:localStorage.getItem("Refresh_token"),
+                grant_type:'refresh_token'
             })
-            .catch(error=>console.log('error'))
-        })
-        .catch(error=>console.log('error'))
-        
-    })
+            try{
+                const response = await axios.post(urlToken, data, {
+                    headers:{'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+               
+                const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
+                    headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
+                })
+                changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl )
+                
+                
+            }catch(err){
+                console.log(err)
+            }
+        }
+    }
+    async function requestToTakeData(response){
+        try{
+            const data = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
+                headers:{'Authorization': `Bearer ${response.data.access_token}`}
+            })
+            changeProfile(data.data.items[0].snippet.thumbnails.default.url, data.data.items[0].snippet.title, data.data.items[0].snippet.customUrl )
 
-}   
+        }catch(err){
+            console.log(err)
+        }
+    }
+    async function callFunction(){
+        const response = await requestToTakeToken(code)
+        if(response){
+            await requestToTakeData(response)
+        }
+    }
+    callFunction()
+}
+
+//     .catch(error=>{
+//         const data = new URLSearchParams()
+//         data.append('client_id', cliendId)
+//         data.append('client_secret', clientSecret);
+//         data.append('refresh_token', localStorage.getItem("Refresh_token"))
+//         data.append('grant_type', 'refresh_token');
+//         axios.post(urlToken, data, {
+//             headers:{
+//                 'Content-Type': 'application/x-www-form-urlencoded'
+//             }
+//         })
+//         .then(response=>{
+//             axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
+//                 headers:{
+//                     'Authorization':`Bearer ${response.data.access_token}`
+//                 }
+//             })
+//             .then(response=>{
+
+//                 changeProfile(response.data.items[0].snippet.thumbnails.default.url,response.data.items[0].snippet.title, response.data.items[0].snippet.customUrl )
+//             })
+//             .catch(error=>console.log('error'))
+            
+           
+
+//         })
+//         .catch(error=>console.log('error'))
+
+
+//     })
+
+// }   
