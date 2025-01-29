@@ -13,12 +13,15 @@ ol, ul{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     row-gap: 80px;
+    z-index: 1;
+    margin-top: 20px;
 }
 .Main_container_video{
     width: 95%;
     height: 100%;
     position: relative;
     cursor: pointer;
+    z-index: 1;
 }
 .Main_container_preview{
     max-height: 80%;
