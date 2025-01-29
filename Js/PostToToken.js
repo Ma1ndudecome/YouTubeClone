@@ -65,35 +65,3 @@ if(code){
     callFunction()
 }
 
-//     .catch(error=>{
-//         const data = new URLSearchParams()
-//         data.append('client_id', cliendId)
-//         data.append('client_secret', clientSecret);
-//         data.append('refresh_token', localStorage.getItem("Refresh_token"))
-//         data.append('grant_type', 'refresh_token');
-//         axios.post(urlToken, data, {
-//             headers:{
-//                 'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         })
-//         .then(response=>{
-//             axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
-//                 headers:{
-//                     'Authorization':`Bearer ${response.data.access_token}`
-//                 }
-//             })
-//             .then(response=>{
-
-//                 changeProfile(response.data.items[0].snippet.thumbnails.default.url,response.data.items[0].snippet.title, response.data.items[0].snippet.customUrl )
-//             })
-//             .catch(error=>console.log('error'))
-            
-           
-
-//         })
-//         .catch(error=>console.log('error'))
-
-
-//     })
-
-// }   
