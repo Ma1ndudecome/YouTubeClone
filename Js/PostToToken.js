@@ -45,11 +45,7 @@ if(code){
                 })
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl )
                 
-                const subsribeAccount = await axios.get("https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&maxResults=200",{
-                    headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
-                })
-                
-                console.log(subsribeAccount)
+               
             }catch(err){
                 console.log(err)
             }
