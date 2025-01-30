@@ -1,4 +1,4 @@
-import { makeMarkingVideo } from './markingVideo.js'
+import { makeMarkingVideo } from './Marking/markingVideo.js'
 import { formatDuration } from './FromISOToTime.js'
 export let dateRequest = []
 const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video&eventType=none&key=${APIKEY}`;

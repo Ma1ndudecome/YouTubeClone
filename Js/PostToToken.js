@@ -1,6 +1,6 @@
 import { changeProfile } from "./changeData.js";
 import { channelData } from "./loadDataChannel.js";
-import { makeMarkingVideo } from "./markingVideo.js";
+import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { container } from "./LoadVideo.js";
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
