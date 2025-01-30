@@ -1,3 +1,4 @@
+import { container } from "./LoadVideo.js"
 export function changeProfile(profileImg, profileName, profileCustomUrl){
     document.querySelector(".sing_int").innerHTML = `
     <div class="profileImg dF jcE">
@@ -10,7 +11,7 @@ export function changeProfile(profileImg, profileName, profileCustomUrl){
                 <div class="Info_top_profileInfo">
                     <div class="profileInfo_title">${profileName}</div>
                     <div class="profileInfo_customUrl">${profileCustomUrl}</div>
-                    <a href="">View your channel</a>
+                    <a href="#">View your channel</a>
                 </div>
             </div>
             <div class="Info_account">
@@ -72,5 +73,12 @@ export function changeProfile(profileImg, profileName, profileCustomUrl){
             info.classList.remove("show")
         }
     }
+    document.querySelector(".profileImg_Info").addEventListener("click", ({target})=>{
+      if(target.textContent !== 'View your channel'){
+        return
+      }
+      const info = document.querySelector(".profileImg_Info")
+      info.classList.remove("show")
+    })
 }
 
