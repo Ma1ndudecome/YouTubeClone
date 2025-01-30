@@ -2,8 +2,9 @@
 
 import "./LoadVideo.js"
 import "./PostToToken.js"
+import { container as main } from "./LoadVideo.js"
 // import { dateRequest } from "./LoadVideo.js"
-// const main = document.querySelector(".Main_container")
+
 // main.addEventListener("click", (e) => {
 //     const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
 //    const dateRequests = dateRequest.filter(el=>el.id === id)
