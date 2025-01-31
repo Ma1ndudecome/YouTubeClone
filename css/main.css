@@ -216,7 +216,9 @@ iframe{
     justify-content: center;
     align-items: center;
 }
-
+.triger{
+    height: 10px;
+}
 .rightSide_emotion_dislike svg{
     width: 20px;
     margin-right: 5px;
