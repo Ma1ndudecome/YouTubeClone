@@ -2,6 +2,7 @@
 
 import "./LoadVideo.js"
 import "./PostToToken.js"
+import "./Marking/MarkingProfile.js"
 import { container as main } from "./LoadVideo.js"
 // import { dateRequest } from "./LoadVideo.js"
 

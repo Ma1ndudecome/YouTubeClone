@@ -1,5 +1,6 @@
 import { makeMarkingVideo } from './Marking/markingVideo.js'
 import { formatDuration } from './FromISOToTime.js'
+const triger = document.querySelector(".triger")
 export let dateRequest = []
 const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video&eventType=none&key=${APIKEY}`;
 export const container = document.querySelector(".Main_container")
@@ -22,6 +23,8 @@ async function LoadVideo() {
     }
 }
 
-
-
+const observ = new IntersectionObserver((etry)=>{
+    console.log(etry)
+})
+observ.observe(triger)
 
