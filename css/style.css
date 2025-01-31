@@ -7,6 +7,8 @@ html{
     --hovSing:rgb(220, 238, 245);
     --hoverBlack:rgb(102, 102, 102, 0.103);
     --hovWithOutTransperent:rgb(250, 250, 250);
+    --bgColorTransperentHover:#00000017;
+    --bgcolorTransperent:#0000000e;
     background-color: var(--WhColor);
 }
 html.black{
@@ -17,6 +19,8 @@ html.black{
     --hovSing:rgba(173, 224, 245, 0.212);
     --hoverBlack:rgb(102, 102, 102, 0.303);
     --hovWithOutTransperent:rgb(53, 52, 52);
+    --bgcolorTransperent:#9b9a9a94;
+    --bgColorTransperentHover:#d6d6d694;
 }
 
 html.black svg path{

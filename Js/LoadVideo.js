@@ -1,5 +1,6 @@
 import { makeMarkingVideo } from './Marking/markingVideo.js'
 import { formatDuration } from './FromISOToTime.js'
+import { fromViewToShortView } from './ViewToViewLikeToLike.js'
 const triger = document.querySelector(".triger")
 export let dateRequest = []
 let pageToken = ''
@@ -16,7 +17,7 @@ async function LoadVideo() {
              if (el.snippet.liveBroadcastContent === 'none'){
                 const date = new Date(el.snippet.publishedAt)
                 const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
-                container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, el.statistics.viewCount, result, formatDuration(el.contentDetails.duration), el.id))
+                container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), result, formatDuration(el.contentDetails.duration), el.id))
                 dateRequest.push(el)
              }
         })
