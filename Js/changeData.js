@@ -1,6 +1,5 @@
 import { container } from "./LoadVideo.js"
 import { markingProfile } from "./Marking/MarkingIcon.js"
-import { some } from "./Marking/MarkingProfile.js"
 export function changeProfile(profileImg, profileName, profileCustomUrl){
     document.querySelector(".sing_int").innerHTML = markingProfile(profileImg, profileName, profileCustomUrl)
     document.body.onclick = (e)=>{
