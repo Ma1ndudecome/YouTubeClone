@@ -19,6 +19,12 @@
 .jcE{
     justify-content: flex-end;
 }
+
 .fdC{
     flex-direction: column;
+
 }
+.fdR{
+    flex-direction: row;
+}
+
