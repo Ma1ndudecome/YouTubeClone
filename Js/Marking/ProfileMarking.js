@@ -1,16 +1,18 @@
-export function markingProfile() {
+
+import { fromViewToShortView } from "../ViewToViewLikeToLike.js" 
+export function markingProfile(backgorundProfile, profileImg, customUrl, subscribers, countVideos, prewievVideo, durationVideo, titleVideo, countWiev, date) {
     return `
         <div class="container_channel dF aiC fdC">
         <div class="Main_container_Header">
-            <img src="https://hyperpc.ru/images/support/articles/pc-for-cs-go/content/cs-go-banner_webp.jpg" alt="">
+            <img src="${backgorundProfile}" alt="">
          </div>
         <div class="Header_channel_info dF">
             <div class="Header_channel_info_img">
-                <img src="https://hyperpc.ru/images/support/articles/pc-for-cs-go/content/cs-go-banner_webp.jpg" alt="">
+                <img src="${profileImg}" alt="">
             </div>
             <div class="Header_channel_info_chaneel dF fdC jcC">
                 <h1>Ma1n</h1>
-                <p class="chaneel_info dF"><span>@ma1n97</span>•<span>21 subscribers</span>•<span>29 videos</span></p>
+                <p class="chaneel_info dF"><span>${customUrl}</span>•<span>${subscribers} subscribers</span>•<span>${countVideos} videos</span></p>
                 <p class="more_info">More about this channel <span>...more</span></p>
             </div>
         </div>
@@ -26,14 +28,14 @@ export function markingProfile() {
             <div class="ForYou_Container_video dF">
                 <div class="video_box">
                 <div class="Container_video_preview">
-                    <img src="https://hyperpc.ru/images/support/articles/pc-for-cs-go/content/cs-go-banner_webp.jpg" alt="">
-                    <span class="Container_video_preview_duration">3:55</span>
+                    <img src="${prewievVideo}" alt="">
+                    <span class="Container_video_preview_duration">${durationVideo}</span>
                 </div>
-                <div class="Container_video_title">СТРИМ ПО КС ГОУ АПАЕМ БЕРКУТА</div>
+                <div class="Container_video_title">${titleVideo}</div>
                 <div class="Container_video_statistic dF">
-                    <div class="Container_video_statistic_veiw">17 views</div>
+                    <div class="Container_video_statistic_veiw">${fromViewToShortView(countWiev)}</div>
                     •
-                    <div class="Container_video_statistic_date">2 years ago</div>
+                    <div class="Container_video_statistic_date">${date}</div>
                 </div>
             </div>
                         
@@ -45,14 +47,14 @@ export function markingProfile() {
                 <div class="Container_videos_item">
                     <div class="Container_videos_item_preview">
                         <img src="https://hyperpc.ru/images/support/articles/pc-for-cs-go/content/cs-go-banner_webp.jpg" alt="">
-                        <span class="Container_videos_item_preview_duration">1:05:55</span>
+                        <span class="Container_videos_item_preview_duration">${durationVideo}</span>
                     </div>
                     <div class="Container_videos_item_statistic">
-                        <div class="Container_videos_item_statistic_title">Аристократ</div>
+                        <div class="Container_videos_item_statistic_title">${titleVideo}</div>
                         <div class="Container_videos_item_statistic_info">
-                            <span>42views</span>
+                            <span>${fromViewToShortView(countWiev)}</span>
                             •
-                            <span>2 years ago</span>
+                            <span>${date}</span>
                         </div>
 
                     </div>
@@ -74,8 +76,8 @@ export function markingProfile() {
                         <img src="https://hyperpc.ru/images/support/articles/pc-for-cs-go/content/cs-go-banner_webp.jpg" alt="">
                     </div>
                     <div class="Shorts_video_item_info">
-                        <div class="Shorts_video_item_info_title">B</div>
-                        <div class="Shorts_container_statistic">153 перегляди</div>
+                        <div class="Shorts_video_item_info_title">${titleVideo}</div>
+                        <div class="Shorts_container_statistic">${fromViewToShortView(countWiev)}</div>
                     </div>
                 </div>
                             

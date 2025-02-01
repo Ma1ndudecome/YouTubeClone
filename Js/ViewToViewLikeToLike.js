@@ -1,6 +1,27 @@
 export function fromLikeToShortLike(view){
     const views = [
         {
+            count:1,
+            do(){
+                let str;
+                return str = `${view}`
+            }
+        },
+        {
+            count:2,
+            do(){
+                let str;
+                return str = `${view}`
+            }
+        },
+        {
+            count:3,
+            do(){
+                let str;
+                return str = `${view}`
+            }
+        },
+        {
             count:4,
             do(){
                 let str;
@@ -67,6 +88,27 @@ export function fromLikeToShortLike(view){
 
 export function fromViewToShortView(view){
     const views = [
+        {
+            count:1,
+            do(){
+                let str;
+                return str = `${view} views`
+            }
+        },
+        {
+            count:2,
+            do(){
+                let str;
+                return str = `${view} views`
+            }
+        },
+        {
+            count:3,
+            do(){
+                let str;
+                return str = `${view} views`
+            }
+        },
         {
             count:4,
             do(){
