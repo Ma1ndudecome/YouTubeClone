@@ -32,6 +32,10 @@ html.black svg path{
 html.black svg path[fill="#FF0033"]{
     fill:#FF0033
 }
+.svgShorts{
+    fill:red!important;
+}
+
 body{
     display: flex;
     flex-direction: column;
