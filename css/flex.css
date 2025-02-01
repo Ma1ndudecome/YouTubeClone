@@ -19,3 +19,9 @@
 .jcE{
     justify-content: flex-end;
 }
+.flex-coll{
+    flex-direction: column;
+}
+.flex-row{
+    flex-direction: row;
+}
