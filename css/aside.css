@@ -15,7 +15,6 @@ aside:hover::-webkit-scrollbar-thumb {
 aside::-webkit-scrollbar-thumb {
     background-color: transparent;
     border-radius: 10px;
-    
 }
 aside::-webkit-scrollbar-thumb:hover{
     background-color: rgba(0, 0, 0, 0.305);

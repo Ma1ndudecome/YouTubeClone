@@ -9,6 +9,7 @@ html{
     --hovWithOutTransperent:rgb(250, 250, 250);
     --bgColorTransperentHover:#00000017;
     --bgcolorTransperent:#0000000e;
+    --forAllTextWithSmallTransperent:#575656;
     background-color: var(--WhColor);
 }
 html.black{
@@ -21,6 +22,8 @@ html.black{
     --hovWithOutTransperent:rgb(53, 52, 52);
     --bgcolorTransperent:#9b9a9a94;
     --bgColorTransperentHover:#d6d6d694;
+    --forAllTextWithSmallTransperent:#ffffff91;
+    background-color: var(--WhColor);
 }
 
 html.black svg path{
@@ -29,6 +32,10 @@ html.black svg path{
 html.black svg path[fill="#FF0033"]{
     fill:#FF0033
 }
+.svgShorts{
+    fill:red!important;
+}
+
 body{
     display: flex;
     flex-direction: column;
