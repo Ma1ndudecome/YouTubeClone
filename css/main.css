@@ -342,7 +342,7 @@ iframe{
 }
 .video_box{
     height: 260px;
-    width:253px;
+    min-width: 280px;
     margin-top: 20px;
     cursor: pointer;
     
@@ -472,7 +472,43 @@ iframe{
 .block{
     display: block;
 }
+.Container_video_title, .Container_videos_item_statistic_title, .Shorts_video_item_info_title{
+    overflow: hidden;            
+  text-overflow: ellipsis;     
+}
+.ForYou_Container_video::-webkit-scrollbar,
+.Container_videos_block::-webkit-scrollbar,
+.Shorts_video_container::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px; 
+}
 
+.ForYou_Container_video::-webkit-scrollbar-thumb,
+.Container_videos_block::-webkit-scrollbar-thumb,
+.Shorts_video_container::-webkit-scrollbar-thumb {
+    background-color: #d2d4d6; 
+    border-radius: 10px;
+    border: 2px solid #f8f9fa; 
+}
+
+.ForYou_Container_video::-webkit-scrollbar-thumb:hover,
+.Container_videos_block::-webkit-scrollbar-thumb:hover,
+.Shorts_video_container::-webkit-scrollbar-thumb:hover {
+    background-color: #495057; 
+}
+
+.ForYou_Container_video::-webkit-scrollbar-track,
+.Container_videos_block::-webkit-scrollbar-track,
+.Shorts_video_container::-webkit-scrollbar-track {
+    background-color: #979797; 
+    border-radius: 10px; 
+}
+
+.ForYou_Container_video::-webkit-scrollbar-track:hover,
+.Container_videos_block::-webkit-scrollbar-track:hover,
+.Shorts_video_container::-webkit-scrollbar-track:hover {
+    background-color: #e9ecef; 
+}
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);
