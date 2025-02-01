@@ -256,6 +256,61 @@ iframe{
 .rightSide_threeDots svg{
     width: 50%;
 }
+.container_channel{
+    width: 100%;
+}
+.Main_container_Header{
+    width: 80%;
+    height: 250px;
+    
+}
+.Main_container_Header img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.Header_channel_info{
+    margin-top: 20px;
+    width: 80%;
+    height: 200px;
+    gap: 20px;
+}
+.Header_channel_info_img{
+    width: 11%;
+}
+.Header_channel_info_img img{
+    width: 100%;
+    height: 75%;
+    border-radius: 100px;
+}
+.Header_channel_info_chaneel{
+    height: 75%;
+}
+.Header_channel_info_chaneel{
+    
+    font-family: "Roboto", "Arial", sans-serif;
+    gap:5px;
+}
+.Header_channel_info_chaneel h1{
+    color:var(--bordColor);
+}
+.chaneel_info span:first-child{
+    color:var(--bordColor);
+}
+.chaneel_info {
+    color:var(--forAllTextWithSmallTransperent)
+}
+.more_info{
+    color:var(--forAllTextWithSmallTransperent)
+}
+.more_info span{
+    color:var(--bordColor);
+    cursor: pointer;
+}
+.chaneel_info{
+    gap: 5px;
+}
 .block{
     display: block;
 }
