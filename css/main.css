@@ -342,9 +342,10 @@ iframe{
 }
 .video_box{
     height: 260px;
-    width: 24%;
+    width:253px;
     margin-top: 20px;
     cursor: pointer;
+    
 }
 .Container_video_preview{
     width: 100%;
@@ -353,6 +354,9 @@ iframe{
 }
 .ForYou_Container_video{
     gap:15px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
 }
 .Container_video_preview_duration{
     position: absolute;
@@ -387,9 +391,12 @@ iframe{
 .Container_videos_block{
     margin-top: 20px;
     gap: 15px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
 }
 .Container_videos_item{
-    width: 15%;
+    min-width:176px;
     cursor: pointer;
     height: 160px;
     margin-bottom: 35px;
@@ -425,6 +432,43 @@ iframe{
     font-family: "Roboto", "Arial", sans-serif;
     margin-top: 5px;
 }
+.Shorts_video_container{
+    gap:15px;
+    margin-top: 20px;
+    white-space:nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+.Shorts_container_title{
+    color:var(--bordColor);
+    margin-top: 20px;
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 23px;
+}
+.Shorts_video_item{
+    min-width: 200px;
+    height: 300px;
+}
+.Shorts_video_item_preview{
+    width: 100%;
+    height: 80%;
+}
+.Shorts_video_item_preview img{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+}
+.Shorts_video_item_info{
+    color:var(--bordColor);
+    font-family: "Roboto", "Arial", sans-serif;
+    margin-top: 5px;
+}
+.Shorts_container_statistic{
+    color:var(--forAllTextWithSmallTransperent);
+    font-size: 14px;
+    margin-top: 5px;
+}
 .block{
     display: block;
 }
@@ -434,19 +478,127 @@ iframe{
         grid-template-columns: repeat(4, 1fr);
     }
 }
+@media (max-width:1670px) {
+    .Header_channel_info_img{
+        width: 11%;
+        display: flex;
+        align-items: center;
+        height: 80%;
+    }
+    .Header_channel_info_img img{
+        height: 80%;
+    }
+    .video_box{
+        height: 240px;
+    }
+    .Header_channel_info_chaneel h1{
+        font-size: 20px;
+    }
+    .Header_channel_info_chaneel p{
+        font-size: 14px;
+    }
+    .container_channel_navigation{
+        font-size: 14px;
+        height: 30px;
+    }
+    .Header_Main_container_video h1{
+        font-size: 18px;
+    }
+    .Container_video_title{
+        font-size: 12px;
+    }
+    .Container_video_statistic{
+        font-size: 11px;
+    }
+    .Container_videos h1{
+        font-size: 18px;
+    }
+    .Container_videos_item{
+        margin-bottom:25px;
+
+    }
+    .Container_videos_item_statistic_title{
+        font-size: 14px;
+    }
+    .Container_videos_item_statistic_info{
+        font-size: 11px;
+    }
+    .Shorts_container_title{
+        font-size: 18px;
+    }
+    .Shorts_video_item_info_title{
+        font-size: 14px;
+    }
+    .Shorts_container_statistic{
+        font-size: 12px;
+    }
+}
 @media (max-width:1575px){
     .Main_container{
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width:1300px) {
+    .Header_channel_info_img {
+        width: 11%
+    }
+    .Header_channel_info_img img {
+        height: 65%;
     }
 }
 @media (max-width:1200px){
     .Main_container{
         grid-template-columns: repeat(2, 1fr);
     }
+    .Main_container_Header {
+     
+        height: 180px;
+    }
 }
-
+@media (max-width:1160px){
+    .Header_channel_info_img {
+        width: 12%
+    }
+    .Header_channel_info_img img {
+        height: 70%;
+    }
+    .Header_channel_info_chaneel h1{
+        font-size: 17px;
+    }
+    .Header_channel_info_chaneel p{
+        font-size: 12px;
+    }
+    .Header_channel_info {
+        height: 170px;
+    }
+    .Container_video_title{
+        font-size: 11px;
+    }
+    .video_box{
+        min-width: 240px;
+    }
+    .Container_video_statistic{
+        font-size: 11px;
+    }
+}
+@media (max-width:960px) {
+    .Header_channel_info_img{
+        width: 100px;
+    }
+}
 @media (max-width:760px){
     .Main_container{
         grid-template-columns: repeat(1, 1fr);
+    }
+}
+@media (max-width:600px) {
+    .Main_container_Header{
+        height: 140px;
+    }
+    .Header_channel_info_chaneel h1{
+        font-size: 15px;
+    }
+    .Header_channel_info_chaneel p {
+        font-size: 10px;
     }
 }
