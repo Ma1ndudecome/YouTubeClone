@@ -61,10 +61,10 @@ main {
 }
 
 .nameVideo {
-    font-size: 1.3rem;
-    line-height: 1.8rem;
-    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
     color: var(--bordColor);
+    font-family: "Roboto", "Arial", sans-serif;
 
 }
 
