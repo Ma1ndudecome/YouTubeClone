@@ -36,5 +36,5 @@ const observ = new IntersectionObserver((entries)=>{
         }
     },{ root: null, threshold: 0.5 });
 })
-observ.observe(triger)
+
 
