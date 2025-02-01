@@ -343,14 +343,26 @@ iframe{
 .video_box{
     height: 300px;
     width: 24%;
+    margin-top: 20px;
 }
 .Container_video_preview{
     width: 100%;
     height: 60%;
+    position: relative;
+}
+.Container_video_preview_duration{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.651);
+    padding: 5px;
+    border-radius: 20px;
+    color:var(--bordColor);
+    right: 10px;
+    bottom: 5px;
 }
 .Container_video_preview img{
     width: 100%;
     height: 100%;
+    border-radius: 20px;
 }
 .Container_video_title{
     color:var(--bordColor);
@@ -358,6 +370,13 @@ iframe{
     font-size: 14px;
     margin-top: 10px;
     font-weight: 500;
+}
+.Container_video_statistic{
+    color:var(--forAllTextWithSmallTransperent);
+    gap:5px;
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 12px;
+    margin-top: 5px;
 }
 .block{
     display: block;
