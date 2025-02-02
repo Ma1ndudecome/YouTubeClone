@@ -58,8 +58,10 @@ header .menu .burger::before, .burger::after{
     height: 2px;
 }
 
+
 header .search_micro{
     display: flex;
+    justify-content: center;
      gap: 10px;
     width: 370px;
 }
@@ -71,6 +73,20 @@ header .search{
     height: 40px;
     border: 1px solid var(--bordColor);
     border-radius: 15px 15px 15px 15px;
+}
+@media (max-width:1200px){
+    header{
+        justify-content: center;
+    }
+}
+@media (max-width:750px){
+    header{
+        justify-content: center;
+    }
+    header .search{
+        width: 150px;
+    }
+    
 }
 header .search input{
     width:calc(100% - 40px) ;

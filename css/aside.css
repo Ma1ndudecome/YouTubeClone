@@ -73,6 +73,26 @@ aside::-webkit-scrollbar-thumb:hover{
 .mok2{
     height: 105px;
 }
+/* Блок на кого подписан профиль */
+.aside_SignIn .block_list_Sing_int{
+    width: 90%;
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid rgb(255, 255, 255);
+    display: none;
+}
+.aside_SignIn .block_list_Sing_int .subscription_1{
+    display: flex;
+}
+.aside_SignIn .block_list_Sing_int .img_1,.img_2,.img_3,.img_4,.img_5{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+/* Конец */
+
 @media (max-width:1680px){
     .SignIn_paragraph{
         font-size: 12px;
