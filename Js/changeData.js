@@ -48,14 +48,12 @@ export function changeProfile(profileImg, profileName, profileCustomUrl, accessT
           const profileData = response.data.items[0]
           container.insertAdjacentHTML("afterbegin", profileMark(profileData.brandingSettings.image.bannerExternalUrl, profileData.snippet.thumbnails.medium.url,profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount))
           const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
-          const VideosVideoContainer = document.querySelector(".Container_videos_block")
+        
           const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
 
 
           video.data.items.forEach(el=>{
-            console.log(el)
             forYouVideoContainer.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, el.contentDetails.duration, el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-            VideosVideoContainer.insertAdjacentHTML("beforeend",videoMarking(el.snippet.thumbnails.medium.url, el.contentDetails.duration, el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
             ShortsVideoContainer.insertAdjacentHTML("beforeend",shortVideoMarking(el.snippet.thumbnails.medium.url,el.snippet.title, el.statistics.viewCount, el.id ))
           })
          })
