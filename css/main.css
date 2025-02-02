@@ -395,43 +395,6 @@ iframe{
     white-space: nowrap;
     padding-bottom: 10px;
 }
-.Container_videos_item{
-    min-width:176px;
-    cursor: pointer;
-    height: 160px;
-    margin-bottom: 35px;
-}
-.Container_videos_item_preview{
-    width: 100%;
-    position: relative;
-    height: 73%;
-}
-.Container_videos_item_preview img{
-    width: 100%;
-    border-radius: 20px;
-    height: 100%;
-}
-.Container_videos_item_preview_duration{
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.651);
-    padding: 5px 10px 5px 10px;
-    border-radius: 20px;
-    bottom: 5px;
-    right: 5px;
-    color:var(--bordColor)
-}
-.Container_videos_item_statistic_title{
-    color:var(--bordColor);
-    font-family: "Roboto", "Arial", sans-serif;
-    font-size: 17px;
-    margin-top: 5px;
-}
-.Container_videos_item_statistic_info{
-    color:var(--forAllTextWithSmallTransperent);
-    font-size: 12px;
-    font-family: "Roboto", "Arial", sans-serif;
-    margin-top: 5px;
-}
 .Shorts_video_container{
     gap:15px;
     margin-top: 20px;
@@ -477,14 +440,12 @@ iframe{
   text-overflow: ellipsis;     
 }
 .ForYou_Container_video::-webkit-scrollbar,
-.Container_videos_block::-webkit-scrollbar,
 .Shorts_video_container::-webkit-scrollbar {
     width: 8px; 
     height: 8px; 
 }
 
 .ForYou_Container_video::-webkit-scrollbar-thumb,
-.Container_videos_block::-webkit-scrollbar-thumb,
 .Shorts_video_container::-webkit-scrollbar-thumb {
     background-color: #d2d4d6; 
     border-radius: 10px;
@@ -492,20 +453,17 @@ iframe{
 }
 
 .ForYou_Container_video::-webkit-scrollbar-thumb:hover,
-.Container_videos_block::-webkit-scrollbar-thumb:hover,
 .Shorts_video_container::-webkit-scrollbar-thumb:hover {
     background-color: #495057; 
 }
 
 .ForYou_Container_video::-webkit-scrollbar-track,
-.Container_videos_block::-webkit-scrollbar-track,
 .Shorts_video_container::-webkit-scrollbar-track {
     background-color: #979797; 
     border-radius: 10px; 
 }
 
 .ForYou_Container_video::-webkit-scrollbar-track:hover,
-.Container_videos_block::-webkit-scrollbar-track:hover,
 .Shorts_video_container::-webkit-scrollbar-track:hover {
     background-color: #e9ecef; 
 }
