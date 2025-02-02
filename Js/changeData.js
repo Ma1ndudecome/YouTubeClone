@@ -4,6 +4,7 @@ import { markingProfile as profileMark } from "./Marking/ProfileMarking.js"
 import { forYouVideoMarking } from "./Marking/profileVideoMarking.js"
 import { videoMarking } from "./Marking/profileVideoMarking.js"
 import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
+import { formatDuration } from "./FromISOToTime.js"
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken){
     document.querySelector(".sing_int").innerHTML = markingProfile(profileImg, profileName, profileCustomUrl)
     document.body.onclick = (e)=>{
@@ -35,7 +36,7 @@ export function changeProfile(profileImg, profileName, profileCustomUrl, accessT
           params: {
             part: "snippet,contentDetails",
             playlistId: `${response.data.items[0].contentDetails.relatedPlaylists.uploads}`,
-            maxResults: 11
+            maxResults: 35
         }
         })
         
@@ -53,8 +54,18 @@ export function changeProfile(profileImg, profileName, profileCustomUrl, accessT
 
 
           video.data.items.forEach(el=>{
-            forYouVideoContainer.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, el.contentDetails.duration, el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-            ShortsVideoContainer.insertAdjacentHTML("beforeend",shortVideoMarking(el.snippet.thumbnails.medium.url,el.snippet.title, el.statistics.viewCount, el.id ))
+            const duration = formatDuration(el.contentDetails.duration)
+            if(duration !== "NaN"){
+              const time = duration.split(':').map(Number)
+              if(time[0] === 0){
+                  ShortsVideoContainer.insertAdjacentHTML("beforeend",shortVideoMarking(el.snippet.thumbnails.medium.url,el.snippet.title, el.statistics.viewCount, el.id ))
+              }else{
+                forYouVideoContainer.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, el.contentDetails.duration, el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+
+              }
+            }
+           
+
           })
          })
          
