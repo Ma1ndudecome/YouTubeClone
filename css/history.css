@@ -1,0 +1,142 @@
+.history-header-contain {
+    width: 100%;
+    z-index: 2000;
+    font-family: "Roboto", "Arial", sans-serif;
+    height: fit-content;
+}
+
+.history-header-inner-contain {
+    padding-right: max(16px, calc(50% - 642px));
+    padding-left: max(16px, calc(50% - 642px));
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+
+main {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 87vw;
+    background-color: var(--WhColor);
+    margin: 0 auto;
+    z-index: 0;
+    flex-direction: column;
+
+}
+
+.main-history-container {
+    box-sizing: border-box;
+    width: 66.88%;
+    padding-right: max(16px, calc(50% - 642px));
+    padding-left: max(16px, calc(50% - 642px));
+
+}
+
+.conteiner-video {
+    display: flex;
+    flex-direction: row;
+    font-family: "Roboto", "Arial", sans-serif;
+}
+
+.video-img-conteiner {
+    width: 246px;
+    height: 138px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.video-img-conteiner img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.overview {
+    display: flex;
+    flex-direction: column;
+    text-overflow: ellipsis;
+    height: 138px;
+
+}
+
+.nameVideo {
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+    color: var(--bordColor);
+    font-family: "Roboto", "Arial", sans-serif;
+
+}
+
+.name-chanel,
+.count-views,
+.overview-video {
+    color: var(--bordColor);
+    opacity: 0.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.history-nav-menu {
+    padding: 0 20px;
+    overflow-y: auto;
+    background-color: transparent;
+    height: 100%;
+    font-size: 16px;
+    font-family: "Roboto", Arial, sans-serif;
+}
+
+.history-search {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    height: 36px;
+    font-family: inherit;
+    background: transparent;
+    border: none;
+    border-radius: 18px;
+    padding-left: 10px;
+    outline: none;
+    font-size: 14px;
+}
+
+
+.search-input-history {
+    min-width: 0;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+    border-radius: 25px;
+}
+
+.filter-btn:hover {
+    background-color: var(--hoverBlack);
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+}

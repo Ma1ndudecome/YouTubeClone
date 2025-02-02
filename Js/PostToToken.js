@@ -1,10 +1,10 @@
 import { changeProfile } from "./changeData.js";
-import { makeMarkingVideo } from "./markingVideo.js";
+import { channelData } from "./loadDataChannel.js";
+import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { container } from "./LoadVideo.js";
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
 const code = urlParams.get('code');
-
 
 if(code){
     async function requestToTakeToken(code) {
@@ -25,8 +25,9 @@ if(code){
             const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                 headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
             })
-            changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl )
-
+            
+            changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
+            channelData(response.data.access_token)
             return response
         }catch(err){
             const data = new URLSearchParams({
@@ -43,7 +44,8 @@ if(code){
                 const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                     headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
                 })
-                changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl )
+                console.log(dataAccount)
+                changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
                 
                
             }catch(err){
@@ -56,7 +58,6 @@ if(code){
             const data = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                 headers:{'Authorization': `Bearer ${response.data.access_token}`}
             })
-            console.log(response.data.access_token)
             const Recomendation = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
                 params: {
                     part: 'snippet',
@@ -72,7 +73,7 @@ if(code){
             })
           
 
-            changeProfile(data.data.items[0].snippet.thumbnails.default.url, data.data.items[0].snippet.title, data.data.items[0].snippet.customUrl)
+            changeProfile(data.data.items[0].snippet.thumbnails.default.url, data.data.items[0].snippet.title, data.data.items[0].snippet.customUrl, response.data.access_token)
         }catch(err){
             console.log(err)
         }
