@@ -30,13 +30,6 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
                                     
                     </div>
                     <div class="line"></div>
-                    <div class="Container_videos">
-                        <h1>Videos</h1>
-                        <div class="Container_videos_block dF">
-                            
-                        </div>
-                    </div>
-                    <div class="line"></div>
                     <div class="Shorts_container">
                         <div class="Shorts_container_title dF aiC">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="red" width="24" height="24" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
