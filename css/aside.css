@@ -103,4 +103,12 @@ aside::-webkit-scrollbar-thumb:hover{
         width: 18px;
         height: 18px;
     }
+    .home_elements p{
+        font-size: 12px;
+    }
+    .home_elements svg{
+        width: 18px;
+        height: 18px;
+    }
+    
 }
