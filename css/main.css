@@ -357,6 +357,7 @@ iframe{
     overflow-x: auto;
     white-space: nowrap;
     padding-bottom: 10px;
+    scroll-behavior: smooth;
 }
 .Container_video_preview_duration{
     position: absolute;
