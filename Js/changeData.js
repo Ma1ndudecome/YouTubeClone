@@ -17,9 +17,10 @@ export function changeProfile(profileImg, profileName, profileCustomUrl, accessT
             info.classList.remove("show")
         }
     }
-    document.querySelector(".profileImg_Info").addEventListener("click", ({target})=>{
-      openProfile(target, accessToken)
-  
+    document.querySelector(".profileImg_Info").addEventListener("click", async ({target})=>{
+      await openProfile(target, accessToken)
+      
+      slideToButton()
     })
 }
 
@@ -76,4 +77,15 @@ async function openProfile(target, accessToken){
     console.log(error)
   }
    
+}
+function slideToButton(){
+  const rightArrow = document.querySelector(".ForYou_Container_rightArrow")
+  const leftArrow = document.querySelector(".ForYou_Container_leftArrow")
+  const containerForYou = document.querySelector(".ForYou_Container_video")
+  rightArrow.onclick = ()=>{
+    containerForYou.scrollLeft += 250
+  }
+  leftArrow.onclick = ()=>{
+    containerForYou.scrollLeft -= 250
+  }
 }

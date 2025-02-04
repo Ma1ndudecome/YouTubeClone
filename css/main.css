@@ -332,6 +332,8 @@ iframe{
 }
 .Header_Main_container_video{
     width: 80%;
+    position: relative;
+    user-select: none;
 }
 .Header_Main_container_video h1{
     margin-top: 15px;
@@ -358,6 +360,25 @@ iframe{
     white-space: nowrap;
     padding-bottom: 10px;
     scroll-behavior: smooth;
+    position: relative;
+    z-index: 1;
+}
+.ForYou_Container_leftArrow, .ForYou_Container_rightArrow{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: var(--hovColor);
+    border-radius: 50%;
+    z-index: 999;
+    cursor: pointer;
+}
+.ForYou_Container_leftArrow{
+    top:145px;
+    left:-50px;
+}
+.ForYou_Container_rightArrow{
+    right: -50px;
+    top:145px
 }
 .Container_video_preview_duration{
     position: absolute;
@@ -442,32 +463,12 @@ iframe{
 }
 .ForYou_Container_video::-webkit-scrollbar,
 .Shorts_video_container::-webkit-scrollbar {
-    width: 8px; 
-    height: 8px; 
+    width: 0px; 
+    height: 0px; 
 }
 
-.ForYou_Container_video::-webkit-scrollbar-thumb,
-.Shorts_video_container::-webkit-scrollbar-thumb {
-    background-color: #d2d4d6; 
-    border-radius: 10px;
-    border: 2px solid #f8f9fa; 
-}
 
-.ForYou_Container_video::-webkit-scrollbar-thumb:hover,
-.Shorts_video_container::-webkit-scrollbar-thumb:hover {
-    background-color: #495057; 
-}
 
-.ForYou_Container_video::-webkit-scrollbar-track,
-.Shorts_video_container::-webkit-scrollbar-track {
-    background-color: #979797; 
-    border-radius: 10px; 
-}
-
-.ForYou_Container_video::-webkit-scrollbar-track:hover,
-.Shorts_video_container::-webkit-scrollbar-track:hover {
-    background-color: #e9ecef; 
-}
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);
