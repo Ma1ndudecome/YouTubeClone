@@ -61,11 +61,9 @@ async function openProfile(target, accessToken) {
 
     const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
     const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
+  
     addMarking(detailInformationVideo.data.items, 'Home', ShortsVideoContainer, forYouVideoContainer)
-
     dateProfileVideo.push(...detailInformationVideo.data.items)
-
-   
 
   } catch (error) {
     console.log(error)
