@@ -363,7 +363,7 @@ iframe{
     position: relative;
     z-index: 1;
 }
-.ForYou_Container_leftArrow, .ForYou_Container_rightArrow{
+.ForYou_Container_leftArrow, .ForYou_Container_rightArrow, .Shorts_Container_leftArrow, .Shorts_Container_rightArrow{
     position: absolute;
     width: 40px;
     height: 40px;
@@ -379,6 +379,14 @@ iframe{
 .ForYou_Container_rightArrow{
     right: -50px;
     top:145px
+}
+.Shorts_Container_leftArrow{
+    top:500px;
+    left:-50px
+}
+.Shorts_Container_rightArrow{
+    top:500px;
+    right: -50px;
 }
 .Container_video_preview_duration{
     position: absolute;
