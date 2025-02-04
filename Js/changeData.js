@@ -79,13 +79,24 @@ async function openProfile(target, accessToken){
    
 }
 function slideToButton(){
-  const rightArrow = document.querySelector(".ForYou_Container_rightArrow")
-  const leftArrow = document.querySelector(".ForYou_Container_leftArrow")
+  const rightArrowF = document.querySelector(".ForYou_Container_rightArrow")
+  const leftArrowF = document.querySelector(".ForYou_Container_leftArrow")
+
+  const rightArrowS = document.querySelector(".Shorts_Container_leftArrow")
+  const leftArrowS = document.querySelector(".Shorts_Container_rightArrow")
+
   const containerForYou = document.querySelector(".ForYou_Container_video")
-  rightArrow.onclick = ()=>{
+  const containerShorts = document.querySelector(".Shorts_video_container")
+  rightArrowF.onclick = ()=>{
     containerForYou.scrollLeft += 250
   }
-  leftArrow.onclick = ()=>{
+  leftArrowF.onclick = ()=>{
     containerForYou.scrollLeft -= 250
+  }
+  leftArrowS.onclick = ()=>{
+    containerShorts.scrollLeft +=250
+  }
+  rightArrowS.onclick = ()=>{
+    containerShorts.scrollLeft -=250
   }
 }

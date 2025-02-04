@@ -431,6 +431,7 @@ iframe{
     white-space:nowrap;
     overflow-x: auto;
     padding-bottom: 10px;
+    scroll-behavior: smooth;
 }
 .Shorts_container_title{
     color:var(--bordColor);
