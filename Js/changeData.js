@@ -61,20 +61,9 @@ async function openProfile(target, accessToken) {
 
     const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
     const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
-
-    detailInformationVideo.data.items.forEach(el => {
-      dateProfileVideo.push(el)
-      const duration = formatDuration(el.contentDetails.duration)
-      if (duration !== "NaN") {
-        const time = duration.split(':').map(Number)
-        if (time[0] === 0) {
-          ShortsVideoContainer.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
-        } else {
-          forYouVideoContainer.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-
-        }
-      }
-    })
+  
+    addMarking(detailInformationVideo.data.items, 'Home', ShortsVideoContainer, forYouVideoContainer)
+    dateProfileVideo.push(...detailInformationVideo.data.items)
 
   } catch (error) {
     console.log(error)
@@ -107,6 +96,8 @@ function slideToButton() {
 function moveToVideo() {
   const navigationContainer = document.querySelector(".container_channel_navigation")
   navigationContainer.addEventListener("click", ({ target }) => {
+    const containerVideo = document.querySelector(".Header_Main_container_video")
+
     if (target.textContent === 'Videos' || target.textContent === "Shorts" || target.textContent === 'Home') {
       document.querySelector(".borderBottom").classList.remove("borderBottom")
       target.classList.add("borderBottom")
@@ -114,19 +105,43 @@ function moveToVideo() {
         const containerVideo = document.querySelector(".Header_Main_container_video")
         containerVideo.classList.add("grid","gridTC5", "gap10")
         containerVideo.innerHTML = ''
-        dateProfileVideo.forEach(el=>{
-        const duration = formatDuration(el.contentDetails.duration)
-        if (duration !== "NaN") {
-          const time = duration.split(':').map(Number)
-          if (time[0] !== 0) {
-            containerVideo.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-          }
-        }
-        })
-       
+       addMarking(dateProfileVideo, 'Videos')
+      }else if(target.textContent === 'Shorts'){
+        const containerVideo = document.querySelector(".Header_Main_container_video")
+        containerVideo.classList.add("grid","gridTC5", "gap10")
+        containerVideo.innerHTML = ''
+        addMarking(dateProfileVideo, 'Shorts')
       }
     }
   })
+}
+
+function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, forYouVideoContainer=null){
+    informationVideoMas.forEach(el=>{
+      const duration = formatDuration(el.contentDetails.duration)
+      if(duration !=="NaN"){
+        const time = duration.split(':').map(Number)
+        if(WhereCall==='Home'){
+          if (time[0] === 0) {
+            ShortsVideoContainer.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
+          } else {
+            forYouVideoContainer.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+          }
+        }else if(WhereCall === 'Videos'){
+          const containerVideo = document.querySelector(".Header_Main_container_video")          
+          if(time[0]!==0){
+            containerVideo.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+          }
+        }else if(WhereCall === 'Shorts'){
+          const containerVideo = document.querySelector(".Header_Main_container_video")          
+          if(time[0]===0){
+            containerVideo.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
+          }
+        }
+        
+      }
+    })
+  
 }
 
 

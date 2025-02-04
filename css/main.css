@@ -332,6 +332,7 @@ iframe{
     width: 80%;
     position: relative;
     user-select: none;
+    margin-top: 30px;
 }
 .Header_Main_container_video h1{
     margin-top: 15px;
