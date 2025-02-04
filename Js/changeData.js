@@ -112,6 +112,7 @@ function moveToVideo() {
       target.classList.add("borderBottom")
       if (target.textContent === 'Videos') {
         const containerVideo = document.querySelector(".Header_Main_container_video")
+        containerVideo.classList.add("grid","gridTC5", "gap10")
         containerVideo.innerHTML = ''
         dateProfileVideo.forEach(el=>{
         const duration = formatDuration(el.contentDetails.duration)

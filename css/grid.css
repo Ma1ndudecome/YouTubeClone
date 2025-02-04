@@ -13,3 +13,9 @@
 .gridTC2{
     grid-template-columns: repeat(2, 1fr);
 }
+.gap10{
+    gap:10px;
+}
+.gap15{
+    gap:15px;
+}
