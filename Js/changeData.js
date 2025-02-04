@@ -21,6 +21,8 @@ export function changeProfile(profileImg, profileName, profileCustomUrl, accessT
       await openProfile(target, accessToken)
       
       slideToButton()
+
+      moveToVideo()
     })
 }
 
@@ -99,4 +101,15 @@ function slideToButton(){
   rightArrowS.onclick = ()=>{
     containerShorts.scrollLeft -=250
   }
+}
+
+function moveToVideo(){
+  const navigationContainer = document.querySelector(".container_channel_navigation")
+  navigationContainer.addEventListener("click", ({target})=>{
+    if(target.textContent === 'Videos'|| target.textContent === "Shorts" || target.textContent === 'Home'){
+      document.querySelector(".borderBottom").classList.remove("borderBottom")
+      target.classList.add("borderBottom")
+      console.log(dateProfileVideo)
+    }
+  })
 }

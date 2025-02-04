@@ -17,10 +17,9 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
                         </div>
                     </div>
                     <div class="container_channel_navigation dF ">
-                        <div class="container_channel_navigation_item">Home</div>
+                        <div class="container_channel_navigation_item borderBottom">Home</div>
                         <div class="container_channel_navigation_item">Videos</div>
                         <div class="container_channel_navigation_item">Shorts</div>
-                        <div class="container_channel_navigation_item">Live</div>
                     </div>
                     <div class="line"></div>
                      <div class="Header_Main_container_video">

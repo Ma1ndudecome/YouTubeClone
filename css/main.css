@@ -322,9 +322,7 @@ iframe{
 .container_channel_navigation_item{
     cursor: pointer;
 }
-.container_channel_navigation_item:nth-child(1){
-    border-bottom: 2px solid var(--bordColor);
-}
+
 .line{
     width: 100%;
     height: 1.5px;
@@ -476,7 +474,9 @@ iframe{
     height: 0px; 
 }
 
-
+.borderBottom{
+    border-bottom: 2px solid var(--bordColor);
+}
 
 @media (max-width:1900px){
     .Main_container{
