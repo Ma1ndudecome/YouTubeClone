@@ -1,6 +1,6 @@
 
 
-// import "./LoadVideo.js"
+import "./LoadVideo.js"
 import "./PostToToken.js"
 import { MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
 

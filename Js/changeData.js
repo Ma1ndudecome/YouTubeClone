@@ -4,6 +4,10 @@ import { markingProfile as profileMark } from "./Marking/ProfileMarking.js"
 import { forYouVideoMarking } from "./Marking/profileVideoMarking.js"
 import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
+
+let profileMarking;
+
+
 export let dateProfileVideo = []
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
   document.querySelector(".sing_int").innerHTML = markingProfile(profileImg, profileName, profileCustomUrl)
@@ -17,58 +21,65 @@ export function changeProfile(profileImg, profileName, profileCustomUrl, accessT
       info.classList.remove("show")
     }
   }
-  document.querySelector(".profileImg_Info").addEventListener("click", async ({ target }) => {
-    await openProfile(target, accessToken)
-
-    slideToButton()
-
-    moveToVideo()
+  document.querySelector(".profileImg_Info").addEventListener("click",  (e) => {
+    e.preventDefault()
+    openProfile(e.target, accessToken)
+    
   })
 }
 
 async function openProfile(target, accessToken) {
-  if (target.textContent !== 'View your channel') {
-    return
-  }
-  const info = document.querySelector(".profileImg_Info")
-  info.classList.remove("show")
-  container.classList.add('block')
-  try {
-    const dataProfile = await axios.get(`https://www.googleapis.com/youtube/v3/channels`, {
-      headers: { 'Authorization': `Bearer ${accessToken}` },
-      params: {
-        part: "snippet,statistics,brandingSettings,contentDetails",
-        mine: true
-      }
-    })
-
-    const videoProfile = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
-      headers: { 'Authorization': `Bearer ${accessToken}` },
-      params: {
-        part: "snippet,contentDetails",
-        playlistId: `${dataProfile.data.items[0].contentDetails.relatedPlaylists.uploads}`,
-        maxResults: 35
-      }
-    })
-
-    const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
-
-    const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
-
-    const profileData = dataProfile.data.items[0]
-
-    container.insertAdjacentHTML("afterbegin", profileMark(profileData.brandingSettings.image.bannerExternalUrl, profileData.snippet.thumbnails.medium.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount))
-
-    const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
-    const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
   
-    addMarking(detailInformationVideo.data.items, 'Home', ShortsVideoContainer, forYouVideoContainer)
-    dateProfileVideo.push(...detailInformationVideo.data.items)
+  if (target.textContent === 'View your channel') {
+    container.innerHTML = ''  
+    const info = document.querySelector(".profileImg_Info")
+    info.classList.remove("show")
+    container.classList.add('block')
+    try {
+      const dataProfile = await axios.get(`https://www.googleapis.com/youtube/v3/channels`, {
+        headers: { 'Authorization': `Bearer ${accessToken}` },
+        params: {
+          part: "snippet,statistics,brandingSettings,contentDetails",
+          mine: true
+        }
+      })
+  
+      const videoProfile = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
+        headers: { 'Authorization': `Bearer ${accessToken}` },
+        params: {
+          part: "snippet,contentDetails",
+          playlistId: `${dataProfile.data.items[0].contentDetails.relatedPlaylists.uploads}`,
+          maxResults: 35
+        }
+      })
+  
+      const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
+  
+      const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
+  
+      const profileData = dataProfile.data.items[0]
+  
+      container.insertAdjacentHTML("afterbegin", profileMark(profileData.brandingSettings.image.bannerExternalUrl, profileData.snippet.thumbnails.medium.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount))
+  
+      const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
+      const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
+    
+      addMarking(detailInformationVideo.data.items, 'Home', ShortsVideoContainer, forYouVideoContainer)
+      dateProfileVideo.push(...detailInformationVideo.data.items)
+  
+      const contVid = document.querySelector(".Header_Main_container_video")
+      profileMarking = contVid.innerHTML
+      
+      slideToButton()
+      moveToVideo()
 
-  } catch (error) {
-    console.log(error)
+    } catch (error) {
+      console.log(error)
+    }
+  }else if(target.parentNode.parentNode.textContent.trim() === 'Google Account'){
+    console.log('213')
+    location.href = 'https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&access_type=offline&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5501&client_id=729574226005-s73fnabnui73ga2vtfa52u87o3qag7f8.apps.googleusercontent.com&approval_prompt=force&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow'
   }
-
 }
 function slideToButton() {
   const rightArrowF = document.querySelector(".ForYou_Container_rightArrow")
@@ -111,6 +122,11 @@ function moveToVideo() {
         containerVideo.classList.add("grid","gridTC5", "gap10")
         containerVideo.innerHTML = ''
         addMarking(dateProfileVideo, 'Shorts')
+      }else if(target.textContent === 'Home'){
+        const containerVideo = document.querySelector(".Header_Main_container_video")
+        containerVideo.classList.remove("grid", "gridTC5", 'gap10')
+        containerVideo.innerHTML = profileMarking
+        slideToButton()
       }
     }
   })
@@ -143,5 +159,4 @@ function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, f
     })
   
 }
-
 
