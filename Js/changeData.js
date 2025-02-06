@@ -82,8 +82,7 @@ async function openProfile(target, accessToken) {
   }else if(click === 'Sing out'|| clickpast === 'Sing out'){
     location.href = redirectUri
   }
-  console.log(click)
-  console.log(clickpast)
+
 
 }
 function slideToButton() {
