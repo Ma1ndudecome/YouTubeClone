@@ -10,7 +10,7 @@ export function markingProfile(profileImg,profileName,profileCustomUrl ){
                 <div class="Info_top_profileInfo">
                     <div class="profileInfo_title">${profileName}</div>
                     <div class="profileInfo_customUrl">${profileCustomUrl}</div>
-                    <a href="#">View your channel</a>
+                    <a href="">View your channel</a>
                 </div>
             </div>
             <div class="Info_account">
