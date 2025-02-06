@@ -29,7 +29,8 @@ export function changeProfile(profileImg, profileName, profileCustomUrl, accessT
 }
 
 async function openProfile(target, accessToken) {
-  
+    const click = target.parentNode.parentNode.textContent.trim()
+    const clickpast = target.parentNode.textContent.trim()
   if (target.textContent === 'View your channel') {
     container.innerHTML = ''  
     const info = document.querySelector(".profileImg_Info")
@@ -76,10 +77,14 @@ async function openProfile(target, accessToken) {
     } catch (error) {
       console.log(error)
     }
-  }else if(target.parentNode.parentNode.textContent.trim() === 'Google Account'){
-    console.log('213')
+  }else if(click === 'Switch Account' || clickpast === 'Switch Account'){
     location.href = 'https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&access_type=offline&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5501&client_id=729574226005-s73fnabnui73ga2vtfa52u87o3qag7f8.apps.googleusercontent.com&approval_prompt=force&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow'
+  }else if(click === 'Sing out'|| clickpast === 'Sing out'){
+    location.href = redirectUri
   }
+  console.log(click)
+  console.log(clickpast)
+
 }
 function slideToButton() {
   const rightArrowF = document.querySelector(".ForYou_Container_rightArrow")
