@@ -6,7 +6,9 @@ import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 
 let profileMarking;
+let prevMarking;
 
+let lastUrl = location.href;
 
 export let dateProfileVideo = []
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
@@ -32,6 +34,8 @@ async function openProfile(target, accessToken) {
     const click = target.parentNode.parentNode.textContent.trim()
     const clickpast = target.parentNode.textContent.trim()
   if (target.textContent === 'View your channel') {
+    prevMarking = container.innerHTML
+    history.pushState({},'',window.location.href + '&page=profile')
     container.innerHTML = ''  
     const info = document.querySelector(".profileImg_Info")
     info.classList.remove("show")
@@ -194,3 +198,14 @@ function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, f
   
 }
 
+window.addEventListener("popstate", ()=>{
+  const currentUrl = location.href;
+ 
+  if(currentUrl.length === lastUrl.length){
+    history.pushState(null, "", location.href);
+    container.innerHTML = prevMarking
+  }else{
+    return
+  }
+ 
+})
