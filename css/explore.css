@@ -25,6 +25,9 @@
 .Explore_element_menu li{
     border-radius: 10px;
 }
+.selected{
+    background-color: var(--hovColor);
+}
 .Explore_element_menu li a{
     display: flex;
     width: 100%;
