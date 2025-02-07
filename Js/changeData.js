@@ -99,21 +99,22 @@ function slideToButton() {
 
   if(count1 === 0){
     document.querySelector(".ForYou_Container_video").remove()
-    document.querySelectorAll(".container_channel_navigation_item")[1].remove()
+    if(document.querySelectorAll(".container_channel_navigation_item")[1]){
+      document.querySelectorAll(".container_channel_navigation_item")[1].remove()
+    }
   }
   if(count2 === 0){
     document.querySelector(".Shorts_container").remove()
-    document.querySelectorAll(".container_channel_navigation_item")[2].remove()
-
-
+    if(document.querySelectorAll(".container_channel_navigation_item")[2]){
+      document.querySelectorAll(".container_channel_navigation_item")[2].remove()
+    }
+   
   }
   const rightArrowF = document.querySelector(".ForYou_Container_rightArrow")
   const leftArrowF = document.querySelector(".ForYou_Container_leftArrow")
 
   const rightArrowS = document.querySelector(".Shorts_Container_leftArrow")
   const leftArrowS = document.querySelector(".Shorts_Container_rightArrow")
-
-
 
   if(count1 < 4){
     rightArrowF.remove()
