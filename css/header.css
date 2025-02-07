@@ -15,9 +15,10 @@ header .menu_icon{
     justify-content: center;
     align-items: center;
     width: calc(12.5% + 10px);
+    
 }
 header .menu{
-    
+    padding-right: 15px;
     width: 25px;
     height: 20px;
 }

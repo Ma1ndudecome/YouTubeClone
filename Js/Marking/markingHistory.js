@@ -30,7 +30,7 @@ export function markinHistory() {
                     <hr style="margin-bottom: 20px;" class="divider">
                     <div class="history-filters dF fdC">
                         <button class="filter-btn clear-history ">
-                            <span style="margin-right: 5px; height: 24px; width: 24px;" class="icon"><svg style="height: 24px; width: 24px;" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                            <span style="margin-right: 5px; height: 24px; width: 24px;" class="filter-btn-icon"><svg style="height: 24px; width: 24px;" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
                                     height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
                                     style="pointer-events: none; display: inherit; width: 100%; height: 100%;">
                                     <path
@@ -39,7 +39,7 @@ export function markinHistory() {
                                 </svg></span> Clear all watvh history
                         </button>
                         <button class="filter-btn pause-history">
-                            <span  style="margin-right: 5px;  height: 24px; width: 24px;" class="icon"><svg style="height: 24px; width: 24px;" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
+                            <span  style="margin-right: 5px;  height: 24px; width: 24px;" class="filter-btn-icon"><svg style="height: 24px; width: 24px;" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
                                     width="24" focusable="false" aria-hidden="true"
                                     style="pointer-events: none; display: inherit; width: 100%; height: 100%;">
                                     <path d="M9 19H7V5h2Zm8-14h-2v14h2Z"></path>

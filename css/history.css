@@ -140,7 +140,7 @@ main {
     background-color: var(--hoverBlack);
 }
 
-.icon {
+.filter-btn-icon{
     display: flex;
     justify-content: center;
     align-items: center;
