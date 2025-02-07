@@ -121,3 +121,12 @@ aside::-webkit-scrollbar-thumb:hover{
     }
     
 }
+
+@media(max-width:1000px){
+    aside{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80px;
+    }
+}

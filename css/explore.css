@@ -40,11 +40,24 @@
     background-color:var(--hovColor);
 }
 @media(max-width:1380px){
-   
     .down{
         display: none;
     }
     .explore_Container{
         padding: 0px;
+    }
+}
+@media(max-width:1000px){
+    .explore_Container ul li a p {
+        font-size: 9px;    
+    }
+    .menu_Explore{
+        width: 60px;
+    }
+    
+}
+@media(max-width:800px){
+    .explore_Container ul li a p {
+        font-size: 8px;    
     }
 }
