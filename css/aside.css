@@ -105,10 +105,19 @@ aside::-webkit-scrollbar-thumb:hover{
     }
 }
 @media(max-width:1380px){
-    .menu_Explore .explore_Container .Explore_element_menu li a p{
-        display: none;
+    aside{
+        width: 10%;
     }
-    .down li a{
-        display: none;
+    .explore_Container ul li a {
+        flex-direction: column;
     }
+    .explore_Container ul li a p {
+        font-size: 11px;
+    }
+    .explore_Container ul li{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
 }

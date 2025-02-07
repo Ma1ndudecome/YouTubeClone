@@ -39,3 +39,12 @@
 .Explore_element_menu li:hover{
     background-color:var(--hovColor);
 }
+@media(max-width:1380px){
+   
+    .down{
+        display: none;
+    }
+    .explore_Container{
+        padding: 0px;
+    }
+}
