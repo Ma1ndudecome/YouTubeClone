@@ -7,6 +7,7 @@ import { MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
 import { container as main } from "./LoadVideo.js"
 import { dateRequest } from "./LoadVideo.js"
 import { dateProfileVideo } from "./changeData.js"
+import "./changeHistoryPage.js"
 
 main.addEventListener("click", (e) => {
     if(e.target.closest(".Main_container_video")){
