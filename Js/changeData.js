@@ -63,7 +63,7 @@ async function openProfile(target, accessToken) {
           container.insertAdjacentHTML("afterbegin", profileMark('', profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
           document.querySelector(".Main_container_Header").remove()
         }else{
-          container.insertAdjacentHTML("afterbegin", profileMark(profileData.brandingSettings.image.bannerExternalUrl, profileData.snippet.thumbnails.medium.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount))
+          container.insertAdjacentHTML("afterbegin", profileMark(profileData.brandingSettings.image.bannerExternalUrl, profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
         }
       
         
@@ -125,16 +125,16 @@ function slideToButton() {
     leftArrowS.remove()
   }
   rightArrowF.onclick = () => {
-    containerForYou.scrollLeft += 250
+    containerForYou.scrollLeft += 600
   }
   leftArrowF.onclick = () => {
-    containerForYou.scrollLeft -= 250
+    containerForYou.scrollLeft -= 600
   } 
   leftArrowS.onclick = () => {
-    containerShorts.scrollLeft += 250
+    containerShorts.scrollLeft += 600
   }
   rightArrowS.onclick = () => {
-    containerShorts.scrollLeft -= 250
+    containerShorts.scrollLeft -= 600
   }
 }
 
