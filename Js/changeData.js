@@ -99,9 +99,13 @@ function slideToButton() {
 
   if(count1 === 0){
     document.querySelector(".ForYou_Container_video").remove()
+    document.querySelectorAll(".container_channel_navigation_item")[1].remove()
   }
   if(count2 === 0){
     document.querySelector(".Shorts_container").remove()
+    document.querySelectorAll(".container_channel_navigation_item")[2].remove()
+
+
   }
   const rightArrowF = document.querySelector(".ForYou_Container_rightArrow")
   const leftArrowF = document.querySelector(".ForYou_Container_leftArrow")
