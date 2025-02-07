@@ -47,7 +47,7 @@ if(code){
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
                 
             }catch(err){
-                console.log(err)
+                console.log('some',err)
             }
         }
     }

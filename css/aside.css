@@ -104,3 +104,11 @@ aside::-webkit-scrollbar-thumb:hover{
         height: 18px;
     }
 }
+@media(max-width:1380px){
+    .menu_Explore .explore_Container .Explore_element_menu li a p{
+        display: none;
+    }
+    .down li a{
+        display: none;
+    }
+}
