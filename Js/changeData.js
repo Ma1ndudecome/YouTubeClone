@@ -44,7 +44,6 @@ async function openProfile(target, accessToken) {
           mine: true
         }
       })
-  
       const videoProfile = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },
         params: {
@@ -59,9 +58,15 @@ async function openProfile(target, accessToken) {
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
   
       const profileData = dataProfile.data.items[0]
-  
-      container.insertAdjacentHTML("afterbegin", profileMark(profileData.brandingSettings.image.bannerExternalUrl, profileData.snippet.thumbnails.medium.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount))
-  
+      console.log(profileData)
+        if(!profileData.brandingSettings.image){
+          container.insertAdjacentHTML("afterbegin", profileMark('', profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
+          document.querySelector(".Main_container_Header").remove()
+        }else{
+          container.insertAdjacentHTML("afterbegin", profileMark(profileData.brandingSettings.image.bannerExternalUrl, profileData.snippet.thumbnails.medium.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount))
+        }
+      
+        
       const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
       const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
     
@@ -86,14 +91,34 @@ async function openProfile(target, accessToken) {
 
 }
 function slideToButton() {
+  const containerForYou = document.querySelector(".ForYou_Container_video")
+  const containerShorts = document.querySelector(".Shorts_video_container")
+
+  const count1 = containerForYou.querySelectorAll(".video_box").length
+  const count2 = containerShorts.querySelectorAll(".Shorts_video_item").length
+
+  if(count1 === 0){
+    document.querySelector(".ForYou_Container_video").remove()
+  }
+  if(count2 === 0){
+    document.querySelector(".Shorts_container").remove()
+  }
   const rightArrowF = document.querySelector(".ForYou_Container_rightArrow")
   const leftArrowF = document.querySelector(".ForYou_Container_leftArrow")
 
   const rightArrowS = document.querySelector(".Shorts_Container_leftArrow")
   const leftArrowS = document.querySelector(".Shorts_Container_rightArrow")
 
-  const containerForYou = document.querySelector(".ForYou_Container_video")
-  const containerShorts = document.querySelector(".Shorts_video_container")
+
+
+  if(count1 < 4){
+    rightArrowF.remove()
+    leftArrowF.remove()
+  }
+  if(count2 < 6){
+    rightArrowS.remove()
+    leftArrowS.remove()
+  }
   rightArrowF.onclick = () => {
     containerForYou.scrollLeft += 250
   }
