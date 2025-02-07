@@ -99,7 +99,7 @@ function slideToButton() {
   }
   leftArrowF.onclick = () => {
     containerForYou.scrollLeft -= 250
-  }
+  } 
   leftArrowS.onclick = () => {
     containerShorts.scrollLeft += 250
   }
