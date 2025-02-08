@@ -104,3 +104,29 @@ aside::-webkit-scrollbar-thumb:hover{
         height: 18px;
     }
 }
+@media(max-width:1380px){
+    aside{
+        width: 10%;
+    }
+    .explore_Container ul li a {
+        flex-direction: column;
+    }
+    .explore_Container ul li a p {
+        font-size: 11px;
+    }
+    .explore_Container ul li{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
+@media(max-width:1000px){
+    aside{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80px;
+    }
+}

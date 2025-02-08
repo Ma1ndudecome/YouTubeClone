@@ -5,7 +5,7 @@ import { container } from "./LoadVideo.js";
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
 const code = urlParams.get('code');
-
+let pagetoken = ''
 if(code){
     async function requestToTakeToken(code) {
         const data = new URLSearchParams({
@@ -27,7 +27,7 @@ if(code){
             })
             
             changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
-            channelData(response.data.access_token)
+            channelData(response.data.access_token) 
             return response
         }catch(err){
             const data = new URLSearchParams({
@@ -44,12 +44,10 @@ if(code){
                 const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                     headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
                 })
-                console.log(dataAccount)
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
                 
-               
             }catch(err){
-                console.log(err)
+                console.log('some',err)
             }
         }
     }
