@@ -16,14 +16,3 @@ main.addEventListener("click", (e) => {
     
 })
 
-
-
-
-
-
-
-
-
-
-
-
