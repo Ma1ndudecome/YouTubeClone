@@ -439,8 +439,9 @@ iframe{
     font-size: 23px;
 }
 .Shorts_video_item{
-    min-width: 200px;
+    max-width: 220px;
     height: 300px;
+    min-width: 220px;
 }
 .Shorts_video_item_preview{
     width: 100%;
@@ -599,6 +600,9 @@ iframe{
     }
     .Header_Main_container_video{
         grid-template-columns: repeat(2, 1fr)!important;
+    }
+    .ForYou_Container_rightArrow, .ForYou_Container_leftArrow, .Shorts_Container_leftArrow, .Shorts_Container_rightArrow{
+        display: none;
     }
 }
 @media (max-width:760px){

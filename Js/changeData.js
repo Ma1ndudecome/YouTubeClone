@@ -4,9 +4,12 @@ import { markingProfile as profileMark } from "./Marking/ProfileMarking.js"
 import { forYouVideoMarking } from "./Marking/profileVideoMarking.js"
 import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
+import { loadVideoInProfile } from "./infinityScrollInProfile.js"
+
 
 let profileMarking;
 let prevMarking;
+export let pageTokenProfile = ''
 
 let lastUrl = location.href;
 
@@ -48,21 +51,15 @@ async function openProfile(target, accessToken) {
           mine: true
         }
       })
-      const videoProfile = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
-        headers: { 'Authorization': `Bearer ${accessToken}` },
-        params: {
-          part: "snippet,contentDetails",
-          playlistId: `${dataProfile.data.items[0].contentDetails.relatedPlaylists.uploads}`,
-          maxResults: 35
-        }
-      })
-  
+     
+      const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0]) 
+      console.log(videoProfile)
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
   
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
   
       const profileData = dataProfile.data.items[0]
-      console.log(profileData)
+
         if(!profileData.brandingSettings.image){
           container.insertAdjacentHTML("afterbegin", profileMark('', profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
           document.querySelector(".Main_container_Header").remove()
