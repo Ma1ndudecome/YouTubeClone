@@ -63,3 +63,12 @@ export function markingProfile(profileImg,profileName,profileCustomUrl ){
     </div>
     `
 }
+
+export function markingSubribe(img, title){
+    return `
+    <div class="subriber">
+        <img src="${img}">
+        <p>${title}</p>
+    </div<
+    `
+}

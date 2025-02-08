@@ -12,8 +12,10 @@ header{
 
 header .menu_icon{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    height: 100%;
+    padding-left: 32px;
     width: calc(12.5% + 10px);
     
 }
@@ -21,9 +23,12 @@ header .menu{
     padding-right: 15px;
     width: 25px;
     height: 20px;
+    
 }
 
-
+header .menu_icon .icon{
+    width: 90px;
+}
 header .menu .burger{
     display: flex;
     position: relative;
@@ -44,7 +49,7 @@ header .menu .burger span {
 header .menu .burger::before, .burger::after{
  content: '';
  position: absolute;
- /* height: 1px; */
+ 
  width: 80%;
  background-color: rgb(74, 74, 74);
 
@@ -65,30 +70,192 @@ header .search_micro{
     justify-content: center;
      gap: 10px;
     width: 370px;
+    
 }
 
 header .search{
     display: flex;
     align-items: center;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
+    min-width: 100px;
     height: 40px;
     border: 1px solid var(--bordColor);
     border-radius: 15px 15px 15px 15px;
+    transition: max-width 0.3s ease-in-out;
 }
-@media (max-width:1200px){
-    header{
-        justify-content: center;
-    }
+
+header .adaptation{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 56px;
+    display: flex;
+    justify-content: fl;
+    align-items: center;
+    background-color: rgb(40, 40, 40);
+    display: none;
 }
-@media (max-width:750px){
-    header{
-        justify-content: center;
-    }
-    header .search{
-        width: 150px;
-    }
+header .adaptation .img_adaptation{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+header .adaptation .img_adaptation:hover{
+    background-color:var(--headerColor)
+}
+
+   
+
+header  .search_adaptation{
+    display: flex;
+    align-items: center;
+    width: calc(100% - 40px);
+    
+    height: 40px;
+    border: 1px solid var(--bordColor);
+    border-radius: 15px 15px 15px 15px;
+    transition: max-width 0.3s ease-in-out;
+    position: sticky;
+    z-index: 5;
     
 }
+
+
+header .search_adaptation input{
+    width:calc(100% - 40px) ;
+    height: 100%;
+    border-radius: 15px 0 0 15px;
+    background-color: var(--WhColor);
+    border: none;
+    
+}
+header .search_adaptation .glass_search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 100%;
+    border-radius: 0 15px 15px 0;
+    background-color: rgba(228, 228, 228, 0.671);
+    cursor: pointer;
+}
+header .search_adaptation .glass_search:hover{
+    background-color:var(--headerColor)
+}
+
+
+header .search_micro .glass_adaptation{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    
+    border-radius: 50%;
+     display: none; 
+    
+}
+
+header .search_micro .glass_adaptation:hover{
+    background-color:var(--headerColor)
+    
+       
+   }
+ @media (max-width:1150px){
+     header .search{
+        width: 90%;
+        transition:width 1s ease-in-out;
+    } 
+} 
+@media (max-width:950px){
+    header .search{
+        width: 80%;
+        transition:width 1s ease-in-out;
+    }
+}
+@media (max-width:880px){
+    header .search{
+        width: 75%;
+        transition:width 1s ease-in-out;
+    }
+    header .search_micro .glass_adaptation{
+         display: none; 
+        
+    }
+}
+
+@media (max-width:800px){
+    header .search{
+        width: 70%;
+        transition:width 1s ease-in-out;
+    }
+    header .search_micro .glass_adaptation{
+        display: none; 
+       
+   }
+}
+  @media (max-width:780px){
+    
+    header .search{
+         transition:width 1s ease-in-out; 
+          width: 65%;  
+    }
+    header .search_micro .glass_adaptation{
+        display: none; 
+       
+   }
+   }
+    @media (max-width:740px){
+      header .search_micro{
+        justify-content: flex-end;
+      }
+        header .search{
+             transition:width 1s ease-in-out; 
+              width: 60%;  
+        }
+        header .search_micro .glass_adaptation{
+            display: none; 
+           
+       }
+        
+}  
+
+@media (max-width:625px){
+    
+    header .search{
+         transition:width 1s ease-in-out; 
+          width: 60%;  
+    }
+      header .search_micro .search{
+        display: none;
+    }  
+
+    header .search_micro .micro{
+        display: none;
+    } 
+    header .search_micro .glass_adaptation{
+
+         display: block;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         width: 40px;
+         height: 40px;
+         
+         border-radius: 50%;
+       
+    }
+    
+
+    
+
+}  
 header .search input{
     width:calc(100% - 40px) ;
     height: 100%;

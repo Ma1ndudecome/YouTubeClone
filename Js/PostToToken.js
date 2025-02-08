@@ -85,3 +85,17 @@ if(code){
     callFunction()
 }
 
+async function loadSubsiber(access_token){
+    try{
+        const dataSubsribe = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&access_token=${access_token}&maxResults=7&pageToken=${pagetoken}`)
+        pagetoken = dataSubsribe.data.nextPageToken || ''
+        dataSubsribe.data.items.forEach(({snippet})=>{
+            markingSubribe(snippet.thumbnails.medium.url,snippet.title)
+        })
+        
+    }catch(error){
+        console.log(error)
+    }
+   
+}
+
