@@ -2,6 +2,13 @@ import { changeProfile } from "./changeData.js";
 import { channelData } from "./loadDataChannel.js";
 import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { container } from "./LoadVideo.js";
+let refreshTokenProfile = []
+if(localStorage.getItem("dataRefreshToken")){
+    refreshTokenProfile = JSON.parse(localStorage.getItem("dataRefreshToken"))
+
+}
+console.log(refreshTokenProfile)
+
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
 const code = urlParams.get('code');
@@ -19,12 +26,20 @@ if(code){
             const response = await axios.post(urlToken,data,{
                 headers: {'Content-Type': 'application/x-www-form-urlencoded' }
             })
-            if(response.data.refresh_token){
-                localStorage.setItem("Refresh_token", response.data.refresh_token);
-            }
+            
             const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                 headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
             })
+            if(response.data.refresh_token){
+                refreshTokenProfile.forEach(el=>{
+                    if(el.name !== dataAccount.data.items[0].snippet.title){
+                        refreshTokenProfile.push({name:dataAccount.data.items[0].snippet.title, refreshToken:response.data.refresh_token})
+                        localStorage.setItem("dataRefreshToken", JSON.stringify(refreshTokenProfile))
+                    }
+                })
+                
+            }
+            
             
             changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
             channelData(response.data.access_token) 
