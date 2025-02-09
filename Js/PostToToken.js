@@ -5,9 +5,9 @@ import { container } from "./LoadVideo.js";
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
     refreshTokenProfile = JSON.parse(localStorage.getItem("dataRefreshToken"))
-
 }
 console.log(refreshTokenProfile)
+
 
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
@@ -31,24 +31,22 @@ if(code){
                 headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
             })
             if(response.data.refresh_token){
-                refreshTokenProfile.forEach(el=>{
-                    if(el.name !== dataAccount.data.items[0].snippet.title){
-                        refreshTokenProfile.push({name:dataAccount.data.items[0].snippet.title, refreshToken:response.data.refresh_token})
-                        localStorage.setItem("dataRefreshToken", JSON.stringify(refreshTokenProfile))
-                    }
-                })
-                
+              const check = refreshTokenProfile.some(el=>el.name === dataAccount.data.items[0].snippet.title )
+                 if(!check){
+                    refreshTokenProfile.push({name:dataAccount.data.items[0].snippet.title, refreshToken:response.data.refresh_token})
+                    localStorage.setItem("dataRefreshToken", JSON.stringify(refreshTokenProfile))
+                 }
             }
-            
-            
+            localStorage.setItem("nameAccount", dataAccount.data.items[0].snippet.title)
             changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
             channelData(response.data.access_token) 
             return response
         }catch(err){
+           const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
             const data = new URLSearchParams({
                 client_id:cliendId,
                 client_secret:clientSecret,
-                refresh_token:localStorage.getItem("Refresh_token"),
+                refresh_token:token[0].refreshToken,
                 grant_type:'refresh_token'
             })
             try{
