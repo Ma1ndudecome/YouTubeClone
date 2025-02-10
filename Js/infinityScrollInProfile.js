@@ -19,12 +19,11 @@ export async function loadVideoInProfile(accessToken, dataProfile){
 
 export  function loadNextVideo(accessToken, dataProfile, button){
   button.onclick = ()=>{
-    console.log('1')
-    loadMore(accessToken, dataProfile)
+    loadMore(accessToken, dataProfile, button)
   }
   
 }
-async function loadMore(accessToken, dataProfile) {
+async function loadMore(accessToken, dataProfile, button) {
     try{
       console.log('1')
       const data = await loadVideoInProfile(accessToken, dataProfile)
@@ -32,18 +31,21 @@ async function loadMore(accessToken, dataProfile) {
       const videoId = data.data.items.map(el => el.contentDetails.videoId).join(',')
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
       console.log(data)
+    
       if(!data.data.nextPageToken){
         button.remove()
+        return
       }else{
         state.pageTokenProfile = data.data.nextPageToken
       }
-      console.log(state.pageTokenProfile, data.data.nextPageToken)
+
        const resultCall = addMarking(detailInformationVideo.data.items, 'Videos')
+
        if(resultCall[0] === 1){
         console.log('now')
-       loadMore(accessToken, dataProfile)
+        await loadMore(accessToken, dataProfile)
        }else{
-        console.log('mariiing')
+        console.log('Видео успешно загружено.')
        }
       
     }catch(error){
