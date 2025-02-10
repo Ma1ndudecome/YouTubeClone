@@ -1,5 +1,5 @@
 
-import { fromViewToShortView } from "../ViewToViewLikeToLike.js" 
+import { fromViewToShortView } from "../ViewToViewLikeToLike.js"
 export function markingProfile(backgorundProfile, profileImg, customUrl, subscribers, countVideos, titleChannel) {
     return `
                        <div class="container_channel dF aiC fdC">
@@ -57,10 +57,13 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
                             Shorts
                         </div>
                         <div class="Shorts_video_container dF">
-                       
-                                        
+                               
                         </div>
+                       
                     </div>
+                    </div>
+                     <div class="container_button_load dF jcC none">
+                            <button>I'm load more video </button>
                     </div>
                 </div>
     `

@@ -343,7 +343,6 @@ iframe{
 }
 .video_box{
     height: 260px;
-    
     margin-top: 20px;
     cursor: pointer;
     
@@ -475,9 +474,25 @@ iframe{
     width: 0px; 
     height: 0px; 
 }
+.container_button_load{
+    width: 100%;
 
+}
+.container_button_load button{
+    padding: 15px;
+    font-family: "Roboto", "Arial", sans-serif;
+    color:var(--WhColor);
+    background-color: rgb(162, 218, 236);
+    border-radius: 20px;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
 .borderBottom{
     border-bottom: 2px solid var(--bordColor);
+}
+.none{
+    display: none !important;
 }
 
 @media (max-width:1900px){
