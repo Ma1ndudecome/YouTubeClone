@@ -3,14 +3,13 @@ import { forYouVideoMarking } from "./Marking/profileVideoMarking.js";
 import { formatDuration } from "./FromISOToTime.js";
 import { addMarking } from "./changeData.js";
 
-
 export async function loadVideoInProfile(accessToken, dataProfile){
     return await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },
         params: {
           part: "snippet,contentDetails",
           playlistId: `${dataProfile.contentDetails.relatedPlaylists.uploads}`,
-          maxResults: 1,
+          maxResults: 10,
           pageToken:state.pageTokenProfile,
           _t: Date.now()
         }
@@ -18,8 +17,10 @@ export async function loadVideoInProfile(accessToken, dataProfile){
 }
 
 export  function loadNextVideo(accessToken, dataProfile, button){
-  button.onclick = ()=>{
-    loadMore(accessToken, dataProfile, button)
+  button.onclick = async ()=>{
+    console.log('1')
+    await loadMore(accessToken, dataProfile, button)
+    state.markingVideoPage = document.querySelector(".Header_Main_container_video").innerHTML
   }
   
 }
@@ -34,22 +35,21 @@ async function loadMore(accessToken, dataProfile, button) {
     
       if(!data.data.nextPageToken){
         button.remove()
-        return
+        
       }else{
         state.pageTokenProfile = data.data.nextPageToken
       }
 
-       const resultCall = addMarking(detailInformationVideo.data.items, 'Videos')
-
-       if(resultCall[0] === 1){
-        console.log('now')
-        await loadMore(accessToken, dataProfile)
-       }else{
-        console.log('Видео успешно загружено.')
-       }
+      const result = addMarking(detailInformationVideo.data.items, 'Videos')
+      console.log(result)
       
     }catch(error){
       console.log(error)
     }
   
+}
+export function checkPageToken(dateAboutToken, buttonLoadMore){
+  if(dateAboutToken.data.nextPageToken){
+    buttonLoadMore.classList.remove("none")
+  }
 }

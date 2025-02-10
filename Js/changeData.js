@@ -5,17 +5,21 @@ import { forYouVideoMarking } from "./Marking/profileVideoMarking.js"
 import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
+import { checkPageToken } from "./infinityScrollInProfile.js"
 
-
-let profileMarking;
-let prevMarking;
-export const state = {
-  pageTokenProfile: ''
+let profileMarking;//Переменная для сохранения разметки профиля
+let prevMarking;//Переменная для сохранения при перходе предыдущей разметки
+export const state = {//Тут храняться переменные которые изменяються в разныъ файлах
+  pageTokenProfile: '',//Сохранение токена для следующей страницы
+  markingVideoPage:''//Сохранение контейнера видео
 };
 
-let lastUrl = location.href;
 
-export let dateProfileVideo = []
+
+let lastUrl = location.href;//Получаю первоначальное url для popstata
+
+export let dateProfileVideo = []//При запросе сохраняю все видео тут для того что бы избавиться от лишних запросов 
+
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
   document.querySelector(".sing_int").innerHTML = markingProfile(profileImg, profileName, profileCustomUrl)
   document.body.onclick = (e) => {
@@ -55,6 +59,7 @@ async function openProfile(target, accessToken) {
       })
      
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0])
+      console.log(videoProfile)
       
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
       
@@ -83,7 +88,7 @@ async function openProfile(target, accessToken) {
       profileMarking = contVid.innerHTML
       
       slideToButton()
-      moveToVideo()
+      moveToVideo(videoProfile)
       loadNextVideo(accessToken, profileData, document.querySelector(".container_button_load button"))
 
 
@@ -146,7 +151,7 @@ function slideToButton() {
   }
 }
 
-function moveToVideo() {
+function moveToVideo(statusNextPage) {
   const navigationContainer = document.querySelector(".container_channel_navigation")
   navigationContainer.addEventListener("click", ({ target }) => {
     const containerVideo = document.querySelector(".Header_Main_container_video")
@@ -155,12 +160,20 @@ function moveToVideo() {
       document.querySelector(".borderBottom").classList.remove("borderBottom")
       target.classList.add("borderBottom")
       if (target.textContent === 'Videos') {
-        buttonLoadMore.classList.remove("none")
-        containerVideo.classList.add("grid","gridTC5", "gap10")
-        containerVideo.innerHTML = ''
-       addMarking(dateProfileVideo, 'Videos')
+        if(state.markingVideoPage === ''){
+          checkPageToken(statusNextPage,buttonLoadMore )
+          containerVideo.classList.add("grid","gridTC5", "gap10")
+          containerVideo.innerHTML = ''
+         addMarking(dateProfileVideo, 'Videos')
+
+        }else{
+          buttonLoadMore.classList.remove("none")
+          containerVideo.classList.add("grid","gridTC5", "gap10")
+          containerVideo.innerHTML = state.markingVideoPage
+        }
+       
       }else if(target.textContent === 'Shorts'){
-        buttonLoadMore.classList.remove("none")
+        checkPageToken(statusNextPage,buttonLoadMore )
         containerVideo.classList.add("grid","gridTC5", "gap10")
         containerVideo.innerHTML = ''
         addMarking(dateProfileVideo, 'Shorts')
@@ -176,7 +189,7 @@ function moveToVideo() {
 }
 
 export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, forYouVideoContainer=null){
-   return informationVideoMas.map(el=>{
+   return informationVideoMas.reduce((akk,el)=>{
       const duration = formatDuration(el.contentDetails.duration)
       if(duration !=="NaN"){
         const time = duration.split(':').map(Number)
@@ -191,19 +204,20 @@ export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=
           
           if(time[0]!==0){
             containerVideo.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-          }else{
-            
-            return 1
+            akk = 1
+            return akk
           }
         }else if(WhereCall === 'Shorts'){
           const containerVideo = document.querySelector(".Header_Main_container_video")          
           if(time[0]===0){
             containerVideo.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
+            akk = 2
+            return akk
           }
         }
         
       }
-    })
+    },0)
   
 }
 
