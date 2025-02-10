@@ -53,7 +53,6 @@ async function openProfile(target, accessToken) {
       })
      
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0]) 
-      console.log(videoProfile)
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
   
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
