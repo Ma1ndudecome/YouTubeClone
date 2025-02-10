@@ -3,14 +3,14 @@ import { forYouVideoMarking } from "./Marking/profileVideoMarking.js";
 import { formatDuration } from "./FromISOToTime.js";
 import { addMarking } from "./changeData.js";
 
-
+let counter = 0
 export async function loadVideoInProfile(accessToken, dataProfile){
     return await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },
         params: {
           part: "snippet,contentDetails",
           playlistId: `${dataProfile.contentDetails.relatedPlaylists.uploads}`,
-          maxResults: 1,
+          maxResults: 10,
           pageToken:state.pageTokenProfile,
           _t: Date.now()
         }
@@ -34,19 +34,13 @@ async function loadMore(accessToken, dataProfile, button) {
     
       if(!data.data.nextPageToken){
         button.remove()
-        return
+        
       }else{
         state.pageTokenProfile = data.data.nextPageToken
       }
 
-       const resultCall = addMarking(detailInformationVideo.data.items, 'Videos')
+      addMarking(detailInformationVideo.data.items, 'Videos')
 
-       if(resultCall[0] === 1){
-        console.log('now')
-        await loadMore(accessToken, dataProfile)
-       }else{
-        console.log('Видео успешно загружено.')
-       }
       
     }catch(error){
       console.log(error)

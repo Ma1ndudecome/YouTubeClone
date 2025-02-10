@@ -176,7 +176,7 @@ function moveToVideo() {
 }
 
 export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, forYouVideoContainer=null){
-   return informationVideoMas.map(el=>{
+   return informationVideoMas.forEach(el=>{
       const duration = formatDuration(el.contentDetails.duration)
       if(duration !=="NaN"){
         const time = duration.split(':').map(Number)
@@ -191,9 +191,6 @@ export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=
           
           if(time[0]!==0){
             containerVideo.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-          }else{
-            
-            return 1
           }
         }else if(WhereCall === 'Shorts'){
           const containerVideo = document.querySelector(".Header_Main_container_video")          
