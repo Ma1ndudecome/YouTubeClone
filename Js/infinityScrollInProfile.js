@@ -18,7 +18,6 @@ export async function loadVideoInProfile(accessToken, dataProfile){
 
 export  function loadNextVideo(accessToken, dataProfile, button){
   button.onclick = async ()=>{
-    console.log('1')
     await loadMore(accessToken, dataProfile, button)
     state.markingVideoPage = document.querySelector(".Header_Main_container_video").innerHTML
   }
@@ -26,7 +25,6 @@ export  function loadNextVideo(accessToken, dataProfile, button){
 }
 async function loadMore(accessToken, dataProfile, button) {
     try{
-      console.log('1')
       const data = await loadVideoInProfile(accessToken, dataProfile)
     
       const videoId = data.data.items.map(el => el.contentDetails.videoId).join(',')
@@ -40,8 +38,18 @@ async function loadMore(accessToken, dataProfile, button) {
         state.pageTokenProfile = data.data.nextPageToken
       }
 
-      const result = addMarking(detailInformationVideo.data.items, 'Videos')
-      console.log(result)
+      
+      const container = document.querySelectorAll(".container_channel_navigation")[0].children
+      for(let i =0; i < container.length; i+=1){
+        if(container[i].classList.contains("borderBottom")){
+          if(container[i].textContent === 'Videos'){
+            addMarking(detailInformationVideo.data.items, 'Videos')
+          }else if(container[i].textContent === 'Shorts'){
+            addMarking(detailInformationVideo.data.items, 'Shorts')
+          }
+        }
+      }
+      console.log(container)
       
     }catch(error){
       console.log(error)
