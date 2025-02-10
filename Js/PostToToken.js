@@ -42,6 +42,7 @@ if(code){
             channelData(response.data.access_token) 
             return response
         }catch(err){
+            console.log(localStorage.getItem("dataRegreshToken"))
            const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
             const data = new URLSearchParams({
                 client_id:cliendId,

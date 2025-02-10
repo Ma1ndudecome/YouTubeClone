@@ -10,3 +10,14 @@ export async function loadVideoInProfile(accessToken, dataProfile){
         }
       })
 }
+
+export  function loadNextVideo(accessToken, dataProfile, micro){
+  micro.onclick = async ()=>{
+    try{
+      const data = await loadVideoInProfile(accessToken, dataProfile)
+      console.log(data)
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
