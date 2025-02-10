@@ -10,8 +10,11 @@ import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
 let profileMarking;
 let prevMarking;
 export const state = {
-  pageTokenProfile: ''
+  pageTokenProfile: '',
+  markingVideoPage:''
 };
+
+
 
 let lastUrl = location.href;
 
@@ -155,10 +158,20 @@ function moveToVideo() {
       document.querySelector(".borderBottom").classList.remove("borderBottom")
       target.classList.add("borderBottom")
       if (target.textContent === 'Videos') {
-        buttonLoadMore.classList.remove("none")
-        containerVideo.classList.add("grid","gridTC5", "gap10")
-        containerVideo.innerHTML = ''
-       addMarking(dateProfileVideo, 'Videos')
+        if(state.markingVideoPage === ''){
+          buttonLoadMore.classList.remove("none")
+          containerVideo.classList.add("grid","gridTC5", "gap10")
+          containerVideo.innerHTML = ''
+         addMarking(dateProfileVideo, 'Videos')
+         console.log('im in if')
+
+        }else{
+          console.log('im here in else')
+          buttonLoadMore.classList.remove("none")
+          containerVideo.classList.add("grid","gridTC5", "gap10")
+          containerVideo.innerHTML = state.markingVideoPage
+        }
+       
       }else if(target.textContent === 'Shorts'){
         buttonLoadMore.classList.remove("none")
         containerVideo.classList.add("grid","gridTC5", "gap10")
