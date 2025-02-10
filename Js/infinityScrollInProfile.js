@@ -18,6 +18,7 @@ export async function loadVideoInProfile(accessToken, dataProfile){
 
 export  function loadNextVideo(accessToken, dataProfile, button){
   button.onclick = async ()=>{
+    console.log('1')
     await loadMore(accessToken, dataProfile, button)
     state.markingVideoPage = document.querySelector(".Header_Main_container_video").innerHTML
   }
@@ -39,8 +40,8 @@ async function loadMore(accessToken, dataProfile, button) {
         state.pageTokenProfile = data.data.nextPageToken
       }
 
-      addMarking(detailInformationVideo.data.items, 'Videos')
-
+      const result = addMarking(detailInformationVideo.data.items, 'Videos')
+      console.log(result)
       
     }catch(error){
       console.log(error)

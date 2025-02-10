@@ -7,18 +7,19 @@ import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
 import { checkPageToken } from "./infinityScrollInProfile.js"
 
-let profileMarking;
-let prevMarking;
-export const state = {
-  pageTokenProfile: '',
-  markingVideoPage:''
+let profileMarking;//Переменная для сохранения разметки профиля
+let prevMarking;//Переменная для сохранения при перходе предыдущей разметки
+export const state = {//Тут храняться переменные которые изменяються в разныъ файлах
+  pageTokenProfile: '',//Сохранение токена для следующей страницы
+  markingVideoPage:''//Сохранение контейнера видео
 };
 
 
 
-let lastUrl = location.href;
+let lastUrl = location.href;//Получаю первоначальное url для popstata
 
-export let dateProfileVideo = []
+export let dateProfileVideo = []//При запросе сохраняю все видео тут для того что бы избавиться от лишних запросов 
+
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
   document.querySelector(".sing_int").innerHTML = markingProfile(profileImg, profileName, profileCustomUrl)
   document.body.onclick = (e) => {
@@ -188,7 +189,7 @@ function moveToVideo(statusNextPage) {
 }
 
 export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, forYouVideoContainer=null){
-   return informationVideoMas.forEach(el=>{
+   return informationVideoMas.reduce((akk,el)=>{
       const duration = formatDuration(el.contentDetails.duration)
       if(duration !=="NaN"){
         const time = duration.split(':').map(Number)
@@ -203,16 +204,20 @@ export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=
           
           if(time[0]!==0){
             containerVideo.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+            akk = 1
+            return akk
           }
         }else if(WhereCall === 'Shorts'){
           const containerVideo = document.querySelector(".Header_Main_container_video")          
           if(time[0]===0){
             containerVideo.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
+            akk = 2
+            return akk
           }
         }
         
       }
-    })
+    },0)
   
 }
 
