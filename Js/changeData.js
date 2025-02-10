@@ -9,7 +9,9 @@ import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
 
 let profileMarking;
 let prevMarking;
-export let pageTokenProfile = ''
+export const state = {
+  pageTokenProfile: ''
+};
 
 let lastUrl = location.href;
 
@@ -52,10 +54,11 @@ async function openProfile(target, accessToken) {
         }
       })
      
-      const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0]) 
+      const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0])
+      
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
       
-      pageTokenProfile = videoProfile.data.nextPageToken || ''
+      state.pageTokenProfile = videoProfile.data.nextPageToken || ''
   
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
   
@@ -172,8 +175,8 @@ function moveToVideo() {
   })
 }
 
-function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, forYouVideoContainer=null){
-    informationVideoMas.forEach(el=>{
+export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, forYouVideoContainer=null){
+   return informationVideoMas.map(el=>{
       const duration = formatDuration(el.contentDetails.duration)
       if(duration !=="NaN"){
         const time = duration.split(':').map(Number)
@@ -184,9 +187,13 @@ function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, f
             forYouVideoContainer.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
           }
         }else if(WhereCall === 'Videos'){
-          const containerVideo = document.querySelector(".Header_Main_container_video")          
+          const containerVideo = document.querySelector(".Header_Main_container_video")  
+          
           if(time[0]!==0){
             containerVideo.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+          }else{
+            
+            return 1
           }
         }else if(WhereCall === 'Shorts'){
           const containerVideo = document.querySelector(".Header_Main_container_video")          
@@ -212,7 +219,3 @@ window.addEventListener("popstate", ()=>{
  
 })
 
-export function changeTokenProfile(pageToken,newData){
-  pageToken = newData
-
-}
