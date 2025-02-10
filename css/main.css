@@ -343,7 +343,6 @@ iframe{
 }
 .video_box{
     height: 260px;
-    min-width: 300px;
     margin-top: 20px;
     cursor: pointer;
     
@@ -486,9 +485,14 @@ iframe{
     background-color: rgb(162, 218, 236);
     border-radius: 20px;
     border: none;
+    margin-top: 20px;
+    cursor: pointer;
 }
 .borderBottom{
     border-bottom: 2px solid var(--bordColor);
+}
+.none{
+    display: none !important;
 }
 
 @media (max-width:1900px){

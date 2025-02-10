@@ -59,10 +59,11 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
                         <div class="Shorts_video_container dF">
                                
                         </div>
-                        <div class="container_button_load dF jcC none">
-                            <button>I'm load more video </button>
-                        </div>
+                       
                     </div>
+                    </div>
+                     <div class="container_button_load dF jcC none">
+                            <button>I'm load more video </button>
                     </div>
                 </div>
     `

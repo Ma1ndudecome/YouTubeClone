@@ -6,7 +6,6 @@ import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
 
-const micro = document.querySelector('.micro')
 
 let profileMarking;
 let prevMarking;
@@ -56,13 +55,12 @@ async function openProfile(target, accessToken) {
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0]) 
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
       
-      pageTokenProfile = videoProfile.data.nextPageToken
+      pageTokenProfile = videoProfile.data.nextPageToken || ''
   
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
   
       const profileData = dataProfile.data.items[0]
 
-      loadNextVideo(accessToken, profileData, micro)
 
         if(!profileData.brandingSettings.image){
           container.insertAdjacentHTML("afterbegin", profileMark('', profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
@@ -83,6 +81,8 @@ async function openProfile(target, accessToken) {
       
       slideToButton()
       moveToVideo()
+      loadNextVideo(accessToken, profileData, document.querySelector(".container_button_load button"))
+
 
     } catch (error) {
       console.log(error)
@@ -148,22 +148,21 @@ function moveToVideo() {
   navigationContainer.addEventListener("click", ({ target }) => {
     const containerVideo = document.querySelector(".Header_Main_container_video")
     const buttonLoadMore = document.querySelector(".container_button_load")
-
     if (target.textContent === 'Videos' || target.textContent === "Shorts" || target.textContent === 'Home') {
       document.querySelector(".borderBottom").classList.remove("borderBottom")
       target.classList.add("borderBottom")
       if (target.textContent === 'Videos') {
-        buttonLoadMore.classList.add("block")
+        buttonLoadMore.classList.remove("none")
         containerVideo.classList.add("grid","gridTC5", "gap10")
         containerVideo.innerHTML = ''
        addMarking(dateProfileVideo, 'Videos')
       }else if(target.textContent === 'Shorts'){
-        buttonLoadMore.classList.add("block")
+        buttonLoadMore.classList.remove("none")
         containerVideo.classList.add("grid","gridTC5", "gap10")
         containerVideo.innerHTML = ''
         addMarking(dateProfileVideo, 'Shorts')
       }else if(target.textContent === 'Home'){
-        buttonLoadMore.classList.remove("block")
+        buttonLoadMore.classList.add("none")
 
         containerVideo.classList.remove("grid", "gridTC5", 'gap10')
         containerVideo.innerHTML = profileMarking
@@ -212,3 +211,8 @@ window.addEventListener("popstate", ()=>{
   }
  
 })
+
+export function changeTokenProfile(pageToken,newData){
+  pageToken = newData
+
+}
