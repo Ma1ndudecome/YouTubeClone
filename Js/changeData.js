@@ -5,7 +5,7 @@ import { forYouVideoMarking } from "./Marking/profileVideoMarking.js"
 import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
-
+import { checkPageToken } from "./infinityScrollInProfile.js"
 
 let profileMarking;
 let prevMarking;
@@ -58,6 +58,7 @@ async function openProfile(target, accessToken) {
       })
      
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0])
+      console.log(videoProfile)
       
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
       
@@ -86,7 +87,7 @@ async function openProfile(target, accessToken) {
       profileMarking = contVid.innerHTML
       
       slideToButton()
-      moveToVideo()
+      moveToVideo(videoProfile)
       loadNextVideo(accessToken, profileData, document.querySelector(".container_button_load button"))
 
 
@@ -149,7 +150,7 @@ function slideToButton() {
   }
 }
 
-function moveToVideo() {
+function moveToVideo(statusNextPage) {
   const navigationContainer = document.querySelector(".container_channel_navigation")
   navigationContainer.addEventListener("click", ({ target }) => {
     const containerVideo = document.querySelector(".Header_Main_container_video")
@@ -159,21 +160,19 @@ function moveToVideo() {
       target.classList.add("borderBottom")
       if (target.textContent === 'Videos') {
         if(state.markingVideoPage === ''){
-          buttonLoadMore.classList.remove("none")
+          checkPageToken(statusNextPage,buttonLoadMore )
           containerVideo.classList.add("grid","gridTC5", "gap10")
           containerVideo.innerHTML = ''
          addMarking(dateProfileVideo, 'Videos')
-         console.log('im in if')
 
         }else{
-          console.log('im here in else')
           buttonLoadMore.classList.remove("none")
           containerVideo.classList.add("grid","gridTC5", "gap10")
           containerVideo.innerHTML = state.markingVideoPage
         }
        
       }else if(target.textContent === 'Shorts'){
-        buttonLoadMore.classList.remove("none")
+        checkPageToken(statusNextPage,buttonLoadMore )
         containerVideo.classList.add("grid","gridTC5", "gap10")
         containerVideo.innerHTML = ''
         addMarking(dateProfileVideo, 'Shorts')

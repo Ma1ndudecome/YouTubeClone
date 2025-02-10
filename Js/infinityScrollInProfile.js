@@ -47,3 +47,8 @@ async function loadMore(accessToken, dataProfile, button) {
     }
   
 }
+export function checkPageToken(dateAboutToken, buttonLoadMore){
+  if(dateAboutToken.data.nextPageToken){
+    buttonLoadMore.classList.remove("none")
+  }
+}
