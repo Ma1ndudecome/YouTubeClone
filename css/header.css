@@ -40,9 +40,9 @@ header .menu .burger{
 }
 header .menu .burger span {
      height: 1px; 
-    width: 80%;
+    width: 70%;
     border-radius: 3px;
-    background-color: rgb(74, 74, 74);
+    background-color: var(--bordColor);
     transform: scale(1);
     
 }
@@ -50,18 +50,18 @@ header .menu .burger::before, .burger::after{
  content: '';
  position: absolute;
  
- width: 80%;
- background-color: rgb(74, 74, 74);
+ width: 70%;    
+ background-color:var(--bordColor)
 
 }
 
 .burger::before{
     top:0 ;
-    height: 2px;
+    height: 1px;
 }
 .burger::after{
     bottom: 0;
-    height: 2px;
+    height: 1px;    
 }
 
 
