@@ -331,38 +331,39 @@ header .sing_int {
 
 .profileImg img {
     border-radius: 50%;
-    width: 35%;
+    width: 45%;
     cursor: pointer;
 }
 
 .profileImg_Info {
+    overflow: hidden;
+    font-family: 'Roboto',sans-serif;
     display: none;
-    border-radius: 20px;
-    top: 35px;
+    border-radius: 24px;
+    top: 40px;
     position: absolute;
-    left: -208px;
-    width: 300px;
-    height: 300px;
+    left: -180px;
+    width: 280px;
+    height: fit-content;
     background-color: var(--hovWithOutTransperent);
     z-index: 9999;
-    border: 1px solid var(--bordColor);
-    box-shadow: 0px 0px 10px var(--bordColor);
+    border: 1px solid var(--hovColor);
+    /* box-shadow: 0px 0px 10px var(--bordColor); */
 }
 
 .profileImg_Info_top {
     width: 100%;
-    height: 34%;
+    height: 25%;
     border-bottom: 1px solid white;
-    padding: 20px 0px 0px 10px;
-    box-sizing: border-box;
+    padding: 20px 0px 20px 10px;
 }
 
 .Info_top_img {
-    width: 20%;
+    width: 15%;
 }
 
 .Info_top_img img {
-    width: 70%;
+    width: 100%;
 }
 
 .Info_top_profileInfo {
@@ -373,16 +374,19 @@ header .sing_int {
 .profileInfo_title,
 .profileInfo_customUrl {
     color: var(--bordColor);
-    font-family: "Poppins", serif;
-    font-weight: 300;
-    font-size: 15px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+.profileInfo_customUrl{
+    margin-bottom: 10px;
 }
 
 .Info_top_profileInfo a {
-    color: #6ca3eb;
-    margin-top: 15px;
-    font-family: "Poppins", serif;
-    font-weight: 300;
+    font-family: 'Roboto',sans-serif;
+    color: #3ea6ff;
+    font-weight: 400;
+    font-size: 0.9rem;
 
 }
 
@@ -420,7 +424,7 @@ header .sing_int {
 
 .Info_account_google_box1 p {
     color: var(--bordColor);
-    font-family: "Poppins", serif;
+    font-family: "Roboto", serif;
 }
 
 .Info_account_google,
@@ -428,6 +432,8 @@ header .sing_int {
 .Info_account_exit {
     height: 33.333%;
 }
+.Info_account_exit{
+    align-items: center;}
 
 .left_box {
     width: 25%;
@@ -441,7 +447,7 @@ header .sing_int {
 
 .left_box1 p {
     color: var(--bordColor);
-    font-family: "Poppins", serif;
+    font-family: "Roboto", sans-serif;
 
 }
 
@@ -452,7 +458,7 @@ header .sing_int {
 
 .exit_box1 p {
     color: var(--bordColor);
-    font-family: "Poppins", serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .Setting_theme {
@@ -508,7 +514,7 @@ header .sing_int {
     flex-direction: column;
 }
 
-.sing_int svg {
+.sing_int .svgS {
     border: solid var(--headerColor) 1px;
     border-radius: 24px;
     transition: 300ms;
