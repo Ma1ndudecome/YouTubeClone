@@ -95,9 +95,11 @@ async function openProfile(target, accessToken) {
       profileMarking = contVid.innerHTML
       
       slideToButton()
-      moveToVideo(videoProfile)
+      moveToVideo(videoProfile, videoProfile.data)
       loadNextVideo(accessToken, profileData, document.querySelector(".container_button_load button"))
 
+      
+      document.querySelector(".container_button_load button").classList.add('none')
 
     } catch (error) {
       console.log(error)
@@ -158,7 +160,7 @@ function slideToButton() {
   }
 }
 
-function moveToVideo(statusNextPage) {
+function moveToVideo(statusNextPage, data) {
   const navigationContainer = document.querySelector(".container_channel_navigation")
   const containerVideo = document.querySelector(".Header_Main_container_video")
   const buttonLoadMore = document.querySelector(".container_button_load button")
@@ -170,9 +172,9 @@ function moveToVideo(statusNextPage) {
     }
 
       if (target.textContent === 'Videos') {
-        some(state.isLastVideos,buttonLoadMore, state.markingVideoPage,statusNextPage,containerVideo, 'Videos')
+        some(state.isLastVideos,buttonLoadMore, state.markingVideoPage,statusNextPage,containerVideo, 'Videos', data)
       }else if(target.textContent === 'Shorts'){
-        some(state.isLastShorts, buttonLoadMore, state.markingShortsPage, statusNextPage, containerVideo, 'Shorts')
+        some(state.isLastShorts, buttonLoadMore, state.markingShortsPage, statusNextPage, containerVideo, 'Shorts', data)
       }else if(target.textContent === 'Home'){
         buttonLoadMore.classList.add("none")
         containerVideo.classList.remove("grid", "gridTC5", 'gap10')
@@ -202,7 +204,6 @@ export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=
         }else if(WhereCall === 'Shorts'){
           const containerVideo = document.querySelector(".Header_Main_container_video") 
           if(time[0]===0){
-            console.log('here')
             containerVideo.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
           }
         }
@@ -224,8 +225,8 @@ window.addEventListener("popstate", ()=>{
  
 })
 
-function some(LastVideo, buttonLoadMore, marking, statusNextPage, containerVideo, Call){
-  if(!LastVideo){
+function some(LastVideo, buttonLoadMore, marking, statusNextPage, containerVideo, Call, data){
+  if(!LastVideo && data.nextPageToken){
     buttonLoadMore.classList.remove('none')
     
   }
@@ -235,13 +236,11 @@ function some(LastVideo, buttonLoadMore, marking, statusNextPage, containerVideo
     addMarking(dateProfileVideo, Call)
     marking = containerVideo.innerHTML
   }else{
-    buttonLoadMore.classList.remove("none")
     AddClassToContainer(containerVideo, marking)
   }
 }
 
 function AddClassToContainer(containerVideo, inner){
-  console.log(containerVideo)
   containerVideo.classList.add("grid","gridTC5", "gap10")
   containerVideo.innerHTML = inner
 }
