@@ -72,6 +72,7 @@ async function takeDefaultVideoOrShorts(accessToken, dataProfile, requiredToken,
       button.classList.add("none")
       console.log('here')
     }else{
+      
       button.classList.add("block")
       if (whereCall === 'Videos') {
         state.pageTokenProfileVideo = data.data.nextPageToken;

@@ -6,7 +6,7 @@ import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
 import { checkPageToken } from "./infinityScrollInProfile.js"
-//сделать 2 токена для разных данных
+
 let profileMarking;//Переменная для сохранения разметки профиля
 let prevMarking;//Переменная для сохранения при перходе предыдущей разметки
 export const state = {//Тут храняться переменные которые изменяються в разныъ файлах
@@ -162,11 +162,13 @@ function moveToVideo(statusNextPage) {
   const navigationContainer = document.querySelector(".container_channel_navigation")
   const containerVideo = document.querySelector(".Header_Main_container_video")
   const buttonLoadMore = document.querySelector(".container_button_load button")
+  console.log(containerVideo)
   navigationContainer.addEventListener("click", ({ target }) => {
     if(target.classList.contains("container_channel_navigation_item")){
       document.querySelector(".borderBottom").classList.remove("borderBottom")
       target.classList.add("borderBottom")
     }
+
       if (target.textContent === 'Videos') {
         some(state.isLastVideos,buttonLoadMore, state.markingVideoPage,statusNextPage,containerVideo, 'Videos')
       }else if(target.textContent === 'Shorts'){
@@ -199,8 +201,6 @@ export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=
           }
         }else if(WhereCall === 'Shorts'){
           const containerVideo = document.querySelector(".Header_Main_container_video") 
-               
-
           if(time[0]===0){
             console.log('here')
             containerVideo.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
@@ -227,6 +227,7 @@ window.addEventListener("popstate", ()=>{
 function some(LastVideo, buttonLoadMore, marking, statusNextPage, containerVideo, Call){
   if(!LastVideo){
     buttonLoadMore.classList.remove('none')
+    
   }
   if(marking === ''){
     checkPageToken(statusNextPage,buttonLoadMore)
@@ -235,11 +236,12 @@ function some(LastVideo, buttonLoadMore, marking, statusNextPage, containerVideo
     marking = containerVideo.innerHTML
   }else{
     buttonLoadMore.classList.remove("none")
-    AddClassToContainer(marking)
+    AddClassToContainer(containerVideo, marking)
   }
 }
 
 function AddClassToContainer(containerVideo, inner){
+  console.log(containerVideo)
   containerVideo.classList.add("grid","gridTC5", "gap10")
   containerVideo.innerHTML = inner
 }
