@@ -6,12 +6,15 @@ import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
 import { checkPageToken } from "./infinityScrollInProfile.js"
-
+//сделать 2 токена для разных данных
 let profileMarking;//Переменная для сохранения разметки профиля
 let prevMarking;//Переменная для сохранения при перходе предыдущей разметки
 export const state = {//Тут храняться переменные которые изменяються в разныъ файлах
-  pageTokenProfile: '',//Сохранение токена для следующей страницы
-  markingVideoPage:''//Сохранение контейнера видео
+  pageTokenProfileVideo: '',//Сохранение токена для следующей страницы видео
+  pageTokenProfileShorts:'',//Сохранение токена для следующей страницы шортса
+  markingVideoPage:'',//Сохранение контейнера видео
+  markingHomePage:'',
+  markingShortsPage:''
 };
 
 
@@ -58,12 +61,14 @@ async function openProfile(target, accessToken) {
         }
       })
      
-      const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0])
+      const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0], state.pageTokenProfileVideo)
       console.log(videoProfile)
       
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
       
-      state.pageTokenProfile = videoProfile.data.nextPageToken || ''
+      state.pageTokenProfileVideo = videoProfile.data.nextPageToken || ''
+      state.pageTokenProfileShorts = videoProfile.data.nextPageToken || ''
+
   
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
   
@@ -169,12 +174,14 @@ function moveToVideo(statusNextPage) {
         }else{
           buttonLoadMore.classList.remove("none")
           containerVideo.classList.add("grid","gridTC5", "gap10")
+          console.log(state.markingVideoPage)
           containerVideo.innerHTML = state.markingVideoPage
         }
        
       }else if(target.textContent === 'Shorts'){
         checkPageToken(statusNextPage,buttonLoadMore )
         containerVideo.classList.add("grid","gridTC5", "gap10")
+        state.markingVideoPage = containerVideo.innerHTML    
         containerVideo.innerHTML = ''
         addMarking(dateProfileVideo, 'Shorts')
       }else if(target.textContent === 'Home'){
@@ -189,7 +196,7 @@ function moveToVideo(statusNextPage) {
 }
 
 export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, forYouVideoContainer=null){
-   return informationVideoMas.reduce((akk,el)=>{
+   return informationVideoMas.forEach(el=>{
       const duration = formatDuration(el.contentDetails.duration)
       if(duration !=="NaN"){
         const time = duration.split(':').map(Number)
@@ -201,23 +208,21 @@ export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=
           }
         }else if(WhereCall === 'Videos'){
           const containerVideo = document.querySelector(".Header_Main_container_video")  
-          
           if(time[0]!==0){
             containerVideo.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-            akk = 1
-            return akk
           }
         }else if(WhereCall === 'Shorts'){
-          const containerVideo = document.querySelector(".Header_Main_container_video")          
+          const containerVideo = document.querySelector(".Header_Main_container_video") 
+               
+
           if(time[0]===0){
+            console.log('here')
             containerVideo.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
-            akk = 2
-            return akk
           }
         }
         
       }
-    },0)
+    })
   
 }
 
