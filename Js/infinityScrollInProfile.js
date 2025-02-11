@@ -35,7 +35,7 @@ async function loadMore(accessToken, dataProfile, button) {
       }else if(position.textContent === 'Shorts'){
         await takeDefaultVideoOrShorts(accessToken, dataProfile, state.pageTokenProfileShorts, 'Shorts', button)
         state.markingShortsPage = document.querySelector(".Header_Main_container_video").innerHTML
-      
+        
       }
 
       
@@ -64,16 +64,21 @@ async function takeDefaultVideoOrShorts(accessToken, dataProfile, requiredToken,
     console.log(data)
     addMarking(detailInformationVideo.data.items, whereCall)
     if(!data.data.nextPageToken){
+      if(whereCall === 'Videos'){
+        state.isLastVideos = true;
+      }else if(whereCall === 'Shorts'){
+        state.isLastShorts = true;
+      }
       button.classList.add("none")
-      
+      console.log('here')
     }else{
+      button.classList.add("block")
       if (whereCall === 'Videos') {
         state.pageTokenProfileVideo = data.data.nextPageToken;
       } else if (whereCall === 'Shorts') {
         state.pageTokenProfileShorts = data.data.nextPageToken;
       }
     }
-    console.log(requiredToken)
   }catch(error){
     console.log(error)
   }
