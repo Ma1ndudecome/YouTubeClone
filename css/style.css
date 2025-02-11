@@ -2,7 +2,7 @@ html{
     
     --WhColor:white;
     --bordColor:#0f0f0f;
-    --hovColor:rgba(0, 0, 0, 0.103);
+    --hovColor:rgba(0, 0, 0, 0.103); /* hover background*/
     --headerColor:rgba(212, 211, 211, 0.871) ;
     --hovSing:rgb(220, 238, 245);
     --hoverBlack:rgb(102, 102, 102, 0.103);
