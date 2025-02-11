@@ -454,6 +454,7 @@ header .sing_int {
 .left_box3 {
     width: 20%;
     height: 100%;
+    transition: 200ms;
 }
 
 .exit_box1 p {
@@ -487,6 +488,12 @@ header .sing_int {
 
 .theme_arrow {
     width: 20%;
+    transition: 200ms;
+}
+.theme_arrow:hover,.left_box3:hover{
+    cursor: pointer;
+    background-color: var(--hoverBlack);
+
 }
 
 .Info_account_google:hover,
