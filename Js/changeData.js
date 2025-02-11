@@ -160,55 +160,24 @@ function slideToButton() {
 
 function moveToVideo(statusNextPage) {
   const navigationContainer = document.querySelector(".container_channel_navigation")
+  const containerVideo = document.querySelector(".Header_Main_container_video")
+  const buttonLoadMore = document.querySelector(".container_button_load button")
   navigationContainer.addEventListener("click", ({ target }) => {
-    const containerVideo = document.querySelector(".Header_Main_container_video")
-    const buttonLoadMore = document.querySelector(".container_button_load button")
-    if (target.textContent === 'Videos' || target.textContent === "Shorts" || target.textContent === 'Home') {
+    if(target.classList.contains("container_channel_navigation_item")){
       document.querySelector(".borderBottom").classList.remove("borderBottom")
       target.classList.add("borderBottom")
+    }
       if (target.textContent === 'Videos') {
-        console.log(state.isLastVideos)
-        if(!state.isLastVideos){
-          buttonLoadMore.classList.remove('none')
-        }
-        if(state.markingVideoPage === ''){
-          console.log('write old marking')
-          checkPageToken(statusNextPage,buttonLoadMore )
-          containerVideo.classList.add("grid","gridTC5", "gap10")
-          containerVideo.innerHTML = ''
-         addMarking(dateProfileVideo, 'Videos')
-         state.markingVideoPage = containerVideo.innerHTML
-
-        }else{
-          buttonLoadMore.classList.remove("none")
-          containerVideo.classList.add("grid","gridTC5", "gap10")
-          containerVideo.innerHTML = state.markingVideoPage
-        }
-       
+        some(state.isLastVideos,buttonLoadMore, state.markingVideoPage,statusNextPage,containerVideo, 'Videos')
       }else if(target.textContent === 'Shorts'){
-          if(!state.isLastShorts){
-            buttonLoadMore.classList.remove("none")
-          }
-          if(state.markingShortsPage === ''){
-            checkPageToken(statusNextPage,buttonLoadMore )
-            containerVideo.classList.add("grid","gridTC5", "gap10")
-            containerVideo.innerHTML = ''
-            addMarking(dateProfileVideo, 'Shorts')
-            state.markingShortsPage =  containerVideo.innerHTML
-          }else{
-            checkPageToken(statusNextPage,buttonLoadMore)
-            containerVideo.classList.add("grid", "gridTC5", "gap10")
-            containerVideo.innerHTML = state.markingShortsPage
-          }
-        
+        some(state.isLastShorts, buttonLoadMore, state.markingShortsPage, statusNextPage, containerVideo, 'Shorts')
       }else if(target.textContent === 'Home'){
         buttonLoadMore.classList.add("none")
-
         containerVideo.classList.remove("grid", "gridTC5", 'gap10')
         containerVideo.innerHTML = profileMarking
         slideToButton()
       }
-    }
+    
   })
 }
 
@@ -255,3 +224,22 @@ window.addEventListener("popstate", ()=>{
  
 })
 
+function some(LastVideo, buttonLoadMore, marking, statusNextPage, containerVideo, Call){
+  if(!LastVideo){
+    buttonLoadMore.classList.remove('none')
+  }
+  if(marking === ''){
+    checkPageToken(statusNextPage,buttonLoadMore)
+    AddClassToContainer(containerVideo, '')
+    addMarking(dateProfileVideo, Call)
+    marking = containerVideo.innerHTML
+  }else{
+    buttonLoadMore.classList.remove("none")
+    AddClassToContainer(marking)
+  }
+}
+
+function AddClassToContainer(containerVideo, inner){
+  containerVideo.classList.add("grid","gridTC5", "gap10")
+  containerVideo.innerHTML = inner
+}
