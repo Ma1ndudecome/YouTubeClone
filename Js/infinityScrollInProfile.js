@@ -9,7 +9,7 @@ export async function loadVideoInProfile(accessToken, dataProfile, tokenVideo){
         params: {
           part: "snippet,contentDetails",
           playlistId: `${dataProfile.contentDetails.relatedPlaylists.uploads}`,
-          maxResults: 10,
+          maxResults: 15,
           pageToken:tokenVideo,
           _t: Date.now()
         }
@@ -70,8 +70,8 @@ async function takeDefaultVideoOrShorts(accessToken, dataProfile, requiredToken,
         state.isLastShorts = true;
       }
       button.classList.add("none")
-      console.log('here')
     }else{
+      
       button.classList.add("block")
       if (whereCall === 'Videos') {
         state.pageTokenProfileVideo = data.data.nextPageToken;
