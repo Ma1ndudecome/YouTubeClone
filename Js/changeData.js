@@ -13,8 +13,8 @@ export const state = {//Тут храняться переменные кото�
   pageTokenProfileVideo: '',//Сохранение токена для следующей страницы видео
   pageTokenProfileShorts:'',//Сохранение токена для следующей страницы шортса
   markingVideoPage:'',//Сохранение контейнера видео
-  markingHomePage:'',
-  markingShortsPage:''
+  markingHomePage:'',//Сохранение главной страницы
+  markingShortsPage:''//Сохранение контейнера шортс
 };
 
 
@@ -166,24 +166,35 @@ function moveToVideo(statusNextPage) {
       target.classList.add("borderBottom")
       if (target.textContent === 'Videos') {
         if(state.markingVideoPage === ''){
+          console.log('write old marking')
           checkPageToken(statusNextPage,buttonLoadMore )
           containerVideo.classList.add("grid","gridTC5", "gap10")
           containerVideo.innerHTML = ''
          addMarking(dateProfileVideo, 'Videos')
+         state.markingVideoPage = containerVideo.innerHTML
 
         }else{
           buttonLoadMore.classList.remove("none")
           containerVideo.classList.add("grid","gridTC5", "gap10")
-          console.log(state.markingVideoPage)
+          console.log("take old marking")
           containerVideo.innerHTML = state.markingVideoPage
         }
        
       }else if(target.textContent === 'Shorts'){
-        checkPageToken(statusNextPage,buttonLoadMore )
-        containerVideo.classList.add("grid","gridTC5", "gap10")
-        state.markingVideoPage = containerVideo.innerHTML    
-        containerVideo.innerHTML = ''
-        addMarking(dateProfileVideo, 'Shorts')
+          if(state.markingShortsPage === ''){
+            checkPageToken(statusNextPage,buttonLoadMore )
+            containerVideo.classList.add("grid","gridTC5", "gap10")
+            console.log("write old marking")
+            containerVideo.innerHTML = ''
+            addMarking(dateProfileVideo, 'Shorts')
+            state.markingShortsPage =  containerVideo.innerHTML
+          }else{
+            checkPageToken(statusNextPage,buttonLoadMore)
+            containerVideo.classList.add("grid", "gridTC5", "gap10")
+            console.log('take old marking')
+            containerVideo.innerHTML = state.markingShortsPage
+          }
+        
       }else if(target.textContent === 'Home'){
         buttonLoadMore.classList.add("none")
 
