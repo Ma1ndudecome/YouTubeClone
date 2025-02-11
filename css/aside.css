@@ -130,3 +130,8 @@ aside::-webkit-scrollbar-thumb:hover{
         width: 80px;
     }
 }
+@media (max-width:620px){
+    aside{
+        display: none;
+    }
+}
