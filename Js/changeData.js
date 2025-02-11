@@ -165,7 +165,7 @@ function moveToVideo(statusNextPage, data) {
   const navigationContainer = document.querySelector(".container_channel_navigation")
   const containerVideo = document.querySelector(".Header_Main_container_video")
   const buttonLoadMore = document.querySelector(".container_button_load button")
-  console.log(containerVideo)
+
   navigationContainer.addEventListener("click", ({ target }) => {
     if(target.classList.contains("container_channel_navigation_item")){
       document.querySelector(".borderBottom").classList.remove("borderBottom")
@@ -191,44 +191,40 @@ export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=
       if(duration !=="NaN"){
         const time = duration.split(':').map(Number)
         if(WhereCall==='Home'){
-          if (time[0] === 0) {
-            ShortsVideoContainer.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
-          } else {
-            forYouVideoContainer.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-          }
+          insertVideo(time,el, undefined, ShortsVideoContainer, forYouVideoContainer, WhereCall)
         }else if(WhereCall === 'Videos'){
           const containerVideo = document.querySelector(".Header_Main_container_video")  
-          if(time[0]!==0){
-            containerVideo.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-          }
+          insertVideo(time, el, containerVideo, undefined, undefined, WhereCall)
         }else if(WhereCall === 'Shorts'){
           const containerVideo = document.querySelector(".Header_Main_container_video") 
-          if(time[0]===0){
-            containerVideo.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
-          }
+          insertVideo(time, el, containerVideo, undefined, undefined, WhereCall)
+          console.log('insertShorts')
         }
         
       }
     })
   
 }
-function insertVideo(time, containerVideo=null, ShortsVideoContainer=null, forYouVideoContainer=null, el){
+function insertVideo(time, el, containerVideo, ShortsVideoContainer, forYouVideoContainer, WhereCall){
   const isShort = time[0] === 0;
   const markup = isShort
-  ?shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id)
-  :forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id);
-  
-  if (isShort) {
-    ShortsVideoContainer?.insertAdjacentHTML("beforeend", markup);
-  } else {
-    forYouVideoContainer?.insertAdjacentHTML("beforeend", markup);
+    ? shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id)
+    : forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id);
+
+  if (WhereCall === 'Home') {
+    isShort 
+      ? ShortsVideoContainer?.insertAdjacentHTML("beforeend", markup)
+      : forYouVideoContainer?.insertAdjacentHTML("beforeend", markup);
+  } else if (WhereCall === 'Videos' && !isShort) {
+    containerVideo?.insertAdjacentHTML("beforeend", markup);
+  } else if (WhereCall === 'Shorts' && isShort) {
+    console.log('here');
+    containerVideo?.insertAdjacentHTML("beforeend", markup);
   }
-  containerVideo?.insertAdjacentHTML("beforeend", markup);
 }
 function checkAndGiveMarking(LastVideo, buttonLoadMore, marking, statusNextPage, containerVideo, Call, data){
   if(!LastVideo && data.nextPageToken){
     buttonLoadMore.classList.remove('none')
-    
   }
   if(marking === ''){
     checkPageToken(statusNextPage,buttonLoadMore)

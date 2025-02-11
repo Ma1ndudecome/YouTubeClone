@@ -9,7 +9,7 @@ export async function loadVideoInProfile(accessToken, dataProfile, tokenVideo){
         params: {
           part: "snippet,contentDetails",
           playlistId: `${dataProfile.contentDetails.relatedPlaylists.uploads}`,
-          maxResults: 50,
+          maxResults: 15,
           pageToken:tokenVideo,
           _t: Date.now()
         }
