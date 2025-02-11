@@ -30,9 +30,12 @@ async function loadMore(accessToken, dataProfile, button) {
       const position = element(container)
      
       if(position.textContent === 'Videos'){
-        takeDefaultVideoOrShorts(accessToken, dataProfile, state.pageTokenProfileVideo, 'Videos', button)
+       await takeDefaultVideoOrShorts(accessToken, dataProfile, state.pageTokenProfileVideo, 'Videos', button)
+        state.markingVideoPage = document.querySelector(".Header_Main_container_video").innerHTML
       }else if(position.textContent === 'Shorts'){
-        takeDefaultVideoOrShorts(accessToken, dataProfile, state.pageTokenProfileShorts, 'Shorts', button)
+        await takeDefaultVideoOrShorts(accessToken, dataProfile, state.pageTokenProfileShorts, 'Shorts', button)
+        state.markingShortsPage = document.querySelector(".Header_Main_container_video").innerHTML
+        
       }
 
       
@@ -61,16 +64,21 @@ async function takeDefaultVideoOrShorts(accessToken, dataProfile, requiredToken,
     console.log(data)
     addMarking(detailInformationVideo.data.items, whereCall)
     if(!data.data.nextPageToken){
-      button.remove()
-      
+      if(whereCall === 'Videos'){
+        state.isLastVideos = true;
+      }else if(whereCall === 'Shorts'){
+        state.isLastShorts = true;
+      }
+      button.classList.add("none")
+      console.log('here')
     }else{
+      button.classList.add("block")
       if (whereCall === 'Videos') {
         state.pageTokenProfileVideo = data.data.nextPageToken;
       } else if (whereCall === 'Shorts') {
         state.pageTokenProfileShorts = data.data.nextPageToken;
       }
     }
-    console.log(requiredToken)
   }catch(error){
     console.log(error)
   }

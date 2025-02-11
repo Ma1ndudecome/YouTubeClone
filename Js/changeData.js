@@ -13,8 +13,10 @@ export const state = {//Тут храняться переменные кото�
   pageTokenProfileVideo: '',//Сохранение токена для следующей страницы видео
   pageTokenProfileShorts:'',//Сохранение токена для следующей страницы шортса
   markingVideoPage:'',//Сохранение контейнера видео
-  markingHomePage:'',
-  markingShortsPage:''
+  markingHomePage:'',//Сохранение главной страницы
+  markingShortsPage:'',//Сохранение контейнера шортс
+  isLastVideos:false,//Последнее ли видео
+  isLastShorts:false,//Последнее ли видео
 };
 
 
@@ -160,30 +162,45 @@ function moveToVideo(statusNextPage) {
   const navigationContainer = document.querySelector(".container_channel_navigation")
   navigationContainer.addEventListener("click", ({ target }) => {
     const containerVideo = document.querySelector(".Header_Main_container_video")
-    const buttonLoadMore = document.querySelector(".container_button_load")
+    const buttonLoadMore = document.querySelector(".container_button_load button")
     if (target.textContent === 'Videos' || target.textContent === "Shorts" || target.textContent === 'Home') {
       document.querySelector(".borderBottom").classList.remove("borderBottom")
       target.classList.add("borderBottom")
       if (target.textContent === 'Videos') {
+        console.log(state.isLastVideos)
+        if(!state.isLastVideos){
+          buttonLoadMore.classList.remove('none')
+        }
         if(state.markingVideoPage === ''){
+          console.log('write old marking')
           checkPageToken(statusNextPage,buttonLoadMore )
           containerVideo.classList.add("grid","gridTC5", "gap10")
           containerVideo.innerHTML = ''
          addMarking(dateProfileVideo, 'Videos')
+         state.markingVideoPage = containerVideo.innerHTML
 
         }else{
           buttonLoadMore.classList.remove("none")
           containerVideo.classList.add("grid","gridTC5", "gap10")
-          console.log(state.markingVideoPage)
           containerVideo.innerHTML = state.markingVideoPage
         }
        
       }else if(target.textContent === 'Shorts'){
-        checkPageToken(statusNextPage,buttonLoadMore )
-        containerVideo.classList.add("grid","gridTC5", "gap10")
-        state.markingVideoPage = containerVideo.innerHTML    
-        containerVideo.innerHTML = ''
-        addMarking(dateProfileVideo, 'Shorts')
+          if(!state.isLastShorts){
+            buttonLoadMore.classList.remove("none")
+          }
+          if(state.markingShortsPage === ''){
+            checkPageToken(statusNextPage,buttonLoadMore )
+            containerVideo.classList.add("grid","gridTC5", "gap10")
+            containerVideo.innerHTML = ''
+            addMarking(dateProfileVideo, 'Shorts')
+            state.markingShortsPage =  containerVideo.innerHTML
+          }else{
+            checkPageToken(statusNextPage,buttonLoadMore)
+            containerVideo.classList.add("grid", "gridTC5", "gap10")
+            containerVideo.innerHTML = state.markingShortsPage
+          }
+        
       }else if(target.textContent === 'Home'){
         buttonLoadMore.classList.add("none")
 
