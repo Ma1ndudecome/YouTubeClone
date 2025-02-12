@@ -212,13 +212,10 @@ function insertVideo(time, el, containerVideo, ShortsVideoContainer, forYouVideo
     : forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id);
 
   if (WhereCall === 'Home') {
-    isShort 
-      ? ShortsVideoContainer?.insertAdjacentHTML("beforeend", markup)
-      : forYouVideoContainer?.insertAdjacentHTML("beforeend", markup);
+    isShort ? ShortsVideoContainer?.insertAdjacentHTML("beforeend", markup): forYouVideoContainer?.insertAdjacentHTML("beforeend", markup);
   } else if (WhereCall === 'Videos' && !isShort) {
     containerVideo?.insertAdjacentHTML("beforeend", markup);
   } else if (WhereCall === 'Shorts' && isShort) {
-    console.log('here');
     containerVideo?.insertAdjacentHTML("beforeend", markup);
   }
 }

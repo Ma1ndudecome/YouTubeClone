@@ -345,7 +345,7 @@ iframe{
     height: 260px;
     margin-top: 20px;
     cursor: pointer;
-    min-width: 300px;
+    min-width: 260px;
     
 }
 .Container_video_preview{
@@ -495,7 +495,9 @@ iframe{
 .none{
     display: none !important;
 }
-
+.whColor{
+    background-color: var(--WhColor);
+}
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);
