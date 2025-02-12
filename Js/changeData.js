@@ -18,6 +18,7 @@ export const state = {//Тут храняться переменные кото�
   isLastVideos:false,//Последнее ли видео
   isLastShorts:false,//Последнее ли видео
   prevMarking:'',//Переменная для сохранения при перходе предыдущей разметки
+  countsubscribe:'',
 };
 
 
@@ -63,9 +64,13 @@ async function openProfile(target, accessToken) {
           mine: true
         }
       })
-     
+     console.log(dataProfile)
+      state.countsubscribe = {
+        subscriberCount:dataProfile.data.items[0].statistics.subscriberCount,
+        img:`${dataProfile.data.items[0].snippet.thumbnails.default.url}`
+      }
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0], state.pageTokenProfileVideo)
-      console.log(videoProfile)
+      
       
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
       
