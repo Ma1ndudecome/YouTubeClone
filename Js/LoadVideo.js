@@ -25,6 +25,7 @@ async function LoadVideo() {
         console.log(error)
     }
 }
+
 const observ = new IntersectionObserver((entries)=>{
     if(isVideo){
         return

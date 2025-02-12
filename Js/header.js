@@ -7,13 +7,20 @@ let img_adaptation = document.getElementById("img_adaptation")
 const burger = document.querySelector(".burger")
 const aside = document.querySelector("aside")
 const asideSign = document.querySelector(".aside_SignIn")
-const menuExplore = document.querySelector(".menu_Explore.down")
+const menuExploreHidden = document.querySelector(".menu_Explore.down")
+const menuExplore = document.querySelectorAll(".menu_Explore")
 const exploreContainer = document.querySelector(".explore_Container")
 const exploreItem = document.querySelectorAll(".Explore_element_menu li")
 const exploreItemA = document.querySelectorAll(".Explore_element_menu li a")
 const exploreItemAP = document.querySelectorAll(".Explore_element_menu li a p")
-
-
+const main = document.querySelector("main")
+const backdrop = document.querySelector(".backdrop")
+const nowHeight = window.innerHeight
+if(window.innerWidth < 820){
+    aside.classList.add('none')
+    aside.classList.add("positionFixed")
+    aside.classList.add("w120")
+}
 
 function el(){
     const mas = []
@@ -22,13 +29,33 @@ function el(){
     }
     return mas
 }
-// window.addEventListener('resize', ()=>{
-//     if(window.innerWidth < 820){
-//         aside.classList.add('none')
-//     }else{
-//         aside.classList.remove('none')
-//     }
-// })
+window.addEventListener('resize', ()=>{
+    if(window.innerWidth <= 1380){
+        asideSign.classList.add("down")
+        document.querySelector(".menu_Explore.downItem").classList.add('down')
+    }
+    console.log(window.innerWidth)
+    if(window.innerWidth > 820){
+        backdrop.classList.remove("active")
+        aside.classList.remove("positionFixed", "w120")
+        aside.classList.toggle('block')
+        aside.classList.remove("ovhAuto")
+        menuExplore.forEach(el=>el.classList.remove('w100Pr'))
+        exploreItemA.forEach(el=>{
+            el.classList.remove('fdR')
+            el.classList.remove('gap10')
+        })
+       } else if(window.innerWidth < 820){
+        document.body.classList.toggle('ovhHidden')
+        aside.classList.add('none')
+        aside.classList.add("positionFixed")
+        aside.classList.add("w120")
+        
+    }else{
+        aside.classList.remove('none')
+    }
+   
+})
 
 glass_adaptation.addEventListener("click",(e)=>{
     // search.style.position ="fixed"
@@ -42,28 +69,32 @@ img_adaptation.addEventListener("click",() =>{
    glass_adaptation.style.display ="flex"
 })
 burger.onclick = ()=>{
-    if(window.innerWidth > 1380){
+    if(window.innerWidth < 820){
+        aside.classList.remove("none")
+        aside.classList.add('block')
+        backdrop.classList.add("active")
+        document.body.classList.toggle('ovhHidden')
+        aside.classList.add("ovhAuto")
+        menuExplore.forEach(el=>el.classList.add('w100Pr'))
+        asideSign.classList.remove('down')
+        menuExploreHidden.classList.remove('down')
         el().forEach(el=>{
-            el.classList.toggle('dF')
-            el.classList.toggle('jcC')
-            el.classList.toggle('aiC')
+         
         })
         exploreItemA.forEach(el=>{
-            el.classList.toggle('fdC')
-            el.classList.toggle('gap10')
-
+            el.classList.add('fdR')
+            el.classList.add('gap10')
         })
-        aside.classList.toggle("w80")
-        menuExplore.classList.toggle('none')
-        asideSign.classList.toggle('none')
-        exploreContainer.classList.toggle('pad0')
-        exploreItemAP.forEach(el=>el.classList.toggle("fS12"))
+    }else{
+        aside.classList.remove("positionFixed", "w120")
+        aside.classList.toggle('block')
+        aside.classList.toggle("none")
     }
-    aside.classList.toggle("none")
-    aside.classList.toggle('block')
-
-   
-
+}
+backdrop.onclick = ()=>{
+    backdrop.classList.remove("active")
+    aside.classList.add("none")
+    document.body.classList.remove('ovhHidden')
 }
 // function f1(){
 //     if(window.innerWidth < 590){

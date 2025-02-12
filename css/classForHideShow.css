@@ -7,6 +7,32 @@ padding: 0;
 .fS12{
     font-size: 12px;
 }
-.positionAbs{
-    position: absolute;
+.positionFixed{
+    position: fixed;
+    
+    
+}
+.w120{
+    width: 150px;
+}
+.w100Pr{
+    width: 100%;
+}
+.backdrop{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 3;
+}
+.active{
+    display: block;
+}
+.ovhHidden{
+    overflow: hidden;
+}
+.ovhAuto{
+    overflow: auto;
+    max-height: 100vh;
 }
