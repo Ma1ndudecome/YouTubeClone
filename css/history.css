@@ -14,16 +14,7 @@
     margin-bottom: 50px;
 }
 
-main {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 87vw;
-    background-color: var(--WhColor);
-    margin: 0 auto;
-    z-index: 0;
-    flex-direction: column;
 
-}
 
 .main-history-container {
     gap: 25px;

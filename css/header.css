@@ -37,7 +37,7 @@ header .menu .burger {
     align-items: center;
     width: 25px;
     height: 15px;
-
+    cursor: pointer;
     position: relative;
 }
 

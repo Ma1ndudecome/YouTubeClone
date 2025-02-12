@@ -42,6 +42,11 @@
 .Explore_element_menu li:hover{
     background-color:var(--hovColor);
 }
+@media (max-width:1500px) {
+    .explore_Container ul li a p {
+        font-size: 10px;    
+    }
+}
 @media(max-width:1380px){
     .down{
         display: none;
