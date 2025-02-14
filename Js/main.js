@@ -2,6 +2,7 @@
 
 import "./LoadVideo.js"
 import "./PostToToken.js"
+import "./SingIn.js"
 import { MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
 
 import { container as main } from "./LoadVideo.js"
@@ -35,6 +36,7 @@ main.addEventListener("click", (e) => {
         isVideo = true
     }
    
+    
     
 })
 
