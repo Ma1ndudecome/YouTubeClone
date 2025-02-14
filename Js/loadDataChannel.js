@@ -8,3 +8,9 @@ export async function channelData(accessToken) {
     })
     return response
 }
+
+export function moreBtn(){
+    document.querySelector(".more_info span").onclick = ()=>{
+        
+    }
+}

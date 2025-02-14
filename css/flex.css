@@ -19,7 +19,16 @@
 .jcE{
     justify-content: flex-end;
 }
+.jcsB{
+    justify-content: space-between;
+}
+.jcsA{
+    justify-content: space-around;
+}
+.jcsE{
+    justify-content: space-evenly;
 
+}
 .fdC{
     flex-direction: column;
 

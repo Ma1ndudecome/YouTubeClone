@@ -6,6 +6,7 @@ import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
 import { checkPageToken } from "./infinityScrollInProfile.js"
+import { channelData, moreBtn } from "./loadDataChannel.js"
 
 let profileMarking;//Переменная для сохранения разметки профиля
 
@@ -18,7 +19,7 @@ export const state = {//Тут храняться переменные кото�
   isLastVideos:false,//Последнее ли видео
   isLastShorts:false,//Последнее ли видео
   prevMarking:'',//Переменная для сохранения при перходе предыдущей разметки
-  countsubscribe:'',
+  countsubscribe:'',//Сохранить количество подписчиков и url профиля
 };
 
 
@@ -57,14 +58,8 @@ async function openProfile(target, accessToken) {
     info.classList.remove("show")
     container.classList.add('block')
     try {
-      const dataProfile = await axios.get(`https://www.googleapis.com/youtube/v3/channels`, {
-        headers: { 'Authorization': `Bearer ${accessToken}` },
-        params: {
-          part: "snippet,statistics,brandingSettings,contentDetails",
-          mine: true
-        }
-      })
-     console.log(dataProfile)
+      const dataProfile = await channelData(accessToken)
+     
       state.countsubscribe = {
         subscriberCount:dataProfile.data.items[0].statistics.subscriberCount,
         img:`${dataProfile.data.items[0].snippet.thumbnails.default.url}`
@@ -106,7 +101,7 @@ async function openProfile(target, accessToken) {
 
       
       document.querySelector(".container_button_load button").classList.add('none')
-
+      moreBtn()
     } catch (error) {
       console.log(error)
     }

@@ -15,8 +15,7 @@ import "./changeHistoryPage.js"
 import { state } from "./changeData.js"
 
 main.addEventListener("click", (e) => {
-    console.log(e.target)
-    console.log(e)
+
     if(e.target.closest(".Main_container_video")){
         const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
         const dateRequests = dateRequest.filter(el=>el.id === id)
