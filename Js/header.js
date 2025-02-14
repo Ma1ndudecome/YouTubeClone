@@ -46,7 +46,9 @@ window.addEventListener('resize', ()=>{
             el.classList.remove('gap10')
         })
        } else if(window.innerWidth < 820){
-        document.body.classList.toggle('ovhHidden')
+        main.classList.toggle("w100Pr")
+        main.classList.toggle("pad0")
+        
         aside.classList.add('none')
         aside.classList.add("positionFixed")
         aside.classList.add("w120")
@@ -69,6 +71,8 @@ img_adaptation.addEventListener("click",() =>{
    glass_adaptation.style.display ="flex"
 })
 burger.onclick = ()=>{
+    main.classList.toggle("w100Pr")
+   
     if(window.innerWidth < 820){
         aside.classList.remove("none")
         aside.classList.add('block')
