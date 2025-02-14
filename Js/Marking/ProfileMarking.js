@@ -69,23 +69,27 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
     `
 }
 
-export function InfoAboutChannel(){
+export function InfoAboutChannel(countSubscribe, countVideo, countViews, accountCreat){
+    const dateString = accountCreat
+    const parsedDate = dateFns.parseISO(dateString);
+    console.log(parsedDate)
+    const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
     return `
    <div class="backdropInfo dF aiC jcC">
         <div class="block_info dF jcC aiC fdC">
             <div class="block_info_header dF jcsB aiC">
-                <h1>Про канал</h1>
+                <h1>About</h1>
                 <svg class="closeMoreInfoBtn" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"><path d="m12.71 12 8.15 8.15-.71.71L12 12.71l-8.15 8.15-.71-.71L11.29 12 3.15 3.85l.71-.71L12 11.29l8.15-8.15.71.71L12.71 12z"></path></svg>
             </div>
             <div class="block_info_main dF fdC jcC">
-                <h1>Відомості про канал</h1>
+                <h1>Channel details</h1>
                     <div class="subscriber dF">
                         <div class="subscriber_svg">
                                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"><path d="M11.72 11.93C13.58 11.59 15 9.96 15 8c0-2.21-1.79-4-4-4S7 5.79 7 8c0 1.96 1.42 3.59 3.28 3.93C4.77 12.21 2 15.76 2 20h18c0-4.24-2.77-7.79-8.28-8.07zM8 8c0-1.65 1.35-3 3-3s3 1.35 3 3-1.35 3-3 3-3-1.35-3-3zm3 4.9c5.33 0 7.56 2.99 7.94 6.1H3.06c.38-3.11 2.61-6.1 7.94-6.1zm5.68-1.46-.48-.88C17.31 9.95 18 8.77 18 7.5s-.69-2.45-1.81-3.06l.49-.88C18.11 4.36 19 5.87 19 7.5c0 1.64-.89 3.14-2.32 3.94zm2.07 1.69-.5-.87c1.7-.98 2.75-2.8 2.75-4.76s-1.05-3.78-2.75-4.76l.5-.87C20.75 3.03 22 5.19 22 7.5s-1.24 4.47-3.25 5.63z"></path></svg>
 
                         </div>
                         <div class="subscriber_text dF aiC">
-                            Підписалося 22 користувачі
+                            ${countSubscribe} subscribers
                         </div>
                     </div>
                     <div class="block_info_main_video dF">
@@ -93,7 +97,7 @@ export function InfoAboutChannel(){
                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" ><path d="m10 8 6 4-6 4V8zm11-5v18H3V3h18zm-1 1H4v16h16V4z"></path></svg>
                         </div>
                           <div class="block_info_main_video_text dF aiC">
-                            29 відео
+                            ${countVideo} videos
                         </div>
                     </div>
                      <div class="block_info_main_view dF">
@@ -101,7 +105,7 @@ export function InfoAboutChannel(){
                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"><path d="M22 6v7h-1V7.6l-8.5 7.6-4-4-5.6 5.6-.7-.7 6.4-6.4 4 4L20.2 7H15V6h7z"></path></svg>
                         </div>
                           <div class="block_info_main_view_text dF aiC">
-                            1620 переглядів
+                            ${fromViewToShortView(countViews)}
                         </div>
                     </div>
                     <div class="block_info_main_dateCreated dF">
@@ -109,7 +113,7 @@ export function InfoAboutChannel(){
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"><path d="M13 17h-2v-6h2v6zm0-10h-2v2h2V7zm-1-4c-4.96 0-9 4.04-9 9s4.04 9 9 9 9-4.04 9-9-4.04-9-9-9m0-1c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"></path></svg>
                         </div>
                           <div class="block_info_main_dateCreated_text dF aiC">
-                            Канал створено 24 лют. 2019р
+                            Joined ${formattedDate}
                         </div>
                     </div>
             </div>

@@ -19,7 +19,7 @@ export const state = {//Тут храняться переменные кото�
   isLastVideos:false,//Последнее ли видео
   isLastShorts:false,//Последнее ли видео
   prevMarking:'',//Переменная для сохранения при перходе предыдущей разметки
-  countsubscribe:'',//Сохранить количество подписчиков и url профиля
+  infoChannel:'',//Сохранить количество подписчиков и url профиля
 };
 
 
@@ -59,10 +59,13 @@ async function openProfile(target, accessToken) {
     container.classList.add('block')
     try {
       const dataProfile = await channelData(accessToken)
-     
-      state.countsubscribe = {
+     console.log(dataProfile)
+      state.infoChannel = {
         subscriberCount:dataProfile.data.items[0].statistics.subscriberCount,
-        img:`${dataProfile.data.items[0].snippet.thumbnails.default.url}`
+        img:dataProfile.data.items[0].snippet.thumbnails.default.url,
+        videoCount:dataProfile.data.items[0].statistics.videoCount,
+        viewCount:dataProfile.data.items[0].statistics.viewCount,
+        dateCreateAccount:dataProfile.data.items[0].snippet.publishedAt
       }
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0], state.pageTokenProfileVideo)
       

@@ -28,7 +28,7 @@ main.addEventListener("click", (e) => {
         const dateRequests = dateProfileVideo.filter(el=>el.id === id)
         
         console.log(state)
-        main.innerHTML = MarkingPlayer(id, dateRequests, state.countsubscribe)
+        main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
         
   
         main.classList.add('block')
