@@ -72,7 +72,6 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
 export function InfoAboutChannel(countSubscribe, countVideo, countViews, accountCreat){
     const dateString = accountCreat
     const parsedDate = dateFns.parseISO(dateString);
-    console.log(parsedDate)
     const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
     return `
    <div class="backdropInfo dF aiC jcC">

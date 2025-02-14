@@ -89,3 +89,44 @@ padding: 0;
     border-radius: 50px;
     background-color:var(--bgcolorTransperent);
   }
+@media (max-width:1300px) {
+  .block_info{
+    width:350px;
+    height: 270px;
+  }
+  .block_info_header h1{
+    font-size:21px;
+  }
+  .closeMoreInfoBtn, 
+  .subscriber_svg svg,
+  .block_info_main_video_svg,
+  .block_info_main_video_view,
+  .block_info_main_video_dateCreated,
+  .block_info_main_video_svg svg, 
+  .block_info_main_video_view svg, 
+  .block_info_main_video_dateCreated svg {
+   width: 20px;
+   height: 20px;
+  }
+  .block_info_main h1 {
+    font-size: 20px;
+  }
+  .subscriber_text, 
+  .block_info_main_video_text, 
+  .block_info_main_view_text,
+  .block_info_main_dateCreated_text {
+    font-size: 14px;
+  }
+
+
+}
+@media (max-width:600px) {
+  .block_info{
+    width:300px;
+  }
+}
+@media (max-width:460px) {
+  .block_info{
+    width:260px;
+  }
+}
