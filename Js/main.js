@@ -76,13 +76,7 @@ function moreBtn(originalText, dateRequests, ProfileData){
     inserEl(descriptionCont,"afterbegin",originalText )
     inserEl(descriptionCont,"afterend",markingShowMore(dateRequests, ProfileData))
 }
-function linkToTag(description){
-    const regex = /(https?:\/\/[^\s]+)/g;
-    const updateDesc = description.replace(regex, (match)=>{
-        return `<a href="${match}" target="_blank">${match}</a>`
-    })
-    return updateDesc
-}
+
 function inserEl(el, positon, marking){
     el.insertAdjacentHTML(positon, marking)
 }
