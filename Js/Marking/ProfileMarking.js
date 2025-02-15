@@ -124,6 +124,7 @@ export function InfoAboutChannel(countSubscribe, countVideo, countViews, account
 }
 export function markingShowMore(dateRequests, dataProfile){
     return `
+    <div class="containerShowMore">
       <div class="TranscriptVideo dF fdC">
             <h1>Transcript</h1>
             <p>Follow along using the transcript</p>
@@ -138,6 +139,7 @@ export function markingShowMore(dateRequests, dataProfile){
                 <div class="description_channel_container_subscribers">${fromLikeToShortLike(dataProfile.infoChannel.subscriberCount)} subscribers</div>
             </div>
         </div>
+    </div>
     `
 
 }

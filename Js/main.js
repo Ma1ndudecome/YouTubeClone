@@ -15,6 +15,7 @@ import "./changeHistoryPage.js"
 
 import { state } from "./changeData.js"
 import { markingShowMore } from "./Marking/ProfileMarking.js"
+let countClick = 0
 main.addEventListener("click", (e) => {
 
     if(e.target.closest(".Main_container_video")){
@@ -37,8 +38,19 @@ main.addEventListener("click", (e) => {
         isVideo = true
         
         shortLength('.Main_container_blockInfo_description_link', 20)
-        document.querySelector(".showMoreDescription").onclick = ()=>{
-            moreBtn(dateRequests[0].snippet.description, dateRequests, state)
+        const buttonShowMore = document.querySelector(".showMoreDescription")
+        buttonShowMore.onclick = ()=>{
+            countClick += 1
+            if(countClick === 1){
+                buttonShowMore.textContent = 'Show less'
+                moreBtn(dateRequests[0].snippet.description, dateRequests, state)
+
+            }else if(countClick === 2){
+                document.querySelector(".containerShowMore").remove()
+                shortLength('.Main_container_blockInfo_description_link', 20)
+                buttonShowMore.textContent = '...more'
+                countClick = 0
+            }
         }
     }
    
@@ -57,8 +69,8 @@ function shortLength(element, maxLength){
     return text
 }
 function moreBtn(originalText, dateRequests, ProfileData){
-    const descriptionCont = document.querySelector(".Main_container_blockInfo_description")
+    const descriptionCont = document.querySelector(".Main_container_blockInfo_description_link")
     document.querySelector('.Main_container_blockInfo_description_link').textContent = originalText
-    descriptionCont.insertAdjacentHTML("beforeend",markingShowMore(dateRequests, ProfileData))
+    descriptionCont.insertAdjacentHTML("afterend",markingShowMore(dateRequests, ProfileData))
 
 }
