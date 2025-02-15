@@ -54,7 +54,6 @@ if(code){
                 const response = await axios.post(urlToken, data, {
                     headers:{'Content-Type': 'application/x-www-form-urlencoded'}
                 })
-                
                 const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                     headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
                 })
