@@ -27,16 +27,35 @@ main.addEventListener("click", (e) => {
         
         const id = e.target.closest(".video_box").getAttribute("idVideo")
         const dateRequests = dateProfileVideo.filter(el=>el.id === id)
-        
-        console.log(state)
+    
+        dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
+
         main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
         
   
         main.classList.add('block')
         isVideo = true
+        
+        shortLength('.Main_container_blockInfo_description_link', 20)
+        document.querySelector(".showMoreDescription").onclick = ()=>{
+            moreBtn(dateRequests[0].snippet.description)
+        }
     }
    
     
     
 })
 
+function shortLength(element, maxLength){
+    const elem = document.querySelector(element)
+    const text = elem.textContent
+
+    if(text.length > maxLength){
+        const short = text.slice(0, maxLength)
+        elem.textContent = short
+    }
+    return text
+}
+function moreBtn(originalText){
+    document.querySelector('.Main_container_blockInfo_description_link').textContent = originalText
+}

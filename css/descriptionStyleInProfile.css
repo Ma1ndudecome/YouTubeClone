@@ -1,0 +1,19 @@
+.Main_container_blockInfo_description{
+    background-color: var(--colorForDescriptionInProfile);
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.Main_container_blockInfo_description div{
+    color:var(--bordColor);
+    font-family: "Roboto", "Arial", sans-serif;
+}
+.Main_container_blockInfo_description_link{
+    font-weight: 400;
+    font-size: 15px;
+
+}
+.showMoreDescription{
+    font-weight:700;
+    cursor: pointer;
+}

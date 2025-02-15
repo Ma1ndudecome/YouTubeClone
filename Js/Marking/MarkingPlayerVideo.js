@@ -55,7 +55,7 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                             <span class="Main_container_blockInfo_description_view">${dateRequests[0].statistics.viewCount} views</span><span class="Main_container_blockInfo_description_date">2 years ago</span>
                         </div>
                         <div>
-                            <span class="Main_container_blockInfo_description_link">Мой тт-...</span> <span class="showMoreDescription">...more</span>
+                            <span class="Main_container_blockInfo_description_link">${dateRequests[0].snippet.description}</span> <span class="showMoreDescription">...more</span>
                         </div>
                     </div>
                 </div>
