@@ -174,7 +174,7 @@ iframe{
     cursor: pointer;
 }
 .leftSide_subscribe_button button:hover{
-    background-color: rgba(0, 0, 0, 0.829);
+    background-color: var(--bgColorTransperentHover)
 }
 .rightSide_emotion{
     width: 20%;
@@ -499,6 +499,7 @@ iframe{
 .whColor{
     background-color: var(--WhColor);
 }
+
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);

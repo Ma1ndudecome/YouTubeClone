@@ -2,7 +2,7 @@ import { fromLikeToShortLike } from "../ViewToViewLikeToLike.js"
 
 export function MarkingPlayer(id, dateRequests, dataProfile){
     return `
-     <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="YouTube Data API Tutorial - Search for Videos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+     <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="${dateRequests[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      <div class="Main_container_blockInfo">
                     <h1>${dateRequests[0].snippet.localized.title}</h1>
                     <div class="Main_container_blockInfo_statistic">
@@ -47,6 +47,15 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                                     </g>
                                 </svg>
                             </div>
+                        </div>
+                       
+                    </div>
+                   <div class="Main_container_blockInfo_description">
+                        <div>
+                            <span class="Main_container_blockInfo_description_view">${dateRequests[0].statistics.viewCount} views</span><span class="Main_container_blockInfo_description_date">2 years ago</span>
+                        </div>
+                        <div>
+                            <span class="Main_container_blockInfo_description_link">Мой тт-...</span> <span class="showMoreDescription">...more</span>
                         </div>
                     </div>
                 </div>

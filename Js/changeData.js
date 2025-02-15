@@ -24,7 +24,6 @@ export const state = {//Тут храняться переменные кото�
 
 
 
-let lastUrl = location.href;//Получаю первоначальное url для popstata
 
 export let dateProfileVideo = []//При запросе сохраняю все видео тут для того что бы избавиться от лишних запросов 
 
@@ -68,7 +67,7 @@ async function openProfile(target, accessToken) {
         dateCreateAccount:dataProfile.data.items[0].snippet.publishedAt
       }
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0], state.pageTokenProfileVideo)
-      
+      console.log('videoProfile',videoProfile)
       
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
       
@@ -77,7 +76,7 @@ async function openProfile(target, accessToken) {
 
   
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
-  
+      console.log('detailInfo',detailInformationVideo)
       const profileData = dataProfile.data.items[0]
 
 
