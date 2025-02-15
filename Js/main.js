@@ -14,7 +14,7 @@ import { fromLikeToShortLike } from "./ViewToViewLikeToLike.js"
 import "./changeHistoryPage.js"
 
 import { state } from "./changeData.js"
-
+import { markingShowMore } from "./Marking/ProfileMarking.js"
 main.addEventListener("click", (e) => {
 
     if(e.target.closest(".Main_container_video")){
@@ -38,7 +38,7 @@ main.addEventListener("click", (e) => {
         
         shortLength('.Main_container_blockInfo_description_link', 20)
         document.querySelector(".showMoreDescription").onclick = ()=>{
-            moreBtn(dateRequests[0].snippet.description)
+            moreBtn(dateRequests[0].snippet.description, dateRequests, state)
         }
     }
    
@@ -56,6 +56,9 @@ function shortLength(element, maxLength){
     }
     return text
 }
-function moreBtn(originalText){
+function moreBtn(originalText, dateRequests, ProfileData){
+    const descriptionCont = document.querySelector(".Main_container_blockInfo_description")
     document.querySelector('.Main_container_blockInfo_description_link').textContent = originalText
+    descriptionCont.insertAdjacentHTML("beforeend",markingShowMore(dateRequests, ProfileData))
+
 }

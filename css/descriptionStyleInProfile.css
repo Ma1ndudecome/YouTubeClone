@@ -5,8 +5,11 @@
     border-radius: 10px;
 }
 .Main_container_blockInfo_description div{
-    color:var(--bordColor);
+    
     font-family: "Roboto", "Arial", sans-serif;
+}
+.Main_container_blockInfo_description_viewBlock,.Main_container_blockInfo_description_linkBlock{
+    color:var(--bordColor)
 }
 .Main_container_blockInfo_description_link{
     font-weight: 400;
@@ -16,4 +19,48 @@
 .showMoreDescription{
     font-weight:700;
     cursor: pointer;
+}
+.TranscriptVideo{
+    margin-top: 20px;
+    gap:20px;
+}
+.TranscriptVideo h1{
+    color:var(--bordColor);
+    font-size: 20px;
+}
+.TranscriptVideo p {
+    color: var(--forAllTextWithSmallTransperent);
+    font-size: 14px;
+}
+.TranscriptVideo button{
+    width: 150px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--forAllTextWithSmallTransperent);
+    border-radius: 20px;
+    color:rgb(67, 147, 240);
+    cursor: pointer;
+}
+.TranscriptVideo button:hover{
+    background-color: rgba(16, 63, 117, 0.5);
+    border: 1px solid rgba(16, 63, 117, 0.5);
+}
+.Main_container_blockInfo_description_channel{
+    gap:10px;
+    margin-top: 20px;
+}
+.description_channel_img img{
+    width: 45px;
+    border-radius: 50%;
+}
+.description_channel_container_title{
+    font-family: "Roboto", "Arial", sans-serif;
+    color:var(--bordColor);
+    font-weight: 500;
+    font-size: 17px;
+}
+.description_channel_container_subscribers{
+    color: var(--forAllTextWithSmallTransperent);
+    font-size: 12px;
+    margin-top: 5px;
 }

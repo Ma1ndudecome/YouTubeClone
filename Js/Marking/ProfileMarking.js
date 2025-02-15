@@ -1,5 +1,7 @@
 
 import { fromViewToShortView } from "../ViewToViewLikeToLike.js"
+import { fromLikeToShortLike } from "../ViewToViewLikeToLike.js"
+
 export function markingProfile(backgorundProfile, profileImg, customUrl, subscribers, countVideos, titleChannel) {
     return `
                        <div class="container_channel dF aiC fdC">
@@ -119,4 +121,23 @@ export function InfoAboutChannel(countSubscribe, countVideo, countViews, account
         </div>
     </div>
     `
+}
+export function markingShowMore(dateRequests, dataProfile){
+    return `
+      <div class="TranscriptVideo dF fdC">
+            <h1>Transcript</h1>
+            <p>Follow along using the transcript</p>
+            <button>Show transcript</button>
+        </div>
+        <div class="Main_container_blockInfo_description_channel dF">
+                <div class="description_channel_img">
+                <img src="${dataProfile.infoChannel.img}" alt="">
+             </div>
+            <div class="description_channel_container">
+                <div class="description_channel_container_title">${dateRequests[0].snippet.channelTitle}</div>
+                <div class="description_channel_container_subscribers">${fromLikeToShortLike(dataProfile.infoChannel.subscriberCount)} subscribers</div>
+            </div>
+        </div>
+    `
+
 }
