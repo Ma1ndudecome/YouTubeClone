@@ -58,7 +58,7 @@ async function openProfile(target, accessToken) {
     container.classList.add('block')
     try {
       const dataProfile = await channelData(accessToken)
-     console.log(dataProfile)
+      console.log(dataProfile)
       state.infoChannel = {
         subscriberCount:dataProfile.data.items[0].statistics.subscriberCount,
         img:dataProfile.data.items[0].snippet.thumbnails.default.url,

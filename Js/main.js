@@ -30,7 +30,8 @@ main.addEventListener("click", (e) => {
         const dateRequests = dateProfileVideo.filter(el=>el.id === id)
     
         dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
-
+        
+       
         main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
         
   
@@ -44,6 +45,7 @@ main.addEventListener("click", (e) => {
             if(countClick === 1){
                 buttonShowMore.textContent = 'Show less'
                 moreBtn(dateRequests[0].snippet.description, dateRequests, state)
+            
 
             }else if(countClick === 2){
                 document.querySelector(".containerShowMore").remove()
@@ -73,4 +75,11 @@ function moreBtn(originalText, dateRequests, ProfileData){
     document.querySelector('.Main_container_blockInfo_description_link').textContent = originalText
     descriptionCont.insertAdjacentHTML("afterend",markingShowMore(dateRequests, ProfileData))
 
+}
+function linkToTag(description){
+    const regex = /(https?:\/\/[^\s]+)/g;
+    const updateDesc = description.replace(regex, (match)=>{
+        return `<a href="${match}" target="_blank">${match}</a>`
+    })
+    return updateDesc
 }

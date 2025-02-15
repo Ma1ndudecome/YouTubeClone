@@ -19,6 +19,7 @@
 .showMoreDescription{
     font-weight:700;
     cursor: pointer;
+    
 }
 .TranscriptVideo{
     margin-top: 20px;
@@ -63,4 +64,28 @@
     color: var(--forAllTextWithSmallTransperent);
     font-size: 12px;
     margin-top: 5px;
+}
+.containerShowMore_aboutChannel{
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.containerShowMore_aboutChannel_videos, 
+.containerShowMore_aboutChannel_About{
+    padding: 5px 10px;
+    border: 1px solid var(--forAllTextWithSmallTransperent);
+    border-radius: 20px;
+    cursor: pointer;
+    gap: 5px;
+}
+.containerShowMore_aboutChannel_videos span, 
+.containerShowMore_aboutChannel_About span{
+    color:var(--bordColor);
+    
+}
+.containerShowMore_aboutChannel_videos:hover, 
+.containerShowMore_aboutChannel_About:hover{
+   background-color: var(--hoverBlack);
+   border: 1px solid  var(--hoverBlack);
+
 }
