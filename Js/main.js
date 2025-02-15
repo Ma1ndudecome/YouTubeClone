@@ -15,7 +15,7 @@ import "./changeHistoryPage.js"
 
 import { state } from "./changeData.js"
 import { markingShowMore } from "./Marking/ProfileMarking.js"
-let countClick = 0
+
 main.addEventListener("click", (e) => {
 
     if(e.target.closest(".Main_container_video")){
@@ -33,7 +33,7 @@ main.addEventListener("click", (e) => {
         
        
         main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
-        
+        let countClick = 0
   
         main.classList.add('block')
         isVideo = true

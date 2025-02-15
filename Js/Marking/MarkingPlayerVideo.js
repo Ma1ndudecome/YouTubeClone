@@ -1,6 +1,9 @@
 import { fromLikeToShortLike } from "../ViewToViewLikeToLike.js"
 
 export function MarkingPlayer(id, dateRequests, dataProfile){
+    const dateString = dateRequests[0].snippet.publishedAt
+    const parsedDate = dateFns.parseISO(dateString);
+    const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
     return `
      <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="${dateRequests[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      <div class="Main_container_blockInfo">
@@ -51,8 +54,9 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                        
                     </div>
                    <div class="Main_container_blockInfo_description">
-                        <div class="Main_container_blockInfo_description_viewBlock">
-                            <span class="Main_container_blockInfo_description_view">${dateRequests[0].statistics.viewCount} views</span><span class="Main_container_blockInfo_description_date">2 years ago</span>
+                        <div class="Main_container_blockInfo_description_viewBlock dF">
+                            <span class="Main_container_blockInfo_description_view">${dateRequests[0].statistics.viewCount} views</span>
+                            <span class="Main_container_blockInfo_description_date">${formattedDate}</span>
                         </div>
                         <div class="Main_container_blockInfo_description_linkBlock">
                             <span class="Main_container_blockInfo_description_link">${dateRequests[0].snippet.description}</span> 

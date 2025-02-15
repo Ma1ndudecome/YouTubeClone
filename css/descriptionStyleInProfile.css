@@ -1,7 +1,7 @@
 .Main_container_blockInfo_description{
     background-color: var(--colorForDescriptionInProfile);
     box-sizing: border-box;
-    padding: 5px 10px;
+    padding: 15px 15px;
     border-radius: 10px;
 }
 .Main_container_blockInfo_description div{
@@ -9,7 +9,14 @@
     font-family: "Roboto", "Arial", sans-serif;
 }
 .Main_container_blockInfo_description_viewBlock,.Main_container_blockInfo_description_linkBlock{
-    color:var(--bordColor)
+    color:var(--bordColor);
+    font-size: 15px;
+}
+.Main_container_blockInfo_description_linkBlock{
+    margin-top: 5px;
+}
+.Main_container_blockInfo_description_viewBlock{
+    gap:10px;
 }
 .Main_container_blockInfo_description_link{
     font-weight: 400;
