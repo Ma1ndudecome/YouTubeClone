@@ -9,8 +9,6 @@ padding: 0;
 }
 .positionFixed{
     position: fixed;
-    
-    
 }
 .w120{
     width: 150px;
@@ -35,4 +33,98 @@ padding: 0;
 .ovhAuto{
     overflow: auto;
     max-height: 100vh;
+}
+
+.backdropInfo{
+    position: fixed;
+    width:100%;
+    height:100vh;
+    background-color:rgba(0,0,0,0.2);
+    z-index: 999;
+    
+  }
+  .block_info{
+    border-radius: 15px;
+      height: 300px;
+   background-color:var(--hovWithOutTransperent);/*  var --hovWithOutTransperent*/
+    padding:0px 20px 0px 20px;
+    width:400px;
+    
+  }
+  .block_info_header{
+    width:100%;
+    height: 10%;
+  }
+  .block_info_header h1{
+    color: var(--bordColor);
+    font-size:24px;
+    font-family: "Roboto", "Arial", sans-serif;
+  }
+  .block_info_main {
+    width:100%;
+    gap: 15px;
+    height: 80%;
+  }
+  .block_info_main h1{
+    color: var(--bordColor);
+    font-size: 24px;
+    margin-bottom:0;
+    font-family: "Roboto", "Arial", sans-serif;
+  }
+  .subscriber, .block_info_main_video, .block_info_main_view, .block_info_main_dateCreated{
+    color: var(--bordColor);
+    gap:15px;
+    font-family: "Roboto", "Arial", sans-serif;
+  }
+  .closeMoreInfoBtn{
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 5px;
+    
+  }
+  .closeMoreInfoBtn:hover{
+    transform: scale(1.1);
+    border-radius: 50px;
+    background-color:var(--bgcolorTransperent);
+  }
+@media (max-width:1300px) {
+  .block_info{
+    width:350px;
+    height: 270px;
+  }
+  .block_info_header h1{
+    font-size:21px;
+  }
+  .closeMoreInfoBtn, 
+  .subscriber_svg svg,
+  .block_info_main_video_svg,
+  .block_info_main_video_view,
+  .block_info_main_video_dateCreated,
+  .block_info_main_video_svg svg, 
+  .block_info_main_video_view svg, 
+  .block_info_main_video_dateCreated svg {
+   width: 20px;
+   height: 20px;
+  }
+  .block_info_main h1 {
+    font-size: 20px;
+  }
+  .subscriber_text, 
+  .block_info_main_video_text, 
+  .block_info_main_view_text,
+  .block_info_main_dateCreated_text {
+    font-size: 14px;
+  }
+
+
+}
+@media (max-width:600px) {
+  .block_info{
+    width:300px;
+  }
+}
+@media (max-width:460px) {
+  .block_info{
+    width:260px;
+  }
 }

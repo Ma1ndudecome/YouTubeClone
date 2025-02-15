@@ -6,6 +6,7 @@ import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
 import { checkPageToken } from "./infinityScrollInProfile.js"
+import { channelData, moreBtn } from "./loadDataChannel.js"
 
 let profileMarking;//Переменная для сохранения разметки профиля
 
@@ -18,12 +19,11 @@ export const state = {//Тут храняться переменные кото�
   isLastVideos:false,//Последнее ли видео
   isLastShorts:false,//Последнее ли видео
   prevMarking:'',//Переменная для сохранения при перходе предыдущей разметки
-  countsubscribe:'',
+  infoChannel:'',//Сохранить количество подписчиков и url профиля
 };
 
 
 
-let lastUrl = location.href;//Получаю первоначальное url для popstata
 
 export let dateProfileVideo = []//При запросе сохраняю все видео тут для того что бы избавиться от лишних запросов 
 
@@ -57,20 +57,17 @@ async function openProfile(target, accessToken) {
     info.classList.remove("show")
     container.classList.add('block')
     try {
-      const dataProfile = await axios.get(`https://www.googleapis.com/youtube/v3/channels`, {
-        headers: { 'Authorization': `Bearer ${accessToken}` },
-        params: {
-          part: "snippet,statistics,brandingSettings,contentDetails",
-          mine: true
-        }
-      })
-     console.log(dataProfile)
-      state.countsubscribe = {
+      const dataProfile = await channelData(accessToken)
+      console.log(dataProfile)
+      state.infoChannel = {
         subscriberCount:dataProfile.data.items[0].statistics.subscriberCount,
-        img:`${dataProfile.data.items[0].snippet.thumbnails.default.url}`
+        img:dataProfile.data.items[0].snippet.thumbnails.default.url,
+        videoCount:dataProfile.data.items[0].statistics.videoCount,
+        viewCount:dataProfile.data.items[0].statistics.viewCount,
+        dateCreateAccount:dataProfile.data.items[0].snippet.publishedAt
       }
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0], state.pageTokenProfileVideo)
-      
+      console.log('videoProfile',videoProfile)
       
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
       
@@ -79,7 +76,7 @@ async function openProfile(target, accessToken) {
 
   
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
-  
+      console.log('detailInfo',detailInformationVideo)
       const profileData = dataProfile.data.items[0]
 
 
@@ -106,7 +103,7 @@ async function openProfile(target, accessToken) {
 
       
       document.querySelector(".container_button_load button").classList.add('none')
-
+      moreBtn()
     } catch (error) {
       console.log(error)
     }

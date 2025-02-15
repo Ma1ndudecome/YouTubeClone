@@ -1,8 +1,11 @@
 import { fromLikeToShortLike } from "../ViewToViewLikeToLike.js"
 
 export function MarkingPlayer(id, dateRequests, dataProfile){
+    const dateString = dateRequests[0].snippet.publishedAt
+    const parsedDate = dateFns.parseISO(dateString);
+    const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
     return `
-     <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="YouTube Data API Tutorial - Search for Videos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+     <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="${dateRequests[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      <div class="Main_container_blockInfo">
                     <h1>${dateRequests[0].snippet.localized.title}</h1>
                     <div class="Main_container_blockInfo_statistic">
@@ -12,10 +15,10 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                             </div>
                             <div class="leftSide_title">
                                 <div class="leftSide_title_nameAccount">${dateRequests[0].snippet.channelTitle}</div>
-                                <div class="leftSide_title_subscribe">Підписалося ${fromLikeToShortLike(dataProfile.subscriberCount)} користувачів</div>
+                                <div class="leftSide_title_subscribe">${fromLikeToShortLike(dataProfile.subscriberCount)} subscribers</div>
                             </div>
                             <div class="leftSide_subscribe_button">
-                                <button>Підписатися</button>
+                                <button>Subscribe</button>
                             </div>
                             
                         </div>
@@ -33,7 +36,7 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24">
                                     <path d="M19 22H5c-1.654 0-3-1.346-3-3V8h2v11c0 .552.449 1 1 1h14c.552 0 1-.448 1-1v-2h2v2C22 20.654 20.654 22 19 22zM16.707 11.707L15.293 10.293 18.586 7 15.293 3.707 16.707 2.293 21.414 7z"></path><path d="M8,18H6v-1c0-6.065,4.935-11,11-11h3v2h-3c-4.963,0-9,4.037-9,9V18z"></path>
                                 </svg>
-                                <div>Поділитися</div>
+                                <div>Share</div>
                             </div>
                             <div class="rightSide_threeDots">
                                 <?xml version="1.0" encoding="iso-8859-1"?>
@@ -48,6 +51,18 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                                 </svg>
                             </div>
                         </div>
+                       
+                    </div>
+                   <div class="Main_container_blockInfo_description">
+                        <div class="Main_container_blockInfo_description_viewBlock dF">
+                            <span class="Main_container_blockInfo_description_view">${dateRequests[0].statistics.viewCount} views</span>
+                            <span class="Main_container_blockInfo_description_date">${formattedDate}</span>
+                        </div>
+                        <div class="Main_container_blockInfo_description_linkBlock">
+                            <span class="Main_container_blockInfo_description_link">${dateRequests[0].snippet.description}</span> 
+                            <span class="showMoreDescription">...more</span>
+                        </div>
+                      
                     </div>
                 </div>
     `
