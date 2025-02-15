@@ -37,8 +37,9 @@ main.addEventListener("click", (e) => {
   
         main.classList.add('block')
         isVideo = true
-        
+       inserEl(document.querySelector(".Main_container_blockInfo_description_link"),"afterbegin", dateRequests[0].snippet.description )
         shortLength('.Main_container_blockInfo_description_link', 20)
+        
         const buttonShowMore = document.querySelector(".showMoreDescription")
         buttonShowMore.onclick = ()=>{
             countClick += 1
@@ -72,9 +73,8 @@ function shortLength(element, maxLength){
 }
 function moreBtn(originalText, dateRequests, ProfileData){
     const descriptionCont = document.querySelector(".Main_container_blockInfo_description_link")
-    document.querySelector('.Main_container_blockInfo_description_link').textContent = originalText
-    descriptionCont.insertAdjacentHTML("afterend",markingShowMore(dateRequests, ProfileData))
-
+    inserEl(descriptionCont,"afterbegin",originalText )
+    inserEl(descriptionCont,"afterend",markingShowMore(dateRequests, ProfileData))
 }
 function linkToTag(description){
     const regex = /(https?:\/\/[^\s]+)/g;
@@ -82,4 +82,7 @@ function linkToTag(description){
         return `<a href="${match}" target="_blank">${match}</a>`
     })
     return updateDesc
+}
+function inserEl(el, positon, marking){
+    el.insertAdjacentHTML(positon, marking)
 }

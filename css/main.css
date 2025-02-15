@@ -132,9 +132,9 @@ iframe{
     height: 100%;
 }
 .leftSide_img img{
-    width: 100%;
+    width: 45px;
     border-radius: 50%;
-    height: 53%;
+    
 }
 .leftSide_title{
     width: 40%;
