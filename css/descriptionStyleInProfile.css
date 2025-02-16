@@ -189,3 +189,10 @@
     background-color: rgb(79, 169, 248);
     color:var(--whColor);
 }
+.AllComment_Container_item_img{
+    width: 45px;
+}
+.AllComment_Container_item_img img{
+    width: 100%;
+    border-radius: 50%;
+}
