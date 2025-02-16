@@ -152,3 +152,10 @@ export function markingShowMore(dateRequests, dataProfile){
     </div>
     `
 }
+export function marcinSubscriben(img_profile,title_profile){
+    return `
+    <div class="block_list_sing_int_subscription dF aiC">
+         <img class="block_list_sing_int_subscription_img" src="${img_profile}" alt="">
+            <div class="block_list_sing_int_subscription_title">${title_profile}</div>
+    </div>`
+}

@@ -75,20 +75,44 @@ aside::-webkit-scrollbar-thumb:hover{
 /* Блок на кого подписан профиль */
 .aside_SignIn .block_list_Sing_int{
     width: 90%;
-    height: 100%;
+    
     padding-left: 20px;
-    padding-right: 20px;
-    border: 1px solid rgb(255, 255, 255);
-    display: none;
+    gap: 20px;
+    
+  
+
 }
-.aside_SignIn .block_list_Sing_int .subscription_1{
-    display: flex;
+.block_list_sing_int_subscription{
+    gap: 10px;
+
 }
-.aside_SignIn .block_list_Sing_int .img_1,.img_2,.img_3,.img_4,.img_5{
-    width: 20px;
-    height: 20px;
+
+.block_list_sing_int_subscription_img{
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
-    border: 1px solid white;
+}
+.block_list_sing_int_subscription_title{
+    color: var(--bordColor);
+    font-family: "Roboto", "Arial", sans-serif;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 130px;
+}
+.aside_SignIn_buttonMore_text{
+    padding-left: 10px;
+}
+.aside_SignIn_buttonMore{
+    width: 100%;
+    padding-left: 40px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-family: "Roboto", "Arial", sans-serif;
+}
+
+.aside_SignIn_buttonMore_text{
+    color: var(--bordColor);
 }
 /* Конец */
 aside.positionFixed{
