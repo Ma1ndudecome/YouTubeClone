@@ -28,6 +28,7 @@ if(code){
                 headers: {'Content-Type': 'application/x-www-form-urlencoded' }
             })
             state.acessToken = response.data.access_token
+           
             const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                 headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
             })
@@ -36,6 +37,7 @@ if(code){
                  if(!check){
                     refreshTokenProfile.push({name:dataAccount.data.items[0].snippet.title, refreshToken:response.data.refresh_token})
                     localStorage.setItem("dataRefreshToken", JSON.stringify(refreshTokenProfile))
+                    
                  }
             }
             localStorage.setItem("nameAccount", dataAccount.data.items[0].snippet.title)
@@ -100,17 +102,5 @@ if(code){
     callFunction()
 }
 
-async function loadSubsiber(access_token){
-    try{
-        const dataSubsribe = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&access_token=${access_token}&maxResults=7&pageToken=${pagetoken}`)
-        pagetoken = dataSubsribe.data.nextPageToken || ''
-        dataSubsribe.data.items.forEach(({snippet})=>{
-            markingSubribe(snippet.thumbnails.medium.url,snippet.title)
-        })
-        
-    }catch(error){
-        console.log(error)
-    }
-   
-}
+
 
