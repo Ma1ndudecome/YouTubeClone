@@ -10,13 +10,13 @@ header{
     z-index: 2;
 }
 
-header .menu_icon{
+header .menu_logo{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     height: 100%;
     padding-left: 32px;
-    width: calc(12.5% + 10px);
+    width: 162px;
     
 }
 header .menu{
@@ -26,7 +26,7 @@ header .menu{
     
 }
 
-header .menu_icon .icon{
+header .menu_logo .logo{
     width: 90px;
 }
 header .menu .burger{
