@@ -58,7 +58,7 @@ main.addEventListener("click", async (e) => {
             }
         }
 
-        const response = await takeComment(state.acessToken, 'u4bvYKjKeic')
+        const response = await takeComment(state.acessToken, id)
         console.log(response)
         addMarkingComent(response)
         listnerToInput()
