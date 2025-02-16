@@ -71,7 +71,7 @@ img_adaptation.addEventListener("click",() =>{
    glass_adaptation.style.display ="flex"
 })
 burger.onclick = ()=>{
-    main.classList.toggle("w100Pr")
+    main.classList.toggle("ml150")
    
     if(window.innerWidth < 820){
         aside.classList.remove("none")
