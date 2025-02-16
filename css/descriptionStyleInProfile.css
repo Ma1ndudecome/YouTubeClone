@@ -160,7 +160,7 @@
 }
 .Comment_input_block_under{
     margin-top: 15px;
-    gap:10px
+    gap:15px
 }
 .Comment_input_block_under_cancel{
     background: transparent;
@@ -172,7 +172,7 @@
     cursor: pointer;
 }
 .Comment_input_block_under_apply{
-    padding: 10px;
+    padding: 7px;
     border-radius: 20px;
     border: none;
     background-color: var(--hovColor);
@@ -180,4 +180,12 @@
     font-size: 17px;
     cursor: pointer;
 
+}
+.Comment_input_block_under_apply.sendButton:hover{
+    background-color: rgb(101, 184, 255);
+
+}
+.sendButton{
+    background-color: rgb(79, 169, 248);
+    color:var(--whColor);
 }

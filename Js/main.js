@@ -38,7 +38,6 @@ main.addEventListener("click", (e) => {
         main.classList.add('block')
         isVideo = true
        inserEl(document.querySelector(".Main_container_blockInfo_description_link"),"afterbegin", dateRequests[0].snippet.description )
-       console.log(dateRequests[0].snippet.description)
         shortLength('.Main_container_blockInfo_description_link', 100)
         
         const buttonShowMore = document.querySelector(".showMoreDescription")
@@ -47,8 +46,6 @@ main.addEventListener("click", (e) => {
             if(countClick === 1){
                 buttonShowMore.textContent = 'Show less'
                 moreBtn(dateRequests[0].snippet.description, dateRequests, state)
-            
-
             }else if(countClick === 2){
                 document.querySelector(".containerShowMore").remove()
                 shortLength('.Main_container_blockInfo_description_link', 100)
@@ -56,8 +53,9 @@ main.addEventListener("click", (e) => {
                 countClick = 0
             }
         }
+        listnerToInput()
     }
-   
+    
     
     
 })
@@ -80,4 +78,20 @@ function moreBtn(originalText, dateRequests, ProfileData){
 
 function inserEl(el, positon, marking){
     el.insertAdjacentHTML(positon, marking)
+}
+function listnerToInput(){
+    const inputCont= document.querySelector(".Comment_input_block_tag input")
+    
+    const button = document.querySelector(".Comment_input_block_under_apply")
+    inputCont.addEventListener("input", (e)=>{
+        
+        console.log(e.target)
+        console.log(e.target.value)
+        if(e.target.value === ''){
+            button.classList.remove("sendButton")
+            return
+        }
+        button.classList.add("sendButton")
+        
+    })
 }
