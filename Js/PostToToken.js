@@ -31,11 +31,7 @@ if(code){
                 headers: {'Content-Type': 'application/x-www-form-urlencoded' }
             })
             state.acessToken = response.data.access_token
-<<<<<<< HEAD
            
-=======
-            
->>>>>>> main
             const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                 headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
             })
@@ -44,14 +40,8 @@ if(code){
                 
               const check = refreshTokenProfile.some(el=>el.name === dataAccount.data.items[0].snippet.title )
                  if(!check){
-<<<<<<< HEAD
                     refreshTokenProfile.push({name:dataAccount.data.items[0].snippet.title, refreshToken:response.data.refresh_token})
                     localStorage.setItem("dataRefreshToken", JSON.stringify(refreshTokenProfile))
-=======
-                    
-                      refreshTokenProfile.push({name:dataAccount.data.items[0].snippet.title, refreshToken:response.data.refresh_token})
-                      localStorage.setItem("dataRefreshToken", JSON.stringify(refreshTokenProfile))
->>>>>>> main
                     
                  }
             }
@@ -125,9 +115,6 @@ async function loadSubsiber(access_token = ""){
     const singIntNone = document.querySelector(".aside_SignIn_Container")
     singIntNone.classList.add("none")
 
-<<<<<<< HEAD
-
-=======
     buttonMoreSubscriber.classList.remove("none")
 
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
@@ -142,7 +129,6 @@ async function loadSubsiber(access_token = ""){
         
         dataSubsribe.data.items.forEach(({snippet})=>{
             subscriberContainer.insertAdjacentHTML("beforeend",marcinSubscriben(snippet.thumbnails.default.url,snippet.title))
-            console.log(snippet)
         })
         
     }catch(error){
@@ -150,7 +136,6 @@ async function loadSubsiber(access_token = ""){
     }
    
 }
->>>>>>> main
 
 buttonMoreSubscriber.onclick = () => {
     loadSubsiber(state.acessToken)

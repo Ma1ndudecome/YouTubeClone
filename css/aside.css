@@ -3,6 +3,7 @@ aside{
     
     overflow-y: scroll;
     background-color: var(--WhColor);
+    overflow-x: hidden;
     
 }
 aside::-webkit-scrollbar {

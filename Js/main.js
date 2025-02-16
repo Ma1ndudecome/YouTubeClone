@@ -19,7 +19,7 @@ import { markingShowMore } from "./Marking/ProfileMarking.js"
 import { takeComment } from "./AllApiRequest.js"
 import { MarkingCommentItem } from "./Marking/MarkingPlayerVideo.js"
 
-
+import { lisnerToLike } from "./SingIn.js"
 main.addEventListener("click", async (e) => {
 
     if(e.target.closest(".Main_container_video")){
@@ -62,6 +62,7 @@ main.addEventListener("click", async (e) => {
         console.log(response)
         addMarkingComent(response)
         listnerToInput()
+        lisnerToLike()
     }
     
     
