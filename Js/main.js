@@ -38,7 +38,8 @@ main.addEventListener("click", (e) => {
         main.classList.add('block')
         isVideo = true
        inserEl(document.querySelector(".Main_container_blockInfo_description_link"),"afterbegin", dateRequests[0].snippet.description )
-        shortLength('.Main_container_blockInfo_description_link', 20)
+       console.log(dateRequests[0].snippet.description)
+        shortLength('.Main_container_blockInfo_description_link', 100)
         
         const buttonShowMore = document.querySelector(".showMoreDescription")
         buttonShowMore.onclick = ()=>{
@@ -50,7 +51,7 @@ main.addEventListener("click", (e) => {
 
             }else if(countClick === 2){
                 document.querySelector(".containerShowMore").remove()
-                shortLength('.Main_container_blockInfo_description_link', 20)
+                shortLength('.Main_container_blockInfo_description_link', 100)
                 buttonShowMore.textContent = '...more'
                 countClick = 0
             }
@@ -73,7 +74,7 @@ function shortLength(element, maxLength){
 }
 function moreBtn(originalText, dateRequests, ProfileData){
     const descriptionCont = document.querySelector(".Main_container_blockInfo_description_link")
-    inserEl(descriptionCont,"afterbegin",originalText )
+    descriptionCont.textContent = originalText
     inserEl(descriptionCont,"afterend",markingShowMore(dateRequests, ProfileData))
 }
 

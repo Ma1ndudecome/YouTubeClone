@@ -99,7 +99,6 @@ iframe{
     border-radius: 20px;
 }
 .Main_container_blockInfo{
-    height: 30%;
     width: 80%;
     font-family: "Roboto", "Arial", sans-serif;
     padding-top: 20px;
@@ -147,7 +146,7 @@ iframe{
 .leftSide_title_nameAccount{
     font-weight: 500;
     font-size: 17px;
-    height: 29%;
+    height: 20%;
     color:var(--bordColor)
 }
 .leftSide_title_subscribe{
