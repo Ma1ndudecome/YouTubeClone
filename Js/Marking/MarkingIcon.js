@@ -1,16 +1,16 @@
 export function markingProfile(profileImg,profileName,profileCustomUrl ){
     return `
      <div class="profileImg dF jcE">
-        <img src="${profileImg}">
+        <img src="${profileImg}" alt="yourIcon">
         <div class="profileImg_Info">
             <div class="profileImg_Info_top dF">
                 <div class="Info_top_img dF aiS jcC">
-                    <img src="${profileImg}">
+                    <img src="${profileImg}" alt="yourIcon">
                 </div>
                 <div class="Info_top_profileInfo">
                     <div class="profileInfo_title">${profileName}</div>
                     <div class="profileInfo_customUrl">${profileCustomUrl}</div>
-                    <a href="#">View your channel</a>
+                    <a href="">View your channel</a>
                 </div>
             </div>
             <div class="Info_account">
@@ -61,5 +61,14 @@ export function markingProfile(profileImg,profileName,profileCustomUrl ){
             </div>
         </div>
     </div>
+    `
+}
+
+export function markingSubribe(img, title){
+    return `
+    <div class="subriber">
+        <img src="${img}" alt="subscriber">
+        <p>${title}</p>
+    </div<
     `
 }

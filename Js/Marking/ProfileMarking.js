@@ -1,6 +1,6 @@
 
-import { fromViewToShortView } from "../ViewToViewLikeToLike.js" 
-export function markingProfile(backgorundProfile, profileImg, customUrl, subscribers, countVideos) {
+import { fromViewToShortView } from "../ViewToViewLikeToLike.js"
+export function markingProfile(backgorundProfile, profileImg, customUrl, subscribers, countVideos, titleChannel) {
     return `
                        <div class="container_channel dF aiC fdC">
                     <div class="Main_container_Header">
@@ -11,30 +11,41 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
                             <img src="${profileImg}" alt="">
                         </div>
                         <div class="Header_channel_info_chaneel dF fdC jcC">
-                            <h1>Ma1n</h1>
+                            <h1>${titleChannel}</h1>
                             <p class="chaneel_info dF"><span>${customUrl}</span>•<span>${subscribers} subscribers</span>•<span>${countVideos} videos</span></p>
                             <p class="more_info">More about this channel <span>...more</span></p>
                         </div>
                     </div>
                     <div class="container_channel_navigation dF ">
-                        <div class="container_channel_navigation_item">Home</div>
+                        <div class="container_channel_navigation_item borderBottom">Home</div>
                         <div class="container_channel_navigation_item">Videos</div>
                         <div class="container_channel_navigation_item">Shorts</div>
-                        <div class="container_channel_navigation_item">Live</div>
                     </div>
                     <div class="line"></div>
                      <div class="Header_Main_container_video">
+                        <div class="ForYou_Container_leftArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg"viewBox="0 0 24 24" fill="">
+                                <path d="M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z" fill="#0F0F0F"/>
+                            </svg>
+                        </div>
+                        <div class="ForYou_Container_rightArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="" style="transform: rotate(175deg)">
+                                <path d="M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z" fill="#0F0F0F"/>
+                            </svg>
+                        </div>
+                         <div class="Shorts_Container_leftArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg"viewBox="0 0 24 24" fill="">
+                                <path d="M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z" fill="#0F0F0F"/>
+                            </svg>
+                        </div>
+                        <div class="Shorts_Container_rightArrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="" style="transform: rotate(175deg)">вв
+                                <path d="M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z" fill="#0F0F0F"/>
+                            </svg>
+                        </div>
                         <h1>For You</h1>
                         <div class="ForYou_Container_video dF">
-
-                                    
-                    </div>
-                    <div class="line"></div>
-                    <div class="Container_videos">
-                        <h1>Videos</h1>
-                        <div class="Container_videos_block dF">
-                            
-                        </div>
+                                 
                     </div>
                     <div class="line"></div>
                     <div class="Shorts_container">
@@ -46,10 +57,13 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
                             Shorts
                         </div>
                         <div class="Shorts_video_container dF">
-                       
-                                        
+                               
                         </div>
+                       
                     </div>
+                    </div>
+                     <div class="container_button_load dF jcC">
+                            <button>I'm load more video </button>
                     </div>
                 </div>
     `

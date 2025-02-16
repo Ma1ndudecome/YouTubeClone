@@ -4,18 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>YouTube Clone</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
 
     <script src="./Js/main.js" type="module"></script>
     <script src="./Js/APIKEY.js"></script>
 
+    <script defer src="./Js/header.js" ></script>
+
     <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/locale/es/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/locale/ru/cdn.min.js"></script>
     <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+    
 
     <link rel="stylesheet" href="./css/app.css">
+    <link rel="icon" href="https://www.youtube.com/s/desktop/024ccc3d/img/logos/favicon_32x32.png" sizes="32x32">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +29,7 @@
 </head>
 
 <body>
+    <div class="backdrop"></div>
     <header>
         <div class="menu_icon">
             <div class="menu">
@@ -64,7 +69,7 @@
             </div>
         </div>
         <div class="search_micro">
-            <div class="search"><input type="search">
+            <div class="search" id="search"><input placeholder="Search" type="search">
                 <div class="glass"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -73,6 +78,15 @@
                     </svg>
                 </div>
             </div>
+
+            
+            <div class="glass_adaptation" id="glass_adaptation"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M16.296 16.996C14.7383 18.3719 12.7062 19.0877 10.6301 18.9916C8.55388 18.8956 6.59658 17.9953 5.17255 16.4814C3.74853 14.9675 2.96957 12.9589 3.00062 10.8807C3.03166 8.80253 3.87027 6.81802 5.33888 5.34733C6.80749 3.87664 8.79081 3.03524 10.8689 3.00125C12.947 2.96727 14.9568 3.74338 16.4727 5.16527C17.9886 6.58715 18.8917 8.54318 18.9906 10.6192C19.0896 12.6953 18.3768 14.7283 17.003 16.288L20.912 20.198L20.205 20.905L16.296 16.996ZM18 11C18 9.14346 17.2625 7.36298 15.9497 6.05023C14.637 4.73747 12.8565 3.99998 11 3.99998C9.14348 3.99998 7.363 4.73747 6.05025 6.05023C4.7375 7.36298 4 9.14346 4 11C4 11.9192 4.18106 12.8295 4.53284 13.6788C4.88462 14.528 5.40024 15.2997 6.05025 15.9497C6.70026 16.5997 7.47193 17.1153 8.32121 17.4671C9.17049 17.8189 10.0807 18 11 18C11.9193 18 12.8295 17.8189 13.6788 17.4671C14.5281 17.1153 15.2997 16.5997 15.9497 15.9497C16.5998 15.2997 17.1154 14.528 17.4672 13.6788C17.8189 12.8295 18 11.9192 18 11Z"
+                    fill="#0F0F0F" />
+            </svg>
+        </div>
             <div class="micro">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -82,6 +96,20 @@
 
             </div>
         </div>
+       <div class="adaptation" id="adaptation">
+          <div class="img_adaptation" id="img_adaptation">
+               <img src="img/arrow_header.png" alt="">
+          </div>
+        <div class="search_adaptation" id="search_adaptation"><input type="search">
+            <div class="glass_search"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M16.296 16.996C14.7383 18.3719 12.7062 19.0877 10.6301 18.9916C8.55388 18.8956 6.59658 17.9953 5.17255 16.4814C3.74853 14.9675 2.96957 12.9589 3.00062 10.8807C3.03166 8.80253 3.87027 6.81802 5.33888 5.34733C6.80749 3.87664 8.79081 3.03524 10.8689 3.00125C12.947 2.96727 14.9568 3.74338 16.4727 5.16527C17.9886 6.58715 18.8917 8.54318 18.9906 10.6192C19.0896 12.6953 18.3768 14.7283 17.003 16.288L20.912 20.198L20.205 20.905L16.296 16.996ZM18 11C18 9.14346 17.2625 7.36298 15.9497 6.05023C14.637 4.73747 12.8565 3.99998 11 3.99998C9.14348 3.99998 7.363 4.73747 6.05025 6.05023C4.7375 7.36298 4 9.14346 4 11C4 11.9192 4.18106 12.8295 4.53284 13.6788C4.88462 14.528 5.40024 15.2997 6.05025 15.9497C6.70026 16.5997 7.47193 17.1153 8.32121 17.4671C9.17049 17.8189 10.0807 18 11 18C11.9193 18 12.8295 17.8189 13.6788 17.4671C14.5281 17.1153 15.2997 16.5997 15.9497 15.9497C16.5998 15.2997 17.1154 14.528 17.4672 13.6788C17.8189 12.8295 18 11.9192 18 11Z"
+                        fill="#0F0F0F" />
+                </svg>
+            </div>
+        </div>
+       </div>
         <div class="sing_int">
             <div class="block_fon">
                 <div></div>
@@ -108,9 +136,11 @@
         </div>
     </header>
     <div class="wrapp-mainAside">
-        <aside>
+        <aside class="block">
             <div class="menu_Explore">
                 <div class="explore_Container">
+                    <ul class="Explore_element_menu">
+                        <li class="selected">
                     <ul class="Explore_element_menu home_elements">
                         <li>
                             <a href="">
@@ -168,7 +198,7 @@
                                 <p>You</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="history">
                             <a href="">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +214,7 @@
             </div>
 
 
-            <div class="aside_SignIn">
+            <div class="aside_SignIn down">
                 
                 <div class="block_list_Sing_int">
                     <div class="subscription_1">
@@ -224,7 +254,7 @@
                 </div> 
             </div>
 
-            <div class="menu_Explore">
+            <div id="explore" class="menu_Explore down downItem">
                 <div class="explore_Container">
                     <p class="Explore_paragraph">Explore</p>
                     <ul class="Explore_element_menu">
@@ -239,15 +269,15 @@
                                 <p>Trending</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="gaming">
                             <a href="">
-                                <svg width="24" height="24" viewBox="0 0 22 18" fill="none"
+                                <svg  width="24" height="24" viewBox="0 0 22 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M11 4.74998L10.228 4.28598L6.042 1.77498L1.5 4.80298V11.11L11 16.29L20.5 11.109V4.80298L15.958 1.77498L11.772 4.28598L11 4.74998ZM11 2.99998L6.814 0.487977C6.317 0.189977 5.692 0.204977 5.21 0.526977L0.668 3.55498C0.251 3.83298 0 4.29998 0 4.80298V11.11C0 11.658 0.3 12.164 0.782 12.426L10.282 17.608C10.729 17.852 11.271 17.852 11.718 17.608L21.218 12.426C21.7 12.164 22 11.658 22 11.11V4.80298C22 4.30098 21.75 3.83298 21.332 3.55498L16.79 0.526977C16.308 0.204977 15.683 0.189977 15.186 0.487977L11 2.99998ZM14.5 9.24998C14.5 9.93998 13.94 10.5 13.25 10.5C12.56 10.5 12 9.93998 12 9.24998C12 8.55998 12.56 7.99998 13.25 7.99998C13.94 7.99998 14.5 8.55998 14.5 9.24998ZM6 4.99998C5.586 4.99998 5.25 5.33598 5.25 5.74998V7.24998H3.75C3.336 7.24998 3 7.58598 3 7.99998C3 8.41398 3.336 8.74998 3.75 8.74998H5.25V10.25C5.25 10.664 5.586 11 6 11C6.414 11 6.75 10.664 6.75 10.25V8.74998H8.25C8.664 8.74998 9 8.41398 9 7.99998C9 7.58598 8.664 7.24998 8.25 7.24998H6.75V5.74998C6.75 5.33598 6.414 4.99998 6 4.99998ZM16.75 7.99998C17.44 7.99998 18 7.43998 18 6.74998C18 6.05998 17.44 5.49998 16.75 5.49998C16.06 5.49998 15.5 6.05998 15.5 6.74998C15.5 7.43998 16.06 7.99998 16.75 7.99998Z"
                                         fill="#030303" />
                                 </svg>
-                                <p>Gaming</p>
+                                <p >Gaming</p>
                             </a>
                         </li>
                         <li>
@@ -301,7 +331,7 @@
         </aside>
         <main class="Main">
             <div class="Main_container block">
-
+               
             </div>
             <div class="triger"></div>
     </div>

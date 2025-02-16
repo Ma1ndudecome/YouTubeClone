@@ -1,6 +1,6 @@
 aside{
     width: calc(12.5% + 10px);
-    height: 855px;
+    
     overflow-y: scroll;
     background-color: var(--WhColor);
     
@@ -91,7 +91,10 @@ aside::-webkit-scrollbar-thumb:hover{
     border: 1px solid white;
 }
 /* Конец */
-
+aside.positionFixed{
+    z-index: 999;
+    top:55px;
+}
 @media (max-width:1680px){
     .SignIn_paragraph{
         font-size: 12px;
