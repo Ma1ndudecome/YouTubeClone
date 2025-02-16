@@ -16,6 +16,9 @@ padding: 0;
 .w100Pr{
     width: 100%;
 }
+.ml150{
+  margin-left: 150px;
+}
 .backdrop{
     display: none;
     width: 100%;
