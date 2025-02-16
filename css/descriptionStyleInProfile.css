@@ -190,6 +190,9 @@
     background-color: rgb(79, 169, 248);
     color:var(--whColor);
 }
+.AllComment_Container{
+    gap:30px
+}
 .AllComment_Container_item {
     gap:10px;
 }

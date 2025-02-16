@@ -71,7 +71,7 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                     </div>
                     <div class="Comment_input dF">
                         <div class="Comment_input_ImgProfile">
-                            <img src="${dataProfile.img}">
+                            <img src="${dataProfile.img}" alt="ProfileImg">
                         </div>
                         <div class="Comment_input_block dF fdC">
                             <div class="Comment_input_block_tag">
@@ -94,7 +94,7 @@ export function MarkingCommentItem(imgComment, userName, date, commentText, coun
     return `
         <div class="AllComment_Container_item dF">
         <div class="AllComment_Container_item_img">
-            <img src="${imgComment}">
+            <img src="${imgComment}" alt="IMG" referrerpolicy="no-referrer">
         </div>
         <div class="AllComment_Container_item_info dF fdC">
             <div class="AllComment_Container_item_info_userNameDate">

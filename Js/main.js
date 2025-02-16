@@ -4,8 +4,8 @@ import "./LoadVideo.js"
 import "./PostToToken.js"
 import "./SingIn.js"
 import "./ReturnPushState.js"
-import { MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
 
+import { MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
 import { container as main } from "./LoadVideo.js"
 import { dateRequest } from "./LoadVideo.js"
 import { dateProfileVideo } from "./changeData.js"
@@ -16,7 +16,11 @@ import "./changeHistoryPage.js"
 import { state } from "./changeData.js"
 import { markingShowMore } from "./Marking/ProfileMarking.js"
 
-main.addEventListener("click", (e) => {
+import { takeComment } from "./AllApiRequest.js"
+import { MarkingCommentItem } from "./Marking/MarkingPlayerVideo.js"
+
+
+main.addEventListener("click", async (e) => {
 
     if(e.target.closest(".Main_container_video")){
         const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
@@ -37,7 +41,7 @@ main.addEventListener("click", (e) => {
   
         main.classList.add('block')
         isVideo = true
-       inserEl(document.querySelector(".Main_container_blockInfo_description_link"),"afterbegin", dateRequests[0].snippet.description )
+        inserEl(document.querySelector(".Main_container_blockInfo_description_link"),"afterbegin", dateRequests[0].snippet.description )
         shortLength('.Main_container_blockInfo_description_link', 100)
         
         const buttonShowMore = document.querySelector(".showMoreDescription")
@@ -53,6 +57,10 @@ main.addEventListener("click", (e) => {
                 countClick = 0
             }
         }
+
+        const response = await takeComment(state.acessToken, 'u4bvYKjKeic')
+        console.log(response)
+        addMarkingComent(response)
         listnerToInput()
     }
     
@@ -84,7 +92,7 @@ function listnerToInput(){
     
     const button = document.querySelector(".Comment_input_block_under_apply")
     inputCont.addEventListener("input", (e)=>{
-        
+
         console.log(e.target)
         console.log(e.target.value)
         if(e.target.value === ''){
@@ -93,5 +101,18 @@ function listnerToInput(){
         }
         button.classList.add("sendButton")
         
+    })
+}
+
+
+function addMarkingComent(data){
+    const containerComment = document.querySelector(".AllComment_Container")
+    
+    data.forEach(({snippet})=>{
+        const dates = snippet.topLevelComment.snippet
+        const date = new Date(dates.publishedAt)
+        const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
+        
+        containerComment.insertAdjacentHTML("beforeend", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, result, dates.textDisplay, dates.likeCount)) 
     })
 }
