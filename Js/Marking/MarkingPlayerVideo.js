@@ -1,29 +1,32 @@
 import { fromLikeToShortLike } from "../ViewToViewLikeToLike.js"
-export function MarkingPlayer(id, dateRequests){
+
+export function MarkingPlayer(id, dateRequests, dataProfile){
+    const dateString = dateRequests[0].snippet.publishedAt
+    const parsedDate = dateFns.parseISO(dateString);
+    const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
     return `
-     <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="YouTube Data API Tutorial - Search for Videos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+     <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="${dateRequests[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      <div class="Main_container_blockInfo">
                     <h1>${dateRequests[0].snippet.localized.title}</h1>
                     <div class="Main_container_blockInfo_statistic">
                         <div class="Main_container_blockInfo_statistic_leftSide">
                             <div class="leftSide_img">
-                                <img src="${dateRequests[0].snippet.thumbnails.default.url}" alt="">
+                                <img src="${dataProfile.img}" alt="">
                             </div>
                             <div class="leftSide_title">
                                 <div class="leftSide_title_nameAccount">${dateRequests[0].snippet.channelTitle}</div>
-                                <div class="leftSide_title_subscribe">Підписалося 60,3 тис. користувачів</div>
+                                <div class="leftSide_title_subscribe">${fromLikeToShortLike(dataProfile.subscriberCount)} subscribers</div>
                             </div>
                             <div class="leftSide_subscribe_button">
-                                <button>Підписатися</button>
+                                <button>Subscribe</button>
                             </div>
                             
                         </div>
                         <div class="Main_container_blockInfo_statistic_rightSide">
                             <div class="rightSide_emotion">
                                 <div class="rightSide_emotion_like">
+                                
                               <svg id="Layer_1" data-name="Layer 1" fill="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 105.01"><defs><style>.cls-1{fill-rule:evenodd;}</style></defs><title>like</title><path class="cls-1" d="M4,43.36H32.37a4,4,0,0,1,4,4V101a4,4,0,0,1-4,4H4a4,4,0,0,1-4-4V47.39a4,4,0,0,1,4-4ZM62.16,6.3A7.36,7.36,0,0,1,66.23.65,8.14,8.14,0,0,1,71.79.34a15.36,15.36,0,0,1,5.3,2.71A26.21,26.21,0,0,1,86.81,21.9a57.41,57.41,0,0,1-.12,8.35q-.25,2.94-.76,6.15h20.2a21.58,21.58,0,0,1,9.1,2.33,14.7,14.7,0,0,1,5.6,4.92,12.55,12.55,0,0,1,2,7.51,18.1,18.1,0,0,1-1.82,6.93,21.82,21.82,0,0,1,.54,8.38,9.7,9.7,0,0,1-2.78,5.68,25.22,25.22,0,0,1-1.4,9.43,19.81,19.81,0,0,1-4.5,7,28.37,28.37,0,0,1-.9,5A17.3,17.3,0,0,1,109.5,99h0c-3.43,4.84-6.17,4.73-10.51,4.55-.61,0-1.26,0-2.26,0H57.39a19.08,19.08,0,0,1-8.86-1.78,21.13,21.13,0,0,1-7-6.06L41,94V48.15l2-.53c5.08-1.37,9.07-5.71,12.16-10.9a75.8,75.8,0,0,0,7-16.64V6.82l.06-.52Zm6.32-.78a2.15,2.15,0,0,0-1,1.57V20.46l-.12.77a82.31,82.31,0,0,1-7.61,18.24C56.4,45.09,52,49.91,46.37,52.14V93.07A14.6,14.6,0,0,0,50.93,97a14.14,14.14,0,0,0,6.46,1.21H96.73c.7,0,1.61,0,2.47.08,2.57.1,4.2.17,5.94-2.29h0a12.34,12.34,0,0,0,1.71-3.74,24.86,24.86,0,0,0,.79-5l.83-1.77a14.89,14.89,0,0,0,3.9-5.75,21.18,21.18,0,0,0,1-8.67l-.1-1.6,1.36-.84a4.09,4.09,0,0,0,1.64-3,17.44,17.44,0,0,0-.68-7.12l.21-1.94A13.12,13.12,0,0,0,117.51,51a7.29,7.29,0,0,0-1.17-4.38,9.53,9.53,0,0,0-3.59-3.12A16,16,0,0,0,106,41.77H79.51l.6-3.18a85.93,85.93,0,0,0,1.22-8.79,51,51,0,0,0,.13-7.55,20.76,20.76,0,0,0-7.62-15,10.15,10.15,0,0,0-3.41-1.79,3,3,0,0,0-2,0ZM22.64,85.3a5.13,5.13,0,1,1-5.13,5.13,5.13,5.13,0,0,1,5.13-5.13Z"/></svg>
-
-
                                     ${fromLikeToShortLike(dateRequests[0].statistics.likeCount)}
                                 </div>
                                 <div class="rightSide_emotion_dislike">
@@ -34,7 +37,7 @@ export function MarkingPlayer(id, dateRequests){
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24">
                                     <path d="M19 22H5c-1.654 0-3-1.346-3-3V8h2v11c0 .552.449 1 1 1h14c.552 0 1-.448 1-1v-2h2v2C22 20.654 20.654 22 19 22zM16.707 11.707L15.293 10.293 18.586 7 15.293 3.707 16.707 2.293 21.414 7z"></path><path d="M8,18H6v-1c0-6.065,4.935-11,11-11h3v2h-3c-4.963,0-9,4.037-9,9V18z"></path>
                                 </svg>
-                                <div>Поділитися</div>
+                                <div>Share</div>
                             </div>
                             <div class="rightSide_threeDots">
                                 <?xml version="1.0" encoding="iso-8859-1"?>
@@ -49,7 +52,73 @@ export function MarkingPlayer(id, dateRequests){
                                 </svg>
                             </div>
                         </div>
+                       
+                    </div>
+                   <div class="Main_container_blockInfo_description">
+                        <div class="Main_container_blockInfo_description_viewBlock dF">
+                            <span class="Main_container_blockInfo_description_view">${dateRequests[0].statistics.viewCount} views</span>
+                            <span class="Main_container_blockInfo_description_date">${formattedDate}</span>
+                        </div>
+                        <div class="Main_container_blockInfo_description_linkBlock">
+                            <span class="Main_container_blockInfo_description_link"></span> 
+                            <span class="showMoreDescription">...more</span>
+                        </div>
+                      
+                    </div>
+                <div class="Main_container_blockInfo_comment dF fdC">
+                    <div class="comment_title">
+                        <h1 class="countComments">${dateRequests[0].statistics.commentCount} Comments</h1>
+                    </div>
+                    <div class="Comment_input dF">
+                        <div class="Comment_input_ImgProfile">
+                            <img src="${dataProfile.img}" alt="ProfileImg">
+                        </div>
+                        <div class="Comment_input_block dF fdC">
+                            <div class="Comment_input_block_tag">
+                                <input type="text" placeholder="Додайте коментар...">
+                            </div>
+                            <div class="Comment_input_block_under dF jcE">
+                                <button class="Comment_input_block_under_cancel">Скасувати</button>
+                                <button class="Comment_input_block_under_apply">Коментувати</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="AllComment_Container dF fdC">
+
                     </div>
                 </div>
+                </div>
+    `
+}
+export function MarkingCommentItem(imgComment, userName, date, commentText, countLike){
+    return `
+        <div class="AllComment_Container_item dF">
+        <div class="AllComment_Container_item_img">
+            <img src="${imgComment}" alt="IMG" referrerpolicy="no-referrer">
+        </div>
+        <div class="AllComment_Container_item_info dF fdC">
+            <div class="AllComment_Container_item_info_userNameDate">
+                <span class="userNameDate_userName">${userName}</span>
+                <span class="userNameDate_Date">${date}</span>
+            </div>
+            <div class="AllComment_Container_item_text">
+                ${commentText}
+             </div>
+            <div class="AllComment_Container_item_statistic dF">
+                <div class="AllComment_Container_item_statistic_like dF aiC">
+                    <div class="AllComment_Container_item_statistic_like_svg dF aiC jcC">
+                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"><path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H3v10h4h1h9.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z M7,20H4v-8h3V20z M19.98,13.17l-1.34,6 C18.54,19.65,18.03,20,17.43,20H8v-8.61l5.6-6.06C13.79,5.12,14.08,5,14.38,5c0.26,0,0.5,0.11,0.63,0.3 c0.07,0.1,0.15,0.26,0.09,0.47l-1.52,4.94L13.18,12h1.35h4.23c0.41,0,0.8,0.17,1.03,0.46C19.92,12.61,20.05,12.86,19.98,13.17z"></path></svg>
+                    </div>
+                    <span class="AllComment_Container_item_statistic_like_count">${countLike}</span>
+                </div>
+                <div class="AllComment_Container_item_statistic_disLike">
+                    <div class="AllComment_Container_item_statistic_disLike_svg dF aiC jcC">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"><path d="M17,4h-1H6.57C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21 c0.58,0,1.14-0.24,1.52-0.65L17,14h4V4H17z M10.4,19.67C10.21,19.88,9.92,20,9.62,20c-0.26,0-0.5-0.11-0.63-0.3 c-0.07-0.1-0.15-0.26-0.09-0.47l1.52-4.94l0.4-1.29H9.46H5.23c-0.41,0-0.8-0.17-1.03-0.46c-0.12-0.15-0.25-0.4-0.18-0.72l1.34-6 C5.46,5.35,5.97,5,6.57,5H16v8.61L10.4,19.67z M20,13h-3V5h3V13z"></path></svg>
+                    </div>
+                </div>
+                <div class="AllComment_Container_item_statistic_repty dF aiC">Repty</div>
+            </div>
+        </div>
+    </div>
     `
 }

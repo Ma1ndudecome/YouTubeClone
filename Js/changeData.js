@@ -4,16 +4,30 @@ import { markingProfile as profileMark } from "./Marking/ProfileMarking.js"
 import { forYouVideoMarking } from "./Marking/profileVideoMarking.js"
 import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
-import { loadVideoInProfile } from "./infinityScrollInProfile.js"
+import { loadVideoInProfile, loadNextVideo} from "./infinityScrollInProfile.js"
+import { checkPageToken } from "./infinityScrollInProfile.js"
+import { channelData, moreBtn } from "./loadDataChannel.js"
+
+let profileMarking;//Переменная для сохранения разметки профиля
+
+export const state = {//Тут храняться переменные которые изменяються в разныъ файлах
+  pageTokenProfileVideo: '',//Сохранение токена для следующей страницы видео
+  pageTokenProfileShorts:'',//Сохранение токена для следующей страницы шортса
+  markingVideoPage:'',//Сохранение контейнера видео
+  markingHomePage:'',//Сохранение главной страницы
+  markingShortsPage:'',//Сохранение контейнера шортс
+  isLastVideos:false,//Последнее ли видео
+  isLastShorts:false,//Последнее ли видео
+  prevMarking:'',//Переменная для сохранения при перходе предыдущей разметки
+  infoChannel:'',//Сохранить количество подписчиков и url профиля
+  PageTokenComment:''
+};
 
 
-let profileMarking;
-let prevMarking;
-export let pageTokenProfile = ''
 
-let lastUrl = location.href;
 
-export let dateProfileVideo = []
+export let dateProfileVideo = []//При запросе сохраняю все видео тут для того что бы избавиться от лишних запросов 
+
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
   document.querySelector(".sing_int").innerHTML = markingProfile(profileImg, profileName, profileCustomUrl)
   document.body.onclick = (e) => {
@@ -37,28 +51,35 @@ async function openProfile(target, accessToken) {
     const click = target.parentNode.parentNode.textContent.trim()
     const clickpast = target.parentNode.textContent.trim()
   if (target.textContent === 'View your channel') {
-    prevMarking = container.innerHTML
+    state.prevMarking = container.innerHTML
     history.pushState({},'',window.location.href + '&page=profile')
     container.innerHTML = ''  
     const info = document.querySelector(".profileImg_Info")
     info.classList.remove("show")
     container.classList.add('block')
     try {
-      const dataProfile = await axios.get(`https://www.googleapis.com/youtube/v3/channels`, {
-        headers: { 'Authorization': `Bearer ${accessToken}` },
-        params: {
-          part: "snippet,statistics,brandingSettings,contentDetails",
-          mine: true
-        }
-      })
-     
-      const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0]) 
-      console.log(videoProfile)
+      const dataProfile = await channelData(accessToken)
+      console.log(dataProfile)
+      state.infoChannel = {
+        subscriberCount:dataProfile.data.items[0].statistics.subscriberCount,
+        img:dataProfile.data.items[0].snippet.thumbnails.default.url,
+        videoCount:dataProfile.data.items[0].statistics.videoCount,
+        viewCount:dataProfile.data.items[0].statistics.viewCount,
+        dateCreateAccount:dataProfile.data.items[0].snippet.publishedAt
+      }
+      const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0], state.pageTokenProfileVideo)
+      console.log('videoProfile',videoProfile)
+      
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
+      
+      state.pageTokenProfileVideo = videoProfile.data.nextPageToken || ''
+      state.pageTokenProfileShorts = videoProfile.data.nextPageToken || ''
+
   
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
-  
+      console.log('detailInfo',detailInformationVideo)
       const profileData = dataProfile.data.items[0]
+
 
         if(!profileData.brandingSettings.image){
           container.insertAdjacentHTML("afterbegin", profileMark('', profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
@@ -78,8 +99,12 @@ async function openProfile(target, accessToken) {
       profileMarking = contVid.innerHTML
       
       slideToButton()
-      moveToVideo()
+      moveToVideo(videoProfile, videoProfile.data)
+      loadNextVideo(accessToken, profileData, document.querySelector(".container_button_load button"))
 
+      
+      document.querySelector(".container_button_load button").classList.add('none')
+      moreBtn()
     } catch (error) {
       console.log(error)
     }
@@ -139,70 +164,79 @@ function slideToButton() {
   }
 }
 
-function moveToVideo() {
+function moveToVideo(statusNextPage, data) {
   const navigationContainer = document.querySelector(".container_channel_navigation")
-  navigationContainer.addEventListener("click", ({ target }) => {
-    const containerVideo = document.querySelector(".Header_Main_container_video")
+  const containerVideo = document.querySelector(".Header_Main_container_video")
+  const buttonLoadMore = document.querySelector(".container_button_load button")
 
-    if (target.textContent === 'Videos' || target.textContent === "Shorts" || target.textContent === 'Home') {
+  navigationContainer.addEventListener("click", ({ target }) => {
+    if(target.classList.contains("container_channel_navigation_item")){
       document.querySelector(".borderBottom").classList.remove("borderBottom")
       target.classList.add("borderBottom")
+    }
       if (target.textContent === 'Videos') {
-        const containerVideo = document.querySelector(".Header_Main_container_video")
-        containerVideo.classList.add("grid","gridTC5", "gap10")
-        containerVideo.innerHTML = ''
-       addMarking(dateProfileVideo, 'Videos')
+        checkAndGiveMarking(state.isLastVideos,buttonLoadMore, state.markingVideoPage,statusNextPage,containerVideo, 'Videos', data)
       }else if(target.textContent === 'Shorts'){
-        const containerVideo = document.querySelector(".Header_Main_container_video")
-        containerVideo.classList.add("grid","gridTC5", "gap10")
-        containerVideo.innerHTML = ''
-        addMarking(dateProfileVideo, 'Shorts')
+        checkAndGiveMarking(state.isLastShorts, buttonLoadMore, state.markingShortsPage, statusNextPage, containerVideo, 'Shorts', data)
       }else if(target.textContent === 'Home'){
-        const containerVideo = document.querySelector(".Header_Main_container_video")
+        buttonLoadMore.classList.add("none")
         containerVideo.classList.remove("grid", "gridTC5", 'gap10')
         containerVideo.innerHTML = profileMarking
         slideToButton()
       }
-    }
+    
   })
 }
 
-function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, forYouVideoContainer=null){
-    informationVideoMas.forEach(el=>{
+export function addMarking(informationVideoMas, WhereCall, ShortsVideoContainer=null, forYouVideoContainer=null){
+   return informationVideoMas.forEach(el=>{
       const duration = formatDuration(el.contentDetails.duration)
       if(duration !=="NaN"){
         const time = duration.split(':').map(Number)
         if(WhereCall==='Home'){
-          if (time[0] === 0) {
-            ShortsVideoContainer.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
-          } else {
-            forYouVideoContainer.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-          }
+          insertVideo(time,el, undefined, ShortsVideoContainer, forYouVideoContainer, WhereCall)
         }else if(WhereCall === 'Videos'){
-          const containerVideo = document.querySelector(".Header_Main_container_video")          
-          if(time[0]!==0){
-            containerVideo.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-          }
+          const containerVideo = document.querySelector(".Header_Main_container_video")  
+          insertVideo(time, el, containerVideo, undefined, undefined, WhereCall)
         }else if(WhereCall === 'Shorts'){
-          const containerVideo = document.querySelector(".Header_Main_container_video")          
-          if(time[0]===0){
-            containerVideo.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
-          }
+          const containerVideo = document.querySelector(".Header_Main_container_video") 
+          insertVideo(time, el, containerVideo, undefined, undefined, WhereCall)
+          console.log('insertShorts')
         }
         
       }
     })
   
 }
+function insertVideo(time, el, containerVideo, ShortsVideoContainer, forYouVideoContainer, WhereCall){
+  const isShort = time[0] === 0;
+  const markup = isShort
+    ? shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id)
+    : forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id);
 
-window.addEventListener("popstate", ()=>{
-  const currentUrl = location.href;
- 
-  if(currentUrl.length === lastUrl.length){
-    history.pushState(null, "", location.href);
-    container.innerHTML = prevMarking
-  }else{
-    return
+  if (WhereCall === 'Home') {
+    isShort ? ShortsVideoContainer?.insertAdjacentHTML("beforeend", markup): forYouVideoContainer?.insertAdjacentHTML("beforeend", markup);
+  } else if (WhereCall === 'Videos' && !isShort) {
+    containerVideo?.insertAdjacentHTML("beforeend", markup);
+  } else if (WhereCall === 'Shorts' && isShort) {
+    containerVideo?.insertAdjacentHTML("beforeend", markup);
   }
- 
-})
+}
+function checkAndGiveMarking(LastVideo, buttonLoadMore, marking, statusNextPage, containerVideo, Call, data){
+  if(!LastVideo && data.nextPageToken){
+    buttonLoadMore.classList.remove('none')
+  }
+  if(marking === ''){
+    checkPageToken(statusNextPage,buttonLoadMore)
+    AddClassToContainer(containerVideo, '')
+    addMarking(dateProfileVideo, Call)
+    marking = containerVideo.innerHTML
+  }else{
+    AddClassToContainer(containerVideo, marking)
+  }
+}
+
+function AddClassToContainer(containerVideo, inner){
+  containerVideo.classList.add("grid","gridTC5", "gap10")
+  containerVideo.innerHTML = inner
+}

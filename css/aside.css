@@ -1,6 +1,6 @@
 aside{
     width: calc(12.5% + 10px);
-    height: 855px;
+    
     overflow-y: scroll;
     background-color: var(--WhColor);
     
@@ -33,7 +33,7 @@ aside::-webkit-scrollbar-thumb:hover{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding-left:30px;
+    padding-left: 25px;
 }
 .SignIn_paragraph{
     font-family: "Poppins", serif;
@@ -91,7 +91,10 @@ aside::-webkit-scrollbar-thumb:hover{
     border: 1px solid white;
 }
 /* Конец */
-
+aside.positionFixed{
+    z-index: 999;
+    top:55px;
+}
 @media (max-width:1680px){
     .SignIn_paragraph{
         font-size: 12px;
@@ -127,6 +130,29 @@ aside::-webkit-scrollbar-thumb:hover{
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 80px;
+        width: 90px;
+        padding-left: 10px;
     }
 }
+@media (max-width:820px) {
+    .SignIn_paragraph{
+        font-size: 10px;
+        width: 140px;
+    }
+    .SignIn_element{
+        width: 100px;
+    }
+    .aside_SignIn_Container{
+        width: 150px;
+    }
+    .aside_SignIn_Container{
+       
+        padding-left:5px;
+    }
+}
+@media (max-width:620px){
+    aside{
+        display: none;
+    }
+}
+

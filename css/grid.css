@@ -14,7 +14,7 @@
     grid-template-columns: repeat(2, 1fr);
 }
 .gap10{
-    gap:10px;
+    gap: 10px !important;;
 }
 .gap15{
     gap:15px;

@@ -2,7 +2,7 @@ html{
     
     --WhColor:white;
     --bordColor:#0f0f0f;
-    --hovColor:rgba(0, 0, 0, 0.103);
+    --hovColor:rgba(0, 0, 0, 0.103); /* hover background*/
     --headerColor:rgba(212, 211, 211, 0.871) ;
     --hovSing:rgb(220, 238, 245);
     --hoverBlack:rgb(102, 102, 102, 0.103);
@@ -10,6 +10,7 @@ html{
     --bgColorTransperentHover:#00000017;
     --bgcolorTransperent:#0000000e;
     --forAllTextWithSmallTransperent:#575656;
+    --colorForDescriptionInProfile:rgb(44, 43, 41); /* цвет для фона описания в профиле */
     background-color: var(--WhColor);
 }
 html.black{
@@ -20,7 +21,7 @@ html.black{
     --hovSing:rgba(173, 224, 245, 0.212);
     --hoverBlack:rgb(102, 102, 102, 0.303);
     --hovWithOutTransperent:rgb(53, 52, 52);
-    --bgcolorTransperent:#9b9a9a94;
+    --bgcolorTransperent:#302f2d;
     --bgColorTransperentHover:#d6d6d694;
     --forAllTextWithSmallTransperent:#ffffff91;
     background-color: var(--WhColor);
