@@ -64,6 +64,25 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                         </div>
                       
                     </div>
+                <div class="Main_container_blockInfo_comment dF fdC">
+                    <div class="comment_title">
+                        <h1 class="countComments">20 коментарів</h1>
+                    </div>
+                    <div class="Comment_input dF">
+                        <div class="Comment_input_ImgProfile">
+                            <img src="${dataProfile.img}">
+                        </div>
+                        <div class="Comment_input_block dF fdC">
+                            <div class="Comment_input_block_tag">
+                                <input type="text" placeholder="Додайте коментар...">
+                            </div>
+                            <div class="Comment_input_block_under dF jcE">
+                                <button class="Comment_input_block_under_cancel">Скасувати</button>
+                                <button class="Comment_input_block_under_apply">Коментувати</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
     `
 }
