@@ -13,9 +13,7 @@ export function lisnerToLike(){
    containerComment.addEventListener("click", (e)=>{
     const svg = e.target.querySelector("path").style.fill
     const path =  e.target.querySelector("path")
-    console.log(svg === uhliked)
-    console.log(svg === liked)
-
+   
     if(svg === uhliked){
         console.log('first')
         path.style.fill = liked
