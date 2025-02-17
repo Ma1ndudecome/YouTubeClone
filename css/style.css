@@ -36,7 +36,9 @@ html.black svg path[fill="#FF0033"]{
 .svgShorts{
     fill:red!important;
 }
-
+.svgLikeEnable path{
+    fill: gray
+}
 body{
     display: flex;
     flex-direction: column;

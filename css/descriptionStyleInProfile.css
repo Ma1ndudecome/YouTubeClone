@@ -231,6 +231,7 @@
 .AllComment_Container_item_statistic_like_count{
     color:var(--forAllTextWithSmallTransperent);
     font-size: 15px;
+    user-select: none;
 }
 .AllComment_Container_item_statistic{
     gap:10px;
@@ -243,6 +244,7 @@
     cursor: pointer;
     font-size: 15px;
     padding: 5px 15px;
+    user-select: none;
 }
 .AllComment_Container_item_statistic_repty:hover{
     background-color: var(--colorForDescriptionInProfile);
@@ -252,12 +254,14 @@
 .AllComment_Container_item_statistic_disLike_svg{
     width: 25px;
     height: 28px ;
+    padding: 3px 3px;
+
 }
 .AllComment_Container_item_statistic_like_svg:hover,
 .AllComment_Container_item_statistic_disLike_svg:hover{
     cursor: pointer;
-    background-color: var(--colorForDescriptionInProfile);
-    border-radius: 20px;
+    background-color: var(--bgcolorTransperent);
+    border-radius: 50%;
     
 }
 .AllComment_Container_item_statistic_like_svg svg, 
