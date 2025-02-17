@@ -64,38 +64,4 @@ async function loadData(conteinerVideo) {
 
 
 
-/*
-button.addEventListener('click', (e)=>{
-    some()
-    
-    axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=gaming&type=video&videoCategoryId=20&maxResults=20&key=${APIKEY}`)
-    .then(({data})=>{
-        const IDVideo = data.items.map(el => el.id.videoId).join(',')
-         axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`)
-        .then(data=>{
-            data.items.forEach(el=>{
-                if(el.snippet.liveBroadcastContent='none'){
-                    const date = new Date(el.snippet.publishedAt)
-                    const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
-                    container.insertAdjacentHTML("beforeend", makeMarkingVideo(result,formatDuration(el.contentDetails.duration)),el.id)
-                }
-                
-            })
-        
-        }
-        )
-    })
-})
-
-
-
-
-
-
-
-
-
-*/
-
-
 

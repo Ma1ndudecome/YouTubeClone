@@ -129,7 +129,6 @@ async function loadSubsiber(access_token = ""){
         
         dataSubsribe.data.items.forEach(({snippet})=>{
             subscriberContainer.insertAdjacentHTML("beforeend",marcinSubscriben(snippet.thumbnails.default.url,snippet.title))
-            console.log(snippet)
         })
         
     }catch(error){
