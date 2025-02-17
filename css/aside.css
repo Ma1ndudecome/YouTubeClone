@@ -1,6 +1,6 @@
 aside{
     width: calc(12.5% + 10px);
-    
+    max-height: 100vh;
     overflow-y: scroll;
     background-color: var(--WhColor);
     overflow-x: hidden;

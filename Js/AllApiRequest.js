@@ -15,7 +15,7 @@ export  async function  takeComment(accessToken, videoId) {
         headers: { 'Authorization': `Bearer ${accessToken}` },
         params: {
             part: "snippet",
-            videoId: 'Xvdw2_iNO9A',
+            videoId: videoId,
             maxResults:50,
             pageToken:state.PageTokenComment
     }})
