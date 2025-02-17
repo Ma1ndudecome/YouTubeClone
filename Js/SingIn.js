@@ -7,16 +7,18 @@ SingButton.onclick = (e)=>{
 
 export function lisnerToLike(){
    const containerComment =  document.querySelector(".AllComment_Container")
+   const uhliked = `rgba(117, 113, 113, 0.23)`
+   const liked = `rgba(255, 255, 255, 0.71)`
    containerComment.addEventListener("click", (e)=>{
-    console.log(e)
-    const constSvg = document.querySelector(".AllComment_Container_item_statistic_like_svg")
-    if(e.target.parentElement.classList.contains("AllComment_Container_item_statistic_like_svg")){
-        e.target.parentElement.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path d="M3,11h3v10H3V11z M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11v10h10.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"></path></svg>
-        `
-        e.target.remove()
-       
-        
-    }
-   })
+    const svg = e.target.querySelector("path").style.fill
+    const path =  e.target.querySelector("path")
+    console.log('svgStyle:',svg)
+    console.log('unliked',uhliked)
+    if(svg === uhliked){
+        path.style.fill = liked
+    }else if(svg === liked)
+        path.style.fill = uhliked
+    })
+  
+   
 }

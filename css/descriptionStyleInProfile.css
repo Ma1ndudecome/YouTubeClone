@@ -252,12 +252,14 @@
 .AllComment_Container_item_statistic_disLike_svg{
     width: 25px;
     height: 28px ;
+    padding: 3px 3px;
+
 }
 .AllComment_Container_item_statistic_like_svg:hover,
 .AllComment_Container_item_statistic_disLike_svg:hover{
     cursor: pointer;
-    background-color: var(--colorForDescriptionInProfile);
-    border-radius: 20px;
+    background-color: var(--bgcolorTransperent);
+    border-radius: 50%;
     
 }
 .AllComment_Container_item_statistic_like_svg svg, 

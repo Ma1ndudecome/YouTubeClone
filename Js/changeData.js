@@ -31,9 +31,12 @@ export let dateProfileVideo = []//При запросе сохраняю все 
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
   document.querySelector(".sing_int").innerHTML = markingProfile(profileImg, profileName, profileCustomUrl)
   document.body.onclick = (e) => {
-    if (e.target.parentNode.classList.contains("profileImg")) {
-      const info = document.querySelector(".profileImg_Info")
-      info.classList.toggle("show")
+    if (e.target.parentNode) {
+      if(e.target.parentNode.classList.contains("profileImg")){
+        const info = document.querySelector(".profileImg_Info")
+        info.classList.toggle("show")
+      }
+      
     } else if (!e.target.closest(".profileImg_Info")) {
 
       const info = document.querySelector(".profileImg_Info")
