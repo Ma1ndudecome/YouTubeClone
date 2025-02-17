@@ -28,7 +28,7 @@ async function LoadVideo() {
         console.log(error)
     }
 }
-LoadVideo()
+
 const observ = new IntersectionObserver((entries)=>{
     if(isVideo){
         return
@@ -40,4 +40,4 @@ const observ = new IntersectionObserver((entries)=>{
     },{ root: null, threshold: 0.5 });
 })
 
-observ.observe(triger)
+// observ.observe(triger)
