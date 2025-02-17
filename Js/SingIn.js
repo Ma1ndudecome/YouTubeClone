@@ -7,18 +7,30 @@ SingButton.onclick = (e)=>{
 
 export function lisnerToLike(){
    const containerComment =  document.querySelector(".AllComment_Container")
-   const uhliked = `rgba(117, 113, 113, 0.23)`
+   const uhliked = `rgba(117, 113, 113, 0)`
    const liked = `rgba(255, 255, 255, 0.71)`
+   const countLike = document.querySelector(".AllComment_Container_item_statistic_like_count")
    containerComment.addEventListener("click", (e)=>{
     const svg = e.target.querySelector("path").style.fill
     const path =  e.target.querySelector("path")
-    console.log('svgStyle:',svg)
-    console.log('unliked',uhliked)
+    console.log(svg === uhliked)
+    console.log(svg === liked)
+
     if(svg === uhliked){
+        console.log('first')
         path.style.fill = liked
-    }else if(svg === liked)
+        
+        const plusLike = +countLike.textContent + 1
+        countLike.textContent = plusLike
+        
+    }else if(svg === liked){
         path.style.fill = uhliked
-    })
-  
+        const minusLike = +countLike.textContent - 1
+        countLike.textContent = minusLike
+    }
+
+
+})
+
    
 }

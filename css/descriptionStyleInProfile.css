@@ -231,6 +231,7 @@
 .AllComment_Container_item_statistic_like_count{
     color:var(--forAllTextWithSmallTransperent);
     font-size: 15px;
+    user-select: none;
 }
 .AllComment_Container_item_statistic{
     gap:10px;
@@ -243,6 +244,7 @@
     cursor: pointer;
     font-size: 15px;
     padding: 5px 15px;
+    user-select: none;
 }
 .AllComment_Container_item_statistic_repty:hover{
     background-color: var(--colorForDescriptionInProfile);
