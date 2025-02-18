@@ -9,7 +9,7 @@ export function lisnerToLike(){
    const containerComment =  document.querySelector(".AllComment_Container")
    const uhliked = `rgba(117, 113, 113, 0)`
    const liked = `rgba(255, 255, 255, 0.71)`
-   const countLike = document.querySelector(".AllComment_Container_item_statistic_like_count")
+   
    containerComment.addEventListener("click", ({target})=>{
 
     const haveClassDisLike = target.classList.contains("AllComment_Container_item_statistic_disLike_svg")
@@ -18,7 +18,8 @@ export function lisnerToLike(){
     if(haveClassLike || haveClassDisLike){
     const svg = target.querySelector("path").style.fill
     const path =  target.querySelector("path")
-  
+    
+    const countLike = target.parentElement.parentElement.querySelector("span")
     if(haveClassLike){
         const parentSvg = target.parentElement.nextElementSibling.children[0]
         if(svg === liked){
@@ -43,8 +44,6 @@ export function lisnerToLike(){
     }
     
 })
-
-   
 }
 
 function checkAndGiveLikeDislike(svg,path, uhliked, liked, haveClassDisLike, haveClassLike, countLike, target){
