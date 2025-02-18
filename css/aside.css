@@ -11,14 +11,14 @@ aside::-webkit-scrollbar {
     
 }
 aside:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.205);
+    background-color:var(--hovColor)
 }
 aside::-webkit-scrollbar-thumb {
     background-color: transparent;
     border-radius: 10px;
 }
 aside::-webkit-scrollbar-thumb:hover{
-    background-color: rgba(0, 0, 0, 0.305);
+    background-color: var(--hovSing)
     
 }
     

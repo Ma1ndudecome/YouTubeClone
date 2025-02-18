@@ -1,4 +1,4 @@
-export function markingProfile(profileImg,profileName,profileCustomUrl ){
+export function markingProfile(profileImg, profileName, profileCustomUrl) {
     return `
      <div class="profileImg dF jcE">
         <img src="${profileImg}" alt="yourIcon">
@@ -64,11 +64,22 @@ export function markingProfile(profileImg,profileName,profileCustomUrl ){
     `
 }
 
-export function markingSubribe(img, title){
+export function markingSubribe(img, title) {
     return `
     <div class="subriber">
         <img src="${img}" alt="subscriber">
         <p>${title}</p>
     </div<
     `
+}
+export function markingChangeTheme() {
+
+    return `
+        <div class=" dF aiC jcC dark_theme">
+                      Dark Theme
+                    </div>
+                    <div class=" dF aiC jcC light_theme">
+                      Light Theme
+                    </div>
+                    `
 }

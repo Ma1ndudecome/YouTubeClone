@@ -476,6 +476,10 @@ header .sing_int {
     height: 100%;
     width: 20%;
 }
+.dark_theme,.light_theme{
+    height: 100%;
+    width: 20%;
+}
 
 .theme_box1 {
     width: 60%;
@@ -483,7 +487,7 @@ header .sing_int {
 
 .theme_box1 p {
     color: var(--bordColor);
-    font-family: "Poppins", serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .theme_arrow {
