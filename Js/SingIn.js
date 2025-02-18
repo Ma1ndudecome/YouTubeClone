@@ -10,39 +10,53 @@ export function lisnerToLike(){
    const uhliked = `rgba(117, 113, 113, 0)`
    const liked = `rgba(255, 255, 255, 0.71)`
    const countLike = document.querySelector(".AllComment_Container_item_statistic_like_count")
-   containerComment.addEventListener("click", (e)=>{
+   containerComment.addEventListener("click", ({target})=>{
 
-    const haveClassLike = e.target.classList.contains("AllComment_Container_item_statistic_disLike_svg")
-    const haveClassDisLike = e.target.classList.contains("AllComment_Container_item_statistic_like_svg")
+    const haveClassDisLike = target.classList.contains("AllComment_Container_item_statistic_disLike_svg")
+    const haveClassLike = target.classList.contains("AllComment_Container_item_statistic_like_svg")
 
     if(haveClassLike || haveClassDisLike){
-    const svg = e.target.querySelector("path").style.fill
-    const path =  e.target.querySelector("path")
-    
+    const svg = target.querySelector("path").style.fill
+    const path =  target.querySelector("path")
+  
     if(haveClassLike){
-        
+        const parentSvg = target.parentElement.nextElementSibling.children[0]
+        if(svg === liked){
+            countLike.textContent = +countLike.textContent - 1
+
+        }
+        if(parentSvg.classList.contains("activated")){
+            parentSvg.querySelector("path").style.fill = uhliked
+        }
+    }else if(haveClassDisLike){
+        console.dir(target)
+        const parentSvg = target.parentElement.previousElementSibling.children[0]
+        if(parentSvg.classList.contains("activated")){
+            parentSvg.querySelector("path").style.fill = uhliked
+            countLike.textContent = +countLike.textContent - 1
+            parentSvg.classList.remove("activated")
+        }
     }
 
-
-    if(svg === uhliked){
-        path.style.fill = liked
-
-        e.target.classList.contains("AllComment_Container_item_statistic_like_svg") ? countLike.textContent = +countLike.textContent + 1 : ''
-
-       
-        
-        
-    }else if(svg === liked){
-        path.style.fill = uhliked
-
-        e.target.classList.contains("AllComment_Container_item_statistic_like_svg") ? countLike.textContent = +countLike.textContent - 1 : ''
-        
-    }
+    checkAndGiveLikeDislike(svg, path, uhliked, liked, haveClassLike,haveClassDisLike, countLike, target)
+    
     }
     
-
-
 })
 
    
+}
+
+function checkAndGiveLikeDislike(svg,path, uhliked, liked, haveClassDisLike, haveClassLike, countLike, target){
+    if(svg === uhliked){
+        path.style.fill = liked
+
+        haveClassDisLike ? countLike.textContent = +countLike.textContent + 1 : ''
+        target.classList.add("activated")
+    }else if(svg === liked){
+        path.style.fill = uhliked
+        
+        target.classList.remove("activated")
+        
+    }
 }

@@ -62,7 +62,6 @@ async function openProfile(target, accessToken) {
     container.classList.add('block')
     try {
       const dataProfile = await channelData(accessToken)
-      console.log(dataProfile)
       state.infoChannel = {
         subscriberCount:dataProfile.data.items[0].statistics.subscriberCount,
         img:dataProfile.data.items[0].snippet.thumbnails.default.url,
@@ -71,7 +70,6 @@ async function openProfile(target, accessToken) {
         dateCreateAccount:dataProfile.data.items[0].snippet.publishedAt
       }
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0], state.pageTokenProfileVideo)
-      console.log('videoProfile',videoProfile)
       
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
       
@@ -80,7 +78,6 @@ async function openProfile(target, accessToken) {
 
   
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
-      console.log('detailInfo',detailInformationVideo)
       const profileData = dataProfile.data.items[0]
 
 
