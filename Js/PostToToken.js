@@ -65,7 +65,6 @@ if(code){
                     headers:{'Content-Type': 'application/x-www-form-urlencoded'}
                 })
                  state.acessToken = response.data.access_token
-                 console.log(response.data.access_token)
                 const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                     headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
                 })
@@ -120,7 +119,6 @@ async function loadSubsiber(access_token = ""){
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
     try{
         const dataSubsribe = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&access_token=${access_token}&maxResults=7&pageToken=${pageTokenSubscribe}`)
-        console.log(dataSubsribe)
         if(dataSubsribe.data.nextPageToken){
             pageTokenSubscribe = dataSubsribe.data.nextPageToken 
         }else{
@@ -129,7 +127,6 @@ async function loadSubsiber(access_token = ""){
         
         dataSubsribe.data.items.forEach(({snippet})=>{
             subscriberContainer.insertAdjacentHTML("beforeend",marcinSubscriben(snippet.thumbnails.default.url,snippet.title))
-            console.log(snippet)
         })
         
     }catch(error){

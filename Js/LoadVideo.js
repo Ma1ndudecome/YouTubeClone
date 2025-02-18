@@ -11,8 +11,11 @@ async function LoadVideo() {
     try{
         const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video&eventType=none&key=${APIKEY}&pageToken=${pageToken}`)
         pageToken = response.data.nextPageToken || '';
+
         const IDVideo = response.data.items.map(el => el.id.videoId).join(',')
+
         const MoreStatisticVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`)
+        
         await MoreStatisticVideo.data.items.forEach(el=>{
              if (el.snippet.liveBroadcastContent === 'none'){
                 const date = new Date(el.snippet.publishedAt)
