@@ -266,5 +266,6 @@
 }
 .AllComment_Container_item_statistic_like_svg svg, 
 .AllComment_Container_item_statistic_disLike_svg svg{
-    width: 21px;
+    width: 100%;
+    height: 100%;
 }

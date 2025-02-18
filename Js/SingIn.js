@@ -11,21 +11,35 @@ export function lisnerToLike(){
    const liked = `rgba(255, 255, 255, 0.71)`
    const countLike = document.querySelector(".AllComment_Container_item_statistic_like_count")
    containerComment.addEventListener("click", (e)=>{
+
+    const haveClassLike = e.target.classList.contains("AllComment_Container_item_statistic_disLike_svg")
+    const haveClassDisLike = e.target.classList.contains("AllComment_Container_item_statistic_like_svg")
+
+    if(haveClassLike || haveClassDisLike){
     const svg = e.target.querySelector("path").style.fill
     const path =  e.target.querySelector("path")
-   
-    if(svg === uhliked){
-        console.log('first')
-        path.style.fill = liked
+    
+    if(haveClassLike){
         
-        const plusLike = +countLike.textContent + 1
-        countLike.textContent = plusLike
+    }
+
+
+    if(svg === uhliked){
+        path.style.fill = liked
+
+        e.target.classList.contains("AllComment_Container_item_statistic_like_svg") ? countLike.textContent = +countLike.textContent + 1 : ''
+
+       
+        
         
     }else if(svg === liked){
         path.style.fill = uhliked
-        const minusLike = +countLike.textContent - 1
-        countLike.textContent = minusLike
+
+        e.target.classList.contains("AllComment_Container_item_statistic_like_svg") ? countLike.textContent = +countLike.textContent - 1 : ''
+        
     }
+    }
+    
 
 
 })
