@@ -4,7 +4,7 @@ import "./LoadVideo.js"
 import "./PostToToken.js"
 import "./SingIn.js"
 import "./ReturnPushState.js"
-
+import "./HeaderANDAside.js"
 import { MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
 import { container as main } from "./LoadVideo.js"
 import { dateRequest } from "./LoadVideo.js"

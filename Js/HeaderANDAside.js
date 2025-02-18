@@ -1,6 +1,5 @@
 "use strict"
 
-
 let glass_adaptation = document.getElementById("glass_adaptation")
 let adaptation = document.getElementById("adaptation")
 let img_adaptation = document.getElementById("img_adaptation")
@@ -110,3 +109,4 @@ backdrop.onclick = ()=>{
 // }
 // f1()
 // window.addEventListener("resize",f1)
+

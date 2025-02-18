@@ -21,3 +21,11 @@ export  async function  takeComment(accessToken, videoId) {
     }})
     return allComment.data.items
 }
+
+export async function TakeNews() {
+    const NewsData = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=20&chart=mostPopular&maxResults=20&key=${APIKEY}`)
+    const IDVideo = NewsData.data.items.map(el => el.id.videoId).join(',')
+    const detailInf = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`)
+   
+    return detailInf
+}
