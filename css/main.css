@@ -42,6 +42,7 @@ ol, ul{
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    height: fit-content;
 }
 .Main_container_video_info_logo{
     width: 12%;
@@ -75,7 +76,9 @@ ol, ul{
     font-size: 17px;
     line-height: 20px;
     font-weight: 500;
-    color:var(--bordColor)
+    color:var(--bordColor);
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .Main_container_video_title_info{
     font-family: "Roboto", "Arial", sans-serif;
