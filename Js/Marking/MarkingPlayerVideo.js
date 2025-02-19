@@ -84,8 +84,9 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                         </div>
                     </div>
                     <div class="AllComment_Container dF fdC">
-
                     </div>
+                    <div class="trigerContainer"></div>
+
                 </div>
                 </div>
     `

@@ -48,6 +48,9 @@ ol, ul{
     width: 12%;
     
 }
+.trigerContainer{
+    height: 1px;
+}
 .time{
     color: white;
     position: absolute;

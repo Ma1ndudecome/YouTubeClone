@@ -30,7 +30,7 @@ export function lisnerToLike(){
             parentSvg.querySelector("path").style.fill = uhliked
         }
     }else if(haveClassDisLike){
-        console.dir(target)
+
         const parentSvg = target.parentElement.previousElementSibling.children[0]
         if(parentSvg.classList.contains("activated")){
             parentSvg.querySelector("path").style.fill = uhliked
