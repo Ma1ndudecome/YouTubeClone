@@ -45,7 +45,7 @@ let innerGamingText = `
              
 
                     <div class="boxtxtGaming ">
-                        
+                        <div class = "txtgaming">
                             <svg width='64' height='64' viewBox='0 0 34 34' xmlns='http://www.w3.org/2000/svg'
                                 xmlns:xlink='http://www.w3.org/1999/xlink'>
                                 <rect width='24' height='24' stroke='none' rx="15" padding="10" fill=' #FF0033'
@@ -96,9 +96,11 @@ let innerGamingText = `
                             </svg>
                             <b class="txtg">Gaming</b>
                         
-                       
-                    </div>
-                    <div class="txtg"> Пропоноване</div>`
+                       </div>
+                    
+                    <div class="txtg"> Пропоноване</div>
+                    </div>`
+                    
 
 
 

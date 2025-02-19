@@ -798,6 +798,9 @@ iframe{
 /* CSS Gaming*/
 
 .boxtxtGaming{
+    margin-left: 20px;
+}
+.txtgaming{
     color: rgb(182, 0, 0);
     display: flex;
     align-items: center;
