@@ -795,3 +795,15 @@ iframe{
     gap:40px;
  }
 }
+/* CSS Gaming*/
+
+.boxtxtGaming{
+    color: rgb(182, 0, 0);
+    display: flex;
+    align-items: center;
+}
+.txtg{
+    color: white;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
