@@ -20,6 +20,8 @@ import { takeComment } from "./AllApiRequest.js"
 import { MarkingCommentItem } from "./Marking/MarkingPlayerVideo.js"
 
 import { lisnerToLike } from "./SingIn.js"
+
+import { LoadMoreComments } from "./infinityScrollInProfile.js"
 main.addEventListener("click", async (e) => {
 
     if(e.target.closest(".Main_container_video")){
@@ -59,10 +61,12 @@ main.addEventListener("click", async (e) => {
         }
 
         const response = await takeComment(state.acessToken, id)
-        console.log(response)
+
         addMarkingComent(response)
         listnerToInput()
         lisnerToLike()
+
+        LoadMoreComments(id)
     }
     
     
@@ -106,14 +110,17 @@ function listnerToInput(){
 }
 
 
-function addMarkingComent(data){
+export function addMarkingComent(data){
+    console.log(data)
+
     const containerComment = document.querySelector(".AllComment_Container")
     
-    data.forEach(({snippet})=>{
+    data.items.forEach(({snippet})=>{
         const dates = snippet.topLevelComment.snippet
         const date = new Date(dates.publishedAt)
         const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
         
         containerComment.insertAdjacentHTML("beforeend", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, result, dates.textDisplay, dates.likeCount)) 
     })
+    state.PageTokenComment = data.nextPageToken
 }

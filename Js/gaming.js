@@ -24,6 +24,8 @@ gamingBtn.onclick = (event) => {
                 axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`)
                     .then(({ data }) => {
                        container.innerHTML = ''
+                       container.classList.add("grid")
+                       container.classList.remove("block")
                         data.items.forEach(el=>{
                             const date = new Date(el.snippet.publishedAt)
                             const result = dateFns.formatDistanceToNow(date, { addSuffix: true })

@@ -2,7 +2,8 @@ import { state } from "./changeData.js"
 import { forYouVideoMarking } from "./Marking/profileVideoMarking.js";
 import { formatDuration } from "./FromISOToTime.js";
 import { addMarking } from "./changeData.js";
-
+import { takeComment } from "./AllApiRequest.js";
+import { addMarkingComent } from "./main.js";
 export async function loadVideoInProfile(accessToken, dataProfile, tokenVideo){
     return await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },
@@ -83,4 +84,28 @@ async function takeDefaultVideoOrShorts(accessToken, dataProfile, requiredToken,
     console.log(error)
   }
  
+}
+
+
+export function LoadMoreComments(id){
+  const triger = document.querySelector(".trigerContainer")
+  console.log(triger)
+
+  const observ = new IntersectionObserver((entries)=>{
+    checkEntriesAndTakeResponse(entries, id)
+  })
+
+  observ.observe(triger)
+}
+
+function checkEntriesAndTakeResponse(entries, id){
+  entries.forEach(async (entry)=>{
+    if(entry.isIntersecting){
+      const response = await takeComment(state.acessToken, id)
+      if(response.nextPageToken){
+        state.PageTokenComment = response.nextPageToken
+        addMarkingComent(response)
+      }
+    }
+  })
 }
