@@ -38,6 +38,7 @@
     height: 138px;
     margin-right: 15px;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .video-img-conteiner img {
@@ -66,10 +67,15 @@
 .name-chanel,
 .count-views,
 .overview-video {
-    color: var(--bordColor);
+    color: #aaa;
     opacity: 0.8;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-height: 3.6rem;
+    /* height: 20px; */
+    white-space: normal;
+    font-size: 1rem;
+    font-weight: 400;
 
 }
 
@@ -131,10 +137,42 @@
     background-color: var(--hoverBlack);
 }
 
-.filter-btn-icon{
+.filter-btn-icon {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 24px;
     height: 24px;
+}
+
+.constainer-settings {
+    display: flex;
+    position: relative;
+    top: -50px;
+    right: -331px;
+}
+
+.delete-video,
+.options {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.delete-video svg , .options svg {
+    height: 24px;
+    width: 24px;
+}
+.options{
+    box-sizing: border-box;
+    padding: 7px;
+}
+.delete-video{
+    border-radius: 24px;
+    transition: 200ms;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.delete-video:hover{
+    background-color: var(--hovColor);
 }

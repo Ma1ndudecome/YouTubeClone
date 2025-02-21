@@ -1,62 +1,36 @@
 import { container } from "./LoadVideo.js";
 const historyBtn = document.querySelector(".history")
 import { markinHistory, markinHistoryVideo } from "./Marking/markingHistory.js";
+import { fromViewToShortView } from "./ViewToViewLikeToLike.js";
 
 
-let arrDataVideo = [
-    {
-        videoImg: "",
-        videoName: "yura",
-        chanelName: "uralohtv",
-        countViews: "11111",
-        videoId: "",                    // ! Обязательно должен быть!!
-        overview: "bwgbwiubwiweiwgiwebgiwebiewg",
+export let arrDataVideo = [
 
-    }
-    ,
-    {
-        videoImg: "",
-        videoName: "vlad",
-        chanelName: "vladloh",
-        countViews: "1241",
-        overview: "ondfiwengowengwenowegn",
-
-    }
-    ,
-    {
-        videoImg: "",
-        videoName: "vlad",
-        chanelName: "vladloh",
-        countViews: "1241",
-        overview: "ondfiwengowengwenowegn",
-
-    }
-    ,
-    {
-        videoImg: "",
-        videoName: "vlad",
-        chanelName: "vladloh",
-        countViews: "1241",
-        overview: "ondfiwengowengwenowegn",
-
-    }
 ]
 
 
+if(localStorage.getItem("history")){
+    arrDataVideo = JSON.parse((localStorage.getItem("history")))
+}
 
 historyBtn.onclick = (event) => {
     event.preventDefault()
     console.log("!!!")
     container.innerHTML = markinHistory()
+    container.classList.remove("grid")
+    container.style.display  = "block"
     const conteinerHistoryVideo = document.querySelector(".main-history-container")
     loadData(conteinerHistoryVideo)
 
 }
 
+
 async function loadData(conteinerVideo) {
     try {
-        arrDataVideo.forEach(({ videoImg, videoName, countViews, chanelName, overview }) => {
-            conteinerVideo.insertAdjacentHTML("beforeend", markinHistoryVideo(videoImg, videoName, chanelName, countViews, overview))
+
+        arrDataVideo.forEach((item) => {
+            console.log(item);
+            conteinerVideo.insertAdjacentHTML("afterbegin", markinHistoryVideo(item.snippet.thumbnails.high.url, item.snippet.title, item.snippet.channelTitle, fromViewToShortView(item.statistics.viewCount), item.snippet.description,item.id))
         })
 
     }

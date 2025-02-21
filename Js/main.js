@@ -23,13 +23,16 @@ import { MarkingCommentItem } from "./Marking/MarkingPlayerVideo.js"
 import { lisnerToLike } from "./SingIn.js"
 
 import { LoadMoreComments } from "./infinityScrollInProfile.js"
+import { arrDataVideo } from "./changeHistoryPage.js"
 main.addEventListener("click", async (e) => {
 
     if(e.target.closest(".Main_container_video")){
         const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
         const dateRequests = dateRequest.filter(el=>el.id === id)
+        arrDataVideo.push(dateRequests[0])
+        localStorage.setItem("history",JSON.stringify(arrDataVideo))
         
-        main.innerHTML = MarkingPlayer(id, dateRequests)
+        // main.innerHTML = MarkingPlayer(id, dateRequests)
         main.classList.add('block')
         isVideo = true
         
