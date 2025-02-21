@@ -60,6 +60,7 @@
 .description_channel_img img{
     width: 45px;
     border-radius: 50%;
+    height: 45px;
 }
 .description_channel_container_title{
     font-family: "Roboto", "Arial", sans-serif;

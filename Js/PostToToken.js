@@ -19,6 +19,7 @@ let pagetoken = ''
 let pageTokenSubscribe = '';
 if(code){
     async function requestToTakeToken(code) {
+
         const data = new URLSearchParams({
             code:code,
             client_id: cliendId,
@@ -53,7 +54,7 @@ if(code){
             return response
         }catch(err){
          const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
-            
+            console.log('13123123')
             const data = new URLSearchParams({
                 client_id:cliendId,
                 client_secret:clientSecret,
@@ -68,7 +69,7 @@ if(code){
                 })
             
                  state.acessToken = response.data.access_token
-                 console.log(state)
+                
                 const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                     headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
                 })

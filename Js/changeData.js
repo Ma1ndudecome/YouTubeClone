@@ -8,6 +8,7 @@ import { loadVideoInProfile, loadNextVideo } from "./infinityScrollInProfile.js"
 import { checkPageToken } from "./infinityScrollInProfile.js"
 import { channelData, moreBtn } from "./loadDataChannel.js"
 
+
 let profileMarking;//Переменная для сохранения разметки профиля
 
 export const state = {//Тут храняться переменные которые изменяються в разныъ файлах
@@ -19,9 +20,10 @@ export const state = {//Тут храняться переменные кото�
   isLastVideos: false,//Последнее ли видео
   isLastShorts: false,//Последнее ли видео
   prevMarking: '',//Переменная для сохранения при перходе предыдущей разметки
-  infoChannel: '',//Сохранить количество подписчиков и url профиля
+  infoChannel: {img: 'https://cdn-icons-png.flaticon.com/512/6522/6522516.png'},//Сохранить количество подписчиков и url профиля
   PageTokenComment: ''
 };
+
 
 
 
