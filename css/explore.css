@@ -51,25 +51,11 @@
         font-size: 10px;    
     }
 }
-@media(max-width:1380px){
-    .down{
-        display: none;
-    }
+@media (max-width:1200px) {
     .explore_Container{
-        padding: 0px;
+        padding: 10px;
     }
-}
-@media(max-width:1000px){
-    .explore_Container ul li a p {
-        font-size: 9px;    
-    }
-    .menu_Explore{
-        width: 60px;
-    }
-    
-}
-@media(max-width:800px){
-    .explore_Container ul li a p {
-        font-size: 8px;    
+    .menu_Explore.down{
+        display: none;
     }
 }
