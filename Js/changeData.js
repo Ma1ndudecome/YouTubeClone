@@ -62,13 +62,9 @@ async function openProfile(target, accessToken) {
     container.classList.add('block')
     try {
       const dataProfile = await channelData(accessToken)
-      state.infoChannel = {
-        subscriberCount:dataProfile.data.items[0].statistics.subscriberCount,
-        img:dataProfile.data.items[0].snippet.thumbnails.default.url,
-        videoCount:dataProfile.data.items[0].statistics.videoCount,
-        viewCount:dataProfile.data.items[0].statistics.viewCount,
-        dateCreateAccount:dataProfile.data.items[0].snippet.publishedAt
-      }
+      
+      safeDataInPushState(dataProfile)
+
       const videoProfile = await loadVideoInProfile(accessToken, dataProfile.data.items[0], state.pageTokenProfileVideo)
       
       const videoId = videoProfile.data.items.map(el => el.contentDetails.videoId).join(',')
@@ -105,11 +101,12 @@ async function openProfile(target, accessToken) {
       
       document.querySelector(".container_button_load button").classList.add('none')
       moreBtn()
+      checkCountVideo()
     } catch (error) {
       console.log(error)
     }
   }else if(click === 'Switch Account' || clickpast === 'Switch Account'){
-    location.href = 'https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&access_type=offline&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A5501&client_id=729574226005-s73fnabnui73ga2vtfa52u87o3qag7f8.apps.googleusercontent.com&approval_prompt=force&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow'
+    location.href = 'http://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.force-ssl&redirect_uri=http%3A%2F%2Flocalhost%3A5501&response_type=code&client_id=729574226005-s73fnabnui73ga2vtfa52u87o3qag7f8.apps.googleusercontent.com&access_type=offline&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow'
   }else if(click === 'Sing out'|| clickpast === 'Sing out'){
     location.href = redirectUri
   }
@@ -125,14 +122,16 @@ function slideToButton() {
 
   if(count1 === 0){
     document.querySelector(".ForYou_Container_video").remove()
-    if(document.querySelectorAll(".container_channel_navigation_item")[1]){
-      document.querySelectorAll(".container_channel_navigation_item")[1].remove()
+    const navItem = document.querySelectorAll(".container_channel_navigation_item")[1]
+    if(navItem){
+      navItem.remove()
     }
   }
   if(count2 === 0){
     document.querySelector(".Shorts_container").remove()
-    if(document.querySelectorAll(".container_channel_navigation_item")[2]){
-      document.querySelectorAll(".container_channel_navigation_item")[2].remove()
+    const navItem = document.querySelectorAll(".container_channel_navigation_item")[2]
+    if(navItem){
+      navItem.remove()
     }
    
   }
@@ -239,4 +238,30 @@ function checkAndGiveMarking(LastVideo, buttonLoadMore, marking, statusNextPage,
 function AddClassToContainer(containerVideo, inner){
   containerVideo.classList.add("grid","gridTC5", "gap10")
   containerVideo.innerHTML = inner
+}
+
+
+function safeDataInPushState(dataProfile){
+  state.infoChannel = {
+    subscriberCount:dataProfile.data.items[0].statistics.subscriberCount,
+    img:dataProfile.data.items[0].snippet.thumbnails.default.url,
+    videoCount:dataProfile.data.items[0].statistics.videoCount,
+    viewCount:dataProfile.data.items[0].statistics.viewCount,
+    dateCreateAccount:dataProfile.data.items[0].snippet.publishedAt
+  }
+  
+}
+
+function checkCountVideo(){
+    if(state.infoChannel.videoCount === String(0)){
+      
+     document.querySelector(".line").remove()
+     document.querySelector(".Header_Main_container_video").remove()
+     document.querySelector(".container_button_load").remove()
+     const nav = document.querySelector(".container_channel_navigation")
+     nav.innerHTML = `
+     <div class="noneVideo">Автор поки загрузив жодного відео😥</div>
+     `
+     nav.classList.add("jcC")
+    }
 }
