@@ -38,10 +38,14 @@
     font-family: "Roboto", serif;
     color: var(--bordColor);
     padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
 }
-.Explore_element_menu li:hover{
-    background-color:var(--hovColor);
+
+.Explore_element_menu li a:hover{
+    background-color: var(--hovColor);
 }
+
 @media (max-width:1500px) {
     .explore_Container ul li a p {
         font-size: 10px;    

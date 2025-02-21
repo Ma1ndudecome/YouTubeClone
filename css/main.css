@@ -42,10 +42,14 @@ ol, ul{
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    height: fit-content;
 }
 .Main_container_video_info_logo{
     width: 12%;
     
+}
+.trigerContainer{
+    height: 1px;
 }
 .time{
     color: white;
@@ -75,7 +79,9 @@ ol, ul{
     font-size: 17px;
     line-height: 20px;
     font-weight: 500;
-    color:var(--bordColor)
+    color:var(--bordColor);
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .Main_container_video_title_info{
     font-family: "Roboto", "Arial", sans-serif;
@@ -788,4 +794,16 @@ iframe{
  .Main_container_blockInfo_statistic_rightSide{
     gap:40px;
  }
+}
+/* CSS Gaming*/
+
+.boxtxtGaming{
+    color: rgb(182, 0, 0);
+    display: flex;
+    align-items: center;
+}
+.txtg{
+    color: white;
+    margin-bottom: 10px;
+    font-size: 20px;
 }

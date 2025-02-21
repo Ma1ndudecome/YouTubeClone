@@ -59,6 +59,7 @@ async function openProfile(target, accessToken) {
     container.innerHTML = ''  
     const info = document.querySelector(".profileImg_Info")
     info.classList.remove("show")
+    container.classList.remove("grid")
     container.classList.add('block')
     try {
       const dataProfile = await channelData(accessToken)

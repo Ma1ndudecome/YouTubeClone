@@ -20,5 +20,5 @@ export  async function  takeComment(accessToken, videoId) {
             maxResults:5,
             pageToken:state.PageTokenComment
     }})
-    return allComment.data.items
+    return allComment.data
 }
