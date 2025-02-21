@@ -511,7 +511,9 @@ iframe{
 .whColor{
     background-color: var(--WhColor);
 }
-
+.ContainerPlayerVideo{
+    width: 100%;
+}
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);

@@ -49,6 +49,7 @@ if(code){
             changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
             channelData(response.data.access_token) 
             loadSubsiber(response.data.access_token)
+            state.infoChannel.img = dataAccount.data.items[0].snippet.thumbnails.default.url
             return response
         }catch(err){
          const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
@@ -73,6 +74,10 @@ if(code){
                 })
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
                  loadSubsiber(response.data.access_token)
+                state.infoChannel = {
+                    img:dataAccount.data.items[0].snippet.thumbnails.default.url
+                }
+
             }catch(err){
                 console.log(err.response ? err.response.data : err);
             }
