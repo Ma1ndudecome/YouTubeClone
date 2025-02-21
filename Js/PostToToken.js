@@ -49,29 +49,37 @@ if(code){
             changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
             channelData(response.data.access_token) 
             loadSubsiber(response.data.access_token)
+            state.infoChannel.img = dataAccount.data.items[0].snippet.thumbnails.default.url
             return response
         }catch(err){
-            console.log(localStorage.getItem("dataRegreshToken"))
-         const  token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
-
+         const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
+            
             const data = new URLSearchParams({
                 client_id:cliendId,
                 client_secret:clientSecret,
                 refresh_token:token[0].refreshToken,
                 grant_type:'refresh_token'
             })
+            
             try{
+                
                 const response = await axios.post(urlToken, data, {
                     headers:{'Content-Type': 'application/x-www-form-urlencoded'}
                 })
+            
                  state.acessToken = response.data.access_token
+                 console.log(state)
                 const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                     headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
                 })
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
                  loadSubsiber(response.data.access_token)
+                state.infoChannel = {
+                    img:dataAccount.data.items[0].snippet.thumbnails.default.url
+                }
+
             }catch(err){
-                console.log('some',err)
+                console.log(err.response ? err.response.data : err);
             }
         }
     }
@@ -112,10 +120,13 @@ if(code){
 async function loadSubsiber(access_token = ""){
     document.querySelector(".aside_SignIn").classList.add("hF","fdC")
     const singIntNone = document.querySelector(".aside_SignIn_Container")
+    const removeNonContainer = document.querySelector(".block_list_Sing_int ")
+    
     singIntNone.classList.add("none")
+    removeNonContainer.classList.remove("none")
 
     buttonMoreSubscriber.classList.remove("none")
-
+    
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
     try{
         const dataSubsribe = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&access_token=${access_token}&maxResults=7&pageToken=${pageTokenSubscribe}`)

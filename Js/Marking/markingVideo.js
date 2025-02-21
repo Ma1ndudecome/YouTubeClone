@@ -22,3 +22,5 @@ export function makeMarkingVideo(logoVideo, logoChannel, titleVideo, nameChannel
                 </div>    
     `
 }
+
+

@@ -1,9 +1,13 @@
 aside{
-    width: calc(12.5% + 10px);
+    position: fixed;
+    width: 250px;
     max-height: 100vh;
     overflow-y: scroll;
     background-color: var(--WhColor);
     overflow-x: hidden;
+    left: 0;
+    top:50px;
+    z-index: 999;
     
 }
 aside::-webkit-scrollbar {
@@ -20,6 +24,9 @@ aside::-webkit-scrollbar-thumb {
 aside::-webkit-scrollbar-thumb:hover{
     background-color: var(--hovSing)
     
+}
+aside.hidden {
+    transform: translateX(-100%); /* Скрыто за экраном */
 }
     
 
@@ -120,23 +127,53 @@ aside.positionFixed{
     z-index: 999;
     top:55px;
 }
-@media (max-width:1680px){
+
+aside.wow .Explore_element_menu li a {
+    flex-direction: row;
+}
+aside.wow{
+    width: 230px;
+}
+aside.wow .SignIn_paragraph{
+    display: block;
+}
+aside.wow .Sign_In_button{
+    display: block;
+}
+aside.wow .aside_SignIn {
+    display: block;
+}
+aside.wow .menu_Explore.down {
+    display: block;
+}
+
+@media (max-width:1200px) {
+    .Explore_element_menu li a {
+        flex-direction: column;
+    }
+    aside{
+        width: 100px;
+    }
+    .explore_Container{
+        padding: 10px;
+    }
     .SignIn_paragraph{
-        font-size: 12px;
+        display: none;
     }
-    .SignIn_element a {
-        font-size: 13px;
+    .Sign_In_button{
+        display: none;
     }
-    .SignIn_element svg{
-        width: 18px;
-        height: 18px;
+    .aside_SignIn {
+        height: 50px;
+        display: none;
     }
-    .home_elements p{
-        font-size: 12px;
+    .SignIn_element{
+        width: 35px;
+        height: 23px;
     }
-    .home_elements svg{
-        width: 18px;
-        height: 18px;
+}
+@media (max-width:720px) {
+    aside{
+        display: none;
     }
-    
 }

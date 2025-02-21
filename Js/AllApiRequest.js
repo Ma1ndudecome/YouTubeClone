@@ -11,12 +11,13 @@ export async function takeCountCommentUnderVideo(videoId){
 }
 
 export  async function  takeComment(accessToken, videoId) {
+    console.log(state.acessToken)
     const allComment = await axios.get("https://www.googleapis.com/youtube/v3/commentThreads", {
         headers: { 'Authorization': `Bearer ${accessToken}` },
         params: {
             part: "snippet",
             videoId: videoId,
-            maxResults:50,
+            maxResults:5,
             pageToken:state.PageTokenComment
     }})
     return allComment.data
