@@ -16,7 +16,7 @@ import "./changeHistoryPage.js"
 
 import { state } from "./changeData.js"
 import { markingShowMore } from "./Marking/ProfileMarking.js"
-
+import { MarkingCommentItemAny } from "./Marking/MarkingPlayerVideo.js"
 import { takeComment } from "./AllApiRequest.js"
 import { MarkingCommentItem } from "./Marking/MarkingPlayerVideo.js"
 
@@ -24,14 +24,35 @@ import { lisnerToLike } from "./SingIn.js"
 
 import { LoadMoreComments } from "./infinityScrollInProfile.js"
 main.addEventListener("click", async (e) => {
-
+    let countClick = 0
+    main.classList.remove("grid")
     if(e.target.closest(".Main_container_video")){
-        const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
-        const dateRequests = dateRequest.filter(el=>el.id === id)
+        if(e.target.classList.contains("Main_container_video_title_info_name")){
+           const NameChannel = e.target.textContent
+            isVideo = true
+
+        }else if(e.target.classList.contains("VideoLogoChannel")){
+            console.log('coming to Channel')
+            isVideo = true
+        }else{
+            const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
+            const dateRequests = dateRequest.filter(el=>el.id === id)
+            main.innerHTML = MarkingPlayerAny(id, dateRequests, state)
+            console.log(dateRequests[0])
+            main.classList.add('block')
+            isVideo = true
+            buttonLoadMoreFnc(dateRequests, dateRequests[0].snippet.thumbnails.high.url, 2000)
+
+            const response = await takeComment(state.acessToken, id)
+            console.log(response)
+            addMarkingComent(response)
+            listnerToInput()
+            lisnerToLike()
         
-        main.innerHTML = MarkingPlayer(id, dateRequests)
-        main.classList.add('block')
-        isVideo = true
+            LoadMoreComments(id)
+            
+        }
+       
         
     }else if(e.target.closest(".video_box")){
         
@@ -49,19 +70,7 @@ main.addEventListener("click", async (e) => {
         inserEl(document.querySelector(".Main_container_blockInfo_description_link"),"afterbegin", dateRequests[0].snippet.description )
         shortLength('.Main_container_blockInfo_description_link', 100)
         
-        const buttonShowMore = document.querySelector(".showMoreDescription")
-        buttonShowMore.onclick = ()=>{
-            countClick += 1
-            if(countClick === 1){
-                buttonShowMore.textContent = 'Show less'
-                moreBtn(dateRequests[0].snippet.description, dateRequests, state)
-            }else if(countClick === 2){
-                document.querySelector(".containerShowMore").remove()
-                shortLength('.Main_container_blockInfo_description_link', 100)
-                buttonShowMore.textContent = '...more'
-                countClick = 0
-            }
-        }
+        buttonLoadMoreFnc(dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount)
 
         const response = await takeComment(state.acessToken, id)
         addMarkingComent(response)
@@ -85,10 +94,10 @@ function shortLength(element, maxLength){
     }
     return text
 }
-function moreBtn(originalText, dateRequests, ProfileData){
+function moreBtn(originalText, dateRequests, ProfileData, countSubs){
     const descriptionCont = document.querySelector(".Main_container_blockInfo_description_link")
     descriptionCont.textContent = originalText
-    inserEl(descriptionCont,"afterend",markingShowMore(dateRequests, ProfileData))
+    inserEl(descriptionCont,"afterend",markingShowMore(dateRequests, ProfileData, countSubs))
 }
 
 function inserEl(el, positon, marking){
@@ -125,4 +134,23 @@ export function addMarkingComent(data){
         containerComment.insertAdjacentHTML("beforeend", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, result, dates.textDisplay, dates.likeCount)) 
     })
     state.PageTokenComment = data.nextPageToken
+}
+
+function buttonLoadMoreFnc(dateRequests, state, countSubs){
+    let countClick = 0
+    const buttonShowMore = document.querySelector(".showMoreDescription")
+    console.log(dateRequests)
+    buttonShowMore.onclick = ()=>{
+        countClick += 1
+        if(countClick === 1){
+            buttonShowMore.textContent = 'Show less'
+            console.log(countSubs)
+            moreBtn(dateRequests[0].snippet.description, dateRequests, state, countSubs)
+        }else if(countClick === 2){
+            document.querySelector(".containerShowMore").remove()
+            shortLength('.Main_container_blockInfo_description_link', 100)
+            buttonShowMore.textContent = '...more'
+            countClick = 0
+        }
+    }
 }
