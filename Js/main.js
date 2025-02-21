@@ -25,6 +25,7 @@ import { lisnerToLike } from "./SingIn.js"
 import { LoadMoreComments } from "./infinityScrollInProfile.js"
 
 import { ImgAndSubscribeChannel } from "./AllApiRequest.js"
+import { arrDataVideo } from "./changeHistoryPage.js"
 main.addEventListener("click", async (e) => {
     let countClick = 0
     main.classList.remove("grid")
@@ -32,6 +33,8 @@ main.addEventListener("click", async (e) => {
         if(e.target.classList.contains("Main_container_video_title_info_name")){
            const NameChannel = e.target.textContent
             isVideo = true
+            arrDataVideo.push(dateRequests[0])
+            localStorage.setItem("history",JSON.stringify(arrDataVideo))
         
         }else if(e.target.classList.contains("VideoLogoChannel")){
             console.log('coming to Channel')
