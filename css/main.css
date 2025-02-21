@@ -141,7 +141,7 @@ iframe{
 .leftSide_img img{
     width: 45px;
     border-radius: 50%;
-    
+    height: 45px;
 }
 .leftSide_title{
     width: 40%;

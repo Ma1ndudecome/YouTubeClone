@@ -69,7 +69,7 @@ if(code){
                 })
             
                  state.acessToken = response.data.access_token
-                 console.log(state)
+                
                 const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
                     headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
                 })

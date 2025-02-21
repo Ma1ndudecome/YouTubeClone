@@ -89,7 +89,7 @@ async function takeDefaultVideoOrShorts(accessToken, dataProfile, requiredToken,
 
 export function LoadMoreComments(id){
   const triger = document.querySelector(".trigerContainer")
-  console.log(triger)
+
 
   const observ = new IntersectionObserver((entries)=>{
     checkEntriesAndTakeResponse(entries, id)
@@ -101,7 +101,7 @@ export function LoadMoreComments(id){
 function checkEntriesAndTakeResponse(entries, id){
   entries.forEach(async (entry)=>{
     if(entry.isIntersecting){
-      const response = await takeComment(state.acessToken, id)
+      const response = await takeComment(id)
       if(response.nextPageToken){
         state.PageTokenComment = response.nextPageToken
         addMarkingComent(response)

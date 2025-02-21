@@ -125,7 +125,7 @@ export function MarkingCommentItem(imgComment, userName, date, commentText, coun
     </div>
     `
 }
-export function MarkingPlayerAny(id, InfoVideo, state){
+export function MarkingPlayerAny(id, InfoVideo, state, dataChannel){
     const dateString = InfoVideo[0].snippet.publishedAt
     const parsedDate = dateFns.parseISO(dateString);
     const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
@@ -137,11 +137,11 @@ export function MarkingPlayerAny(id, InfoVideo, state){
                     <div class="Main_container_blockInfo_statistic">
                         <div class="Main_container_blockInfo_statistic_leftSide">
                             <div class="leftSide_img">
-                                <img src="${InfoVideo[0].snippet.thumbnails.default.url}" alt="">
+                                <img src="${dataChannel.imgChannel}" alt="">
                             </div>
                             <div class="leftSide_title">
                                 <div class="leftSide_title_nameAccount">${InfoVideo[0].snippet.channelTitle}</div>
-                                <div class="leftSide_title_subscribe">${2000} subscribers</div>
+                                <div class="leftSide_title_subscribe">${dataChannel.subscriberChannel} subscribers</div>
                             </div>
                             <div class="leftSide_subscribe_button">
                                 <button>Subscribe</button>
