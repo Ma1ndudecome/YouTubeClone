@@ -122,7 +122,7 @@ export function InfoAboutChannel(countSubscribe, countVideo, countViews, account
     </div>
     `
 }
-export function markingShowMore(dateRequests, dataProfile){
+export function markingShowMore(dateRequests, dataProfile, countSubs){
     return `
     <div class="containerShowMore">
       <div class="TranscriptVideo dF fdC">
@@ -132,11 +132,11 @@ export function markingShowMore(dateRequests, dataProfile){
         </div>
         <div class="Main_container_blockInfo_description_channel dF">
                 <div class="description_channel_img">
-                <img src="${dataProfile.infoChannel.img}" alt="">
+                <img src="${dataProfile}" alt="">
              </div>
             <div class="description_channel_container">
                 <div class="description_channel_container_title">${dateRequests[0].snippet.channelTitle}</div>
-                <div class="description_channel_container_subscribers">${fromLikeToShortLike(dataProfile.infoChannel.subscriberCount)} subscribers</div>
+                <div class="description_channel_container_subscribers">${fromLikeToShortLike(countSubs)} subscribers</div>
             </div>
         </div>
         <div class="containerShowMore_aboutChannel dF">
