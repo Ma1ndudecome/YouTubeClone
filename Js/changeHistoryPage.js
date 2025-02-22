@@ -1,8 +1,6 @@
 import { container } from "./LoadVideo.js";
 const historyBtn = document.querySelector(".history")
-import { markinHistory, markinHistoryVideo } from "./Marking/markingHistory.js";
-import { fromViewToShortView } from "./ViewToViewLikeToLike.js";
-
+import { markinHistory, markinHistoryVideo } from "./Marking/Marking.js";
 
 export let arrDataVideo = [
 

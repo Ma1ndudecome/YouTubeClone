@@ -186,13 +186,20 @@ iframe{
 .rightSide_emotion{
     width: 20%;
     display: flex;
+    height: fit-content;
     
 }
 .rightSide_emotion_like, .rightSide_emotion_dislike{
-    
+
     height: 35%;
     background-color: var(--bgcolorTransperent)
     
+}
+.rightSide_emotion_dislike_svg, .rightSide_emotion_like_svg{
+    width: 24px;
+    height: 24px;
+    display: inherit;
+    pointer-events: none;
 }
 .rightSide_emotion_like{
     display: flex;
@@ -218,6 +225,7 @@ iframe{
     font-family: "Roboto", "Arial", sans-serif;
     font-size: 14px;
     color:var(--bordColor);
+    user-select: none;
 }
 .rightSide_emotion_dislike{
     border-top-right-radius: 20px;
@@ -247,6 +255,7 @@ iframe{
     background-color: var(--bgcolorTransperent);
     border-radius: 20px;
     padding: 5px;
+    user-select: none;
 }
 .rightSide_share svg{
     height: 80%;
@@ -264,6 +273,7 @@ iframe{
     justify-content: center;
     align-items: center;
     padding: 5px;
+    user-select: none;
 }
 
 .rightSide_threeDots svg{
@@ -771,7 +781,7 @@ iframe{
 }
 @media(max-width:620px){
     main{
-        width: calc(100% - 100px);
+        width: 100%
     }
 }
 @media (max-width:600px) {

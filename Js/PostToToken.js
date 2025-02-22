@@ -3,7 +3,7 @@ import { channelData } from "./loadDataChannel.js";
 import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { container } from "./LoadVideo.js";
 import { state } from "./changeData.js";
-import { marcinSubscriben } from "./Marking/ProfileMarking.js";
+import { marcinSubscriben } from "./Marking/Marking.js";
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
     refreshTokenProfile = JSON.parse(localStorage.getItem("dataRefreshToken"))

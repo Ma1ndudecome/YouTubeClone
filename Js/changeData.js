@@ -1,6 +1,6 @@
 import { container } from "./LoadVideo.js"
 import { markingProfile } from "./Marking/MarkingIcon.js"
-import { markingProfile as profileMark } from "./Marking/ProfileMarking.js"
+import { markingProfile as profileMark } from "./Marking/Marking.js"
 import { forYouVideoMarking } from "./Marking/profileVideoMarking.js"
 import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
