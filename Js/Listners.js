@@ -101,10 +101,10 @@ export function likeAndDislikeToVideoFunc(){
                 path.style.fill = uhliked 
             }
         }
-
-      
     }
 }
+
+
 export function listnerToInput(){
     const inputCont= document.querySelector(".Comment_input_block_tag input")
     
