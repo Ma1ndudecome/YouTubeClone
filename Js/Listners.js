@@ -1,4 +1,5 @@
-
+import {moreBtn} from './HelpsFunction.js'
+import { shortLength } from './HelpsFunction.js'
 const SingButton = document.querySelector(".SignIn_element")
 SingButton.onclick = (e)=>{
     e.preventDefault()
@@ -57,5 +58,45 @@ function checkAndGiveLikeDislike(svg,path, uhliked, liked, haveClassDisLike, hav
         
         target.classList.remove("activated")
         
+    }
+}
+
+export function likeAndDislikeToVideoFunc(){
+    const likeContainer = document.querySelector(".rightSide_emotion")
+    likeContainer.onclick = (e)=>{
+        console.log(e.target)
+        console.log(e)
+    }
+}
+export function listnerToInput(){
+    const inputCont= document.querySelector(".Comment_input_block_tag input")
+    
+    const button = document.querySelector(".Comment_input_block_under_apply")
+    inputCont.addEventListener("input", (e)=>{
+
+        if(e.target.value === ''){
+            button.classList.remove("sendButton")
+            return
+        }
+        button.classList.add("sendButton")
+        
+    })
+}
+export function buttonLoadMoreFnc(dateRequests, state, countSubs){
+    let countClick = 0
+    const buttonShowMore = document.querySelector(".showMoreDescription")
+
+    buttonShowMore.onclick = ()=>{
+        countClick += 1
+        if(countClick === 1){
+            buttonShowMore.textContent = 'Show less'
+            
+            moreBtn(dateRequests, state, countSubs)
+        }else if(countClick === 2){
+            document.querySelector(".containerShowMore").remove()
+            shortLength('.Main_container_blockInfo_description_link', 100)
+            buttonShowMore.textContent = '...more'
+            countClick = 0
+        }
     }
 }

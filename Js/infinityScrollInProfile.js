@@ -3,7 +3,7 @@ import { forYouVideoMarking } from "./Marking/profileVideoMarking.js";
 import { formatDuration } from "./FromISOToTime.js";
 import { addMarking } from "./changeData.js";
 import { takeComment } from "./AllApiRequest.js";
-import { addMarkingComent } from "./main.js";
+import { addMarkingComent } from "./HelpsFunction.js";
 export async function loadVideoInProfile(accessToken, dataProfile, tokenVideo){
     return await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },

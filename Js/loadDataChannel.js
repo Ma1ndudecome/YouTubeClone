@@ -1,4 +1,4 @@
-import { InfoAboutChannel } from "./Marking/ProfileMarking.js"
+import { InfoAboutChannel } from "./Marking/Marking.js"
 import { state } from "./changeData.js"
 export async function channelData(accessToken) {
     const response = await axios.get("https://www.googleapis.com/youtube/v3/channels", {

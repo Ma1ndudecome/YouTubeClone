@@ -189,10 +189,14 @@ iframe{
     
 }
 .rightSide_emotion_like, .rightSide_emotion_dislike{
-    
+
     height: 35%;
     background-color: var(--bgcolorTransperent)
     
+}
+.rightSide_emotion_dislike_svg, .rightSide_emotion_like_svg{
+    width: 24px;
+    height: 24px;
 }
 .rightSide_emotion_like{
     display: flex;
@@ -771,7 +775,7 @@ iframe{
 }
 @media(max-width:620px){
     main{
-        width: calc(100% - 100px);
+        width: 100%
     }
 }
 @media (max-width:600px) {
