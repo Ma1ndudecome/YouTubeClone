@@ -5,11 +5,11 @@ SingButton.onclick = (e)=>{
     e.preventDefault()
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.force-ssl&redirect_uri=${redirectUri}&response_type=code&client_id=${cliendId}&access_type=offline`;
 }
-
+const uhliked = `rgba(117, 113, 113, 0)`
+const liked = `rgba(255, 255, 255, 0.71)`
 export function lisnerToLike(){
    const containerComment =  document.querySelector(".AllComment_Container")
-   const uhliked = `rgba(117, 113, 113, 0)`
-   const liked = `rgba(255, 255, 255, 0.71)`
+   
    
    containerComment.addEventListener("click", ({target})=>{
 
@@ -64,8 +64,45 @@ function checkAndGiveLikeDislike(svg,path, uhliked, liked, haveClassDisLike, hav
 export function likeAndDislikeToVideoFunc(){
     const likeContainer = document.querySelector(".rightSide_emotion")
     likeContainer.onclick = (e)=>{
-        console.log(e.target)
-        console.log(e)
+        e.target.classList.toggle("activated")
+
+        const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
+        const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
+
+        const path = e.target.querySelector("path")
+   
+        if(haveClassLike){
+            const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
+            if(dislikeEl.classList.contains("activated")){
+                dislikeEl.classList.remove("activated")
+                dislikeEl.querySelector("path").style.fill = uhliked
+            }
+            if(path.style.fill === uhliked){
+                path.style.fill = liked 
+                const count = e.target.children[1].textContent
+                e.target.children[1].textContent = +count + 1
+            }else{
+                path.style.fill = uhliked 
+                const count = e.target.children[1].textContent
+                e.target.children[1].textContent = +count - 1
+            }
+            
+        }else if(haveClassDisLike){
+            const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
+            if(like.classList.contains("activated")){
+                like.classList.remove("activated")
+                like.querySelector("path").style.fill = uhliked
+                like.children[1].textContent = +like.children[1].textContent - 1
+            }
+            if(path.style.fill === uhliked){
+                path.style.fill = liked 
+               
+            }else{
+                path.style.fill = uhliked 
+            }
+        }
+
+      
     }
 }
 export function listnerToInput(){
@@ -100,3 +137,4 @@ export function buttonLoadMoreFnc(dateRequests, state, countSubs){
         }
     }
 }
+

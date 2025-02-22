@@ -10,24 +10,17 @@ import { MarkingPlayerAny } from "./Marking/MarkingPlayerVideo.js"
 import { container as main } from "./LoadVideo.js"
 import { dateRequest } from "./LoadVideo.js"
 import { dateProfileVideo } from "./changeData.js"
-import { likeAndDislikeToVideoFunc } from "./Listners.js"
 import { listnerToInput } from "./Listners.js"
-import { fromLikeToShortLike } from "./ViewToViewLikeToLike.js"
 import "./changeHistoryPage.js"
 import { buttonLoadMoreFnc } from "./Listners.js"
 import { state } from "./changeData.js"
-import { markingShowMore } from "./Marking/Marking.js"
-import { MarkingCommentItemAny } from "./Marking/MarkingPlayerVideo.js"
 import { takeComment } from "./AllApiRequest.js"
-import { MarkingCommentItem } from "./Marking/MarkingPlayerVideo.js"
 import { addMarkingComent } from "./HelpsFunction.js"
 import { shortLength } from "./HelpsFunction.js"
-
 import { lisnerToLike } from "./Listners.js"
-
 import { LoadMoreComments } from "./infinityScrollInProfile.js"
-
 import { ImgAndSubscribeChannel } from "./AllApiRequest.js"
+import { likeAndDislikeToVideoFunc } from "./Listners.js"
 main.addEventListener("click", async (e) => {
     let countClick = 0
     main.classList.remove("grid")
@@ -90,11 +83,10 @@ main.addEventListener("click", async (e) => {
         addMarkingComent(response)
         listnerToInput()
         lisnerToLike()
+        likeAndDislikeToVideoFunc()
 
         LoadMoreComments(id)
     }
-    
-    
     
 })
 
