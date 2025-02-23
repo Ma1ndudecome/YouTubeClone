@@ -203,8 +203,8 @@
     
 }
 .AllComment_Container_item_img img{
-    width: 100%;
     border-radius: 50%;
+    width: 45px;
 }
 .AllComment_Container_item_info{
     font-family: "Roboto", "Arial", sans-serif;

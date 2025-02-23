@@ -5,8 +5,8 @@ SingButton.onclick = (e)=>{
     e.preventDefault()
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.force-ssl&redirect_uri=${redirectUri}&response_type=code&client_id=${cliendId}&access_type=offline`;
 }
-const uhliked = `rgba(117, 113, 113, 0)`
-const liked = `rgba(255, 255, 255, 0.71)`
+export const uhliked = `rgba(117, 113, 113, 0)`
+export const liked = `rgba(255, 255, 255, 0.71)`
 export function lisnerToLike(){
    const containerComment =  document.querySelector(".AllComment_Container")
    
@@ -73,38 +73,52 @@ export function likeAndDislikeToVideoFunc(){
    
         if(haveClassLike){
             const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
-            if(dislikeEl.classList.contains("activated")){
-                dislikeEl.classList.remove("activated")
-                dislikeEl.querySelector("path").style.fill = uhliked
-            }
-            if(path.style.fill === uhliked){
-                path.style.fill = liked 
-                const count = e.target.children[1].textContent
-                e.target.children[1].textContent = +count + 1
-            }else{
-                path.style.fill = uhliked 
-                const count = e.target.children[1].textContent
-                e.target.children[1].textContent = +count - 1
-            }
-            
+
+            checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
+            HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true)
         }else if(haveClassDisLike){
             const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
-            if(like.classList.contains("activated")){
-                like.classList.remove("activated")
-                like.querySelector("path").style.fill = uhliked
-                like.children[1].textContent = +like.children[1].textContent - 1
-            }
-            if(path.style.fill === uhliked){
-                path.style.fill = liked 
-               
-            }else{
-                path.style.fill = uhliked 
-            }
+
+            checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
+            HaveLikeOrNo(path.style.fill === uhliked, path, e.target)
         }
     }
 }
-
-
+function checkAndGiveClassActivated(situation, item, here=false){
+    if(situation){
+        item.classList.remove("activated")
+        item.querySelector("path").style.fill = uhliked
+        if(here){
+            if(+item.children[1].textContent === NaN){
+                return
+            }
+            item.children[1].textContent = +item.children[1].textContent - 1
+        }
+    }
+}
+function HaveLikeOrNo(situation, path, target, here=false ){
+    if(situation){
+        path.style.fill = liked
+        if(here){
+            if(String(+target.children[1].textContent) === 'NaN'){
+                console.log('stop 107')
+                return
+            }
+            const count = target.children[1].textContent
+            target.children[1].textContent = +count + 1
+        } 
+    }else{
+        path.style.fill = uhliked 
+        if(here){
+            if(String(+target.children[1].textContent) === 'NaN'){
+                console.log('stop 120')
+                return
+            }
+            const count = target.children[1].textContent
+            target.children[1].textContent = +count - 1
+        }
+    }
+}
 export function listnerToInput(){
     const inputCont= document.querySelector(".Comment_input_block_tag input")
     

@@ -11,17 +11,30 @@ export async function takeCountCommentUnderVideo(videoId){
 }
 
 export  async function  takeComment(videoId) {
-
-    const allComment = await axios.get("https://www.googleapis.com/youtube/v3/commentThreads", {
-        
-        params: {
-            part: "snippet",
-            videoId: videoId,
-            maxResults:1,
-            pageToken:state.PageTokenComment,
-            key:APIKEY
-    }})
-    return allComment.data
+    if(state.acessToken){
+        const allComment = await axios.get("https://www.googleapis.com/youtube/v3/commentThreads", {
+            headers: { 'Authorization': `Bearer ${state.acessToken}` },
+            params: {
+                part: "snippet",
+                videoId: videoId,
+                maxResults:20,
+                pageToken:state.PageTokenComment,
+                
+        }})
+        return allComment.data
+    }else{
+        const allComment = await axios.get("https://www.googleapis.com/youtube/v3/commentThreads", {
+            params: {
+                part: "snippet",
+                videoId: videoId,
+                maxResults:5,
+                pageToken:state.PageTokenComment,
+                key:APIKEY
+                
+        }})
+        return allComment.data
+    }
+   
 }
 async function takeInfoChannel(nameChannel){
     const name = nameChannel.trim().replaceAll(' ', '+')
@@ -33,7 +46,7 @@ async function takeInfoChannel(nameChannel){
         params:{
             part:'statistics',
             id:idChannel.data.items[0].id.channelId,
-            key:'AIzaSyAbh1UekN-CQ_R7df6I7NPCvVVy-WV_Q3Y'
+            key:APIKEY
         }
     })
     console.log(moreInfoChannel)
