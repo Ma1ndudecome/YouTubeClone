@@ -29,8 +29,6 @@ main.addEventListener("click", async (e) => {
         if(e.target.classList.contains("Main_container_video_title_info_name")){
            const NameChannel = e.target.textContent
             isVideo = true
-            arrDataVideo.push(dateRequests[0])
-            localStorage.setItem("history",JSON.stringify(arrDataVideo))
         
         }else if(e.target.classList.contains("VideoLogoChannel")){
             console.log('coming to Channel')
@@ -38,6 +36,8 @@ main.addEventListener("click", async (e) => {
         }else{
             const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
             const dateRequests = dateRequest.filter(el=>el.id === id)
+            arrDataVideo.push(dateRequests[0])
+            localStorage.setItem("history",JSON.stringify(arrDataVideo))
 
             dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
             const nameChannel = e.target.closest(".Main_container_video").querySelector(".Main_container_video_title_info_name").textContent
