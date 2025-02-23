@@ -1,3 +1,4 @@
+import { buttonLoadMoreFnc } from "./Listners.js";
 import { container } from "./LoadVideo.js";
 const historyBtn = document.querySelector(".history")
 import { markinHistory, markinHistoryVideo } from "./Marking/markingHistory.js";
@@ -37,6 +38,17 @@ historyBtn.onclick = (event) => {
     const conteinerHistoryVideo = document.querySelector(".main-history-container")
     console.log(conteinerHistoryVideo)
     loadData(conteinerHistoryVideo)
+    const main = document.querySelector(".Main")
+
+   
+    main.addEventListener("click", (event) => {
+        if(!event.target.classList === "delete-video"){
+            return
+        }
+        const delVideo = event.target.parentElement.parentElement.parentElement.parentElement
+        delVideo.remove()
+    })
+
 
 }
 
