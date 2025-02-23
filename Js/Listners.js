@@ -89,6 +89,9 @@ function checkAndGiveClassActivated(situation, item, here=false){
         item.classList.remove("activated")
         item.querySelector("path").style.fill = uhliked
         if(here){
+            if(+item.children[1].textContent === NaN){
+                return
+            }
             item.children[1].textContent = +item.children[1].textContent - 1
         }
     }
@@ -97,12 +100,20 @@ function HaveLikeOrNo(situation, path, target, here=false ){
     if(situation){
         path.style.fill = liked
         if(here){
+            if(String(+target.children[1].textContent) === 'NaN'){
+                console.log('stop 107')
+                return
+            }
             const count = target.children[1].textContent
             target.children[1].textContent = +count + 1
         } 
     }else{
         path.style.fill = uhliked 
         if(here){
+            if(String(+target.children[1].textContent) === 'NaN'){
+                console.log('stop 120')
+                return
+            }
             const count = target.children[1].textContent
             target.children[1].textContent = +count - 1
         }

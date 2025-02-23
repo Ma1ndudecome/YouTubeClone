@@ -19,7 +19,6 @@ export function addMarkingComent(data){
     state.PageTokenComment = data.nextPageToken
     document.querySelectorAll(".AllComment_Container_item_statistic").forEach(el=>{
       const rating  = el.getAttribute("viewerrating")
-      console.log(rating)
       if(rating === 'like'){
         el.querySelector(".AllComment_Container_item_statistic_like_svg").querySelector("path").style.fill = liked
       }else if(rating === "dislike"){
