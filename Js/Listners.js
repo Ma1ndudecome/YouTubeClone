@@ -73,38 +73,41 @@ export function likeAndDislikeToVideoFunc(){
    
         if(haveClassLike){
             const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
-            if(dislikeEl.classList.contains("activated")){
-                dislikeEl.classList.remove("activated")
-                dislikeEl.querySelector("path").style.fill = uhliked
-            }
-            if(path.style.fill === uhliked){
-                path.style.fill = liked 
-                const count = e.target.children[1].textContent
-                e.target.children[1].textContent = +count + 1
-            }else{
-                path.style.fill = uhliked 
-                const count = e.target.children[1].textContent
-                e.target.children[1].textContent = +count - 1
-            }
-            
+
+            checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
+            HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true)
         }else if(haveClassDisLike){
             const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
-            if(like.classList.contains("activated")){
-                like.classList.remove("activated")
-                like.querySelector("path").style.fill = uhliked
-                like.children[1].textContent = +like.children[1].textContent - 1
-            }
-            if(path.style.fill === uhliked){
-                path.style.fill = liked 
-               
-            }else{
-                path.style.fill = uhliked 
-            }
+
+            checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
+            HaveLikeOrNo(path.style.fill === uhliked, path, e.target)
         }
     }
 }
-
-
+function checkAndGiveClassActivated(situation, item, here=false){
+    if(situation){
+        item.classList.remove("activated")
+        item.querySelector("path").style.fill = uhliked
+        if(here){
+            item.children[1].textContent = +item.children[1].textContent - 1
+        }
+    }
+}
+function HaveLikeOrNo(situation, path, target, here=false ){
+    if(situation){
+        path.style.fill = liked
+        if(here){
+            const count = target.children[1].textContent
+            target.children[1].textContent = +count + 1
+        } 
+    }else{
+        path.style.fill = uhliked 
+        if(here){
+            const count = target.children[1].textContent
+            target.children[1].textContent = +count - 1
+        }
+    }
+}
 export function listnerToInput(){
     const inputCont= document.querySelector(".Comment_input_block_tag input")
     
