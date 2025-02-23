@@ -54,10 +54,11 @@ main.addEventListener("click", async (e) => {
             buttonLoadMoreFnc(dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel)
 
             const response = await takeComment(id)
-     
+            
             addMarkingComent(response)
             listnerToInput()
             lisnerToLike()
+            likeAndDislikeToVideoFunc()
         
             LoadMoreComments(id)
             
@@ -83,6 +84,7 @@ main.addEventListener("click", async (e) => {
         buttonLoadMoreFnc(dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount)
 
         const response = await takeComment(id)
+        console.log(response)
         addMarkingComent(response)
         listnerToInput()
         lisnerToLike()
