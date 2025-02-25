@@ -40,13 +40,18 @@ historyBtn.onclick = (event) => {
     loadData(conteinerHistoryVideo)
     const main = document.querySelector(".Main")
 
-   
+
     main.addEventListener("click", (event) => {
-        if(!event.target.classList === "delete-video"){
+        if (!event.target.classList === "delete-video") {
             return
         }
         const delVideo = event.target.parentElement.parentElement.parentElement.parentElement
         delVideo.remove()
+        const idForDeleteVideo = event.target.parentElement.parentElement.parentElement.parentElement.attributes[0].nodeValue
+        console.log(idForDeleteVideo)
+        arrDataVideo = arrDataVideo.filter((el) => el.id !== idForDeleteVideo)
+        localStorage.setItem("history",arrDataVideo)
+        console.log(arrDataVideo)
     })
 
 
