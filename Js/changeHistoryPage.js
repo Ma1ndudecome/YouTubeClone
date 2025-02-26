@@ -9,6 +9,7 @@ export let arrDataVideo = []
 
 
 if (localStorage.getItem("history")) {
+    console.log(localStorage.getItem("history"))
     arrDataVideo = JSON.parse((localStorage.getItem("history")))
 }
 
@@ -36,15 +37,14 @@ historyBtn.onclick = (event) => {
 
     const clearHistoryBtn = container.querySelector(".clear-history")
     clearHistoryBtn.onclick = (event) => {
-        console.log(Error)
         const containVideo = container.querySelector(".main-history-container");
-        console.log(containVideo)
-        if (containVideo) {
-            containVideo.innerHTML = "";
-        }
-        arrDataVideo = [];
-        localStorage.removeItem("history");
-    }
+    //     console.log(containVideo)
+    //     if (containVideo) {
+    //         containVideo.innerHTML = "";
+    //     }
+    //     arrDataVideo = [];                                  ПРОБЛЕМА ТУТА!!!
+    //     localStorage.removeItem("history");
+    // }
 
     const conteinerHistoryVideo = document.querySelector(".main-history-container")
     loadData(conteinerHistoryVideo)

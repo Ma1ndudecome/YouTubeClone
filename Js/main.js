@@ -25,62 +25,64 @@ import { arrDataVideo } from "./changeHistoryPage.js"
 main.addEventListener("click", async (e) => {
     let countClick = 0
     main.classList.remove("grid")
-    if(e.target.closest(".Main_container_video")){
-        if(e.target.classList.contains("Main_container_video_title_info_name")){
-           const NameChannel = e.target.textContent
+    if (e.target.closest(".Main_container_video")) {
+        if (e.target.classList.contains("Main_container_video_title_info_name")) {
+            const NameChannel = e.target.textContent
             isVideo = true
-        
-        }else if(e.target.classList.contains("VideoLogoChannel")){
+
+        } else if (e.target.classList.contains("VideoLogoChannel")) {
             console.log('coming to Channel')
             isVideo = true
-        }else{
+        } else {
             const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
-            const dateRequests = dateRequest.filter(el=>el.id === id)
-            arrDataVideo.push(dateRequests[0])
-            localStorage.setItem("history",JSON.stringify(arrDataVideo))
-
+            const dateRequests = dateRequest.filter(el => el.id === id)
+            if (!arrDataVideo.some(el => el.id === id)) { 
+                arrDataVideo.push(dateRequests[0]); // 
+                localStorage.setItem("history", JSON.stringify(arrDataVideo));
+            }
+            
             dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
             const nameChannel = e.target.closest(".Main_container_video").querySelector(".Main_container_video_title_info_name").textContent
-           
-            const dataChannel =  await ImgAndSubscribeChannel(nameChannel)
 
-           
+            const dataChannel = await ImgAndSubscribeChannel(nameChannel)
+
+
             main.innerHTML = MarkingPlayerAny(id, dateRequests, state, dataChannel)
-           
+
             main.classList.add('block')
             isVideo = true
-            inserEl(document.querySelector(".Main_container_blockInfo_description_link"), "afterbegin",  dateRequests[0].snippet.description)
-             shortLength('.Main_container_blockInfo_description_link', 150)
+            inserEl(document.querySelector(".Main_container_blockInfo_description_link"), "afterbegin", dateRequests[0].snippet.description)
+            shortLength('.Main_container_blockInfo_description_link', 150)
             buttonLoadMoreFnc(dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel)
 
             const response = await takeComment(id)
-            
+
             addMarkingComent(response)
             listnerToInput()
             lisnerToLike()
             likeAndDislikeToVideoFunc()
-        
+
             LoadMoreComments(id)
-            
+
         }
-       
-        
-    }else if(e.target.closest(".video_box")){
-        
+
+
+    } else if (e.target.closest(".video_box")) {
+
         const id = e.target.closest(".video_box").getAttribute("idVideo")
-        const dateRequests = dateProfileVideo.filter(el=>el.id === id)
-    
+        const dateRequests = dateProfileVideo.filter(el => el.id === id)
+
         dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
-        
-       
+
+
         main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
         let countClick = 0
-  
+
         main.classList.add('block')
         isVideo = true
-        inserEl(document.querySelector(".Main_container_blockInfo_description_link"),"afterbegin", dateRequests[0].snippet.description )
+        inserEl(document.querySelector(".Main_container_blockInfo_description_link"), "afterbegin", dateRequests[0].snippet.description)
         shortLength('.Main_container_blockInfo_description_link', 150)
-        
+
         buttonLoadMoreFnc(dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount)
 
         const response = await takeComment(id)
@@ -92,11 +94,11 @@ main.addEventListener("click", async (e) => {
 
         LoadMoreComments(id)
     }
-    
+
 })
 
 
-export function inserEl(el, positon, marking){
+export function inserEl(el, positon, marking) {
     el.insertAdjacentHTML(positon, marking)
 }
 
