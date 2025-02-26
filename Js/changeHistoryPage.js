@@ -7,7 +7,9 @@ import { fromViewToShortView } from "./ViewToViewLikeToLike.js";
 export let arrDataVideo = []
 
 
+
 if (localStorage.getItem("history")) {
+    console.log(localStorage.getItem("history"))
     arrDataVideo = JSON.parse((localStorage.getItem("history")))
 }
 
@@ -20,33 +22,43 @@ function loadData(conteinerVideo) {
                 fromViewToShortView(item.statistics.viewCount),
                 item.snippet.description, item.id))
         })
-
     }
     catch (err) {
         console.error(err);
         console.log("not vide0")
-
     }
 }
 
 historyBtn.onclick = (event) => {
     event.preventDefault()
-    console.log("!!!")
     container.innerHTML = markinHistory()
     container.classList.remove("grid")
     container.style.display = "block"
-    const conteinerHistoryVideo = document.querySelector(".main-history-container")
-    console.log(conteinerHistoryVideo)
-    loadData(conteinerHistoryVideo)
-    const main = document.querySelector(".Main")
 
-   
+    const clearHistoryBtn = container.querySelector(".clear-history")
+    clearHistoryBtn.onclick = (event) => {
+        const containVideo = container.querySelector(".main-history-container");
+    //     console.log(containVideo)
+    //     if (containVideo) {
+    //         containVideo.innerHTML = "";
+    //     }
+    //     arrDataVideo = [];                                  ПРОБЛЕМА ТУТА!!!
+    //     localStorage.removeItem("history");
+    // }
+
+    const conteinerHistoryVideo = document.querySelector(".main-history-container")
+    loadData(conteinerHistoryVideo)
+
+    const main = document.querySelector(".Main")
     main.addEventListener("click", (event) => {
-        if(!event.target.classList === "delete-video"){
+        if (!event.target.classList === "delete-video") {
             return
         }
         const delVideo = event.target.parentElement.parentElement.parentElement.parentElement
         delVideo.remove()
+        const idForDeleteVideo = event.target.parentElement.parentElement.parentElement.parentElement.attributes[0].nodeValue
+        arrDataVideo = arrDataVideo.filter((el) => el.id !== idForDeleteVideo)
+        localStorage.setItem("history", JSON.stringify(arrDataVideo))
     })
 
 
