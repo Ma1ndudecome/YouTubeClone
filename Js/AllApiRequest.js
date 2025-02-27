@@ -1,4 +1,5 @@
 import { state } from "./changeData.js";
+const urlToken = 'https://oauth2.googleapis.com/token';
 export async function takeCountCommentUnderVideo(videoId){
     const comment = await axios.get("https://www.googleapis.com/youtube/v3/videos", {
         params: {
@@ -64,4 +65,32 @@ export function getRatingVideo(videoId){
             id:videoId
         }
     })
+}
+function dataObjectAccess(type, token=''){
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if(type === 'accessToken'){
+        const data = new URLSearchParams({
+            code:code,
+            client_id: cliendId,
+            client_secret: clientSecret,
+            redirect_uri:redirectUri,
+            grant_type:'authorization_code'
+        })
+        return data
+    }else if(type === 'RefreshToken'){
+        const data = new URLSearchParams({
+            client_id: cliendId,
+            client_secret: clientSecret,
+            refresh_token:token[0].refreshToken,
+            grant_type:'refresh_token'
+        })
+        return data
+    }
+}
+
+export function getAccesToken(type, token){
+    const data = dataObjectAccess(type, token)
+    const setting = {headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+    return axios.post(urlToken, data, setting)
 }

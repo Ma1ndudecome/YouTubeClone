@@ -1,15 +1,13 @@
-import { changeProfile } from "./changeData.js";
+import { changeProfile,state } from "./changeData.js";
 import { channelData } from "./loadDataChannel.js";
 import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { container } from "./LoadVideo.js";
-import { state } from "./changeData.js";
 import { marcinSubscriben } from "./Marking/Marking.js";
+import { getAccesToken } from "./AllApiRequest.js";
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
     refreshTokenProfile = JSON.parse(localStorage.getItem("dataRefreshToken"))
 }
-
-
 
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
@@ -20,17 +18,15 @@ let pageTokenSubscribe = '';
 if(code){
     async function requestToTakeToken(code) {
 
-        const data = new URLSearchParams({
-            code:code,
-            client_id: cliendId,
-            client_secret: clientSecret,
-            redirect_uri:redirectUri,
-            grant_type:'authorization_code'
-        })
+        // const data = new URLSearchParams({
+        //     code:code,
+        //     client_id: cliendId,
+        //     client_secret: clientSecret,
+        //     redirect_uri:redirectUri,
+        //     grant_type:'authorization_code'
+        // })
         try{
-            const response = await axios.post(urlToken,data,{
-                headers: {'Content-Type': 'application/x-www-form-urlencoded' }
-            })
+            const response = await getAccesToken('accessToken')
             state.acessToken = response.data.access_token
            
             const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
@@ -56,18 +52,9 @@ if(code){
         }catch(err){
          const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
             
-            const data = new URLSearchParams({
-                client_id:cliendId,
-                client_secret:clientSecret,
-                refresh_token:token[0].refreshToken,
-                grant_type:'refresh_token'
-            })
-            
             try{
                 
-                const response = await axios.post(urlToken, data, {
-                    headers:{'Content-Type': 'application/x-www-form-urlencoded'}
-                })
+                const response = await getAccesToken('RefreshToken', token)
             
                  state.acessToken = response.data.access_token
                 
