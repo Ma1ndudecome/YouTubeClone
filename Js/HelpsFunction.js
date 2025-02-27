@@ -4,6 +4,8 @@ import { state } from "./changeData.js"
 import { inserEl } from "./main.js"
 import { liked, uhliked } from "./Listners.js"
 import { getRatingVideo } from "./AllApiRequest.js"
+import { takeMoreInfoChannelAndVideo } from "./AllApiRequest.js"
+import { markingProfile } from "./Marking/Marking.js"
 
 export function addMarkingComent(data){
 
@@ -63,3 +65,32 @@ export async function  checkAndShowRatingVideo(id){
   }
   
 }
+
+export function saveAcessToken(access_token){
+  state.acessToken = access_token
+}
+export function saveImgAccount(img){
+  state.infoChannel = {
+    img:img
+  }
+}
+export function UserInAccountTrue(InAccount){
+  state.Autorization = InAccount
+}
+
+export async function markProfile(main, nameChannel){
+
+  const dataProfile = await takeMoreInfoChannelAndVideo(nameChannel)
+  const channel = dataProfile.InfoChannel
+  const video = dataProfile.VideoChannel
+  main.classList.add("block")
+  if(!channel.brandingSettings.image.bannerExternalUrl){
+    main.innerHTML = markingProfile('', channel.snippet.thumbnails.high, channel.snippet.customUrl,channel.statistics.subscriberCount, channel.statistics.videoCount, channel.snippet.title )
+  }else{
+    main.innerHTML = markingProfile(channel.brandingSettings.image.bannerExternalUrl, channel.snippet.thumbnails.high.url, channel.snippet.customUrl,channel.statistics.subscriberCount, channel.statistics.videoCount, channel.snippet.title )
+
+  }
+  
+  
+}
+

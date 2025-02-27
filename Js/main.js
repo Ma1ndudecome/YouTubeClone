@@ -11,21 +11,33 @@ import { dateProfileVideo, state } from "./changeData.js"
 import { listnerToInput,buttonLoadMoreFnc, lisnerToLike, likeAndDislikeToVideoFunc} from "./Listners.js"
 import "./changeHistoryPage.js"
 import { takeComment, ImgAndSubscribeChannel} from "./AllApiRequest.js"
-import { addMarkingComent, shortLength, checkAndShowRatingVideo} from "./HelpsFunction.js"
+import { addMarkingComent, shortLength, checkAndShowRatingVideo, markProfile} from "./HelpsFunction.js"
 import { LoadMoreComments } from "./infinityScrollInProfile.js"
 import { arrDataVideo } from "./changeHistoryPage.js"
+import { markingProfile } from "./Marking/Marking.js"
+
+
+
 
 main.addEventListener("click", async (e) => {
+    console.log('marking')
     main.classList.remove("grid")
     if (e.target.closest(".Main_container_video")) {
+        console.log('marking')
         if (e.target.classList.contains("Main_container_video_title_info_name")) {
             const NameChannel = e.target.textContent
+            markProfile(main,NameChannel)
+           
             isVideo = true
 
         } else if (e.target.classList.contains("VideoLogoChannel")) {
-            console.log('coming to Channel')
+            const NameChannel = e.target.parentElement.parentElement.querySelector(".Main_container_video_title_info_name").textContent
+            // takeMoreInfoChannelAndVideo(NameChannel)
+
             isVideo = true
         } else {
+            console.log('marking')
+
             const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
             const dateRequests = dateRequest.filter(el => el.id === id)
             if (!arrDataVideo.some(el => el.id === id)) { 
@@ -41,6 +53,7 @@ main.addEventListener("click", async (e) => {
 
             main.innerHTML = MarkingPlayerAny(id, dateRequests, state, dataChannel)
 
+            
             main.classList.add('block')
             isVideo = true
             inserEl(document.querySelector(".Main_container_blockInfo_description_link"), "afterbegin", dateRequests[0].snippet.description)

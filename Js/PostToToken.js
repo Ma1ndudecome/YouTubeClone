@@ -1,15 +1,12 @@
-import { changeProfile } from "./changeData.js";
+import { changeProfile,state } from "./changeData.js";
 import { channelData } from "./loadDataChannel.js";
-import { makeMarkingVideo } from "./Marking/markingVideo.js";
-import { container } from "./LoadVideo.js";
-import { state } from "./changeData.js";
 import { marcinSubscriben } from "./Marking/Marking.js";
+import { getAccesToken, getDataAccount, TakeSubscriber } from "./AllApiRequest.js";
+import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "./HelpsFunction.js";
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
     refreshTokenProfile = JSON.parse(localStorage.getItem("dataRefreshToken"))
 }
-
-
 
 const urlToken = 'https://oauth2.googleapis.com/token';
 const urlParams = new URLSearchParams(window.location.search);
@@ -18,24 +15,13 @@ let pagetoken = ''
 
 let pageTokenSubscribe = '';
 if(code){
-    async function requestToTakeToken(code) {
-
-        const data = new URLSearchParams({
-            code:code,
-            client_id: cliendId,
-            client_secret: clientSecret,
-            redirect_uri:redirectUri,
-            grant_type:'authorization_code'
-        })
+    async function requestToTakeToken() {
         try{
-            const response = await axios.post(urlToken,data,{
-                headers: {'Content-Type': 'application/x-www-form-urlencoded' }
-            })
-            state.acessToken = response.data.access_token
+            const response = await getAccesToken('accessToken')
+            saveAcessToken(response.data.access_token) 
            
-            const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
-                headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
-            })
+            const dataAccount = await getDataAccount(response.data.access_token)
+
             
             if(response.data.refresh_token){
                 
@@ -50,36 +36,28 @@ if(code){
             changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
             channelData(response.data.access_token) 
             loadSubsiber(response.data.access_token)
-            state.infoChannel.img = dataAccount.data.items[0].snippet.thumbnails.default.url
-            state.Autorization = true
+
+            saveImgAccount(dataAccount.data.items[0].snippet.thumbnails.default.url)
+            UserInAccountTrue(true)
             return response
         }catch(err){
          const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
-            
-            const data = new URLSearchParams({
-                client_id:cliendId,
-                client_secret:clientSecret,
-                refresh_token:token[0].refreshToken,
-                grant_type:'refresh_token'
-            })
-            
             try{
+                const response = await getAccesToken('RefreshToken', token)
                 
-                const response = await axios.post(urlToken, data, {
-                    headers:{'Content-Type': 'application/x-www-form-urlencoded'}
-                })
-            
-                 state.acessToken = response.data.access_token
+                saveAcessToken(response.data.access_token) 
+
                 
-                const dataAccount = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
-                    headers:{ 'Authorization':`Bearer ${response.data.access_token}`}
-                })
+                
+                const dataAccount = await getDataAccount(response.data.access_token)
+                
+                
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
-                 loadSubsiber(response.data.access_token)
-                state.infoChannel = {
-                    img:dataAccount.data.items[0].snippet.thumbnails.default.url
-                }
-                state.Autorization = true
+                loadSubsiber(response.data.access_token)
+
+                saveImgAccount(dataAccount.data.items[0].snippet.thumbnails.default.url)
+                UserInAccountTrue(true)
+               
 
             }catch(err){
                 console.log(err.response ? err.response.data : err);
@@ -87,13 +65,7 @@ if(code){
         }
     }
 
-    async function callFunction(){
-        const response = await requestToTakeToken(code)
-        if(response){
-            await requestToTakeData(response)
-        }
-    }
-    callFunction()
+    requestToTakeToken()
 }
  const buttonMoreSubscriber = document.querySelector(".aside_SignIn_buttonMore")
 async function loadSubsiber(access_token = ""){
@@ -108,13 +80,9 @@ async function loadSubsiber(access_token = ""){
     
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
     try{
-        const dataSubsribe = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&access_token=${access_token}&maxResults=7&pageToken=${pageTokenSubscribe}`)
-        if(dataSubsribe.data.nextPageToken){
-            pageTokenSubscribe = dataSubsribe.data.nextPageToken 
-        }else{
-            buttonMoreSubscriber.remove()
-        }
-        
+        const dataSubsribe = await TakeSubscriber(access_token, pageTokenSubscribe)
+        dataSubsribe.data.nextPageToken ?  pageTokenSubscribe = dataSubsribe.data.nextPageToken : buttonMoreSubscriber.remove()
+  
         dataSubsribe.data.items.forEach(({snippet})=>{
             subscriberContainer.insertAdjacentHTML("beforeend",marcinSubscriben(snippet.thumbnails.default.url,snippet.title))
         })
