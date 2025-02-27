@@ -21,7 +21,8 @@ export const state = {//Тут храняться переменные кото�
   isLastShorts: false,//Последнее ли видео
   prevMarking: '',//Переменная для сохранения при перходе предыдущей разметки
   infoChannel: {img: 'https://cdn-icons-png.flaticon.com/512/6522/6522516.png'},//Сохранить количество подписчиков и url профиля
-  PageTokenComment: ''
+  PageTokenComment: '',
+  Autorization:false
 };
 
 
@@ -112,6 +113,7 @@ async function openProfile(target, accessToken) {
     location.href = 'http://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.force-ssl&redirect_uri=http%3A%2F%2Flocalhost%3A5501&response_type=code&client_id=729574226005-s73fnabnui73ga2vtfa52u87o3qag7f8.apps.googleusercontent.com&access_type=offline&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow'
   } else if (click === 'Sing out' || clickpast === 'Sing out') {
     location.href = redirectUri
+    state.Autorization = false
   }
 
 

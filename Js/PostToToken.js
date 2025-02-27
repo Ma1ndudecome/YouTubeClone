@@ -51,10 +51,11 @@ if(code){
             channelData(response.data.access_token) 
             loadSubsiber(response.data.access_token)
             state.infoChannel.img = dataAccount.data.items[0].snippet.thumbnails.default.url
+            state.Autorization = true
             return response
         }catch(err){
          const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
-            console.log('13123123')
+            
             const data = new URLSearchParams({
                 client_id:cliendId,
                 client_secret:clientSecret,
@@ -78,37 +79,14 @@ if(code){
                 state.infoChannel = {
                     img:dataAccount.data.items[0].snippet.thumbnails.default.url
                 }
+                state.Autorization = true
 
             }catch(err){
                 console.log(err.response ? err.response.data : err);
             }
         }
     }
-    async function requestToTakeData(response){
-        try{
-            const data = await axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true',{
-                headers:{'Authorization': `Bearer ${response.data.access_token}`}
-            })
-            const Recomendation = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
-                params: {
-                    part: 'snippet',
-                    myRating: 'like', 
-                    maxResults: 10
-                },
-                headers: { 'Authorization': `Bearer ${response.data.access_token}` }}
-            )
-           
-            Recomendation.data.items.forEach(el=>{
-                
-                // container.insertAdjacentHTML('beforeend', makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle ))  
-            })
-          
 
-            changeProfile(data.data.items[0].snippet.thumbnails.default.url, data.data.items[0].snippet.title, data.data.items[0].snippet.customUrl, response.data.access_token)
-        }catch(err){
-            console.log(err)
-        }
-    }
     async function callFunction(){
         const response = await requestToTakeToken(code)
         if(response){
