@@ -1,5 +1,6 @@
 import {moreBtn} from './HelpsFunction.js'
 import { shortLength } from './HelpsFunction.js'
+import { checkAndShowRatingVideo } from './HelpsFunction.js'
 const SingButton = document.querySelector(".SignIn_element")
 SingButton.onclick = (e)=>{
     e.preventDefault()
@@ -70,7 +71,7 @@ export function likeAndDislikeToVideoFunc(){
         const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
 
         const path = e.target.querySelector("path")
-   
+        
         if(haveClassLike){
             const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
 

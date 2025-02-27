@@ -56,3 +56,12 @@ export async function ImgAndSubscribeChannel(nameChannel){
     const response = await takeInfoChannel(nameChannel)
     return response
 }
+
+export function getRatingVideo(videoId){
+    return axios.get(`https://www.googleapis.com/youtube/v3/videos/getRating`, {
+        headers: { 'Authorization': `Bearer ${state.acessToken}` },
+        params:{
+            id:videoId
+        }
+    })
+}
