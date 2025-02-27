@@ -53,6 +53,15 @@ async function takeInfoChannel(nameChannel){
     console.log(moreInfoChannel)
     return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount}
 }
+export async function takeMoreInfoChannelAndVideo(nameChannel) {
+    const name = nameChannel.replaceAll(' ', '+')
+    console.log(name)
+    const idChannel = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${name}&key=${APIKEY}`)
+    const moreInfoChannel = await axios.get(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${idChannel.data.items[0].id.channelId}&key=${APIKEY}`)
+    const detailInformationVideo =  await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${idChannel.data.items[0].id.channelId}&maxResults=50&order=date&type=video&key=${APIKEY}`)
+    return {InfoChannel:moreInfoChannel.data.items[0], VideoChannel:detailInformationVideo.data}
+}
+
 export async function ImgAndSubscribeChannel(nameChannel){
     const response = await takeInfoChannel(nameChannel)
     return response

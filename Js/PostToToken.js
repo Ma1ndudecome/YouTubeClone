@@ -1,7 +1,5 @@
 import { changeProfile,state } from "./changeData.js";
 import { channelData } from "./loadDataChannel.js";
-import { makeMarkingVideo } from "./Marking/markingVideo.js";
-import { container } from "./LoadVideo.js";
 import { marcinSubscriben } from "./Marking/Marking.js";
 import { getAccesToken, getDataAccount, TakeSubscriber } from "./AllApiRequest.js";
 import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "./HelpsFunction.js";
@@ -17,7 +15,7 @@ let pagetoken = ''
 
 let pageTokenSubscribe = '';
 if(code){
-    async function requestToTakeToken(code) {
+    async function requestToTakeToken() {
         try{
             const response = await getAccesToken('accessToken')
             saveAcessToken(response.data.access_token) 
@@ -44,20 +42,22 @@ if(code){
             return response
         }catch(err){
          const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
-            
             try{
                 const response = await getAccesToken('RefreshToken', token)
-            
+                
                 saveAcessToken(response.data.access_token) 
 
                 
+                
                 const dataAccount = await getDataAccount(response.data.access_token)
-
+                
+                
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
                 loadSubsiber(response.data.access_token)
 
                 saveImgAccount(dataAccount.data.items[0].snippet.thumbnails.default.url)
                 UserInAccountTrue(true)
+               
 
             }catch(err){
                 console.log(err.response ? err.response.data : err);
@@ -65,13 +65,7 @@ if(code){
         }
     }
 
-    async function callFunction(){
-        const response = await requestToTakeToken(code)
-        if(response){
-            await requestToTakeData(response)
-        }
-    }
-    callFunction()
+    requestToTakeToken()
 }
  const buttonMoreSubscriber = document.querySelector(".aside_SignIn_buttonMore")
 async function loadSubsiber(access_token = ""){
