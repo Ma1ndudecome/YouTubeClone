@@ -63,3 +63,15 @@ export async function  checkAndShowRatingVideo(id){
   }
   
 }
+
+export function saveAcessToken(access_token){
+  state.acessToken = access_token
+}
+export function saveImgAccount(img){
+  state.infoChannel = {
+    img:img
+  }
+}
+export function UserInAccountTrue(InAccount){
+  state.Autorization = InAccount
+}

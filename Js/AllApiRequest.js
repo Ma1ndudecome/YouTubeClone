@@ -94,3 +94,8 @@ export function getAccesToken(type, token){
     const setting = {headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
     return axios.post(urlToken, data, setting)
 }
+export function getDataAccount(accessToken){
+    return axios.get('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true', {
+        headers:{ 'Authorization':`Bearer ${accessToken}`}
+    })
+}
