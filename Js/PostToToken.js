@@ -3,7 +3,7 @@ import { channelData } from "./loadDataChannel.js";
 import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { container } from "./LoadVideo.js";
 import { marcinSubscriben } from "./Marking/Marking.js";
-import { getAccesToken, getDataAccount } from "./AllApiRequest.js";
+import { getAccesToken, getDataAccount, TakeSubscriber } from "./AllApiRequest.js";
 import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "./HelpsFunction.js";
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
@@ -86,13 +86,9 @@ async function loadSubsiber(access_token = ""){
     
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
     try{
-        const dataSubsribe = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&access_token=${access_token}&maxResults=7&pageToken=${pageTokenSubscribe}`)
-        if(dataSubsribe.data.nextPageToken){
-            pageTokenSubscribe = dataSubsribe.data.nextPageToken 
-        }else{
-            buttonMoreSubscriber.remove()
-        }
-        
+        const dataSubsribe = await TakeSubscriber(access_token, pageTokenSubscribe)
+        dataSubsribe.data.nextPageToken ?  pageTokenSubscribe = dataSubsribe.data.nextPageToken : buttonMoreSubscriber.remove()
+  
         dataSubsribe.data.items.forEach(({snippet})=>{
             subscriberContainer.insertAdjacentHTML("beforeend",marcinSubscriben(snippet.thumbnails.default.url,snippet.title))
         })
