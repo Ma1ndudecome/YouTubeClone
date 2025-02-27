@@ -46,19 +46,20 @@ export function moreBtn(dateRequests, ProfileData, countSubs){
     inserEl(descriptionCont,"afterend",markingShowMore(dateRequests, ProfileData, countSubs))
 }
 export async function  checkAndShowRatingVideo(id){
-  const rating = await getRatingVideo(id)
-
-console.log(rating.data.items[0].rating)
-  if(rating.data.items[0].rating === 'like'){
-    const containerRating = document.querySelector(".rightSide_emotion_like")
-    containerRating.classList.add('activated')
-    const path = containerRating.querySelector("path")
-    path.style.fill = liked
-  }else if(rating.data.items[0].rating === 'dislike'){
-    const containerRating = document.querySelector(".rightSide_emotion_dislike")
-    containerRating.classList.add('activated')
-    const path = containerRating.querySelector("path")
-    path.style.fill = liked
-
+  if(state.acessToken){
+    const rating = await getRatingVideo(id)
+      if(rating.data.items[0].rating === 'like'){
+        const containerRating = document.querySelector(".rightSide_emotion_like")
+        containerRating.classList.add('activated')
+        const path = containerRating.querySelector("path")
+        path.style.fill = liked
+      }else if(rating.data.items[0].rating === 'dislike'){
+        const containerRating = document.querySelector(".rightSide_emotion_dislike")
+        containerRating.classList.add('activated')
+        const path = containerRating.querySelector("path")
+        path.style.fill = liked
+    
+      }
   }
+  
 }

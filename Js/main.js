@@ -53,6 +53,8 @@ main.addEventListener("click", async (e) => {
             listnerToInput()
             lisnerToLike()
             likeAndDislikeToVideoFunc(id)
+            checkAndShowRatingVideo(id)
+
 
             LoadMoreComments(id)
 
@@ -68,8 +70,6 @@ main.addEventListener("click", async (e) => {
 
 
         main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
-        const rating = await checkAndShowRatingVideo(id)
-        console.log(rating)
         main.classList.add('block')
         isVideo = true
         inserEl(document.querySelector(".Main_container_blockInfo_description_link"), "afterbegin", dateRequests[0].snippet.description)
