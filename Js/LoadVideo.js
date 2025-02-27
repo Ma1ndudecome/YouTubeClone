@@ -9,7 +9,7 @@ export const container = document.querySelector(".Main_container")
 
 async function LoadVideo() {
     try{
-        const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&eventType=none&key=${APIKEY}&pageToken=${pageToken}&videoDuration=long`);
+        const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&type=video&eventType=none&key=${APIKEY}&pageToken=${pageToken}&videoDuration=long`);
         pageToken = response.data.nextPageToken || '';
        
         const IDVideo = response.data.items.map(el => el.id.videoId).join(',')
@@ -17,6 +17,7 @@ async function LoadVideo() {
         const MoreStatisticVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`)
 
         await MoreStatisticVideo.data.items.forEach(el => {
+            console.log(el)
             if (el.snippet.liveBroadcastContent === 'none') {
                 const date = new Date(el.snippet.publishedAt)
                 const result = dateFns.formatDistanceToNow(date, { addSuffix: true })

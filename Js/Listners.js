@@ -1,5 +1,7 @@
 import {moreBtn} from './HelpsFunction.js'
 import { shortLength } from './HelpsFunction.js'
+import { checkAndShowRatingVideo } from './HelpsFunction.js'
+import { state } from './changeData.js'
 const SingButton = document.querySelector(".SignIn_element")
 SingButton.onclick = (e)=>{
     e.preventDefault()
@@ -12,37 +14,39 @@ export function lisnerToLike(){
    
    
    containerComment.addEventListener("click", ({target})=>{
-
-    const haveClassDisLike = target.classList.contains("AllComment_Container_item_statistic_disLike_svg")
-    const haveClassLike = target.classList.contains("AllComment_Container_item_statistic_like_svg")
-
-    if(haveClassLike || haveClassDisLike){
-    const svg = target.querySelector("path").style.fill
-    const path =  target.querySelector("path")
+    if(state.Autorization){
+        const haveClassDisLike = target.classList.contains("AllComment_Container_item_statistic_disLike_svg")
+        const haveClassLike = target.classList.contains("AllComment_Container_item_statistic_like_svg")
     
-    const countLike = target.parentElement.parentElement.querySelector("span")
-    if(haveClassLike){
-        const parentSvg = target.parentElement.nextElementSibling.children[0]
-        if(svg === liked){
-            countLike.textContent = +countLike.textContent - 1
-
+        if(haveClassLike || haveClassDisLike){
+        const svg = target.querySelector("path").style.fill
+        const path =  target.querySelector("path")
+        
+        const countLike = target.parentElement.parentElement.querySelector("span")
+        if(haveClassLike){
+            const parentSvg = target.parentElement.nextElementSibling.children[0]
+            if(svg === liked){
+                countLike.textContent = +countLike.textContent - 1
+    
+            }
+            if(parentSvg.classList.contains("activated")){
+                parentSvg.querySelector("path").style.fill = uhliked
+            }
+        }else if(haveClassDisLike){
+    
+            const parentSvg = target.parentElement.previousElementSibling.children[0]
+            if(parentSvg.classList.contains("activated")){
+                parentSvg.querySelector("path").style.fill = uhliked
+                countLike.textContent = +countLike.textContent - 1
+                parentSvg.classList.remove("activated")
+            }
         }
-        if(parentSvg.classList.contains("activated")){
-            parentSvg.querySelector("path").style.fill = uhliked
-        }
-    }else if(haveClassDisLike){
-
-        const parentSvg = target.parentElement.previousElementSibling.children[0]
-        if(parentSvg.classList.contains("activated")){
-            parentSvg.querySelector("path").style.fill = uhliked
-            countLike.textContent = +countLike.textContent - 1
-            parentSvg.classList.remove("activated")
+    
+        checkAndGiveLikeDislike(svg, path, uhliked, liked, haveClassLike,haveClassDisLike, countLike, target)
+        
         }
     }
-
-    checkAndGiveLikeDislike(svg, path, uhliked, liked, haveClassLike,haveClassDisLike, countLike, target)
     
-    }
     
 })
 }
@@ -62,36 +66,37 @@ function checkAndGiveLikeDislike(svg,path, uhliked, liked, haveClassDisLike, hav
 }
 
 export function likeAndDislikeToVideoFunc(){
-    const likeContainer = document.querySelector(".rightSide_emotion")
-    likeContainer.onclick = (e)=>{
-        e.target.classList.toggle("activated")
-
-        const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
-        const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
-
-        const path = e.target.querySelector("path")
-   
-        if(haveClassLike){
-            const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
-
-            checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
-            HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true)
-        }else if(haveClassDisLike){
-            const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
-
-            checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
-            HaveLikeOrNo(path.style.fill === uhliked, path, e.target)
+    if(state.Autorization){
+        const likeContainer = document.querySelector(".rightSide_emotion")
+        likeContainer.onclick = (e)=>{
+            e.target.classList.toggle("activated")
+    
+            const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
+            const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
+    
+            const path = e.target.querySelector("path")
+            
+            if(haveClassLike){
+                const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
+    
+                checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
+                HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true)
+            }else if(haveClassDisLike){
+                const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
+    
+                checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
+                HaveLikeOrNo(path.style.fill === uhliked, path, e.target)
+            }
         }
     }
+
 }
 function checkAndGiveClassActivated(situation, item, here=false){
     if(situation){
         item.classList.remove("activated")
         item.querySelector("path").style.fill = uhliked
         if(here){
-            if(+item.children[1].textContent === NaN){
-                return
-            }
+            if(String(+item.children[1].textContent) === "NaN")return
             item.children[1].textContent = +item.children[1].textContent - 1
         }
     }
@@ -100,20 +105,15 @@ function HaveLikeOrNo(situation, path, target, here=false ){
     if(situation){
         path.style.fill = liked
         if(here){
-            if(String(+target.children[1].textContent) === 'NaN'){
-                console.log('stop 107')
-                return
-            }
+            if(String(+target.children[1].textContent) === 'NaN') return
             const count = target.children[1].textContent
             target.children[1].textContent = +count + 1
         } 
     }else{
         path.style.fill = uhliked 
         if(here){
-            if(String(+target.children[1].textContent) === 'NaN'){
-                console.log('stop 120')
-                return
-            }
+            console.log('dislike', String(+target.children[1].textContent) === 'NaN')
+            if(String(+target.children[1].textContent) === 'NaN') return
             const count = target.children[1].textContent
             target.children[1].textContent = +count - 1
         }

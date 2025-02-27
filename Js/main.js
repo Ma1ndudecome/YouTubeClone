@@ -5,25 +5,17 @@ import "./PostToToken.js"
 import "./Listners.js"
 import "./ReturnPushState.js"
 import "./HeaderANDAside.js"
-import { MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
-import { MarkingPlayerAny } from "./Marking/MarkingPlayerVideo.js"
-import { container as main } from "./LoadVideo.js"
-import { dateRequest } from "./LoadVideo.js"
-import { dateProfileVideo } from "./changeData.js"
-import { listnerToInput } from "./Listners.js"
+import { MarkingPlayer, MarkingPlayerAny } from "./Marking/MarkingPlayerVideo.js"
+import { container as main, dateRequest } from "./LoadVideo.js"
+import { dateProfileVideo, state } from "./changeData.js"
+import { listnerToInput,buttonLoadMoreFnc, lisnerToLike, likeAndDislikeToVideoFunc} from "./Listners.js"
 import "./changeHistoryPage.js"
-import { buttonLoadMoreFnc } from "./Listners.js"
-import { state } from "./changeData.js"
-import { takeComment } from "./AllApiRequest.js"
-import { addMarkingComent } from "./HelpsFunction.js"
-import { shortLength } from "./HelpsFunction.js"
-import { lisnerToLike } from "./Listners.js"
+import { takeComment, ImgAndSubscribeChannel} from "./AllApiRequest.js"
+import { addMarkingComent, shortLength, checkAndShowRatingVideo} from "./HelpsFunction.js"
 import { LoadMoreComments } from "./infinityScrollInProfile.js"
-import { ImgAndSubscribeChannel } from "./AllApiRequest.js"
-import { likeAndDislikeToVideoFunc } from "./Listners.js"
 import { arrDataVideo } from "./changeHistoryPage.js"
+
 main.addEventListener("click", async (e) => {
-    let countClick = 0
     main.classList.remove("grid")
     if (e.target.closest(".Main_container_video")) {
         if (e.target.classList.contains("Main_container_video_title_info_name")) {
@@ -60,7 +52,9 @@ main.addEventListener("click", async (e) => {
             addMarkingComent(response)
             listnerToInput()
             lisnerToLike()
-            likeAndDislikeToVideoFunc()
+            likeAndDislikeToVideoFunc(id)
+            checkAndShowRatingVideo(id)
+
 
             LoadMoreComments(id)
 
@@ -76,8 +70,6 @@ main.addEventListener("click", async (e) => {
 
 
         main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
-        let countClick = 0
-
         main.classList.add('block')
         isVideo = true
         inserEl(document.querySelector(".Main_container_blockInfo_description_link"), "afterbegin", dateRequests[0].snippet.description)
@@ -91,6 +83,7 @@ main.addEventListener("click", async (e) => {
         listnerToInput()
         lisnerToLike()
         likeAndDislikeToVideoFunc()
+        checkAndShowRatingVideo(id)
 
         LoadMoreComments(id)
     }

@@ -9,7 +9,7 @@ export let arrDataVideo = []
 
 
 if (localStorage.getItem("history")) {
-    console.log(localStorage.getItem("history"))
+    // console.log(localStorage.getItem("history"))
     arrDataVideo = JSON.parse((localStorage.getItem("history")))
 }
 
@@ -37,14 +37,15 @@ historyBtn.onclick = (event) => {
 
     const clearHistoryBtn = container.querySelector(".clear-history")
     clearHistoryBtn.onclick = (event) => {
+        console.log('213')
         const containVideo = container.querySelector(".main-history-container");
-    //     console.log(containVideo)
-    //     if (containVideo) {
-    //         containVideo.innerHTML = "";
-    //     }
-    //     arrDataVideo = [];                                  ПРОБЛЕМА ТУТА!!!
-    //     localStorage.removeItem("history");
-    // }
+        // console.log(containVideo)
+        // if (containVideo) {
+        //     containVideo.innerHTML = "";
+        // }
+        // arrDataVideo = [];                                
+        // localStorage.removeItem("history");
+    }
 
     const conteinerHistoryVideo = document.querySelector(".main-history-container")
     loadData(conteinerHistoryVideo)
@@ -54,11 +55,11 @@ historyBtn.onclick = (event) => {
         if (!event.target.classList === "delete-video") {
             return
         }
-        const delVideo = event.target.parentElement.parentElement.parentElement.parentElement
-        delVideo.remove()
-        const idForDeleteVideo = event.target.parentElement.parentElement.parentElement.parentElement.attributes[0].nodeValue
-        arrDataVideo = arrDataVideo.filter((el) => el.id !== idForDeleteVideo)
-        localStorage.setItem("history", JSON.stringify(arrDataVideo))
+        // const delVideo = event.target.parentElement.parentElement.parentElement.parentElement
+        // delVideo.remove()
+        // const idForDeleteVideo = event.target.parentElement.parentElement.parentElement.parentElement.attributes[0].nodeValue
+        // arrDataVideo = arrDataVideo.filter((el) => el.id !== idForDeleteVideo)
+        // localStorage.setItem("history", JSON.stringify(arrDataVideo))
     })
 
 

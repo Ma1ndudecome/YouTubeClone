@@ -196,7 +196,7 @@ iframe{
     
 }
 .rightSide_emotion_dislike_svg, .rightSide_emotion_like_svg{
-    width: 24px;
+    width: 30px;
     height: 24px;
     display: inherit;
     pointer-events: none;
