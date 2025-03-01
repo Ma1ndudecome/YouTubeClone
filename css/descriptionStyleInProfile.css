@@ -60,6 +60,7 @@
 .description_channel_img img{
     width: 45px;
     border-radius: 50%;
+    height: 45px;
 }
 .description_channel_container_title{
     font-family: "Roboto", "Arial", sans-serif;
@@ -202,8 +203,8 @@
     
 }
 .AllComment_Container_item_img img{
-    width: 100%;
     border-radius: 50%;
+    width: 45px;
 }
 .AllComment_Container_item_info{
     font-family: "Roboto", "Arial", sans-serif;
