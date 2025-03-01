@@ -161,7 +161,7 @@ export function marcinSubscriben(img_profile,title_profile){
 }
 export function markingGaming(){
     return `
-        <div class="boxtxtGaming ">
+        <div class="boxtxtGaming" style=" display: flex" >
                             <svg width='64' height='64' viewBox='0 0 34 34' xmlns='http://www.w3.org/2000/svg'
                                 xmlns:xlink='http://www.w3.org/1999/xlink'>
                                 <rect width='24' height='24' stroke='none' rx="15" padding="10" fill=' #FF0033'
