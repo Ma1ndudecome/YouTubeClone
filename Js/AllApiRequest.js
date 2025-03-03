@@ -56,3 +56,10 @@ export async function ImgAndSubscribeChannel(nameChannel){
     const response = await takeInfoChannel(nameChannel)
     return response
 }
+
+export async function TakeTrending() {
+    const newsData = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=20&videoDuration=short&chart=mostPopular&maxResults=20&key=${APIKEY}`);
+    const IDVideo = newsData.data.items.map(el => el.id.videoId).join(',')
+    const detailsInf = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`);
+    return detailsInf;
+}

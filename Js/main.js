@@ -1,4 +1,4 @@
-
+import "./Trending.js"
 import "./gaming.js"
 import "./LoadVideo.js"
 import "./PostToToken.js"

@@ -4,7 +4,7 @@ let glass_adaptation = document.getElementById("glass_adaptation")
 let adaptation = document.getElementById("adaptation")
 let img_adaptation = document.getElementById("img_adaptation")
 const burger = document.querySelector(".burger")
-const aside = document.querySelector("aside")
+export const aside = document.querySelector("aside")
 const backdrop = document.querySelector(".backdrop")
 
 burger.addEventListener('click', ()=>{
@@ -52,4 +52,3 @@ img_adaptation.addEventListener("click",() =>{
 // }
 // f1()
 // window.addEventListener("resize",f1)
-
