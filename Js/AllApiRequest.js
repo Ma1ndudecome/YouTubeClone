@@ -65,18 +65,10 @@ export async function takeMoreInfoChannel(nameChannel) {
 export async  function takeMoreVideoAnyProfile(id){
     const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${id}&maxResults=50&pageToken=${state.pageTokenProfileVideoAny}&order=date&type=video&key=${APIKEY}`);
     const videoIds = detailInformationVideo.data.items.map(el => el.id.videoId).join(',');
-    const takeDuration = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoIds}&key=${APIKEY}`);
-    
-    const long = takeDuration.data.items.filter(el => {
-        const checkDuration = String(formatDuration(el.contentDetails.duration));
-        return +checkDuration[0] !== 0 && detailInformationVideo.data.items.some(video => video.id.videoId === el.id);
-    });
-    const short = takeDuration.data.items.filter(el => {
-        const checkDuration = String(formatDuration(el.contentDetails.duration));
-        return +checkDuration[0] === 0 && detailInformationVideo.data.items.some(video => video.id.videoId === el.id);
-    });
-    console.log(long);
-    console.log(short)
+    const takeDuration = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet,statistics&id=${videoIds}&key=${APIKEY}`);
+
+    const long = takeDuration.data.items.filter(el=>+String(formatDuration(el.contentDetails.duration))[0] !== 0)
+    const short = takeDuration.data.items.filter(el=>+String(formatDuration(el.contentDetails.duration))[0] === 0)
 
     return {longVideo:long, shortVideo:short}
 }

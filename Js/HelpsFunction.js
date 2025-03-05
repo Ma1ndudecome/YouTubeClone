@@ -8,6 +8,7 @@ import { markingProfile } from "./Marking/Marking.js"
 import { takeMoreVideoAnyProfile } from "./AllApiRequest.js"
 import { slideToButton } from "./changeData.js"
 import { forYouVideoMarking, shortVideoMarking } from "./Marking/profileVideoMarking.js"
+import { formatDuration } from "./FromISOToTime.js"
 
 export function addMarkingComent(data){
 
@@ -99,7 +100,12 @@ export async function markProfile(main, nameChannel){
       forYouVideoContainer.insertAdjacentHTML('beforeend', forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
     })
   }
-  const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
+  if(video.shortVideo.length !==0){
+    const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
+    video.shortVideo.forEach(el=>{
+      ShortsVideoContainer.insertAdjacentHTML('beforeend', forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+    })
+  }
 
 
 
