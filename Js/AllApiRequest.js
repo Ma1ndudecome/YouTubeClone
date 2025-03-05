@@ -1,4 +1,6 @@
 import { state } from "./changeData.js";
+import { formatDuration } from "./FromISOToTime.js";
+
 const urlToken = 'https://oauth2.googleapis.com/token';
 export async function takeCountCommentUnderVideo(videoId){
     const comment = await axios.get("https://www.googleapis.com/youtube/v3/videos", {
@@ -53,15 +55,23 @@ async function takeInfoChannel(nameChannel){
     console.log(moreInfoChannel)
     return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount}
 }
-export async function takeMoreInfoChannelAndVideo(nameChannel) {
+export async function takeMoreInfoChannel(nameChannel) {
     const name = nameChannel.replaceAll(' ', '+')
     console.log(name)
     const idChannel = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${name}&key=${APIKEY}`)
     const moreInfoChannel = await axios.get(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${idChannel.data.items[0].id.channelId}&key=${APIKEY}`)
-    const detailInformationVideo =  await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${idChannel.data.items[0].id.channelId}&maxResults=50&order=date&type=video&key=${APIKEY}`)
-    return {InfoChannel:moreInfoChannel.data.items[0], VideoChannel:detailInformationVideo.data}
+    return {dataChannel:moreInfoChannel.data.items[0], id:moreInfoChannel.data.items[0].id}
 }
+export async  function takeMoreVideoAnyProfile(id){
+    const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${id}&maxResults=50&pageToken=${state.pageTokenProfileVideoAny}&order=date&type=video&key=${APIKEY}`);
+    const videoIds = detailInformationVideo.data.items.map(el => el.id.videoId).join(',');
+    const takeDuration = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet,statistics&id=${videoIds}&key=${APIKEY}`);
 
+    const long = takeDuration.data.items.filter(el=>+String(formatDuration(el.contentDetails.duration))[0] !== 0)
+    const short = takeDuration.data.items.filter(el=>+String(formatDuration(el.contentDetails.duration))[0] === 0)
+
+    return {longVideo:long, shortVideo:short}
+}
 export async function ImgAndSubscribeChannel(nameChannel){
     const response = await takeInfoChannel(nameChannel)
     return response

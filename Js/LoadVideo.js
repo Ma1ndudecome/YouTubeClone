@@ -1,6 +1,7 @@
 import { makeMarkingVideo } from './Marking/markingVideo.js'
 import { formatDuration } from './FromISOToTime.js'
 import { fromViewToShortView } from './ViewToViewLikeToLike.js'
+import { state } from './changeData.js'
 const triger = document.querySelector(".triger")
 export let dateRequest = []
 let pageToken = ''
@@ -8,8 +9,9 @@ let pageToken = ''
 export const container = document.querySelector(".Main_container")
 
 async function LoadVideo() {
+    state.pageTokenProfileVideoAny = ''
     try{
-        const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&type=video&eventType=none&key=${APIKEY}&pageToken=${pageToken}&videoDuration=long`);
+        const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&eventType=none&key=${APIKEY}&pageToken=${pageToken}&videoDuration=long`);
         pageToken = response.data.nextPageToken || '';
        
         const IDVideo = response.data.items.map(el => el.id.videoId).join(',')

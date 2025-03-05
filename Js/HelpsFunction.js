@@ -3,9 +3,12 @@ import { markingShowMore } from "./Marking/Marking.js"
 import { state } from "./changeData.js"
 import { inserEl } from "./main.js"
 import { liked, uhliked } from "./Listners.js"
-import { getRatingVideo } from "./AllApiRequest.js"
-import { takeMoreInfoChannelAndVideo } from "./AllApiRequest.js"
+import { getRatingVideo, takeMoreInfoChannel } from "./AllApiRequest.js"
 import { markingProfile } from "./Marking/Marking.js"
+import { takeMoreVideoAnyProfile } from "./AllApiRequest.js"
+import { slideToButton } from "./changeData.js"
+import { forYouVideoMarking, shortVideoMarking } from "./Marking/profileVideoMarking.js"
+import { formatDuration } from "./FromISOToTime.js"
 
 export function addMarkingComent(data){
 
@@ -79,17 +82,34 @@ export function UserInAccountTrue(InAccount){
 }
 
 export async function markProfile(main, nameChannel){
-
-  const dataProfile = await takeMoreInfoChannelAndVideo(nameChannel)
-  const channel = dataProfile.InfoChannel
-  const video = dataProfile.VideoChannel
+  const dataChannel = await takeMoreInfoChannel(nameChannel)
+  const channel = dataChannel.dataChannel
+  const video = await takeMoreVideoAnyProfile(dataChannel.id)
+  console.log(video)
   main.classList.add("block")
+
   if(!channel.brandingSettings.image.bannerExternalUrl){
     main.innerHTML = markingProfile('', channel.snippet.thumbnails.high, channel.snippet.customUrl,channel.statistics.subscriberCount, channel.statistics.videoCount, channel.snippet.title )
   }else{
     main.innerHTML = markingProfile(channel.brandingSettings.image.bannerExternalUrl, channel.snippet.thumbnails.high.url, channel.snippet.customUrl,channel.statistics.subscriberCount, channel.statistics.videoCount, channel.snippet.title )
 
   }
+  if(video.longVideo.length !== 0){
+    const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
+    video.longVideo.forEach(el=>{
+      forYouVideoContainer.insertAdjacentHTML('beforeend', forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+    })
+  }
+  if(video.shortVideo.length !==0){
+    const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
+    video.shortVideo.forEach(el=>{
+      ShortsVideoContainer.insertAdjacentHTML('beforeend', shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
+    })
+  }
+
+  slideToButton()
+
+
   
   
 }
