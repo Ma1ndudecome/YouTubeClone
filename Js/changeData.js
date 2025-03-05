@@ -1,8 +1,7 @@
 import { container } from "./LoadVideo.js"
 import { markingProfile } from "./Marking/MarkingIcon.js"
 import { markingProfile as profileMark } from "./Marking/Marking.js"
-import { forYouVideoMarking } from "./Marking/profileVideoMarking.js"
-import { shortVideoMarking } from "./Marking/profileVideoMarking.js"
+import { forYouVideoMarking, shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo } from "./infinityScrollInProfile.js"
 import { checkPageToken } from "./infinityScrollInProfile.js"
@@ -22,7 +21,8 @@ export const state = {//Тут храняться переменные кото�
   prevMarking: '',//Переменная для сохранения при перходе предыдущей разметки
   infoChannel: {img: 'https://cdn-icons-png.flaticon.com/512/6522/6522516.png'},//Сохранить количество подписчиков и url профиля
   PageTokenComment: '',
-  Autorization:false
+  Autorization:false,
+  pageTokenProfileVideoAny:''
 };
 
 
@@ -118,7 +118,7 @@ async function openProfile(target, accessToken) {
 
 
 }
-function slideToButton() {
+export function slideToButton() {
   const containerForYou = document.querySelector(".ForYou_Container_video")
   const containerShorts = document.querySelector(".Shorts_video_container")
 

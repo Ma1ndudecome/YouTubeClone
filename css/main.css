@@ -88,8 +88,11 @@ ol, ul{
 .Main_container_video_title_info{
     font-family: "Roboto", "Arial", sans-serif;
     font-weight: 400;
+    color:var(--forAllTextWithSmallTransperent);
+    opacity: 1;
+}
+.Main_container_video_title_info_name:hover{
     color:var(--bordColor);
-    opacity: 0.5;
 }
 .date{
     position: relative;
