@@ -103,11 +103,11 @@ export async function markProfile(main, nameChannel){
   if(video.shortVideo.length !==0){
     const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
     video.shortVideo.forEach(el=>{
-      ShortsVideoContainer.insertAdjacentHTML('beforeend', forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+      ShortsVideoContainer.insertAdjacentHTML('beforeend', shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
     })
   }
 
-
+  slideToButton()
 
 
   
