@@ -11,8 +11,9 @@ export let arrDataVideo = []
 if (localStorage.getItem("history")) {
     // console.log(localStorage.getItem("history"))
     arrDataVideo = JSON.parse((localStorage.getItem("history")))
+    
 }
-
+console.log(arrDataVideo)
 function loadData(conteinerVideo) {
     try {
         arrDataVideo.forEach((item) => {

@@ -18,7 +18,6 @@ import { markingProfile } from "./Marking/Marking.js"
 
 
 
-
 main.addEventListener("click", async (e) => {
     console.log('marking')
     main.classList.remove("grid")
