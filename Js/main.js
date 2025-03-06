@@ -39,10 +39,10 @@ main.addEventListener("click", async (e) => {
 
             const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
             const dateRequests = dateRequest.filter(el => el.id === id)
-            if (!arrDataVideo.some(el => el.id === id)) { 
+            
                 arrDataVideo.push(dateRequests[0]); // 
                 localStorage.setItem("history", JSON.stringify(arrDataVideo));
-            }
+            
             
             dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
             const nameChannel = e.target.closest(".Main_container_video").querySelector(".Main_container_video_title_info_name").textContent

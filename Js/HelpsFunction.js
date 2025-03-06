@@ -108,9 +108,35 @@ export async function markProfile(main, nameChannel) {
   }
 
   slideToButton()
-
+  navInProfile(video)
 
 
 
 }
 
+
+function navInProfile(objData){
+  const nav = document.querySelector(".container_channel_navigation")
+  nav.onclick = ({target, currentTarget})=>{
+    if(target.textContent === 'Videos'){
+      const containerM = findElAddClass(currentTarget, target)
+      objData.longVideo.forEach(el=>{
+        containerM.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+      })
+    }else if(target.textContent === "Shorts"){
+      const containerM = findElAddClass(currentTarget, target)
+      objData.shortVideo.forEach(el=>{
+        containerM.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
+      })
+    }
+  }
+}
+
+function findElAddClass(currentTarget, target){
+  currentTarget.querySelector(".borderBottom").classList.remove("borderBottom")
+  target.classList.add("borderBottom")
+  const containerM = document.querySelector(".Header_Main_container_video")
+  containerM.innerHTML = ''
+  containerM.classList.add("grid", "gridTC5", "gap10")
+  return containerM
+}
