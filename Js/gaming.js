@@ -32,8 +32,6 @@ gamingBtn.onclick = (event) => {
                             const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
                             gamingContainer.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), result, formatDuration(el.contentDetails.duration), el.id))
                         })
-
-
                     })
 
             })
