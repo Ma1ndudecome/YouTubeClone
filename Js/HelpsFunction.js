@@ -117,17 +117,30 @@ export async function markProfile(main, nameChannel) {
 
 function navInProfile(objData){
   const nav = document.querySelector(".container_channel_navigation")
+  const containerVideo = document.querySelector(".Header_Main_container_video")
   nav.onclick = ({target, currentTarget})=>{
     if(target.textContent === 'Videos'){
+      if(document.querySelector(".borderBottom").textContent === "Home"){
+        state.markingHomePage = containerVideo.innerHTML
+      }
       const containerM = findElAddClass(currentTarget, target)
       objData.longVideo.forEach(el=>{
         containerM.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
       })
     }else if(target.textContent === "Shorts"){
+      if(document.querySelector(".borderBottom").textContent === "Home"){
+        state.markingHomePage = containerVideo.innerHTML
+      }
       const containerM = findElAddClass(currentTarget, target)
       objData.shortVideo.forEach(el=>{
         containerM.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
       })
+    }else if(target.textContent === "Home"){
+      const containerM = findElAddClass(currentTarget, target)
+      containerVideo.innerHTML = state.markingHomePage
+      containerVideo.classList.remove("grid", "gridTC5", 'gap10')
+      slideToButton()
+
     }
   }
 }

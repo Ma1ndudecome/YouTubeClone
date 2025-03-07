@@ -19,10 +19,10 @@ export const state = {//Тут храняться переменные кото�
   isLastVideos: false,//Последнее ли видео
   isLastShorts: false,//Последнее ли видео
   prevMarking: '',//Переменная для сохранения при перходе предыдущей разметки
-  infoChannel: {img: 'https://cdn-icons-png.flaticon.com/512/6522/6522516.png'},//Сохранить количество подписчиков и url профиля
+  infoChannel: { img: 'https://cdn-icons-png.flaticon.com/512/6522/6522516.png' },//Сохранить количество подписчиков и url профиля
   PageTokenComment: '',
-  Autorization:false,
-  pageTokenProfileVideoAny:''
+  Autorization: false,
+  pageTokenProfileVideoAny: ''
 };
 
 
@@ -122,8 +122,17 @@ export function slideToButton() {
   const containerForYou = document.querySelector(".ForYou_Container_video")
   const containerShorts = document.querySelector(".Shorts_video_container")
 
-  const count1 = containerForYou.querySelectorAll(".video_box").length
-  const count2 = containerShorts.querySelectorAll(".Shorts_video_item").length
+  const count1 = containerForYou?.querySelectorAll(".video_box").length
+  const count2 = containerShorts?.querySelectorAll(".Shorts_video_item").length
+
+  const rightArrowF = document.querySelector(".ForYou_Container_rightArrow")
+  const leftArrowF = document.querySelector(".ForYou_Container_leftArrow")
+
+  const rightArrowS = document.querySelector(".Shorts_Container_leftArrow")
+  const leftArrowS = document.querySelector(".Shorts_Container_rightArrow")
+  console.log(rightArrowS)
+  console.log(leftArrowS)
+
 
   if (count1 === 0) {
     document.querySelector(".ForYou_Container_video").remove()
@@ -131,6 +140,8 @@ export function slideToButton() {
     if (navItem) {
       navItem.remove()
     }
+    rightArrowF.remove()
+    leftArrowF.remove()
   }
   if (count2 === 0) {
     document.querySelector(".Shorts_container").remove()
@@ -138,34 +149,41 @@ export function slideToButton() {
     if (navItem) {
       navItem.remove()
     }
-
-  }
-  const rightArrowF = document.querySelector(".ForYou_Container_rightArrow")
-  const leftArrowF = document.querySelector(".ForYou_Container_leftArrow")
-
-  const rightArrowS = document.querySelector(".Shorts_Container_leftArrow")
-  const leftArrowS = document.querySelector(".Shorts_Container_rightArrow")
-
-  if (count1 < 4) {
-    rightArrowF.remove()
-    leftArrowF.remove()
-  }
-  if (count2 < 6) {
     rightArrowS.remove()
     leftArrowS.remove()
+
   }
-  rightArrowF.onclick = () => {
-    containerForYou.scrollLeft += 600
-  }
-  leftArrowF.onclick = () => {
-    containerForYou.scrollLeft -= 600
-  }
-  leftArrowS.onclick = () => {
-    containerShorts.scrollLeft += 600
-  }
-  rightArrowS.onclick = () => {
-    containerShorts.scrollLeft -= 600
-  }
+  console.log(rightArrowS)
+  console.log(leftArrowS)
+
+    if(rightArrowF && leftArrowF){
+      if (count1 < 4) {
+        rightArrowF.remove()
+        leftArrowF.remove()
+      }
+      rightArrowF.onclick = () => {
+        containerForYou.scrollLeft += 600
+      }
+      leftArrowF.onclick = () => {
+        containerForYou.scrollLeft -= 600
+      }
+    }
+     if(rightArrowS && leftArrowS){
+      console.log(rightArrowS)
+      console.log(leftArrowS)
+
+      if (count2 < 6) {
+        rightArrowS.remove()
+        leftArrowS.remove() 
+      }
+      leftArrowS.onclick = () => {
+        containerShorts.scrollLeft += 600
+      }
+      rightArrowS.onclick = () => {
+        containerShorts.scrollLeft -= 600
+      }
+    }
+ 
 }
 
 function moveToVideo(statusNextPage, data) {
