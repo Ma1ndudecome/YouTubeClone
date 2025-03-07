@@ -85,7 +85,7 @@ export async function markProfile(main, nameChannel) {
   const dataChannel = await takeMoreInfoChannel(nameChannel)
   const channel = dataChannel.dataChannel
   const video = await takeMoreVideoAnyProfile(dataChannel.id)
-  console.log(video)
+
   main.classList.add("block")
 
   if (!channel.brandingSettings.image.bannerExternalUrl) {
@@ -94,6 +94,78 @@ export async function markProfile(main, nameChannel) {
     main.innerHTML = markingProfile(channel.brandingSettings.image.bannerExternalUrl, channel.snippet.thumbnails.high.url, channel.snippet.customUrl, channel.statistics.subscriberCount, channel.statistics.videoCount, channel.snippet.title)
 
   }
+  checkCountVideoAndGiveMarking(video)
+
+  slideToButton()
+  navInProfile(video)
+
+}
+
+
+export function navInProfile(objData) {
+  const nav = document.querySelector(".container_channel_navigation")
+  const containerVideo = document.querySelector(".Header_Main_container_video")
+
+  nav.onclick = ({ target, currentTarget }) => {
+
+    if (target.textContent === 'Videos') {
+      saveMarkingIfOnHome(containerVideo)
+
+      const containerM = findElAddClass(currentTarget, target)
+      addElementToContainer(objData.longVideo, 'Videos', containerM)
+
+    } else if (target.textContent === "Shorts") {
+      saveMarkingIfOnHome(containerVideo)
+      const containerM = findElAddClass(currentTarget, target)
+      addElementToContainer(objData.shortVideo, 'Shorts', containerM)
+
+    } else if (target.textContent === "Home") {
+      const containerM = findElAddClass(currentTarget, target)
+      containerVideo.innerHTML = state.markingHomePage
+      containerVideo.classList.remove("grid", "gridTC5", 'gap10')
+      slideToButton()
+
+    }
+  }
+}
+
+function findElAddClass(currentTarget, target) {
+  currentTarget.querySelector(".borderBottom").classList.remove("borderBottom")
+  target.classList.add("borderBottom")
+  const containerM = document.querySelector(".Header_Main_container_video")
+  containerM.innerHTML = ''
+  containerM.classList.add("grid", "gridTC5", "gap10")
+  return containerM
+}
+function saveMarkingIfOnHome(containerVideo) {
+  if (document.querySelector(".borderBottom").textContent === "Home") {
+    state.markingHomePage = containerVideo.innerHTML
+  }
+}
+function addElementToContainer(Data, Call, ContainerM) {
+  Data.forEach(el => {
+    if (Call === 'Videos'){
+      ContainerM.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+    }else if(Call === 'Shorts'){
+      ContainerM.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
+    }
+  })
+}
+export function TakeShortAndLongVideo(detailInformationVideo){
+  const long = detailInformationVideo.data.items.filter(el=>{
+    if(el.snippet.liveBroadcastContent !== "upcoming"){
+      return +formatDuration(el.contentDetails.duration)[0] !== 0
+    }
+  })
+  const short  = detailInformationVideo.data.items.filter(el=>{
+    if(el.snippet.liveBroadcastContent !== "upcoming"){
+      return +formatDuration(el.contentDetails.duration)[0] === 0
+    }
+  })
+  return {longVideo:long, shortVideo:short}
+}
+
+export function checkCountVideoAndGiveMarking(video){
   if (video.longVideo.length !== 0) {
     const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
     video.longVideo.forEach(el => {
@@ -106,37 +178,4 @@ export async function markProfile(main, nameChannel) {
       ShortsVideoContainer.insertAdjacentHTML('beforeend', shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
     })
   }
-
-  slideToButton()
-  navInProfile(video)
-
-
-
-}
-
-
-function navInProfile(objData){
-  const nav = document.querySelector(".container_channel_navigation")
-  nav.onclick = ({target, currentTarget})=>{
-    if(target.textContent === 'Videos'){
-      const containerM = findElAddClass(currentTarget, target)
-      objData.longVideo.forEach(el=>{
-        containerM.insertAdjacentHTML("beforeend", forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-      })
-    }else if(target.textContent === "Shorts"){
-      const containerM = findElAddClass(currentTarget, target)
-      objData.shortVideo.forEach(el=>{
-        containerM.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
-      })
-    }
-  }
-}
-
-function findElAddClass(currentTarget, target){
-  currentTarget.querySelector(".borderBottom").classList.remove("borderBottom")
-  target.classList.add("borderBottom")
-  const containerM = document.querySelector(".Header_Main_container_video")
-  containerM.innerHTML = ''
-  containerM.classList.add("grid", "gridTC5", "gap10")
-  return containerM
 }
