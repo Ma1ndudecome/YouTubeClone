@@ -94,23 +94,10 @@ export async function markProfile(main, nameChannel) {
     main.innerHTML = markingProfile(channel.brandingSettings.image.bannerExternalUrl, channel.snippet.thumbnails.high.url, channel.snippet.customUrl, channel.statistics.subscriberCount, channel.statistics.videoCount, channel.snippet.title)
 
   }
-  if (video.longVideo.length !== 0) {
-    const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
-    video.longVideo.forEach(el => {
-      forYouVideoContainer.insertAdjacentHTML('beforeend', forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
-    })
-  }
-  if (video.shortVideo.length !== 0) {
-    const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
-    video.shortVideo.forEach(el => {
-      ShortsVideoContainer.insertAdjacentHTML('beforeend', shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
-    })
-  }
+  checkCountVideoAndGiveMarking(video)
 
   slideToButton()
   navInProfile(video)
-
-
 
 }
 
