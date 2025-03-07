@@ -1,5 +1,6 @@
 import { state } from "./changeData.js";
 import { formatDuration } from "./FromISOToTime.js";
+import { TakeShortAndLongVideo } from "./HelpsFunction.js";
 
 const urlToken = 'https://oauth2.googleapis.com/token';
 export async function takeCountCommentUnderVideo(videoId){
@@ -66,11 +67,10 @@ export async  function takeMoreVideoAnyProfile(id){
     const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${id}&maxResults=50&pageToken=${state.pageTokenProfileVideoAny}&order=date&type=video&key=${APIKEY}`);
     const videoIds = detailInformationVideo.data.items.map(el => el.id.videoId).join(',');
     const takeDuration = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet,statistics&id=${videoIds}&key=${APIKEY}`);
-    console.log(takeDuration)
-    const long = takeDuration.data.items.filter(el=>+String(formatDuration(el.contentDetails.duration))[0] !== 0)
-    const short = takeDuration.data.items.filter(el=>+String(formatDuration(el.contentDetails.duration))[0] === 0)
 
-    return {longVideo:long, shortVideo:short}
+    const video = TakeShortAndLongVideo(takeDuration)
+
+    return video
 }
 export async function ImgAndSubscribeChannel(nameChannel){
     const response = await takeInfoChannel(nameChannel)

@@ -115,7 +115,7 @@ export async function markProfile(main, nameChannel) {
 }
 
 
-function navInProfile(objData) {
+export function navInProfile(objData) {
   const nav = document.querySelector(".container_channel_navigation")
   const containerVideo = document.querySelector(".Header_Main_container_video")
 
@@ -163,4 +163,32 @@ function addElementToContainer(Data, Call, ContainerM) {
       ContainerM.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
     }
   })
+}
+export function TakeShortAndLongVideo(detailInformationVideo){
+  const long = detailInformationVideo.data.items.filter(el=>{
+    if(el.snippet.liveBroadcastContent !== "upcoming"){
+      return +formatDuration(el.contentDetails.duration)[0] !== 0
+    }
+  })
+  const short  = detailInformationVideo.data.items.filter(el=>{
+    if(el.snippet.liveBroadcastContent !== "upcoming"){
+      return +formatDuration(el.contentDetails.duration)[0] === 0
+    }
+  })
+  return {longVideo:long, shortVideo:short}
+}
+
+export function checkCountVideoAndGiveMarking(video){
+  if (video.longVideo.length !== 0) {
+    const forYouVideoContainer = document.querySelector(".ForYou_Container_video")
+    video.longVideo.forEach(el => {
+      forYouVideoContainer.insertAdjacentHTML('beforeend', forYouVideoMarking(el.snippet.thumbnails.medium.url, formatDuration(el.contentDetails.duration), el.snippet.title, el.statistics.viewCount, el.snippet.publishedAt, el.id))
+    })
+  }
+  if (video.shortVideo.length !== 0) {
+    const ShortsVideoContainer = document.querySelector(".Shorts_video_container")
+    video.shortVideo.forEach(el => {
+      ShortsVideoContainer.insertAdjacentHTML('beforeend', shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
+    })
+  }
 }
