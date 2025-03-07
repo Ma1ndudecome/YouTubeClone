@@ -80,7 +80,7 @@ async function openProfile(target, accessToken) {
       const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
       const profileData = dataProfile.data.items[0]
 
-
+      console.log(detailInformationVideo)
       if (!profileData.brandingSettings.image) {
         container.insertAdjacentHTML("afterbegin", profileMark('', profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
         document.querySelector(".Main_container_Header").remove()
@@ -100,8 +100,6 @@ async function openProfile(target, accessToken) {
 
       slideToButton()
       moveToVideo(videoProfile, videoProfile.data)
-      loadNextVideo(accessToken, profileData, document.querySelector(".container_button_load button"))
-
 
       document.querySelector(".container_button_load button").classList.add('none')
       moreBtn()
@@ -130,8 +128,7 @@ export function slideToButton() {
 
   const rightArrowS = document.querySelector(".Shorts_Container_leftArrow")
   const leftArrowS = document.querySelector(".Shorts_Container_rightArrow")
-  console.log(rightArrowS)
-  console.log(leftArrowS)
+
 
 
   if (count1 === 0) {
@@ -153,8 +150,7 @@ export function slideToButton() {
     leftArrowS.remove()
 
   }
-  console.log(rightArrowS)
-  console.log(leftArrowS)
+
 
     if(rightArrowF && leftArrowF){
       if (count1 < 4) {
@@ -169,8 +165,6 @@ export function slideToButton() {
       }
     }
      if(rightArrowS && leftArrowS){
-      console.log(rightArrowS)
-      console.log(leftArrowS)
 
       if (count2 < 6) {
         rightArrowS.remove()
