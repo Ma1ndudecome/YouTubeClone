@@ -1,22 +1,14 @@
 
-import "./gaming.js"
-import "./LoadVideo.js"
-import "./PostToToken.js"
-import "./Listners.js"
-import "./ReturnPushState.js"
-import "./HeaderANDAside.js"
+import "./gaming.js"; import "./LoadVideo.js"; import "./PostToToken.js"; import "./Listners.js"; import "./ReturnPushState.js"; import "./HeaderANDAside.js";import "./changeHistoryPage.js"
 import { MarkingPlayer, MarkingPlayerAny } from "./Marking/MarkingPlayerVideo.js"
 import { container as main, dateRequest } from "./LoadVideo.js"
 import { dateProfileVideo, state } from "./changeData.js"
 import { listnerToInput,buttonLoadMoreFnc, lisnerToLike, likeAndDislikeToVideoFunc} from "./Listners.js"
-import "./changeHistoryPage.js"
 import { takeComment, ImgAndSubscribeChannel} from "./AllApiRequest.js"
 import { addMarkingComent, shortLength, checkAndShowRatingVideo, markProfile} from "./HelpsFunction.js"
 import { LoadMoreComments } from "./infinityScrollInProfile.js"
 import { arrDataVideo } from "./changeHistoryPage.js"
 import { markingProfile } from "./Marking/Marking.js"
-
-
 
 main.addEventListener("click", async (e) => {
     console.log('marking')

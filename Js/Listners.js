@@ -2,6 +2,11 @@ import {moreBtn} from './HelpsFunction.js'
 import { shortLength } from './HelpsFunction.js'
 import { checkAndShowRatingVideo } from './HelpsFunction.js'
 import { state } from './changeData.js'
+import { SearchContent } from "./AllApiRequest.js"
+import { container } from './LoadVideo.js'
+import { markinHistoryVideo } from './Marking/Marking.js'
+import { fromViewToShortView } from './ViewToViewLikeToLike.js'
+
 const SingButton = document.querySelector(".SignIn_element")
 SingButton.onclick = (e)=>{
     e.preventDefault()
@@ -151,4 +156,36 @@ export function buttonLoadMoreFnc(dateRequests, state, countSubs){
         }
     }
 }
+
+function SearchListner(){
+    const input = document.querySelector(".search input")
+    const buttonSearch = document.querySelector(".glass")
+    buttonSearch.onclick = ()=>{
+        getContentAndAddMarking(input)
+    }
+    window.addEventListener("keydown", (e)=>{
+        if(e.key !== 'Enter'){
+            return 
+        }
+        getContentAndAddMarking(input)
+    })
+}
+SearchListner()
+
+async function getContentAndAddMarking(input){
+    if(input.value !== ''){
+        container.innerHTML = ''
+        container.insertAdjacentHTML('beforeend', `<div class="ContainerVideoSearch mT50p"></div>`)
+        const contVideo = document.querySelector(".ContainerVideoSearch")
+       const videos =  await SearchContent(input.value)
+        console.log(videos)
+       videos.data.items.forEach(el=>{
+        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id)) : false
+       })
+       container.className = 'Main_container dF jcC'
+       contVideo.classList.add("dF", "fdC", "gap15P", "w80Procc")
+    }
+   
+}
+
 
