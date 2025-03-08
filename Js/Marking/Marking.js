@@ -271,7 +271,6 @@ export function markinHistoryVideo(videoImg, videoName, chanelName, countViews, 
 <div class="video-img-conteiner H100 wFC"><img
         src="${videoImg}"
         alt=""
-      
         ></div>
 <div class="overview gap10P"><a class="nameVideo" href="">${videoName}</a>
     <div class="chanel-info">
