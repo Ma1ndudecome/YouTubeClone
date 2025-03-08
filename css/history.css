@@ -54,6 +54,7 @@
     text-overflow: ellipsis;
     height: 138px;
     overflow: hidden;
+    font-family: "Roboto", "Arial", sans-serif;
 
 }
 
@@ -73,7 +74,7 @@
     opacity: 0.8;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 3.6rem;
+    max-height: 4rem;
     /* height: 20px; */
     white-space: normal;
     font-size: 1rem;

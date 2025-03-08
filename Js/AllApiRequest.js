@@ -118,3 +118,13 @@ export async function TakeTrending() {
     const detailsInf = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`);
     return detailsInf;
 }
+export async function SearchContent(content){
+    try{
+        const videoRequest = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${content}&key=${APIKEY}`)
+        const videoId = videoRequest.data.items.map(el=>el.id.videoId).join(',')
+        const MoreStatisticVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet,statistics&id=${videoId}&key=${APIKEY}`);
+        return MoreStatisticVideo
+    }catch(err){
+        console.log(err);
+    }
+}

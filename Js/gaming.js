@@ -18,8 +18,7 @@ gamingBtn.onclick = (event) => {
     event.preventDefault()
     container.innerHTML = ''
     container.innerHTML = markingGaming()
-    container.classList.remove("grid")
-    container.classList.add("block")
+    container.className = 'Main_container block'
     const gamingContainer = container.querySelector(".Container-video-gaming ")
     axios.get(`https://www.googleapis.com/youtube/v3/search?https://www.googleapis.com/youtube/v3/search?part=snippet&q=gaming&type=video&videoCategoryId=20&maxResults=20&key=${APIKEY}`)
         .then(

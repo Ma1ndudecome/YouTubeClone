@@ -22,6 +22,24 @@ padding: 0;
 .ml150{
   margin-left: 150px;
 }
+.w80Procc{
+  width: 80%;
+}
+.H100{
+  height: 100%;
+}
+.wFC{
+  width: fit-content;
+}
+.gap10P{
+  gap: 10px;
+}
+.mT50p{
+  margin-top: 50px;
+}
+.gap15P{
+  gap: 15px;
+}
 .backdrop{
     display: none;
     width: 100%;

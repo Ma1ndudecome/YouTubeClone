@@ -68,10 +68,10 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
     `
 }
 
-export function InfoAboutChannel(countSubscribe, countVideo, countViews, accountCreat){
+export function InfoAboutChannel(countSubscribe, countVideo, countViews, accountCreat) {
     const dateString = accountCreat
     const parsedDate = dateFns.parseISO(dateString);
-    const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
+    const formattedDate = dateFns.format(parsedDate, "MMM d, yyyy")
     return `
    <div class="backdropInfo dF aiC jcC">
         <div class="block_info dF jcC aiC fdC">
@@ -119,7 +119,7 @@ export function InfoAboutChannel(countSubscribe, countVideo, countViews, account
     </div>
     `
 }
-export function markingShowMore(dateRequests, dataProfile, countSubs){
+export function markingShowMore(dateRequests, dataProfile, countSubs) {
     return `
     <div class="containerShowMore">
       <div class="TranscriptVideo dF fdC">
@@ -149,14 +149,14 @@ export function markingShowMore(dateRequests, dataProfile, countSubs){
     </div>
     `
 }
-export function marcinSubscriben(img_profile,title_profile){
+export function marcinSubscriben(img_profile, title_profile) {
     return `
     <div class="block_list_sing_int_subscription dF aiC">
          <img class="block_list_sing_int_subscription_img" src="${img_profile}" alt="">
             <div class="block_list_sing_int_subscription_title">${title_profile}</div>
     </div>`
 }
-export function markingGaming(){
+export function markingGaming() {
     return `
         <div class="boxtxtGaming" style=" display: flex" >
                             <svg width='64' height='64' viewBox='0 0 34 34' xmlns='http://www.w3.org/2000/svg'
@@ -265,19 +265,20 @@ export function markinHistory() {
                     </div>
             </div>`
 }
-export function markinHistoryVideo(videoImg, videoName, chanelName, countViews, overview) {
+export function markinHistoryVideo(videoImg, videoName, chanelName, countViews, overview, id) {
     return `
-    <div class="container-video " style="display: flex;">
-<div class="video-img-conteiner"><img
+    <div idvideo=${id} class="container-video " style="display: flex; height: 260px;">
+<div class="video-img-conteiner H100 wFC"><img
         src="${videoImg}"
-        alt=""></div>
-<div class="overview"><a class="nameVideo" href="">${videoName}</a>
-    <div class="delete-video"></div>
-    <div class="options"></div>
+        alt=""
+        ></div>
+<div class="overview gap10P"><a class="nameVideo" href="">${videoName}</a>
     <div class="chanel-info">
         <a class="name-chanel" href="">${chanelName}</a>
         <span class="count-views">${countViews}</span>
     </div>
     <p class="overview-video">${overview}</p>
-</div>`
+</div>
+`
 }
+
