@@ -10,7 +10,6 @@
     <script src="./Js/main.js" type="module"></script>
     <script src="./Js/APIKEY.js"></script>
 
-    <script defer src="./Js/header.js" ></script>
 
     <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/locale/es/cdn.min.js"></script>
@@ -31,8 +30,8 @@
 <body>
     <div class="backdrop"></div>
     <header>
-        <div class="menu_logo">
-            <div class="menu">
+        <div class="menu_logo dF aiC">
+            <div class="menu dF aiC jcC">
                 <div class="burger">
                     <span> </span>
                 </div>
@@ -136,10 +135,12 @@
         </div>
     </header>
     <div class="wrapp-mainAside">
-        <aside class="block">
+        <aside >
             <div class="menu_Explore">
                 <div class="explore_Container">
                     <ul class="Explore_element_menu">
+                        <li>
+                    <ul class="Explore_element_menu home_elements">
                         <li class="selected">
                             <a href="">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -184,7 +185,7 @@
 
             <div class="menu_Explore">
                 <div class="explore_Container">
-                    <ul class="Explore_element_menu">
+                    <ul class="Explore_element_menu home_elements">
                         <li>
                             <a href="">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -214,7 +215,7 @@
 
             <div class="aside_SignIn down">
                 
-                <div class="block_list_Sing_int dF fdC" >
+                <div class="block_list_Sing_int dF fdC none" >
                     
                     
                     
@@ -261,7 +262,7 @@
                  </div>
             </div>
 
-            <div class="menu_Explore down downItem">
+            <div id="explore" class="menu_Explore down downItem">
                 <div class="explore_Container">
                     <p class="Explore_paragraph">Explore</p>
                     <ul class="Explore_element_menu">
@@ -276,15 +277,15 @@
                                 <p>Trending</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="gaming">
                             <a href="">
-                                <svg width="24" height="24" viewBox="0 0 22 18" fill="none"
+                                <svg  width="24" height="24" viewBox="0 0 22 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M11 4.74998L10.228 4.28598L6.042 1.77498L1.5 4.80298V11.11L11 16.29L20.5 11.109V4.80298L15.958 1.77498L11.772 4.28598L11 4.74998ZM11 2.99998L6.814 0.487977C6.317 0.189977 5.692 0.204977 5.21 0.526977L0.668 3.55498C0.251 3.83298 0 4.29998 0 4.80298V11.11C0 11.658 0.3 12.164 0.782 12.426L10.282 17.608C10.729 17.852 11.271 17.852 11.718 17.608L21.218 12.426C21.7 12.164 22 11.658 22 11.11V4.80298C22 4.30098 21.75 3.83298 21.332 3.55498L16.79 0.526977C16.308 0.204977 15.683 0.189977 15.186 0.487977L11 2.99998ZM14.5 9.24998C14.5 9.93998 13.94 10.5 13.25 10.5C12.56 10.5 12 9.93998 12 9.24998C12 8.55998 12.56 7.99998 13.25 7.99998C13.94 7.99998 14.5 8.55998 14.5 9.24998ZM6 4.99998C5.586 4.99998 5.25 5.33598 5.25 5.74998V7.24998H3.75C3.336 7.24998 3 7.58598 3 7.99998C3 8.41398 3.336 8.74998 3.75 8.74998H5.25V10.25C5.25 10.664 5.586 11 6 11C6.414 11 6.75 10.664 6.75 10.25V8.74998H8.25C8.664 8.74998 9 8.41398 9 7.99998C9 7.58598 8.664 7.24998 8.25 7.24998H6.75V5.74998C6.75 5.33598 6.414 4.99998 6 4.99998ZM16.75 7.99998C17.44 7.99998 18 7.43998 18 6.74998C18 6.05998 17.44 5.49998 16.75 5.49998C16.06 5.49998 15.5 6.05998 15.5 6.74998C15.5 7.43998 16.06 7.99998 16.75 7.99998Z"
                                         fill="#030303" />
                                 </svg>
-                                <p>Gaming</p>
+                                <p >Gaming</p>
                             </a>
                         </li>
                         <li>
@@ -337,7 +338,7 @@
 
         </aside>
         <main class="Main">
-            <div class="Main_container block">
+            <div class="Main_container grid">
                
             </div>
             <div class="triger"></div>

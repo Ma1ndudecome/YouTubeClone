@@ -9,7 +9,7 @@ export function makeMarkingVideo(logoVideo, logoChannel, titleVideo, nameChannel
                     
                     <div class="Main_container_video_info">
                         <div class="Main_container_video_info_logo">
-                            <img src="${logoChannel}" alt="">
+                            <img src="${logoChannel}" alt="" class="VideoLogoChannel">
                         </div>
                         <div class="Main_container_video_title">
                             <h3 class="Main_container_video_title_paragraph">${titleVideo}</h3>
@@ -22,3 +22,5 @@ export function makeMarkingVideo(logoVideo, logoChannel, titleVideo, nameChannel
                 </div>    
     `
 }
+
+

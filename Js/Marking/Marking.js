@@ -48,7 +48,7 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
                         <h1>For You</h1>
                         <div class="ForYou_Container_video dF">
                                  
-                    </div>
+                        </div>
                     <div class="line"></div>
                     <div class="Shorts_container">
                         <div class="Shorts_container_title dF aiC">
@@ -64,17 +64,14 @@ export function markingProfile(backgorundProfile, profileImg, customUrl, subscri
                        
                     </div>
                     </div>
-                     <div class="container_button_load dF jcC">
-                            <button>I'm load more video </button>
-                    </div>
                 </div>
     `
 }
 
-export function InfoAboutChannel(countSubscribe, countVideo, countViews, accountCreat){
+export function InfoAboutChannel(countSubscribe, countVideo, countViews, accountCreat) {
     const dateString = accountCreat
     const parsedDate = dateFns.parseISO(dateString);
-    const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
+    const formattedDate = dateFns.format(parsedDate, "MMM d, yyyy")
     return `
    <div class="backdropInfo dF aiC jcC">
         <div class="block_info dF jcC aiC fdC">
@@ -122,7 +119,7 @@ export function InfoAboutChannel(countSubscribe, countVideo, countViews, account
     </div>
     `
 }
-export function markingShowMore(dateRequests, dataProfile){
+export function markingShowMore(dateRequests, dataProfile, countSubs) {
     return `
     <div class="containerShowMore">
       <div class="TranscriptVideo dF fdC">
@@ -132,11 +129,11 @@ export function markingShowMore(dateRequests, dataProfile){
         </div>
         <div class="Main_container_blockInfo_description_channel dF">
                 <div class="description_channel_img">
-                <img src="${dataProfile.infoChannel.img}" alt="">
+                <img src="${dataProfile}" alt="">
              </div>
             <div class="description_channel_container">
                 <div class="description_channel_container_title">${dateRequests[0].snippet.channelTitle}</div>
-                <div class="description_channel_container_subscribers">${fromLikeToShortLike(dataProfile.infoChannel.subscriberCount)} subscribers</div>
+                <div class="description_channel_container_subscribers">${fromLikeToShortLike(countSubs)} subscribers</div>
             </div>
         </div>
         <div class="containerShowMore_aboutChannel dF">
@@ -152,10 +149,136 @@ export function markingShowMore(dateRequests, dataProfile){
     </div>
     `
 }
-export function marcinSubscriben(img_profile,title_profile){
+export function marcinSubscriben(img_profile, title_profile) {
     return `
     <div class="block_list_sing_int_subscription dF aiC">
          <img class="block_list_sing_int_subscription_img" src="${img_profile}" alt="">
             <div class="block_list_sing_int_subscription_title">${title_profile}</div>
     </div>`
 }
+export function markingGaming() {
+    return `
+        <div class="boxtxtGaming" style=" display: flex" >
+                            <svg width='64' height='64' viewBox='0 0 34 34' xmlns='http://www.w3.org/2000/svg'
+                                xmlns:xlink='http://www.w3.org/1999/xlink'>
+                                <rect width='24' height='24' stroke='none' rx="15" padding="10" fill=' #FF0033'
+                                    opacity='6' />
+
+
+                                <g transform="matrix(0.42 0 0 0.42 12 12)">
+
+                                    <g transform="matrix(1 0 0 1 0 -0.03)">
+                                        <path
+                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                                            transform=" translate(-24, -23.97)"
+                                            d="M 24.3155 13.7581 C 24.1281 13.8986 23.8719 13.8986 23.6845 13.7581 C 22.7294 13.042 19.6378 10.8398 14.8402 8.53175 C 14.1066 8.17887 13.2774 8.07401 12.4987 8.31112 C 10.7564 8.84165 7.40567 10.1661 4.28404 13.1262 C 3.70164 13.6784 3.34921 14.4214 3.26587 15.2196 C 3.06654 17.1289 2.78999 21.0779 3.25256 25.6124 C 3.34435 26.5122 3.76609 27.338 4.44359 27.9371 C 7.03139 30.2257 14.2162 36.1569 22.6659 39.4986 C 23.523 39.8375 24.477 39.8375 25.3341 39.4986 C 33.7839 36.1568 40.9686 30.2257 43.5564 27.9371 C 44.2339 27.3379 44.6556 26.5122 44.7474 25.6124 C 45.21 21.0778 44.9335 17.1288 44.7341 15.2196 C 44.6508 14.4214 44.2984 13.6784 43.716 13.1262 C 40.5943 10.1661 37.2435 8.84165 35.5013 8.31112 C 34.7226 8.07401 33.8933 8.17887 33.1598 8.53175 C 28.3622 10.8398 25.2706 13.042 24.3155 13.7581 Z"
+                                            stroke-linecap="round" />
+                                    </g>
+                                    <g transform="matrix(1 0 0 1 0 2.88)">
+                                        <path
+                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                                            transform=" translate(-24, -26.88)" d="M 24 14 L 24 39.75"
+                                            stroke-linecap="round" />
+                                    </g>
+                                    <g transform="matrix(1 0 0 1 -10 -3)">
+                                        <path
+                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                                            transform=" translate(-14, -21)" d="M 14 17 L 14 25"
+                                            stroke-linecap="round" />
+                                    </g>
+                                    <g transform="matrix(1 0 0 1 -10 -3)">
+                                        <path
+                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                                            transform=" translate(-14, -21)" d="M 18 21 L 10 21"
+                                            stroke-linecap="round" />
+                                    </g>
+                                    <g transform="matrix(1 0 0 1 12 -6)">
+                                        <path
+                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                                            transform=" translate(-36, -18)" d="M 37 18 L 35 18"
+                                            stroke-linecap="round" />
+                                    </g>
+                                    <g transform="matrix(1 0 0 1 8 0)">
+                                        <path
+                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                                            transform=" translate(-32, -24)" d="M 33 24 L 31 24"
+                                            stroke-linecap="round" />
+                                    </g>
+                                </g>
+
+                            </svg>
+                            <b class="txtg">Gaming</b>
+                        
+                       
+                    </div>
+                    <div class="txtg"> Пропоноване</div>
+                    
+                    <div class="Container-video-gaming grid"></div>
+                    `
+}
+
+export function markinHistory() {
+
+    return `
+           <div class="history-header-contain ">
+                <div class="history-header-inner-contain">
+                    <h1 class="history-header-text-h1">
+                        <span class="history-header-text">Watch history</span>
+                    </h1>
+                </div>
+            </div>
+                <div class="conteiner-history dF fdR">
+                <div class="main-history-container block  ">
+                </div>
+                    <div class="history-nav-menu dF fdC">
+                    <div class="history-search dF">
+                        <div style="    font-size: 24px;" class="search-input-history">
+                            <svg style="width: 24px; height: 24px;" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" height="24" viewBox="0 0 24 24" width="24" focusable="false"
+                                aria-hidden="true"
+                                style="pointer-events: none; display: inherit; width: 100%; height: 100%;">
+                                <path clip-rule="evenodd"
+                                    d="M16.296 16.996a8 8 0 11.707-.708l3.909 3.91-.707.707-3.909-3.909zM18 11a7 7 0 00-14 0 7 7 0 1014 0z"
+                                    fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <input type="text" class="search-input" placeholder="Search watch history">
+                    </div>
+                    <hr style="margin-bottom: 20px;" class="divider">
+                    <div class="history-filters dF fdC">
+                        <button class="filter-btn clear-history ">
+                            <span style="margin-right: 5px; height: 24px; width: 24px;" class="filter-btn-icon"><svg style="height: 24px; width: 24px;" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                    height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"
+                                    style="pointer-events: none; display: inherit; width: 100%; height: 100%;">
+                                    <path
+                                        d="M11 17H9V8h2v9zm4-9h-2v9h2V8zm4-4v1h-1v16H6V5H5V4h4V3h6v1h4zm-2 1H7v15h10V5z">
+                                    </path>
+                                </svg></span> Clear all watvh history
+                        </button>
+                        <button class="filter-btn pause-history">
+                            <span  style="margin-right: 5px;  height: 24px; width: 24px;" class="filter-btn-icon"><svg style="height: 24px; width: 24px;" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
+                                    width="24" focusable="false" aria-hidden="true"
+                                    style="pointer-events: none; display: inherit; width: 100%; height: 100%;">
+                                    <path d="M9 19H7V5h2Zm8-14h-2v14h2Z"></path>
+                                </svg></span>Pause watch history
+                        </button>
+                    </div>
+            </div>`
+}
+export function markinHistoryVideo(videoImg, videoName, chanelName, countViews, overview, id) {
+    return `
+    <div idvideo=${id} class="container-video " style="display: flex; height: 260px;">
+<div class="video-img-conteiner H100 wFC"><img
+        src="${videoImg}"
+        alt=""
+        ></div>
+<div class="overview gap10P"><a class="nameVideo" href="">${videoName}</a>
+    <div class="chanel-info">
+        <a class="name-chanel" href="">${chanelName}</a>
+        <span class="count-views">${countViews}</span>
+    </div>
+    <p class="overview-video">${overview}</p>
+</div>
+`
+}
+

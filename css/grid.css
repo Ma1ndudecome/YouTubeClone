@@ -14,8 +14,14 @@
     grid-template-columns: repeat(2, 1fr);
 }
 .gap10{
-    gap: 10px !important;;
+    column-gap: 10px !important;
+    row-gap: 50px;
 }
 .gap15{
     gap:15px;
+}
+.Container-video-gaming {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 50px;
 }

@@ -1,118 +1,105 @@
 
-
-import "./LoadVideo.js"
-import "./PostToToken.js"
-import "./SingIn.js"
-import "./ReturnPushState.js"
-
-import { MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
-import { container as main } from "./LoadVideo.js"
-import { dateRequest } from "./LoadVideo.js"
-import { dateProfileVideo } from "./changeData.js"
-
-import { fromLikeToShortLike } from "./ViewToViewLikeToLike.js"
-import "./changeHistoryPage.js"
-
-import { state } from "./changeData.js"
-import { markingShowMore } from "./Marking/ProfileMarking.js"
-
-import { takeComment } from "./AllApiRequest.js"
-import { MarkingCommentItem } from "./Marking/MarkingPlayerVideo.js"
-
+import "./gaming.js"; import "./LoadVideo.js"; import "./PostToToken.js"; import "./Listners.js"; import "./ReturnPushState.js"; import "./HeaderANDAside.js";import "./changeHistoryPage.js"
+import { MarkingPlayer, MarkingPlayerAny } from "./Marking/MarkingPlayerVideo.js"
+import { container as main, dateRequest } from "./LoadVideo.js"
+import { dateProfileVideo, state } from "./changeData.js"
+import { listnerToInput,buttonLoadMoreFnc, lisnerToLike, likeAndDislikeToVideoFunc} from "./Listners.js"
+import { takeComment, ImgAndSubscribeChannel} from "./AllApiRequest.js"
+import { addMarkingComent, shortLength, checkAndShowRatingVideo, markProfile} from "./HelpsFunction.js"
+import { LoadMoreComments } from "./infinityScrollInProfile.js"
+import { arrDataVideo } from "./changeHistoryPage.js"
+import { markingProfile } from "./Marking/Marking.js"
 
 main.addEventListener("click", async (e) => {
+    console.log('marking')
+    main.classList.remove("grid")
+    if (e.target.closest(".Main_container_video")) {
+        console.log('marking')
+        if (e.target.classList.contains("Main_container_video_title_info_name")) {
+            const NameChannel = e.target.textContent
+            markProfile(main,NameChannel)
+           
+            isVideo = true
 
-    if(e.target.closest(".Main_container_video")){
-        const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
-        const dateRequests = dateRequest.filter(el=>el.id === id)
-        main.innerHTML = MarkingPlayer(id, dateRequests)
-        main.classList.add('block')
-        isVideo = true
-    }else if(e.target.closest(".video_box")){
-        
-        const id = e.target.closest(".video_box").getAttribute("idVideo")
-        const dateRequests = dateProfileVideo.filter(el=>el.id === id)
-    
-        dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
-        
-       
-        main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
-        let countClick = 0
-  
-        main.classList.add('block')
-        isVideo = true
-        inserEl(document.querySelector(".Main_container_blockInfo_description_link"),"afterbegin", dateRequests[0].snippet.description )
-        shortLength('.Main_container_blockInfo_description_link', 100)
-        
-        const buttonShowMore = document.querySelector(".showMoreDescription")
-        buttonShowMore.onclick = ()=>{
-            countClick += 1
-            if(countClick === 1){
-                buttonShowMore.textContent = 'Show less'
-                moreBtn(dateRequests[0].snippet.description, dateRequests, state)
-            }else if(countClick === 2){
-                document.querySelector(".containerShowMore").remove()
-                shortLength('.Main_container_blockInfo_description_link', 100)
-                buttonShowMore.textContent = '...more'
-                countClick = 0
-            }
+        } else if (e.target.classList.contains("VideoLogoChannel")) {
+            const NameChannel = e.target.parentElement.parentElement.querySelector(".Main_container_video_title_info_name").textContent
+            // takeMoreInfoChannelAndVideo(NameChannel)
+
+            isVideo = true
+        } else {
+            console.log('marking')
+
+            const id = e.target.closest(".Main_container_video").getAttribute("idVideo")
+            const dateRequests = dateRequest.filter(el => el.id === id)
+            
+                arrDataVideo.push(dateRequests[0]); // 
+                localStorage.setItem("history", JSON.stringify(arrDataVideo));
+            
+            
+            dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
+            const nameChannel = e.target.closest(".Main_container_video").querySelector(".Main_container_video_title_info_name").textContent
+
+            const dataChannel = await ImgAndSubscribeChannel(nameChannel)
+
+
+            main.innerHTML = MarkingPlayerAny(id, dateRequests, state, dataChannel)
+
+            
+            main.classList.add('block')
+            isVideo = true
+            inserEl(document.querySelector(".Main_container_blockInfo_description_link"), "afterbegin", dateRequests[0].snippet.description)
+            shortLength('.Main_container_blockInfo_description_link', 150)
+            buttonLoadMoreFnc(dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel)
+
+            const response = await takeComment(id)
+
+            addMarkingComent(response)
+            listnerToInput()
+            lisnerToLike()
+            likeAndDislikeToVideoFunc(id)
+            checkAndShowRatingVideo(id)
+
+
+            LoadMoreComments(id)
+
         }
 
-        const response = await takeComment(state.acessToken, 'u4bvYKjKeic')
+
+    } else if (e.target.closest(".video_box")) {
+
+        const id = e.target.closest(".video_box").getAttribute("idVideo")
+        const dateRequests = dateProfileVideo.filter(el => el.id === id)
+
+        dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
+
+
+        main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
+        main.classList.add('block')
+        isVideo = true
+        inserEl(document.querySelector(".Main_container_blockInfo_description_link"), "afterbegin", dateRequests[0].snippet.description)
+        shortLength('.Main_container_blockInfo_description_link', 150)
+
+        buttonLoadMoreFnc(dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount)
+
+        const response = await takeComment(id)
         console.log(response)
         addMarkingComent(response)
         listnerToInput()
+        lisnerToLike()
+        likeAndDislikeToVideoFunc()
+        checkAndShowRatingVideo(id)
+
+        LoadMoreComments(id)
     }
-    
-    
-    
+
 })
 
-function shortLength(element, maxLength){
-    const elem = document.querySelector(element)
-    const text = elem.textContent
 
-    if(text.length > maxLength){
-        const short = text.slice(0, maxLength)
-        elem.textContent = short
-    }
-    return text
-}
-function moreBtn(originalText, dateRequests, ProfileData){
-    const descriptionCont = document.querySelector(".Main_container_blockInfo_description_link")
-    descriptionCont.textContent = originalText
-    inserEl(descriptionCont,"afterend",markingShowMore(dateRequests, ProfileData))
-}
-
-function inserEl(el, positon, marking){
+export function inserEl(el, positon, marking) {
     el.insertAdjacentHTML(positon, marking)
 }
-function listnerToInput(){
-    const inputCont= document.querySelector(".Comment_input_block_tag input")
-    
-    const button = document.querySelector(".Comment_input_block_under_apply")
-    inputCont.addEventListener("input", (e)=>{
-
-        console.log(e.target)
-        console.log(e.target.value)
-        if(e.target.value === ''){
-            button.classList.remove("sendButton")
-            return
-        }
-        button.classList.add("sendButton")
-        
-    })
-}
 
 
-function addMarkingComent(data){
-    const containerComment = document.querySelector(".AllComment_Container")
-    
-    data.forEach(({snippet})=>{
-        const dates = snippet.topLevelComment.snippet
-        const date = new Date(dates.publishedAt)
-        const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
-        
-        containerComment.insertAdjacentHTML("beforeend", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, result, dates.textDisplay, dates.likeCount)) 
-    })
-}
+
+
+

@@ -1,8 +1,13 @@
 aside{
-    width: calc(12.5% + 10px);
-    
+    position: fixed;
+    width: 250px;
+    max-height: 100vh;
     overflow-y: scroll;
     background-color: var(--WhColor);
+    overflow-x: hidden;
+    left: 0;
+    top:50px;
+    z-index: 999;
     
 }
 aside::-webkit-scrollbar {
@@ -10,15 +15,18 @@ aside::-webkit-scrollbar {
     
 }
 aside:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.205);
+    background-color:var(--hovColor)
 }
 aside::-webkit-scrollbar-thumb {
     background-color: transparent;
     border-radius: 10px;
 }
 aside::-webkit-scrollbar-thumb:hover{
-    background-color: rgba(0, 0, 0, 0.305);
+    background-color: var(--hovSing)
     
+}
+aside.hidden {
+    transform: translateX(-100%); /* Скрыто за экраном */
 }
     
 
@@ -153,64 +161,53 @@ aside.positionFixed{
     z-index: 999;
     top:55px;
 }
-@media (max-width:1680px){
-    .SignIn_paragraph{
-        font-size: 12px;
-    }
-    .SignIn_element a {
-        font-size: 13px;
-    }
-    .SignIn_element svg{
-        width: 18px;
-        height: 18px;
-    }
+
+aside.wow .Explore_element_menu li a {
+    flex-direction: row;
 }
-@media(max-width:1380px){
-    aside{
-        width: 10%;
-    }
-    .explore_Container ul li a {
-        flex-direction: column;
-    }
-    .explore_Container ul li a p {
-        font-size: 11px;
-    }
-    .explore_Container ul li{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
+aside.wow{
+    width: 230px;
+}
+aside.wow .SignIn_paragraph{
+    display: block;
+}
+aside.wow .Sign_In_button{
+    display: block;
+}
+aside.wow .aside_SignIn {
+    display: block;
+}
+aside.wow .menu_Explore.down {
+    display: block;
 }
 
-@media(max-width:1000px){
-    aside{
-        display: flex;
+@media (max-width:1200px) {
+    .Explore_element_menu li a {
         flex-direction: column;
-        align-items: center;
-        width: 90px;
-        padding-left: 10px;
     }
-}
-@media (max-width:820px) {
-    .SignIn_paragraph{
-        font-size: 10px;
-        width: 140px;
-    }
-    .SignIn_element{
+    aside{
         width: 100px;
     }
-    .aside_SignIn_Container{
-        width: 150px;
+    .explore_Container{
+        padding: 10px;
     }
-    .aside_SignIn_Container{
-       
-        padding-left:5px;
+    .SignIn_paragraph{
+        display: none;
+    }
+    .Sign_In_button{
+        display: none;
+    }
+    .aside_SignIn {
+        height: 50px;
+        display: none;
+    }
+    .SignIn_element{
+        width: 35px;
+        height: 23px;
     }
 }
-@media (max-width:620px){
+@media (max-width:720px) {
     aside{
         display: none;
     }
 }
-

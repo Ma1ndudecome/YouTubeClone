@@ -1,8 +1,9 @@
 import { state } from "./changeData.js"
 import { forYouVideoMarking } from "./Marking/profileVideoMarking.js";
 import { formatDuration } from "./FromISOToTime.js";
-import { addMarking } from "./changeData.js";
 
+import { takeComment } from "./AllApiRequest.js";
+import { addMarkingComent } from "./HelpsFunction.js";
 export async function loadVideoInProfile(accessToken, dataProfile, tokenVideo){
     return await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },
@@ -56,31 +57,27 @@ function element(arr){
     }
   }
 }
-async function takeDefaultVideoOrShorts(accessToken, dataProfile, requiredToken, whereCall, button){
-  try{
-    const data = await loadVideoInProfile(accessToken, dataProfile, requiredToken)
-    const videoId = data.data.items.map(el => el.contentDetails.videoId).join(',')
-    const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
-    console.log(data)
-    addMarking(detailInformationVideo.data.items, whereCall)
-    if(!data.data.nextPageToken){
-      if(whereCall === 'Videos'){
-        state.isLastVideos = true;
-      }else if(whereCall === 'Shorts'){
-        state.isLastShorts = true;
-      }
-      button.classList.add("none")
-    }else{
-      
-      button.classList.add("block")
-      if (whereCall === 'Videos') {
-        state.pageTokenProfileVideo = data.data.nextPageToken;
-      } else if (whereCall === 'Shorts') {
-        state.pageTokenProfileShorts = data.data.nextPageToken;
+
+
+export function LoadMoreComments(id){
+  const triger = document.querySelector(".trigerContainer")
+
+
+  const observ = new IntersectionObserver((entries)=>{
+    checkEntriesAndTakeResponse(entries, id)
+  })
+
+  observ.observe(triger)
+}
+
+function checkEntriesAndTakeResponse(entries, id){
+  entries.forEach(async (entry)=>{
+    if(entry.isIntersecting){
+      const response = await takeComment(id)
+      if(response.nextPageToken){
+        state.PageTokenComment = response.nextPageToken
+        addMarkingComent(response)
       }
     }
-  }catch(error){
-    console.log(error)
-  }
- 
+  })
 }
