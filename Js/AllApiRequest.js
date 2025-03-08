@@ -111,6 +111,13 @@ export function getDataAccount(accessToken){
 export function TakeSubscriber(access_token, pageTokenSubscribe){
   return axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&access_token=${access_token}&maxResults=7&pageToken=${pageTokenSubscribe}`)
 }
+
+export async function TakeTrending() {
+    const newsData = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=20&videoDuration=short&chart=mostPopular&maxResults=20&key=${APIKEY}`);
+    const IDVideo = newsData.data.items.map(el => el.id.videoId).join(',')
+    const detailsInf = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`);
+    return detailsInf;
+}
 export async function SearchContent(content){
     try{
         const videoRequest = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${content}&key=${APIKEY}`)
