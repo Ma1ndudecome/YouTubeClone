@@ -125,6 +125,8 @@ async function loadSubsiber(access_token = ""){
         console.log(dataSubsribe)
         if(dataSubsribe.data.nextPageToken){
             pageTokenSubscribe = dataSubsribe.data.nextPageToken 
+
+            console.log("2")
         }else{
             buttonMoreSubscriber.remove()
         }
@@ -138,9 +140,80 @@ async function loadSubsiber(access_token = ""){
         console.log(error)
     }
    
+ }
+// start
+// function f1 (){
+
+
+//  let clickount = 0;
+//  const buttonSubscribe = document.querySelector("..aside_SignIn_buttonMore")
+ 
+//  buttonSubscribe.addEventListener("click",async () =>{
+//     clickount ++;
+
+//     const maxResults = (clickount === 1) ? 7 : 50;
+
+//     try{
+//         const dataSubscribe = await aios.get(
+//             `https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&maxResults=${maxResults}&access_token=${access_token}`)
+//     }catch(error){
+//         console.log(error)
+//     }
+
+// })
+// }
+
+//Показать кнопки Покахать все и скрыть подписки 
+
+const show_All_Hide_All = document.querySelector(".aside_bottom_Show_All_Hide_All")
+const aside_bottom_Show_All_Hide_All = function () {
+   
+   show_All_Hide_All.style.display = "block"
+
+   console.log("1")
 }
+
+const show_All = document.querySelector(".show_All")
+
+const show_All_Display_block = function () {
+    show_All.style.display = "flex"
+    // show_All.style.width = "100%"
+}
+
+
 
 buttonMoreSubscriber.onclick = () => {
-    loadSubsiber(state.acessToken)
+    loadSubsiber(state.access_token)
+    
+    aside_bottom_Show_All_Hide_All();
+     show_All_Display_block();
 }
 
+
+//Скрыть все
+const hide_All = document.querySelector(".hide_All")
+
+// const hide_All_Function = function () {
+//    hide_All.onclick = () =>{
+
+//     loadSubsiber(state.acessToken )
+
+//     show_All_Hide_All.style.display = "none"
+//    }
+// }
+// hide_All_Function()
+
+hide_All.onclick = () =>{
+
+    loadSubsiber(state.access_token )
+    
+    show_All_Hide_All.style.display = "none"
+   }
+
+   
+
+   show_All.onclick = () =>{
+
+    show_All.style.display = "none"
+    show_All_Hide_All.style.display = "none"
+   }
