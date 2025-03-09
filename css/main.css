@@ -82,8 +82,11 @@ ol, ul{
     line-height: 20px;
     font-weight: 500;
     color:var(--bordColor);
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 .Main_container_video_title_info{
     font-family: "Roboto", "Arial", sans-serif;

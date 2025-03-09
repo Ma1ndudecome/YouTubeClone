@@ -1,14 +1,12 @@
 import { MarkingCommentItem } from "./Marking/MarkingPlayerVideo.js"
-import { markingShowMore } from "./Marking/Marking.js"
-import { state } from "./changeData.js"
+import { markingShowMore, markingProfile } from "./Marking/Marking.js"
+import { state, slideToButton} from "./changeData.js"
 import { inserEl } from "./main.js"
-import { liked, uhliked } from "./Listners.js"
-import { getRatingVideo, takeMoreInfoChannel } from "./AllApiRequest.js"
-import { markingProfile } from "./Marking/Marking.js"
-import { takeMoreVideoAnyProfile } from "./AllApiRequest.js"
-import { slideToButton } from "./changeData.js"
+import { buttonLoadMoreFnc, liked, uhliked, listnerToInput, lisnerToLike, likeAndDislikeToVideoFunc} from "./Listners.js"
+import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile  } from "./AllApiRequest.js"
 import { forYouVideoMarking, shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
+import { LoadMoreComments } from "./infinityScrollInProfile.js"
 
 export function addMarkingComent(data) {
 
@@ -178,4 +176,22 @@ export function checkCountVideoAndGiveMarking(video){
       ShortsVideoContainer.insertAdjacentHTML('beforeend', shortVideoMarking(el.snippet.thumbnails.medium.url, el.snippet.title, el.statistics.viewCount, el.id))
     })
   }
+}
+export async function addMarkingVideoAndFunctional(main, el, item, dateRequests, imgChannel, ChannelSubs, id){
+
+  main.classList.add('block')
+  
+  isVideo = true
+  inserEl(el, "afterbegin", item)
+  shortLength('.Main_container_blockInfo_description_link', 150)
+  buttonLoadMoreFnc(dateRequests, imgChannel, ChannelSubs)
+
+  const response = await takeComment(id)
+
+  addMarkingComent(response)
+  listnerToInput()
+  lisnerToLike()
+  likeAndDislikeToVideoFunc(id)
+  checkAndShowRatingVideo(id)
+  LoadMoreComments(id)
 }

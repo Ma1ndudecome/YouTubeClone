@@ -34,9 +34,6 @@ gamingBtn.onclick = (event) => {
                     })
 
             })
-
-
-
 }
 
 

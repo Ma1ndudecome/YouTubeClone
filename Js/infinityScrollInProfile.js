@@ -62,7 +62,7 @@ function element(arr){
 export function LoadMoreComments(id){
   const triger = document.querySelector(".trigerContainer")
 
-
+  console.log(triger)
   const observ = new IntersectionObserver((entries)=>{
     checkEntriesAndTakeResponse(entries, id)
   })
