@@ -2,6 +2,8 @@ import { makeMarkingVideo } from './Marking/markingVideo.js'
 import { formatDuration } from './FromISOToTime.js'
 import { fromViewToShortView } from './ViewToViewLikeToLike.js'
 import { state } from './changeData.js'
+import axios from 'axios'
+
 const triger = document.querySelector(".triger")
 export let dateRequest = []
 let pageToken = ''
@@ -31,7 +33,7 @@ async function LoadVideo() {
         console.log(error)
     }
 }
-LoadVideo()
+// LoadVideo()
 const observ = new IntersectionObserver((entries)=>{
     if(isVideo){
         return
