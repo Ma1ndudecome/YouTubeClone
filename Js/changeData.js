@@ -6,7 +6,8 @@ import { formatDuration } from "./FromISOToTime.js"
 import { loadVideoInProfile, loadNextVideo } from "./infinityScrollInProfile.js"
 import { checkPageToken } from "./infinityScrollInProfile.js"
 import { channelData, moreBtn } from "./loadDataChannel.js"
-import { Axios as axios } from "axios";
+import axios from 'axios'
+
 import { TakeShortAndLongVideo,navInProfile, checkCountVideoAndGiveMarking } from "./HelpsFunction.js"
 
 let profileMarking;//Переменная для сохранения разметки профиля

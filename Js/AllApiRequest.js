@@ -1,7 +1,8 @@
 import { state } from "./changeData.js";
 import { formatDuration } from "./FromISOToTime.js";
 import { TakeShortAndLongVideo } from "./HelpsFunction.js";
-import { Axios as axios } from "axios";
+import axios from 'axios'
+
 
 const urlToken = 'https://oauth2.googleapis.com/token';
 export async function takeCountCommentUnderVideo(videoId){
