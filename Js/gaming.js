@@ -9,6 +9,7 @@ const gamingBtn = document.querySelector(".gaming")
 import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { fromViewToShortView } from "./ViewToViewLikeToLike.js";
 import { markingGaming } from "./Marking/Marking.js";
+import { Axios as axios } from "axios";
 
 import { formatDuration } from "./FromISOToTime.js";
 
