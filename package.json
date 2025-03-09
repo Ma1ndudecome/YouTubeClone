@@ -5,9 +5,9 @@
   "description": "it's clone YouTube",
   "main": "main.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "parcel index.html --port 5173",
+    "build": "parcel build index.html",
+    "preview": "parcel serve dist"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,8 @@
     "axios": "^1.8.2"
   },
   "devDependencies": {
-    "vite": "^6.2.1"
+    "buffer": "^6.0.3",
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
   }
 }
