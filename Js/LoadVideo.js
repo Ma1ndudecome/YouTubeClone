@@ -21,7 +21,6 @@ async function LoadVideo() {
         const MoreStatisticVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`)
 
         await MoreStatisticVideo.data.items.forEach(el => {
-            console.log(el)
             if (el.snippet.liveBroadcastContent === 'none') {
                 const date = new Date(el.snippet.publishedAt)
                 const result = dateFns.formatDistanceToNow(date, { addSuffix: true })

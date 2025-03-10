@@ -52,7 +52,7 @@ main.addEventListener("click", async (e) => {
 
         const dataChannel = await ImgAndSubscribeChannel(nameChannel)
 
-        main.innerHTML = MarkingPlayerAny(id, dateRequests, state, dataChannel)
+        main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
 
         addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description,  dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel, id)
 
