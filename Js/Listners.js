@@ -1,11 +1,12 @@
-import {moreBtn} from './HelpsFunction.js'
+import {moreBtn, shortLength, dateTime} from './HelpsFunction.js'
 import { shortLength } from './HelpsFunction.js'
-import { checkAndShowRatingVideo } from './HelpsFunction.js'
 import { state } from './changeData.js'
 import { SearchContent } from "./AllApiRequest.js"
 import { container } from './LoadVideo.js'
 import { markinHistoryVideo } from './Marking/Marking.js'
 import { fromViewToShortView } from './ViewToViewLikeToLike.js'
+import { formatDuration } from './FromISOToTime.js'
+
 
 const SingButton = document.querySelector(".SignIn_element")
 SingButton.onclick = (e)=>{
@@ -180,7 +181,7 @@ async function getContentAndAddMarking(input){
        const videos =  await SearchContent(input.value)
         console.log(videos)
        videos.data.items.forEach(el=>{
-        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id)) : false
+        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt))) : false
        })
        container.className = 'Main_container dF jcC'
        contVideo.classList.add("dF", "fdC", "gap15P", "w80Procc")

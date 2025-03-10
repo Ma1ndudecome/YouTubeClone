@@ -70,18 +70,25 @@
 .name-chanel,
 .count-views,
 .overview-video {
-    color: #aaa;
-    opacity: 0.8;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 4rem;
-    /* height: 20px; */
-    white-space: normal;
     font-size: 1rem;
     font-weight: 400;
+    color: var(--forAllTextWithSmallTransperent);
 
 }
-
+.imgProfile{
+    width: 35px;
+    height: 35px;
+}
+.imgProfile img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
 
 .history-nav-menu {
     padding: 0 20px;

@@ -195,3 +195,8 @@ export async function addMarkingVideoAndFunctional(main, el, item, dateRequests,
   checkAndShowRatingVideo(id)
   LoadMoreComments(id)
 }
+
+export function dateTime(time){
+  const date = new Date(time)
+  return dateFns.formatDistanceToNow(date, { addSuffix: true })
+}

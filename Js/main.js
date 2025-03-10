@@ -10,10 +10,9 @@ const main = document.querySelector(".Main_container")
 
 
 main.addEventListener("click", async (e) => {
-    console.log('marking')
     main.classList.remove("grid")
-    if (e.target.closest(".Main_container_video")) {
-        console.log('marking')
+    if (e.target.closest(".Main_container_video") || e.target.closest(".container-video")) {
+        console.log(e.target)
         if (e.target.classList.contains("Main_container_video_title_info_name")) {
             const NameChannel = e.target.textContent
             markProfile(main,NameChannel)
