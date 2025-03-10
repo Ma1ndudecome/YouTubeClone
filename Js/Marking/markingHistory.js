@@ -70,7 +70,7 @@ export function markinHistoryVideo(videoImg, videoName, chanelName, countViews, 
   </div>
 </div>
     <div class="chanel-info">
-        <a class="name-chanel" href="">${chanelName}</a>
+        <span class="name-chanel nameChannelSelect">${chanelName}</span>
         <div style="display:inline-block; font-size:1rem; color:#aaa;" >•</div>
         <span class="count-views">${countViews}</span>
     </div>

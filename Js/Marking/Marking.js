@@ -279,7 +279,7 @@ export function markinHistoryVideo(videoImg, videoName, chanelName, countViews, 
         </div>
         <div class="chanel-info dF aiC gap10 mT10p">
             <span class="imgProfile"><img src="${videoImg}"></span>
-            <span class="name-chanel">${chanelName}</span>
+            <span class="name-chanel nameChannelSelect">${chanelName}</span>
         </div>
     <p class="overview-video mT10p">${overview}</p>
 </div>
