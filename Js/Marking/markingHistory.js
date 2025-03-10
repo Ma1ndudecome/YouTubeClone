@@ -49,7 +49,7 @@ export function markinHistory() {
 }
 export function markinHistoryVideo(videoImg, videoName, chanelName, countViews, overview, id) {
     return `
-    <div idVideo = "${id}" class="container-video " style="display: flex;">
+    <div idVideo = "${id}" class="container-video chooseVideo" style="display: flex;">
 <div class="video-img-conteiner"><img
         src="${videoImg}"
         alt=""></div>

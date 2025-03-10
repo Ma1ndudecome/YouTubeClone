@@ -267,7 +267,7 @@ export function markinHistory() {
 }
 export function markinHistoryVideo(videoImg, videoName, chanelName, countViews, overview, id, date, duration) {
     return `
-    <div idvideo=${id} class="container-video " style="display: flex; height: 260px;">
+    <div idvideo=${id} class="container-video chooseVideo" style="display: flex; height: 260px;">
         <div class="video-img-conteiner H100 w36P">
             <img src="${videoImg}" alt="">
             <span class="Container_video_preview_duration">${duration}</span>
