@@ -181,7 +181,7 @@ async function getContentAndAddMarking(input){
        const videos =  await SearchContent(input.value)
         console.log(videos)
        videos.data.items.forEach(el=>{
-        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt))) : false
+        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration))) : false
        })
        container.className = 'Main_container dF jcC'
        contVideo.classList.add("dF", "fdC", "gap15P", "w80Procc")
