@@ -130,3 +130,10 @@ export async function SearchContent(content){
         console.log(err);
     }
 }
+export async function getMoreStatisticId(id){
+    try{
+        return await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${id}&key=${APIKEY}`)
+    }catch(err){
+        console.log(err);
+    }
+}

@@ -4,12 +4,12 @@ export function forYouVideoMarking(prewievVideo, durationVideo, titleVideo, coun
      const date = new Date(dateV)
     const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
     return `
-            <div class="video_box" idVideo="${id}">
+            <div class="video_box chooseVideoProfile" idVideo="${id}">
         <div class="Container_video_preview">
             <img src="${prewievVideo}" alt="">
             <span class="Container_video_preview_duration">${durationVideo}</span>
         </div>
-         <div class="Container_video_title">${titleVideo}</div>
+         <div class="Container_video_title nameChannelSelect">${titleVideo}</div>
         <div class="Container_video_statistic dF">
             <div class="Container_video_statistic_veiw">${fromViewToShortView(countWiev)}</div>
             •
