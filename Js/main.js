@@ -1,6 +1,6 @@
 
 import "./gaming.js"; import "./LoadVideo.js"; import "./PostToToken.js"; import "./Listners.js"; import "./ReturnPushState.js"; import "./HeaderANDAside.js";import "./changeHistoryPage.js"
-import {  markProfile, addMarkingVideoAndFunctional, openVideoEverywere} from "./HelpsFunction.js"
+import {  markProfile,openVideoEverywere} from "./HelpsFunction.js"
 const main = document.querySelector(".Main_container")
 
 
@@ -16,6 +16,8 @@ main.addEventListener("click", async (e) => {
         }
     }else if(e.target.closest(".chooseVideoProfile")){
         openVideoEverywere(e, ".chooseVideoProfile", 2, main)
+        
+
     }
 })
 

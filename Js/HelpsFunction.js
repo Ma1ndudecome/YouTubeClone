@@ -219,4 +219,5 @@ export async function openVideoEverywere(e, classVideo, call, main){
   call === 1 ? main.innerHTML =  MarkingPlayerAny(id, dateRequests, state, dataChannel)  :main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
 
   call === 1 ? addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel, id) : addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount, id)
+  call === 2 ? document.querySelector(".leftSide_subscribe_button").remove() : false
 }
