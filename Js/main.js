@@ -2,6 +2,8 @@
 import "./gaming.js"; import "./LoadVideo.js"; import "./PostToToken.js"; import "./Listners.js"; import "./ReturnPushState.js"; import "./HeaderANDAside.js";import "./changeHistoryPage.js"
 import {  markProfile,openVideoEverywere} from "./HelpsFunction.js"
 const main = document.querySelector(".Main_container")
+import { state } from "./changeData.js";
+
 
 
 main.addEventListener("click", async (e) => {

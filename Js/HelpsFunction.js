@@ -2,7 +2,7 @@ import { MarkingCommentItem, MarkingPlayerAny, MarkingPlayer } from "./Marking/M
 import { markingShowMore, markingProfile } from "./Marking/Marking.js"
 import { state, slideToButton} from "./changeData.js"
 import { inserEl } from "./main.js"
-import { buttonLoadMoreFnc, liked, uhliked, listnerToInput, lisnerToLike, likeAndDislikeToVideoFunc} from "./Listners.js"
+import { buttonLoadMoreFnc, liked, uhliked, listnerToInput, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe} from "./Listners.js"
 import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "./AllApiRequest.js"
 import { forYouVideoMarking, shortVideoMarking } from "./Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
@@ -215,9 +215,13 @@ export async function openVideoEverywere(e, classVideo, call, main){
 
   const dataChannel = await ImgAndSubscribeChannel(nameChannel)
  
-
+  
   call === 1 ? main.innerHTML =  MarkingPlayerAny(id, dateRequests, state, dataChannel)  :main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
 
   call === 1 ? addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel, id) : addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount, id)
-  call === 2 ? document.querySelector(".leftSide_subscribe_button").remove() : false
+  call === 2 ? document.querySelector(".leftSide_subscribe_button").remove() : ListnersSubscribe(dataChannel.ChannelId)
+}
+export function changeTextContentAndAddClasslist(button,text, clas, addOrRemove){
+  button.textContent = text
+  addOrRemove === 0 ? button.classList.add(clas) : button.classList.remove(clas)
 }

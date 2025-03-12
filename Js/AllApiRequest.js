@@ -56,7 +56,7 @@ async function takeInfoChannel(nameChannel){
         }
     })
     console.log(moreInfoChannel)
-    return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount}
+    return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount, ChannelId:idChannel.data.items[0].id.channelId}
 }
 export async function takeMoreInfoChannel(nameChannel) {
     const name = nameChannel.replaceAll(' ', '+')
@@ -136,4 +136,61 @@ export async function getMoreStatisticId(id){
     }catch(err){
         console.log(err);
     }
+}
+export async function addSubscribe(channelID) {
+    try{
+        return await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&key=${APIKEY}`, 
+        {
+            snippet:{
+                resourceId:{
+                    kind:"youtube#channel",
+                    channelId:channelID
+                }
+            }
+        },
+        {
+            headers:{
+                'Authorization': `Bearer ${state.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+
+        }
+    )
+    }catch(err){
+        console.log(err)
+    }
+    
+}
+
+export async function removeSubscribe(channelID) {
+    const response = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=id&forChannelId=${channelID}&mine=true&key=${APIKEY}`, {
+        headers:{
+            'Authorization':`Bearer ${state.accessToken}`
+        }
+    })
+    const id = response.data.items[0]?.id
+
+    return await axios.delete(`https://www.googleapis.com/youtube/v3/subscriptions?id=${id}&key=${APIKEY}`,
+        {
+            headers:{
+                'Authorization':`Bearer ${state.accessToken}`,
+                "Content-Type":"application/json"
+            }
+        }
+    )
+    
+}
+
+export async function userSubscriber(idChannel) {
+ 
+    const response  = await axios.get(
+        `https://www.googleapis.com/youtube/v3/subscriptions?part=id&forChannelId=${idChannel}&mine=true&key=${APIKEY}`,
+        {
+            headers: {
+                Authorization: `Bearer ${state.acessToken}`
+            }
+        }
+    )
+    
+    return response.data.items.length > 0
 }

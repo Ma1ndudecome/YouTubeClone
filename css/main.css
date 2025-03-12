@@ -163,6 +163,9 @@ iframe{
    
     color:var(--bordColor)
 }
+.subscribed{
+    background-color: var(--forAllTextWithSmallTransperent)!important;
+}
 .leftSide_title_subscribe{
     font-weight: 300;
     font-size: 12px;
@@ -189,6 +192,7 @@ iframe{
 .leftSide_subscribe_button button:hover{
     background-color: var(--bgColorTransperentHover)
 }
+
 .rightSide_emotion{
     width: 20%;
     display: flex;

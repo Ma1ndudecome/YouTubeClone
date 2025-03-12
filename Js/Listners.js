@@ -1,11 +1,12 @@
-import {moreBtn, shortLength, dateTime} from './HelpsFunction.js'
+import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist} from './HelpsFunction.js'
 import { shortLength } from './HelpsFunction.js'
 import { state } from './changeData.js'
-import { SearchContent } from "./AllApiRequest.js"
+import { SearchContent, addSubscribe, removeSubscribe, userSubscriber } from "./AllApiRequest.js"
 import { container } from './LoadVideo.js'
 import { markinHistoryVideo } from './Marking/Marking.js'
 import { fromViewToShortView } from './ViewToViewLikeToLike.js'
 import { formatDuration } from './FromISOToTime.js'
+
 
 
 const SingButton = document.querySelector(".SignIn_element")
@@ -190,3 +191,28 @@ async function getContentAndAddMarking(input){
 }
 
 
+export async function ListnersSubscribe(ChannelId){
+    const button = document.querySelector(".leftSide_subscribe_button button")
+    let countClick = 0
+    console.log(await userSubscriber(ChannelId))
+    if(await userSubscriber(ChannelId)){
+        changeTextContentAndAddClasslist(button, 'Subscribed', 'subscribed', 0 )
+
+        // button.textContent = 'Subscribed'
+        // button.classList.add('subscribed')
+        countClick = 1
+    }
+    button.onclick = ()=>{
+        if(countClick === 0){
+            changeTextContentAndAddClasslist(button, 'Subscribed', 'subscribed', 0 )
+            // button.textContent = 'Subscribed'
+            // button.classList.add('subscribed')
+            countClick += 1
+        }else if(countClick === 1){
+            changeTextContentAndAddClasslist(button, 'Subscribe', 'subscribed', 1 )
+            // button.textContent = 'Subscribe'
+            // button.classList.remove('subscribed')
+            countClick = 0
+        }
+    }
+}
