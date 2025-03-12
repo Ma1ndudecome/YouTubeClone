@@ -207,6 +207,7 @@ export async function ListnersSubscribe(ChannelId){
 
         }else if(countClick === 1){
             changeTextContentAndAddClasslist(button, 'Subscribe', 'subscribed', 1 )
+            removeSubscribe(ChannelId)
             countClick = 0
         }
     }
