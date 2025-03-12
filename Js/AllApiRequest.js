@@ -138,8 +138,9 @@ export async function getMoreStatisticId(id){
     }
 }
 export async function addSubscribe(channelID) {
+    console.log(state.acessToken)
     try{
-        return await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&key=${APIKEY}`, 
+        return await axios.post(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&key=${APIKEY}`, 
         {
             snippet:{
                 resourceId:{
@@ -150,7 +151,7 @@ export async function addSubscribe(channelID) {
         },
         {
             headers:{
-                'Authorization': `Bearer ${state.accessToken}`,
+                'Authorization': `Bearer ${state.acessToken}`,
                 'Content-Type': 'application/json'
             }
 
@@ -165,7 +166,7 @@ export async function addSubscribe(channelID) {
 export async function removeSubscribe(channelID) {
     const response = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=id&forChannelId=${channelID}&mine=true&key=${APIKEY}`, {
         headers:{
-            'Authorization':`Bearer ${state.accessToken}`
+            'Authorization':`Bearer ${state.acessToken}`
         }
     })
     const id = response.data.items[0]?.id
@@ -173,7 +174,7 @@ export async function removeSubscribe(channelID) {
     return await axios.delete(`https://www.googleapis.com/youtube/v3/subscriptions?id=${id}&key=${APIKEY}`,
         {
             headers:{
-                'Authorization':`Bearer ${state.accessToken}`,
+                'Authorization':`Bearer ${state.acessToken}`,
                 "Content-Type":"application/json"
             }
         }

@@ -197,21 +197,16 @@ export async function ListnersSubscribe(ChannelId){
     console.log(await userSubscriber(ChannelId))
     if(await userSubscriber(ChannelId)){
         changeTextContentAndAddClasslist(button, 'Subscribed', 'subscribed', 0 )
-
-        // button.textContent = 'Subscribed'
-        // button.classList.add('subscribed')
         countClick = 1
     }
     button.onclick = ()=>{
         if(countClick === 0){
             changeTextContentAndAddClasslist(button, 'Subscribed', 'subscribed', 0 )
-            // button.textContent = 'Subscribed'
-            // button.classList.add('subscribed')
+            addSubscribe(ChannelId)
             countClick += 1
+
         }else if(countClick === 1){
             changeTextContentAndAddClasslist(button, 'Subscribe', 'subscribed', 1 )
-            // button.textContent = 'Subscribe'
-            // button.classList.remove('subscribed')
             countClick = 0
         }
     }
