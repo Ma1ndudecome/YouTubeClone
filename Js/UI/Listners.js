@@ -1,6 +1,6 @@
 import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength} from '../untils/HelpsFunction.js'
 import { state } from '../features/changeData.js'
-import { SearchContent, addSubscribe, removeSubscribe, userSubscriber } from "../api/AllApiRequest.js"
+import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment } from "../api/AllApiRequest.js"
 import { container } from '../features/LoadVideo.js'
 import { markinHistoryVideo } from '../Marking/Marking.js'
 import { fromViewToShortView } from '../untils/ViewToViewLikeToLike.js'
@@ -138,6 +138,16 @@ export function listnerToInput(){
         button.classList.add("sendButton")
         
     })
+    return {button:button, input:inputCont}
+}
+export function ListnersToSendComment(id, channelId){
+    const elements = listnerToInput()
+    elements.button.onclick = ()=>{
+        if(elements.input.value === ''){
+            return
+        }
+        putComment(elements.input.value, id, channelId)
+    }
 }
 export function buttonLoadMoreFnc(dateRequests, state, countSubs){
     let countClick = 0

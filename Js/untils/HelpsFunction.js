@@ -2,7 +2,7 @@ import { MarkingCommentItem, MarkingPlayerAny, MarkingPlayer } from "../Marking/
 import { markingShowMore, markingProfile } from "../Marking/Marking.js"
 import { state, slideToButton} from "../features/changeData.js"
 import { inserEl } from "../main.js"
-import { buttonLoadMoreFnc, liked, uhliked, listnerToInput, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe} from "../UI/Listners.js"
+import { buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe} from "../UI/Listners.js"
 import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "../api/AllApiRequest.js"
 import { forYouVideoMarking, shortVideoMarking } from "../Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
@@ -179,7 +179,7 @@ export function checkCountVideoAndGiveMarking(video){
     })
   }
 }
-export async function addMarkingVideoAndFunctional(main, el, item, dateRequests, imgChannel, ChannelSubs, id){
+export async function addMarkingVideoAndFunctional(main, el, item, dateRequests, imgChannel, ChannelSubs, id, channelId){
 
   main.classList.add('block')
   
@@ -191,7 +191,7 @@ export async function addMarkingVideoAndFunctional(main, el, item, dateRequests,
   const response = await takeComment(id)
 
   addMarkingComent(response)
-  listnerToInput()
+  ListnersToSendComment(id, channelId)
   lisnerToLike()
   likeAndDislikeToVideoFunc(id)
   checkAndShowRatingVideo(id)
@@ -215,11 +215,12 @@ export async function openVideoEverywere(e, classVideo, call, main){
   const nameChannel = e.target.closest(`${classVideo}`).querySelector(".nameChannelSelect").textContent
   
   const dataChannel = await ImgAndSubscribeChannel(nameChannel)
+  console.log(dataChannel)
  
   
   call === 1 ? main.innerHTML =  MarkingPlayerAny(id, dateRequests, state, dataChannel)  :main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
 
-  call === 1 ? addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel, id) : addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount, id)
+  call === 1 ? addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel, id, dataChannel.ChannelId) : addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount, id, dataChannel.ChannelId)
   call === 2 ? document.querySelector(".leftSide_subscribe_button").remove() : ListnersSubscribe(dataChannel.ChannelId)
 }
 export function changeTextContentAndAddClasslist(button,text, clas, addOrRemove){

@@ -196,9 +196,27 @@ export async function userSubscriber(idChannel) {
     return response.data.items.length > 0
 }
 
-export async function putComment(text) {
+export async function putComment(text, videoId, channelId) {
     try{
-        
+        return await axios.post("https://www.googleapis.com/youtube/v3/commentThreads?part=snippet", 
+            {
+                snippet: {
+                    channelId:channelId,
+                    videoId:videoId,
+                    topLevelComment:{
+                        snippet:{
+                            textOriginal:text
+                        }
+                    }
+                }
+            },
+            {
+                headers:{
+                    Authorization:`Bearer ${state.acessToken}`,
+                     'Content-Type': 'application/json'
+                }
+            }
+        )
     }catch(err){
         console.log(err)
     }
