@@ -13,16 +13,20 @@ import { dateRequest } from "../features/LoadVideo.js"
 export function addMarkingComent(data) {
 
   const containerComment = document.querySelector(".AllComment_Container")
+  if(!data.items){
+    const dates = data.snippet.topLevelComment.snippet
+    containerComment.insertAdjacentHTML("afterbegin", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, dateTime(dates.publishedAt), dates.textDisplay, dates.likeCount, dates.viewerRating))
+  }else{
+    data.items.forEach(({ snippet }) => {
+      const dates = snippet.topLevelComment.snippet
+      containerComment.insertAdjacentHTML("beforeend", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, dateTime(dates.publishedAt), dates.textDisplay, dates.likeCount, snippet.topLevelComment.snippet.viewerRating))
+    })
+  }
+  
+  if(data.nextPageToken){
+    state.PageTokenComment = data.nextPageToken
+  }
 
-  data.items.forEach(({ snippet }) => {
-    const dates = snippet.topLevelComment.snippet
-    const date = new Date(dates.publishedAt)
-    const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
-
-    containerComment.insertAdjacentHTML("beforeend", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, result, dates.textDisplay, dates.likeCount, snippet.topLevelComment.snippet.viewerRating))
-
-  })
-  state.PageTokenComment = data.nextPageToken
   document.querySelectorAll(".AllComment_Container_item_statistic").forEach(el => {
     const rating = el.getAttribute("viewerrating")
     if (rating === 'like') {
@@ -227,3 +231,4 @@ export function changeTextContentAndAddClasslist(button,text, clas, addOrRemove)
   button.textContent = text
   addOrRemove === 0 ? button.classList.add(clas) : button.classList.remove(clas)
 }
+

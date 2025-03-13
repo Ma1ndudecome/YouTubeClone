@@ -1,4 +1,4 @@
-import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength} from '../untils/HelpsFunction.js'
+import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, addMarkingComent} from '../untils/HelpsFunction.js'
 import { state } from '../features/changeData.js'
 import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment } from "../api/AllApiRequest.js"
 import { container } from '../features/LoadVideo.js'
@@ -142,11 +142,14 @@ export function listnerToInput(){
 }
 export function ListnersToSendComment(id, channelId){
     const elements = listnerToInput()
-    elements.button.onclick = ()=>{
+    elements.button.onclick = async ()=>{
         if(elements.input.value === ''){
             return
         }
-        putComment(elements.input.value, id, channelId)
+        const responseComment = await putComment(elements.input.value, id, channelId)
+        console.log(responseComment)
+        addMarkingComent(responseComment.data)
+
     }
 }
 export function buttonLoadMoreFnc(dateRequests, state, countSubs){
