@@ -1,27 +1,32 @@
-import { MarkingCommentItem, MarkingPlayerAny, MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
-import { markingShowMore, markingProfile } from "./Marking/Marking.js"
-import { state, slideToButton} from "./changeData.js"
-import { inserEl } from "./main.js"
-import { buttonLoadMoreFnc, liked, uhliked, listnerToInput, lisnerToLike, likeAndDislikeToVideoFunc} from "./Listners.js"
-import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "./AllApiRequest.js"
-import { forYouVideoMarking, shortVideoMarking } from "./Marking/profileVideoMarking.js"
+import { MarkingCommentItem, MarkingPlayerAny, MarkingPlayer } from "../Marking/MarkingPlayerVideo.js"
+import { markingShowMore, markingProfile } from "../Marking/Marking.js"
+import { state, slideToButton} from "../features/changeData.js"
+import { inserEl } from "../main.js"
+import { buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe} from "../UI/Listners.js"
+import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "../api/AllApiRequest.js"
+import { forYouVideoMarking, shortVideoMarking } from "../Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
-import { LoadMoreComments } from "./infinityScrollInProfile.js"
-import { dateRequest } from "./LoadVideo.js"
+import { LoadMoreComments } from "../infinityScrollInProfile.js"
+import { dateRequest } from "../features/LoadVideo.js"
+
 
 export function addMarkingComent(data) {
 
   const containerComment = document.querySelector(".AllComment_Container")
+  if(!data.items){
+    const dates = data.snippet.topLevelComment.snippet
+    containerComment.insertAdjacentHTML("afterbegin", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, dateTime(dates.publishedAt), dates.textDisplay, dates.likeCount, dates.viewerRating))
+  }else{
+    data.items.forEach(({ snippet }) => {
+      const dates = snippet.topLevelComment.snippet
+      containerComment.insertAdjacentHTML("beforeend", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, dateTime(dates.publishedAt), dates.textDisplay, dates.likeCount, snippet.topLevelComment.snippet.viewerRating))
+    })
+  }
+  
+  if(data.nextPageToken){
+    state.PageTokenComment = data.nextPageToken
+  }
 
-  data.items.forEach(({ snippet }) => {
-    const dates = snippet.topLevelComment.snippet
-    const date = new Date(dates.publishedAt)
-    const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
-
-    containerComment.insertAdjacentHTML("beforeend", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, result, dates.textDisplay, dates.likeCount, snippet.topLevelComment.snippet.viewerRating))
-
-  })
-  state.PageTokenComment = data.nextPageToken
   document.querySelectorAll(".AllComment_Container_item_statistic").forEach(el => {
     const rating = el.getAttribute("viewerrating")
     if (rating === 'like') {
@@ -178,7 +183,7 @@ export function checkCountVideoAndGiveMarking(video){
     })
   }
 }
-export async function addMarkingVideoAndFunctional(main, el, item, dateRequests, imgChannel, ChannelSubs, id){
+export async function addMarkingVideoAndFunctional(main, el, item, dateRequests, imgChannel, ChannelSubs, id, channelId){
 
   main.classList.add('block')
   
@@ -190,7 +195,7 @@ export async function addMarkingVideoAndFunctional(main, el, item, dateRequests,
   const response = await takeComment(id)
 
   addMarkingComent(response)
-  listnerToInput()
+  ListnersToSendComment(id, channelId)
   lisnerToLike()
   likeAndDislikeToVideoFunc(id)
   checkAndShowRatingVideo(id)
@@ -212,11 +217,18 @@ export async function openVideoEverywere(e, classVideo, call, main){
   dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
 
   const nameChannel = e.target.closest(`${classVideo}`).querySelector(".nameChannelSelect").textContent
-
+  
   const dataChannel = await ImgAndSubscribeChannel(nameChannel)
+  console.log(dataChannel)
  
-
+  
   call === 1 ? main.innerHTML =  MarkingPlayerAny(id, dateRequests, state, dataChannel)  :main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
 
-  call === 1 ? addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel, id) : addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount, id)
+  call === 1 ? addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel, id, dataChannel.ChannelId) : addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount, id, dataChannel.ChannelId)
+  call === 2 ? document.querySelector(".leftSide_subscribe_button").remove() : ListnersSubscribe(dataChannel.ChannelId)
 }
+export function changeTextContentAndAddClasslist(button,text, clas, addOrRemove){
+  button.textContent = text
+  addOrRemove === 0 ? button.classList.add(clas) : button.classList.remove(clas)
+}
+

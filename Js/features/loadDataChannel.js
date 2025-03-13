@@ -1,4 +1,4 @@
-import { InfoAboutChannel } from "./Marking/Marking.js"
+import { InfoAboutChannel } from "../Marking/Marking.js"
 import { state } from "./changeData.js"
 import axios from 'axios'
 

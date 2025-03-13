@@ -1,11 +1,11 @@
-import {moreBtn, shortLength, dateTime} from './HelpsFunction.js'
-import { shortLength } from './HelpsFunction.js'
-import { state } from './changeData.js'
-import { SearchContent } from "./AllApiRequest.js"
-import { container } from './LoadVideo.js'
-import { markinHistoryVideo } from './Marking/Marking.js'
-import { fromViewToShortView } from './ViewToViewLikeToLike.js'
-import { formatDuration } from './FromISOToTime.js'
+import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, addMarkingComent} from '../untils/HelpsFunction.js'
+import { state } from '../features/changeData.js'
+import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment } from "../api/AllApiRequest.js"
+import { container } from '../features/LoadVideo.js'
+import { markinHistoryVideo } from '../Marking/Marking.js'
+import { fromViewToShortView } from '../untils/ViewToViewLikeToLike.js'
+import { formatDuration } from '../untils/FromISOToTime.js'
+
 
 
 const SingButton = document.querySelector(".SignIn_element")
@@ -138,6 +138,19 @@ export function listnerToInput(){
         button.classList.add("sendButton")
         
     })
+    return {button:button, input:inputCont}
+}
+export function ListnersToSendComment(id, channelId){
+    const elements = listnerToInput()
+    elements.button.onclick = async ()=>{
+        if(elements.input.value === ''){
+            return
+        }
+        const responseComment = await putComment(elements.input.value, id, channelId)
+        console.log(responseComment)
+        addMarkingComent(responseComment.data)
+
+    }
 }
 export function buttonLoadMoreFnc(dateRequests, state, countSubs){
     let countClick = 0
@@ -190,3 +203,24 @@ async function getContentAndAddMarking(input){
 }
 
 
+export async function ListnersSubscribe(ChannelId){
+    const button = document.querySelector(".leftSide_subscribe_button button")
+    let countClick = 0
+    console.log(await userSubscriber(ChannelId))
+    if(await userSubscriber(ChannelId)){
+        changeTextContentAndAddClasslist(button, 'Subscribed', 'subscribed', 0 )
+        countClick = 1
+    }
+    button.onclick = ()=>{
+        if(countClick === 0){
+            changeTextContentAndAddClasslist(button, 'Subscribed', 'subscribed', 0 )
+            addSubscribe(ChannelId)
+            countClick += 1
+
+        }else if(countClick === 1){
+            changeTextContentAndAddClasslist(button, 'Subscribe', 'subscribed', 1 )
+            removeSubscribe(ChannelId)
+            countClick = 0
+        }
+    }
+}

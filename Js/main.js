@@ -1,7 +1,9 @@
 
-import "./gaming.js"; import "./LoadVideo.js"; import "./PostToToken.js"; import "./Listners.js"; import "./ReturnPushState.js"; import "./HeaderANDAside.js";import "./changeHistoryPage.js"
-import {  markProfile, addMarkingVideoAndFunctional, openVideoEverywere} from "./HelpsFunction.js"
+import "./gaming.js"; import "./features/LoadVideo.js"; import "./api/PostToToken.js"; import "./UI/Listners.js"; import "./features/ReturnPushState.js"; import "./UI/HeaderANDAside.js";import "./UI/changeHistoryPage.js"
+import {  markProfile,openVideoEverywere} from "./untils/HelpsFunction.js"
 const main = document.querySelector(".Main_container")
+import { state } from "./features/changeData.js";
+
 
 
 main.addEventListener("click", async (e) => {
@@ -16,6 +18,8 @@ main.addEventListener("click", async (e) => {
         }
     }else if(e.target.closest(".chooseVideoProfile")){
         openVideoEverywere(e, ".chooseVideoProfile", 2, main)
+        
+
     }
 })
 

@@ -1,6 +1,6 @@
-import { state } from "./changeData.js";
-import { formatDuration } from "./FromISOToTime.js";
-import { TakeShortAndLongVideo } from "./HelpsFunction.js";
+import { state } from "../features/changeData.js";
+import { formatDuration } from "../untils/FromISOToTime.js";
+import { TakeShortAndLongVideo } from "../untils/HelpsFunction.js";
 import axios from 'axios'
 
 
@@ -56,7 +56,7 @@ async function takeInfoChannel(nameChannel){
         }
     })
     console.log(moreInfoChannel)
-    return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount}
+    return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount, ChannelId:idChannel.data.items[0].id.channelId}
 }
 export async function takeMoreInfoChannel(nameChannel) {
     const name = nameChannel.replaceAll(' ', '+')
@@ -135,5 +135,89 @@ export async function getMoreStatisticId(id){
         return await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${id}&key=${APIKEY}`)
     }catch(err){
         console.log(err);
+    }
+}
+export async function addSubscribe(channelID) {
+    console.log(state.acessToken)
+    try{
+        return await axios.post(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&key=${APIKEY}`, 
+        {
+            snippet:{
+                resourceId:{
+                    kind:"youtube#channel",
+                    channelId:channelID
+                }
+            }
+        },
+        {
+            headers:{
+                'Authorization': `Bearer ${state.acessToken}`,
+                'Content-Type': 'application/json'
+            }
+
+        }
+    )
+    }catch(err){
+        console.log(err)
+    }
+    
+}
+
+export async function removeSubscribe(channelID) {
+    const response = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=id&forChannelId=${channelID}&mine=true&key=${APIKEY}`, {
+        headers:{
+            'Authorization':`Bearer ${state.acessToken}`
+        }
+    })
+    const id = response.data.items[0]?.id
+
+    return await axios.delete(`https://www.googleapis.com/youtube/v3/subscriptions?id=${id}&key=${APIKEY}`,
+        {
+            headers:{
+                'Authorization':`Bearer ${state.acessToken}`,
+                "Content-Type":"application/json"
+            }
+        }
+    )
+    
+}
+
+export async function userSubscriber(idChannel) {
+ 
+    const response  = await axios.get(
+        `https://www.googleapis.com/youtube/v3/subscriptions?part=id&forChannelId=${idChannel}&mine=true&key=${APIKEY}`,
+        {
+            headers: {
+                Authorization: `Bearer ${state.acessToken}`
+            }
+        }
+    )
+    
+    return response.data.items.length > 0
+}
+
+export async function putComment(text, videoId, channelId) {
+    try{
+        return await axios.post("https://www.googleapis.com/youtube/v3/commentThreads?part=snippet", 
+            {
+                snippet: {
+                    channelId:channelId,
+                    videoId:videoId,
+                    topLevelComment:{
+                        snippet:{
+                            textOriginal:text
+                        }
+                    }
+                }
+            },
+            {
+                headers:{
+                    Authorization:`Bearer ${state.acessToken}`,
+                     'Content-Type': 'application/json'
+                }
+            }
+        )
+    }catch(err){
+        console.log(err)
     }
 }
