@@ -1,6 +1,6 @@
-import { makeMarkingVideo } from './Marking/markingVideo.js'
-import { formatDuration } from './FromISOToTime.js'
-import { fromViewToShortView } from './ViewToViewLikeToLike.js'
+import { makeMarkingVideo } from '../Marking/markingVideo.js'
+import { formatDuration } from '../untils/FromISOToTime.js'
+import { fromViewToShortView } from '../untils/ViewToViewLikeToLike.js'
 import { state } from './changeData.js'
 import axios from 'axios'
 

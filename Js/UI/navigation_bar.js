@@ -1,8 +1,8 @@
 import { aside } from "./HeaderANDAside.js";
-import { container } from "./LoadVideo.js";
-import { makeMarkingVideo } from "./Marking/markingVideo.js";
+import { container } from "./features/LoadVideo.js";
+import { makeMarkingVideo } from "../Marking/markingVideo.js";
 import { fromViewToShortView } from "./ViewToViewLikeToLike.js";
-import { TakeTrending } from "./AllApiRequest.js";
+import { TakeTrending } from "../api/AllApiRequest.js";
 import { formatDuration } from "./FromISOToTime.js";
 
 aside.addEventListener('click', async (e) => {

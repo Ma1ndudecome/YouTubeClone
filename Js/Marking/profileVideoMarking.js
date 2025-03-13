@@ -1,4 +1,4 @@
-import { fromViewToShortView } from "../ViewToViewLikeToLike.js"
+import { fromViewToShortView } from "../untils/ViewToViewLikeToLike.js"
 
 export function forYouVideoMarking(prewievVideo, durationVideo, titleVideo, countWiev, dateV, id) {
      const date = new Date(dateV)

@@ -1,13 +1,14 @@
-import { MarkingCommentItem, MarkingPlayerAny, MarkingPlayer } from "./Marking/MarkingPlayerVideo.js"
-import { markingShowMore, markingProfile } from "./Marking/Marking.js"
-import { state, slideToButton} from "./changeData.js"
-import { inserEl } from "./main.js"
-import { buttonLoadMoreFnc, liked, uhliked, listnerToInput, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe} from "./Listners.js"
-import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "./AllApiRequest.js"
-import { forYouVideoMarking, shortVideoMarking } from "./Marking/profileVideoMarking.js"
+import { MarkingCommentItem, MarkingPlayerAny, MarkingPlayer } from "../Marking/MarkingPlayerVideo.js"
+import { markingShowMore, markingProfile } from "../Marking/Marking.js"
+import { state, slideToButton} from "../features/changeData.js"
+import { inserEl } from "../main.js"
+import { buttonLoadMoreFnc, liked, uhliked, listnerToInput, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe} from "../Listners.js"
+import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "../api/AllApiRequest.js"
+import { forYouVideoMarking, shortVideoMarking } from "../Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
-import { LoadMoreComments } from "./infinityScrollInProfile.js"
-import { dateRequest } from "./LoadVideo.js"
+import { LoadMoreComments } from "../infinityScrollInProfile.js"
+import { dateRequest } from "../features/LoadVideo.js"
+
 
 export function addMarkingComent(data) {
 
@@ -212,7 +213,7 @@ export async function openVideoEverywere(e, classVideo, call, main){
   dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
 
   const nameChannel = e.target.closest(`${classVideo}`).querySelector(".nameChannelSelect").textContent
-
+  
   const dataChannel = await ImgAndSubscribeChannel(nameChannel)
  
   

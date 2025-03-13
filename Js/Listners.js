@@ -1,11 +1,10 @@
-import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist} from './HelpsFunction.js'
-import { shortLength } from './HelpsFunction.js'
-import { state } from './changeData.js'
-import { SearchContent, addSubscribe, removeSubscribe, userSubscriber } from "./AllApiRequest.js"
-import { container } from './LoadVideo.js'
+import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength} from './untils/HelpsFunction.js'
+import { state } from './features/changeData.js'
+import { SearchContent, addSubscribe, removeSubscribe, userSubscriber } from "./api/AllApiRequest.js"
+import { container } from './features/LoadVideo.js'
 import { markinHistoryVideo } from './Marking/Marking.js'
-import { fromViewToShortView } from './ViewToViewLikeToLike.js'
-import { formatDuration } from './FromISOToTime.js'
+import { fromViewToShortView } from './untils/ViewToViewLikeToLike.js'
+import { formatDuration } from './untils/FromISOToTime.js'
 
 
 

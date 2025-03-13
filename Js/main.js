@@ -1,8 +1,8 @@
 
-import "./gaming.js"; import "./LoadVideo.js"; import "./PostToToken.js"; import "./Listners.js"; import "./ReturnPushState.js"; import "./HeaderANDAside.js";import "./changeHistoryPage.js"
-import {  markProfile,openVideoEverywere} from "./HelpsFunction.js"
+import "./gaming.js"; import "./features/LoadVideo.js"; import "./api/PostToToken.js"; import "./Listners.js"; import "./features/ReturnPushState.js"; import "./UI/HeaderANDAside.js";import "./changeHistoryPage.js"
+import {  markProfile,openVideoEverywere} from "./untils/HelpsFunction.js"
 const main = document.querySelector(".Main_container")
-import { state } from "./changeData.js";
+import { state } from "./features/changeData.js";
 
 
 

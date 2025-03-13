@@ -1,6 +1,6 @@
-import { state } from "./changeData.js";
-import { formatDuration } from "./FromISOToTime.js";
-import { TakeShortAndLongVideo } from "./HelpsFunction.js";
+import { state } from "../features/changeData.js";
+import { formatDuration } from "../untils/FromISOToTime.js";
+import { TakeShortAndLongVideo } from "../untils/HelpsFunction.js";
 import axios from 'axios'
 
 
@@ -194,4 +194,12 @@ export async function userSubscriber(idChannel) {
     )
     
     return response.data.items.length > 0
+}
+
+export async function putComment(text) {
+    try{
+        
+    }catch(err){
+        console.log(err)
+    }
 }

@@ -1,6 +1,6 @@
 
-import { fromViewToShortView } from "../ViewToViewLikeToLike.js"
-import { fromLikeToShortLike } from "../ViewToViewLikeToLike.js"
+import { fromViewToShortView } from "../untils/ViewToViewLikeToLike.js"
+import { fromLikeToShortLike } from "../untils/ViewToViewLikeToLike.js"
 
 export function markingProfile(backgorundProfile, profileImg, customUrl, subscribers, countVideos, titleChannel) {
     return `

@@ -1,8 +1,8 @@
 import { buttonLoadMoreFnc } from "./Listners.js";
-import { container } from "./LoadVideo.js";
+import { container } from "./features/LoadVideo.js";
 const historyBtn = document.querySelector(".history")
 import { markinHistory, markinHistoryVideo } from "./Marking/markingHistory.js";
-import { fromViewToShortView } from "./ViewToViewLikeToLike.js";
+import { fromViewToShortView } from "./untils/ViewToViewLikeToLike.js";
 
 export let arrDataVideo = []
 
