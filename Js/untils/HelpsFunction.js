@@ -2,7 +2,7 @@ import { MarkingCommentItem, MarkingPlayerAny, MarkingPlayer } from "../Marking/
 import { markingShowMore, markingProfile } from "../Marking/Marking.js"
 import { state, slideToButton} from "../features/changeData.js"
 import { inserEl } from "../main.js"
-import { buttonLoadMoreFnc, liked, uhliked, listnerToInput, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe} from "../Listners.js"
+import { buttonLoadMoreFnc, liked, uhliked, listnerToInput, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe} from "../UI/Listners.js"
 import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "../api/AllApiRequest.js"
 import { forYouVideoMarking, shortVideoMarking } from "../Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"

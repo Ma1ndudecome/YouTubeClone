@@ -1,8 +1,8 @@
-import { changeProfile,state } from "../features/changeData.js";
-import { channelData } from "../features/loadDataChannel.js";
+import { changeProfile,state } from "./changeData.js";
+import { channelData } from "./loadDataChannel.js";
 import { marcinSubscriben } from "../Marking/Marking.js";
 import { getAccesToken, getDataAccount, TakeSubscriber } from "./AllApiRequest.js";
-import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "../untils/HelpsFunction.js";
+import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "./HelpsFunction.js";
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
     refreshTokenProfile = JSON.parse(localStorage.getItem("dataRefreshToken"))
