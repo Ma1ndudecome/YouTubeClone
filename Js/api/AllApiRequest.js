@@ -222,8 +222,8 @@ export async function putComment(text, videoId, channelId) {
     }
 }
 
-export async function addRateToVideo(IdVideo, rating) {
-    const response = await axios.post(`https://www.googleapis.com/youtube/v3/videos/rate?id=${IdVideo}&rating=${rating}`,
+export  function addRateToVideo(IdVideo, rating) {
+     axios.post(`https://www.googleapis.com/youtube/v3/videos/rate?id=${IdVideo}&rating=${rating}`,
         null,
         {
             headers: {
@@ -231,6 +231,5 @@ export async function addRateToVideo(IdVideo, rating) {
             }
         }
     )
-    console.log(response)
-    return response
+    
 }
