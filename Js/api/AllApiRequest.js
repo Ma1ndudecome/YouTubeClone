@@ -221,3 +221,15 @@ export async function putComment(text, videoId, channelId) {
         console.log(err)
     }
 }
+
+export  function addRateToVideo(IdVideo, rating) {
+     axios.post(`https://www.googleapis.com/youtube/v3/videos/rate?id=${IdVideo}&rating=${rating}`,
+        null,
+        {
+            headers: {
+                Authorization: `Bearer ${state.acessToken}`
+            }
+        }
+    )
+    
+}
