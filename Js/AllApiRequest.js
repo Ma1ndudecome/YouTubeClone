@@ -108,8 +108,8 @@ export function getDataAccount(accessToken){
     })
 }
 
-export function TakeSubscriber(access_token, pageTokenSubscribe){
-  return axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&access_token=${access_token}&maxResults=7&pageToken=${pageTokenSubscribe}`)
+export function TakeSubscriber(access_token, pageTokenSubscribe,countSubscriber){
+  return axios.get(`https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true&access_token=${access_token}&maxResults=${countSubscriber}&pageToken=${pageTokenSubscribe}`)
 }
 
 export async function TakeTrending() {

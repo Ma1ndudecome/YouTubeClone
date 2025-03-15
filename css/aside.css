@@ -156,6 +156,10 @@ aside.hidden {
 .hide_All_text{
     padding-left: 10px;
 }
+
+.d_F{
+    display: flex;
+}
 /* Конец */
 aside.positionFixed{
     z-index: 999;
