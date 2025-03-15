@@ -78,7 +78,7 @@ export function getDataAccount(){
 }
 
 export function TakeSubscriber(pageTokenSubscribe){
-    return requestToSeverGet(URL.getRatingVideoURL, { part:"snippet",  mine:true, maxResults:7, pageToken:pageTokenSubscribe}, true)
+    return requestToSeverGet(URL.getSubscriberURL, { part:"snippet",  mine:true, maxResults:7, pageToken:pageTokenSubscribe}, true)
 }
 
 export async function TakeTrending() {
