@@ -1,9 +1,8 @@
 import { buttonLoadMoreFnc } from "./Listners.js";
-import { container } from "./LoadVideo.js";
+import { container } from "../features/LoadVideo.js";
 const historyBtn = document.querySelector(".history")
-import { markinHistory, markinHistoryVideo } from "./Marking/markingHistory.js";
-import { fromViewToShortView } from "./ViewToViewLikeToLike.js";
-
+import { markinHistory, markinHistoryVideo } from "../Marking/markingHistory.js";
+import { fromViewToShortView } from "../untils/ViewToViewLikeToLike.js";
 export let arrDataVideo = []
 
 
@@ -11,7 +10,7 @@ export let arrDataVideo = []
 if (localStorage.getItem("history")) {
     // console.log(localStorage.getItem("history"))
     arrDataVideo = JSON.parse((localStorage.getItem("history")))
-    
+
 }
 console.log(arrDataVideo)
 function loadData(conteinerVideo) {
@@ -50,20 +49,13 @@ historyBtn.onclick = (event) => {
 
     const conteinerHistoryVideo = document.querySelector(".main-history-container")
     loadData(conteinerHistoryVideo)
+}
 
-    const main = document.querySelector(".Main")
-    main.addEventListener("click", (event) => {
-        if (!event.target.classList === "delete-video") {
-            return
-        }
-        // const delVideo = event.target.parentElement.parentElement.parentElement.parentElement
-        // delVideo.remove()
-        // const idForDeleteVideo = event.target.parentElement.parentElement.parentElement.parentElement.attributes[0].nodeValue
-        // arrDataVideo = arrDataVideo.filter((el) => el.id !== idForDeleteVideo)
-        // localStorage.setItem("history", JSON.stringify(arrDataVideo))
-    })
-
-
+export function deleteVideoOnBtn(e) {
+    e.target.closest(".container-video").remove()
+    const idForDeleteVideo = e.target.parentElement.parentElement.parentElement.parentElement.attributes[0].nodeValue
+    arrDataVideo = arrDataVideo.filter((el) => el.id !== idForDeleteVideo)
+    localStorage.setItem("history", JSON.stringify(arrDataVideo))
 }
 
 

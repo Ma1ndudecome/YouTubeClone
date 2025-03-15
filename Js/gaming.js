@@ -4,17 +4,17 @@ let explore = document.getElementById("explore")
 
 
 
-import { container } from "./LoadVideo.js";
+import { container } from "./features/LoadVideo.js";
 const gamingBtn = document.querySelector(".gaming")
 import { makeMarkingVideo } from "./Marking/markingVideo.js";
-import { fromViewToShortView } from "./ViewToViewLikeToLike.js";
+import { fromViewToShortView } from "./untils/ViewToViewLikeToLike.js";
 import { markingGaming } from "./Marking/Marking.js";
-import { GetContentGaming } from "./AllApiRequest.js";
+import { GetContentGaming } from "./api/AllApiRequest.js";
 import { gamingMarkingShorts} from "./gamingShorts.js";
 import axios from 'axios'
 
 
-import { formatDuration } from "./FromISOToTime.js";
+import { formatDuration } from "./untils/FromISOToTime.js";
 
 
 

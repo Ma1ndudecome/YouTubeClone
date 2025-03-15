@@ -1,6 +1,6 @@
-import { makeMarkingVideo } from './Marking/markingVideo.js'
-import { formatDuration } from './FromISOToTime.js'
-import { fromViewToShortView } from './ViewToViewLikeToLike.js'
+import { makeMarkingVideo } from '../Marking/markingVideo.js'
+import { formatDuration } from '../untils/FromISOToTime.js'
+import { fromViewToShortView } from '../untils/ViewToViewLikeToLike.js'
 import { state } from './changeData.js'
 import axios from 'axios'
 
@@ -21,7 +21,6 @@ async function LoadVideo() {
         const MoreStatisticVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`)
 
         await MoreStatisticVideo.data.items.forEach(el => {
-            console.log(el)
             if (el.snippet.liveBroadcastContent === 'none') {
                 const date = new Date(el.snippet.publishedAt)
                 const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
