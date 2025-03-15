@@ -4,7 +4,7 @@ import { markProfile, openVideoEverywere } from "./untils/HelpsFunction.js"
 const main = document.querySelector(".Main_container")
 import { state } from "./features/changeData.js";
 import { deleteVideoOnBtn } from "./UI/changeHistoryPage.js";
-
+import { mas } from "./infinityScrollInProfile.js";
 
 main.addEventListener("click", async (e) => {
     main.classList.remove("grid")
