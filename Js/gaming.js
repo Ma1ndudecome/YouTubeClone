@@ -10,7 +10,7 @@ import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { fromViewToShortView } from "./untils/ViewToViewLikeToLike.js";
 import { markingGaming } from "./Marking/Marking.js";
 import { GetContentGaming } from "./api/AllApiRequest.js";
-import { gamingMarkingShorts} from "./gamingShorts.js";
+import { gamingMarkingShorts} from "./Marking/gamingShorts.js";
 import axios from 'axios'
 
 
