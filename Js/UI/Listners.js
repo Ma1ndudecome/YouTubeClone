@@ -1,6 +1,6 @@
 import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, addMarkingComent} from '../untils/HelpsFunction.js'
 import { state } from '../features/changeData.js'
-import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment } from "../api/AllApiRequest.js"
+import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment, addRateToVideo } from "../api/AllApiRequest.js"
 import { container } from '../features/LoadVideo.js'
 import { markinHistoryVideo } from '../Marking/Marking.js'
 import { fromViewToShortView } from '../untils/ViewToViewLikeToLike.js'
@@ -8,11 +8,7 @@ import { formatDuration } from '../untils/FromISOToTime.js'
 
 
 
-const SingButton = document.querySelector(".SignIn_element")
-SingButton.onclick = (e)=>{
-    e.preventDefault()
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.force-ssl&redirect_uri=${redirectUri}&response_type=code&client_id=${cliendId}&access_type=offline`;
-}
+
 export const uhliked = `rgba(117, 113, 113, 0)`
 export const liked = `rgba(255, 255, 255, 0.71)`
 export function lisnerToLike(){
@@ -71,30 +67,31 @@ function checkAndGiveLikeDislike(svg,path, uhliked, liked, haveClassDisLike, hav
     }
 }
 
-export function likeAndDislikeToVideoFunc(){
-    if(state.Autorization){
-        const likeContainer = document.querySelector(".rightSide_emotion")
-        likeContainer.onclick = (e)=>{
-            e.target.classList.toggle("activated")
-    
-            const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
-            const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
-    
-            const path = e.target.querySelector("path")
-            
-            if(haveClassLike){
-                const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
-    
-                checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
-                HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true)
-            }else if(haveClassDisLike){
-                const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
-    
-                checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
-                HaveLikeOrNo(path.style.fill === uhliked, path, e.target)
-            }
-        }
+export function likeAndDislikeToVideoFunc(idVideo){
+    if(!state.Autorization){
+        return
     }
+    const likeContainer = document.querySelector(".rightSide_emotion")
+    likeContainer.onclick = (e)=>{
+         e.target.classList.toggle("activated")
+    
+        const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
+        const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
+    
+        const path = e.target.querySelector("path")
+            
+        if(haveClassLike){
+            const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
+            checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
+            HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true, idVideo, 'like')
+        }else if(haveClassDisLike){
+            const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
+    
+            checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
+            HaveLikeOrNo(path.style.fill === uhliked, path, e.target, false, idVideo, 'dislike')
+        }
+        }
+    
 
 }
 function checkAndGiveClassActivated(situation, item, here=false){
@@ -107,9 +104,12 @@ function checkAndGiveClassActivated(situation, item, here=false){
         }
     }
 }
-function HaveLikeOrNo(situation, path, target, here=false ){
+function HaveLikeOrNo(situation, path, target, here=false, id, type){
+    console.log(situation)
     if(situation){
         path.style.fill = liked
+        addRateToVideo(id, type)
+        
         if(here){
             if(String(+target.children[1].textContent) === 'NaN') return
             const count = target.children[1].textContent
@@ -117,8 +117,9 @@ function HaveLikeOrNo(situation, path, target, here=false ){
         } 
     }else{
         path.style.fill = uhliked 
+        addRateToVideo(id, 'none')
         if(here){
-            console.log('dislike', String(+target.children[1].textContent) === 'NaN')
+          
             if(String(+target.children[1].textContent) === 'NaN') return
             const count = target.children[1].textContent
             target.children[1].textContent = +count - 1
