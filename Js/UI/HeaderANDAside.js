@@ -1,5 +1,5 @@
 "use strict"
-
+import { URL } from "../URL/URL.js"
 let glass_adaptation = document.getElementById("glass_adaptation")
 let adaptation = document.getElementById("adaptation")
 let img_adaptation = document.getElementById("img_adaptation")
@@ -46,7 +46,7 @@ img_adaptation.addEventListener("click",() =>{
 })
 const functionLogin = (e)=>{
     e.preventDefault()
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.force-ssl&redirect_uri=${redirectUri}&response_type=code&client_id=${cliendId}&access_type=offline`;
+    window.location.href = URL.logInURL;
 }
 subscriberContainer.onclick = functionLogin
 SingButton.onclick = functionLogin
