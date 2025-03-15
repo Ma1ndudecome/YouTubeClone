@@ -214,6 +214,7 @@ export async function openVideoEverywere(e, classVideo, call, main){
     dateRequests = await getMoreStatisticId(id)
     dateRequests = dateRequests.data.items
   }
+  
   dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
 
   const nameChannel = e.target.closest(`${classVideo}`).querySelector(".nameChannelSelect").textContent
