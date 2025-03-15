@@ -130,3 +130,15 @@ export async function SearchContent(content){
         console.log(err);
     }
 }
+
+export async function GetContentGaming(){
+    try{
+        const videoRequest = await axios.get(`https://www.googleapis.com/youtube/v3/search?https://www.googleapis.com/youtube/v3/search?part=snippet&q=gaming&type=video&videoCategoryId=20&maxResults=40&key=${APIKEY}`)
+        const IDVideo = videoRequest.data.items.map(el=>el.id.videoId).join(',')
+       
+        const MoreStatisticVideo = await  axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`);
+        return MoreStatisticVideo.data.items
+    }catch(err){
+        console.log(err);
+    }
+}
