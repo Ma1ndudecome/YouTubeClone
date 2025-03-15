@@ -44,7 +44,7 @@ export  async function  takeComment(videoId) {
 }
 async function takeInfoChannel(nameChannel){
     const name = nameChannel.trim().replaceAll(' ', '+')
-    console.log(name)
+    const url = `${URL.searchChannelURL}${name}&key=${APIKEY}`
     const idChannel = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${name}&key=${APIKEY}`)
     console.log('allInf', idChannel)
     console.log("idChannel", idChannel.data.items[0].id.channelId)
@@ -60,7 +60,7 @@ async function takeInfoChannel(nameChannel){
 }
 export async function takeMoreInfoChannel(nameChannel) {
     const name = nameChannel.replaceAll(' ', '+')
-    console.log(name)
+    const url = `${URL.searchChannelURL}${name}&key=${APIKEY}`
     const idChannel = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${name}&key=${APIKEY}`)
     const moreInfoChannel = await axios.get(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${idChannel.data.items[0].id.channelId}&key=${APIKEY}`)
     return {dataChannel:moreInfoChannel.data.items[0], id:moreInfoChannel.data.items[0].id}
