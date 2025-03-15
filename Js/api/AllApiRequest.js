@@ -45,7 +45,7 @@ export  async function  takeComment(videoId) {
 }
 async function takeInfoChannel(nameChannel){
     const name = nameChannel.trim().replaceAll(' ', '+')
-    const idChannel = await axios.get(`https://www.googleapis.com/youtube/v3/search`,{
+    const idChannel = await axios.get(URL.searchURL,{
         params:{
             part:"snippet",
             type:"channel",
@@ -55,7 +55,7 @@ async function takeInfoChannel(nameChannel){
     })
     console.log('allInf', idChannel)
     console.log("idChannel", idChannel.data.items[0].id.channelId)
-    const moreInfoChannel = await axios.get("https://www.googleapis.com/youtube/v3/channels", {
+    const moreInfoChannel = await axios.get(URL.channelURL, {
         params:{
             part:'statistics',
             id:idChannel.data.items[0].id.channelId,
@@ -67,7 +67,7 @@ async function takeInfoChannel(nameChannel){
 }
 export async function takeMoreInfoChannel(nameChannel) {
     const name = nameChannel.replaceAll(' ', '+')
-    const idChannel = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
+    const idChannel = await axios.get(URL.searchURL, {
         params:{
             part:"snippet",
             q:name,
@@ -76,7 +76,7 @@ export async function takeMoreInfoChannel(nameChannel) {
 
         }
     })
-    const moreInfoChannel = await axios.get(`https://www.googleapis.com/youtube/v3/channels`,{
+    const moreInfoChannel = await axios.get(URL.channelURL,{
         params:{
             part:"snippet,statistics,brandingSettings",
             id:idChannel.data.items[0].id.channelId,
@@ -86,7 +86,7 @@ export async function takeMoreInfoChannel(nameChannel) {
     return {dataChannel:moreInfoChannel.data.items[0], id:moreInfoChannel.data.items[0].id}
 }
 export async  function takeMoreVideoAnyProfile(id){
-    const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search`,{
+    const detailInformationVideo = await axios.get(URL.searchURL,{
         params:{
             part:"snippet",
             channelId:id,
@@ -98,7 +98,7 @@ export async  function takeMoreVideoAnyProfile(id){
         }
     });
     const videoIds = detailInformationVideo.data.items.map(el => el.id.videoId).join(',');
-    const takeDuration = await axios.get(`https://www.googleapis.com/youtube/v3/videos`,{
+    const takeDuration = await axios.get(URL.infoVideoURL,{
         params:{
             part:"contentDetails,snippet,statistics",
             id:videoIds,
@@ -116,7 +116,7 @@ export async function ImgAndSubscribeChannel(nameChannel){
 }
 
 export function getRatingVideo(videoId){
-    return axios.get(`https://www.googleapis.com/youtube/v3/videos/getRating`, {
+    return axios.get(URL.getRatingVideoURL, {
         headers: { 'Authorization': `Bearer ${state.acessToken}` },
         params:{
             id:videoId
@@ -141,7 +141,7 @@ export function getAccesToken(type, token){
     return axios.post(URL.tokenURL, data, setting)
 }
 export function getDataAccount(accessToken){
-    return axios.get('https://www.googleapis.com/youtube/v3/channels', {
+    return axios.get(URL.channelURL, {
         headers:{ 'Authorization':`Bearer ${accessToken}`},
         params:{
             part:"snippet,statistics",
@@ -151,7 +151,7 @@ export function getDataAccount(accessToken){
 }
 
 export function TakeSubscriber(access_token, pageTokenSubscribe){
-  return axios.get(`https://www.googleapis.com/youtube/v3/subscriptions`,{
+  return axios.get(URL.getSubscriberURL,{
     headers:{
         'Authorization': `Bearer ${access_token}`
     },
@@ -165,7 +165,7 @@ export function TakeSubscriber(access_token, pageTokenSubscribe){
 }
 
 export async function TakeTrending() {
-    const newsData = await axios.get(`https://www.googleapis.com/youtube/v3/search`,{
+    const newsData = await axios.get(URL.searchURL,{
         params:{
             part:"snippet",
             type:"video",
@@ -177,7 +177,7 @@ export async function TakeTrending() {
         }
     });
     const IDVideo = newsData.data.items.map(el => el.id.videoId).join(',')
-    const detailsInf = await axios.get(`https://www.googleapis.com/youtube/v3/videos`,{
+    const detailsInf = await axios.get(URL.infoVideoURL,{
         params:{
             part:"snippet, statistics, contentDetails",
             id:IDVideo,
@@ -188,7 +188,7 @@ export async function TakeTrending() {
 }
 export async function SearchContent(content){
     try{
-        const videoRequest = await axios.get(`https://www.googleapis.com/youtube/v3/search`,{
+        const videoRequest = await axios.get(URL.searchURL,{
             params:{
                 part:"snippet",
                 maxResults:20,
@@ -197,7 +197,7 @@ export async function SearchContent(content){
             }
         })
         const videoId = videoRequest.data.items.map(el=>el.id.videoId).join(',')
-        const MoreStatisticVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos`,{
+        const MoreStatisticVideo = await axios.get(URL.infoVideoURL,{
             params:{
                 part:"contentDetails,snippet,statistics",
                 id:videoId,
@@ -211,7 +211,7 @@ export async function SearchContent(content){
 }
 export async function getMoreStatisticId(id){
     try{
-        return await axios.get(`https://www.googleapis.com/youtube/v3/videos`,{
+        return await axios.get(URL.infoVideoURL,{
             params:{
                 part:"snippet,statistics,contentDetails",
                 id:id,
@@ -225,7 +225,7 @@ export async function getMoreStatisticId(id){
 export async function addSubscribe(channelID) {
     console.log(state.acessToken)
     try{
-        return await axios.post(`https://www.googleapis.com/youtube/v3/subscriptions`, 
+        return await axios.post(URL.getSubscriberURL, 
         {
             snippet:{
                 resourceId:{
@@ -256,7 +256,7 @@ export async function addSubscribe(channelID) {
 }
 
 export async function removeSubscribe(channelID) {
-    const response = await axios.get(`https://www.googleapis.com/youtube/v3/subscriptions`, {
+    const response = await axios.get(URL.getSubscriberURL, {
         headers:{
             'Authorization':`Bearer ${state.acessToken}`
         },
@@ -269,7 +269,7 @@ export async function removeSubscribe(channelID) {
     })
     const id = response.data.items[0]?.id
 
-    return await axios.delete(`https://www.googleapis.com/youtube/v3/subscriptions`,
+    return await axios.delete(URL.getSubscriberURL,
         {
             headers:{
                 'Authorization':`Bearer ${state.acessToken}`,
@@ -287,7 +287,7 @@ export async function removeSubscribe(channelID) {
 export async function userSubscriber(idChannel) {
  
     const response  = await axios.get(
-        `https://www.googleapis.com/youtube/v3/subscriptions`,
+        URL.getSubscriberURL,
         {
             headers: {
                 Authorization: `Bearer ${state.acessToken}`
@@ -334,7 +334,7 @@ export async function putComment(text, videoId, channelId) {
 }
 
 export  function addRateToVideo(IdVideo, rating) {
-     axios.post(`https://www.googleapis.com/youtube/v3/videos/rate`,
+     axios.post(URL.addRateToVideoURL,
         null,
         {
             headers: {
