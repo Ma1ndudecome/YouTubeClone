@@ -1,12 +1,13 @@
 import { state } from "../features/changeData.js";
+import { URL } from "../URL/URL.js";
 import { formatDuration } from "../untils/FromISOToTime.js";
 import { TakeShortAndLongVideo } from "../untils/HelpsFunction.js";
 import axios from 'axios'
 
 
-const urlToken = 'https://oauth2.googleapis.com/token';
+
 export async function takeCountCommentUnderVideo(videoId){
-    const comment = await axios.get("https://www.googleapis.com/youtube/v3/videos", {
+    const comment = await axios.get(URL.infoVideoURL, {
         params: {
             part: "statistics",
             id: videoId,
@@ -18,7 +19,7 @@ export async function takeCountCommentUnderVideo(videoId){
 
 export  async function  takeComment(videoId) {
     if(state.acessToken){
-        const allComment = await axios.get("https://www.googleapis.com/youtube/v3/commentThreads", {
+        const allComment = await axios.get(URL.commentURL, {
             headers: { 'Authorization': `Bearer ${state.acessToken}` },
             params: {
                 part: "snippet",
@@ -29,7 +30,7 @@ export  async function  takeComment(videoId) {
         }})
         return allComment.data
     }else{
-        const allComment = await axios.get("https://www.googleapis.com/youtube/v3/commentThreads", {
+        const allComment = await axios.get(URL.commentURL, {
             params: {
                 part: "snippet",
                 videoId: videoId,
@@ -44,7 +45,6 @@ export  async function  takeComment(videoId) {
 }
 async function takeInfoChannel(nameChannel){
     const name = nameChannel.trim().replaceAll(' ', '+')
-    const url = `${URL.searchChannelURL}${name}&key=${APIKEY}`
     const idChannel = await axios.get(`https://www.googleapis.com/youtube/v3/search`,{
         params:{
             part:"snippet",
@@ -67,7 +67,6 @@ async function takeInfoChannel(nameChannel){
 }
 export async function takeMoreInfoChannel(nameChannel) {
     const name = nameChannel.replaceAll(' ', '+')
-    const url = `${URL.searchChannelURL}${name}&key=${APIKEY}`
     const idChannel = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
         params:{
             part:"snippet",
@@ -139,7 +138,7 @@ function dataObjectAccess(type, token=''){
 export function getAccesToken(type, token){
     const data = dataObjectAccess(type, token)
     const setting = {headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-    return axios.post(urlToken, data, setting)
+    return axios.post(URL.tokenURL, data, setting)
 }
 export function getDataAccount(accessToken){
     return axios.get('https://www.googleapis.com/youtube/v3/channels', {
@@ -189,7 +188,7 @@ export async function TakeTrending() {
 }
 export async function SearchContent(content){
     try{
-        const videoRequest = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${content}&key=${APIKEY}`,{
+        const videoRequest = await axios.get(`https://www.googleapis.com/youtube/v3/search`,{
             params:{
                 part:"snippet",
                 maxResults:20,
@@ -307,7 +306,7 @@ export async function userSubscriber(idChannel) {
 
 export async function putComment(text, videoId, channelId) {
     try{
-        return await axios.post("https://www.googleapis.com/youtube/v3/commentThreads", 
+        return await axios.post(URL.commentURL, 
             {
                 snippet: {
                     channelId:channelId,
