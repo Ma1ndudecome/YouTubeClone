@@ -20,7 +20,7 @@ if(code){
             const response = await getAccesToken('accessToken')
             saveAcessToken(response.data.access_token) 
            
-            const dataAccount = await getDataAccount(response.data.access_token)
+            const dataAccount = await getDataAccount()
 
             
             if(response.data.refresh_token){
@@ -49,7 +49,7 @@ if(code){
                
                 
                 
-                const dataAccount = await getDataAccount(response.data.access_token)
+                const dataAccount = await getDataAccount()
                 
                 
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
@@ -80,7 +80,7 @@ async function loadSubsiber(access_token = ""){
     
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
     try{
-        const dataSubsribe = await TakeSubscriber(access_token, pageTokenSubscribe)
+        const dataSubsribe = await TakeSubscriber(pageTokenSubscribe)
         dataSubsribe.data.nextPageToken ?  pageTokenSubscribe = dataSubsribe.data.nextPageToken : buttonMoreSubscriber.remove()
   
         dataSubsribe.data.items.forEach(({snippet})=>{

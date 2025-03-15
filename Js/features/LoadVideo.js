@@ -2,6 +2,8 @@ import { makeMarkingVideo } from '../Marking/markingVideo.js'
 import { formatDuration } from '../untils/FromISOToTime.js'
 import { fromViewToShortView } from '../untils/ViewToViewLikeToLike.js'
 import { state } from './changeData.js'
+import { requestToSeverGet } from "../URL/Request.js";
+import { URL } from '../URL/URL.js';
 import axios from 'axios'
 
 const triger = document.querySelector(".triger")
@@ -13,12 +15,10 @@ export const container = document.querySelector(".Main_container")
 async function LoadVideo() {
     state.pageTokenProfileVideoAny = ''
     try{
-        const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&type=video&eventType=none&key=${APIKEY}&pageToken=${pageToken}&videoDuration=long`);
+        const response = await requestToSeverGet(URL.searchURL, {part:"snippet", maxResults:5, type:"video", eventType:"none", key:APIKEY, pageToken:pageToken, videoDuration:"long"})
         pageToken = response.data.nextPageToken || '';
-       
         const IDVideo = response.data.items.map(el => el.id.videoId).join(',')
-
-        const MoreStatisticVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`)
+        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, {part:"snippet,statistics,contentDetails", id:IDVideo, key:APIKEY})
 
         await MoreStatisticVideo.data.items.forEach(el => {
             if (el.snippet.liveBroadcastContent === 'none') {
