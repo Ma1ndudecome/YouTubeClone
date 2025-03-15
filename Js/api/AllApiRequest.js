@@ -26,7 +26,7 @@ async function takeInfoChannel(nameChannel){
     const name = nameChannel.trim().replaceAll(' ', '+')
 
     const idChannel = await requestToSeverGet(URL.searchURL, { part:"snippet",  type:"channel",  q:name, key:APIKEY })
-    const moreInfoChannel = await requestToSeverGet(URL.searchURL, {  part:'statistics', id:idChannel.data.items[0].id.channelId,  key:APIKEY})
+    const moreInfoChannel = await requestToSeverGet(URL.channelURL, {  part:"statistics", id:idChannel.data.items[0].id.channelId,  key:APIKEY})
 
     return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount, ChannelId:idChannel.data.items[0].id.channelId}
 }
@@ -85,13 +85,7 @@ export async function TakeTrending() {
     const newsData = await requestToSeverGet(URL.searchURL, { part:"snippet",  type:"video",  videoCategoryId:20, videoDuration:"short",  chart:"mostPopular",  maxResults:20, key:APIKEY})
 
     const IDVideo = newsData.data.items.map(el => el.id.videoId).join(',')
-    const detailsInf = await axios.get(URL.infoVideoURL,{
-        params:{
-            part:"snippet, statistics, contentDetails",
-            id:IDVideo,
-            key:APIKEY
-        }
-    });
+    const detailsInf = requestToSeverGet(URL.infoVideoURL, {part:"snippet, statistics, contentDetails",  id:IDVideo,  key:APIKEY})
     return detailsInf;
 }
 export async function SearchContent(content){
@@ -134,9 +128,7 @@ export async function addSubscribe(channelID) {
             }
 
         },
-        
-        
-    )
+)
     }catch(err){
         console.log(err)
     }
