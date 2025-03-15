@@ -9,6 +9,8 @@ const gamingBtn = document.querySelector(".gaming")
 import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { fromViewToShortView } from "./untils/ViewToViewLikeToLike.js";
 import { markingGaming } from "./Marking/Marking.js";
+import { GetContentGaming } from "./api/AllApiRequest.js";
+import { gamingMarkingShorts} from "./gamingShorts.js";
 import axios from 'axios'
 
 
@@ -22,20 +24,33 @@ gamingBtn.onclick = (event) => {
     container.innerHTML = markingGaming()
     container.className = 'Main_container block'
     const gamingContainer = container.querySelector(".Container-video-gaming ")
-    axios.get(`https://www.googleapis.com/youtube/v3/search?https://www.googleapis.com/youtube/v3/search?part=snippet&q=gaming&type=video&videoCategoryId=20&maxResults=20&key=${APIKEY}`)
-        .then(
-            ({ data }) => {
-                const IDVideo = data.items.map(el => el.id.videoId).join(',')
-                axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${IDVideo}&key=${APIKEY}`)
-                    .then(({ data }) => {
-                        data.items.forEach(el=>{
-                            const date = new Date(el.snippet.publishedAt)
-                            const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
-                            gamingContainer.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), result, formatDuration(el.contentDetails.duration), el.id))
-                        })
-                    })
+    const shortsContainer = container.querySelector(".shorts-video-conteiner")
+            
+                         async function Gaming(){
+                            try{
+                                const videos = await GetContentGaming(); 
+                                return videos;
+                            }catch(err){
+                                console.log(err);
+                            }
+                        }
+                            
+                        Gaming().then((videos)=>{
 
-            })
+                            videos.forEach(el=>{
+                            let durationVideo = formatDuration(el.contentDetails.duration)
+                             const date = new Date(el.snippet.publishedAt)
+                             const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
+                             
+                             if(Number(durationVideo[0]) === 0){
+                                shortsContainer.insertAdjacentHTML("beforeend",gamingMarkingShorts(el.snippet.thumbnails.standard.url,el.snippet.title,fromViewToShortView(el.statistics.viewCount)))
+                             }else{
+                                gamingContainer.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), result, formatDuration(el.contentDetails.duration), el.id))
+                             }
+                            
+                            })
+                        })
+                           
 }
 
 
