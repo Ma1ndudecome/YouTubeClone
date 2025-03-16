@@ -12,7 +12,7 @@ if (localStorage.getItem("history")) {
     arrDataVideo = JSON.parse((localStorage.getItem("history")))
 
 }
-console.log(arrDataVideo)
+// console.log(arrDataVideo)
 function loadData(conteinerVideo) {
     try {
         arrDataVideo.forEach((item) => {
@@ -28,28 +28,27 @@ function loadData(conteinerVideo) {
         console.log("not vide0")
     }
 }
+console.log(112)
 
 historyBtn.onclick = (event) => {
     event.preventDefault()
     container.innerHTML = markinHistory()
     container.classList.remove("grid")
     container.style.display = "block"
-
-    const clearHistoryBtn = container.querySelector(".clear-history")
-    clearHistoryBtn.onclick = (event) => {
-        console.log('213')
-        const containVideo = container.querySelector(".main-history-container");
-        // console.log(containVideo)
-        // if (containVideo) {
-        //     containVideo.innerHTML = "";
-        // }
-        // arrDataVideo = [];                                
-        // localStorage.removeItem("history");
-    }
-
     const conteinerHistoryVideo = document.querySelector(".main-history-container")
     loadData(conteinerHistoryVideo)
+    let clearHistoryBtn = container.querySelector(".clear-history")
+    clearHistoryBtn.onclick = (event) => {
+        const containVideo = container.querySelector(".main-history-container");
+        console.log(containVideo)
+        containVideo.innerHTML = "";
+        arrDataVideo = [];
+        localStorage.setItem("history", JSON.stringify(arrDataVideo));
+
+
+    }
 }
+
 
 export function deleteVideoOnBtn(e) {
     e.target.closest(".container-video").remove()
