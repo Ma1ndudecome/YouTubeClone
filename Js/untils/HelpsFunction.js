@@ -1,14 +1,12 @@
-import { MarkingCommentItem, MarkingPlayerAny, MarkingPlayer } from "../Marking/MarkingPlayerVideo.js"
-import { markingShowMore, markingProfile } from "../Marking/Marking.js"
-import { state, slideToButton } from "../features/changeData.js"
 import { inserEl } from "../main.js"
 import { buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe } from "../UI/Listners.js"
 import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "../api/AllApiRequest.js"
-import { forYouVideoMarking, shortVideoMarking } from "../Marking/profileVideoMarking.js"
 import { formatDuration } from "./FromISOToTime.js"
 import { LoadMoreComments } from "../infinityScrollInProfile.js"
-import { dateRequest } from "../features/LoadVideo.js"
 import { arrDataVideo } from "../UI/changeHistoryPage.js"
+import {MarkingCommentItem, MarkingPlayerAny, MarkingPlayer, markingShowMore, markingProfile, forYouVideoMarking, shortVideoMarking } from "../Marking/reExportMarking.js"
+import {state, slideToButton, dateRequest } from "../features/ReExportFeatures.js"
+import {buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe, arrDataVideo} from "../UI/reExportUI.js"
 
 
 export function addMarkingComent(data) {

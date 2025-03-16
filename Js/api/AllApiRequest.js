@@ -1,8 +1,6 @@
 import { state } from "../features/changeData.js";
-import { URL } from "../URL/URL.js";
-import { formatDuration } from "../untils/FromISOToTime.js";
 import { TakeShortAndLongVideo } from "../untils/HelpsFunction.js";
-import { requestToSeverGet, requestToServerPD } from "../URL/Request.js";
+import {URL, requestToSeverGet, requestToServerPD } from "../URL/reExportUrl.js"
 import axios from 'axios'
 
 export async function takeCountCommentUnderVideo(videoId){
