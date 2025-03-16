@@ -1,9 +1,8 @@
-import { changeProfile,state } from "./changeData.js";
-import { channelData } from "./loadDataChannel.js";
-import { marcinSubscriben } from "./Marking/Marking.js";
+import { changeProfile,state } from "../features/changeData.js";
+import { channelData } from "../features/loadDataChannel.js";
+import { marcinSubscriben } from "../Marking/Marking.js";
 import { getAccesToken, getDataAccount, TakeSubscriber } from "./AllApiRequest.js";
-import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "./HelpsFunction.js";
-
+import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "../untils/HelpsFunction.js";
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
     refreshTokenProfile = JSON.parse(localStorage.getItem("dataRefreshToken"))
@@ -21,7 +20,7 @@ if(code){
             const response = await getAccesToken('accessToken')
             saveAcessToken(response.data.access_token) 
            
-            const dataAccount = await getDataAccount(response.data.access_token)
+            const dataAccount = await getDataAccount()
 
             
             if(response.data.refresh_token){
@@ -47,10 +46,10 @@ if(code){
                 const response = await getAccesToken('RefreshToken', token)
                 
                 saveAcessToken(response.data.access_token) 
-
+               
                 
                 
-                const dataAccount = await getDataAccount(response.data.access_token)
+                const dataAccount = await getDataAccount()
                 
                 
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
@@ -90,7 +89,7 @@ async function loadSubsiber(access_token = "",countSubscriber){
       
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
     try{
-        const dataSubsribe = await TakeSubscriber(access_token, pageTokenSubscribe,countSubscriber)
+        const dataSubsribe = await TakeSubscriber(pageTokenSubscribe)
         dataSubsribe.data.nextPageToken ?  pageTokenSubscribe = dataSubsribe.data.nextPageToken : buttonMoreSubscriber.remove()
   
         dataSubsribe.data.items.forEach(({snippet})=>{

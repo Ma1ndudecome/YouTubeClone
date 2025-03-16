@@ -4,11 +4,20 @@
 .pad0{
 padding: 0;
 }
+.m0{
+  margin: 0px;
+}
+.gap8P{
+  gap: 8px;
+}
 .w80{
     width: 100px;
 }
 .fS12{
     font-size: 12px;
+}
+.fS14{
+  font-size: 14px;
 }
 .positionFixed{
     position: fixed;
@@ -37,8 +46,14 @@ padding: 0;
 .mT50p{
   margin-top: 50px;
 }
+.mT10p{
+  margin-top: 10px;
+}
 .gap15P{
   gap: 15px;
+}
+.w36P{
+  width: 36%;
 }
 .backdrop{
     display: none;

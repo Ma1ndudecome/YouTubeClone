@@ -1,17 +1,14 @@
-import {moreBtn} from './HelpsFunction.js'
-import { shortLength } from './HelpsFunction.js'
-import { checkAndShowRatingVideo } from './HelpsFunction.js'
-import { state } from './changeData.js'
-import { SearchContent } from "./AllApiRequest.js"
-import { container } from './LoadVideo.js'
-import { markinHistoryVideo } from './Marking/Marking.js'
-import { fromViewToShortView } from './ViewToViewLikeToLike.js'
+import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, addMarkingComent} from '../untils/HelpsFunction.js'
+import { state } from '../features/changeData.js'
+import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment, addRateToVideo } from "../api/AllApiRequest.js"
+import { container } from '../features/LoadVideo.js'
+import { markinHistoryVideo } from '../Marking/Marking.js'
+import { fromViewToShortView } from '../untils/ViewToViewLikeToLike.js'
+import { formatDuration } from '../untils/FromISOToTime.js'
 
-const SingButton = document.querySelector(".SignIn_element")
-SingButton.onclick = (e)=>{
-    e.preventDefault()
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.force-ssl&redirect_uri=${redirectUri}&response_type=code&client_id=${cliendId}&access_type=offline`;
-}
+
+
+
 export const uhliked = `rgba(117, 113, 113, 0)`
 export const liked = `rgba(255, 255, 255, 0.71)`
 export function lisnerToLike(){
@@ -70,30 +67,31 @@ function checkAndGiveLikeDislike(svg,path, uhliked, liked, haveClassDisLike, hav
     }
 }
 
-export function likeAndDislikeToVideoFunc(){
-    if(state.Autorization){
-        const likeContainer = document.querySelector(".rightSide_emotion")
-        likeContainer.onclick = (e)=>{
-            e.target.classList.toggle("activated")
-    
-            const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
-            const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
-    
-            const path = e.target.querySelector("path")
-            
-            if(haveClassLike){
-                const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
-    
-                checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
-                HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true)
-            }else if(haveClassDisLike){
-                const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
-    
-                checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
-                HaveLikeOrNo(path.style.fill === uhliked, path, e.target)
-            }
-        }
+export function likeAndDislikeToVideoFunc(idVideo){
+    if(!state.Autorization){
+        return
     }
+    const likeContainer = document.querySelector(".rightSide_emotion")
+    likeContainer.onclick = (e)=>{
+         e.target.classList.toggle("activated")
+    
+        const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
+        const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
+    
+        const path = e.target.querySelector("path")
+            
+        if(haveClassLike){
+            const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
+            checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
+            HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true, idVideo, 'like')
+        }else if(haveClassDisLike){
+            const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
+    
+            checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
+            HaveLikeOrNo(path.style.fill === uhliked, path, e.target, false, idVideo, 'dislike')
+        }
+        }
+    
 
 }
 function checkAndGiveClassActivated(situation, item, here=false){
@@ -106,9 +104,12 @@ function checkAndGiveClassActivated(situation, item, here=false){
         }
     }
 }
-function HaveLikeOrNo(situation, path, target, here=false ){
+function HaveLikeOrNo(situation, path, target, here=false, id, type){
+    console.log(situation)
     if(situation){
         path.style.fill = liked
+        addRateToVideo(id, type)
+        
         if(here){
             if(String(+target.children[1].textContent) === 'NaN') return
             const count = target.children[1].textContent
@@ -116,8 +117,9 @@ function HaveLikeOrNo(situation, path, target, here=false ){
         } 
     }else{
         path.style.fill = uhliked 
+        addRateToVideo(id, 'none')
         if(here){
-            console.log('dislike', String(+target.children[1].textContent) === 'NaN')
+          
             if(String(+target.children[1].textContent) === 'NaN') return
             const count = target.children[1].textContent
             target.children[1].textContent = +count - 1
@@ -137,6 +139,19 @@ export function listnerToInput(){
         button.classList.add("sendButton")
         
     })
+    return {button:button, input:inputCont}
+}
+export function ListnersToSendComment(id, channelId){
+    const elements = listnerToInput()
+    elements.button.onclick = async ()=>{
+        if(elements.input.value === ''){
+            return
+        }
+        const responseComment = await putComment(elements.input.value, id, channelId)
+        console.log(responseComment)
+        addMarkingComent(responseComment.data)
+
+    }
 }
 export function buttonLoadMoreFnc(dateRequests, state, countSubs){
     let countClick = 0
@@ -180,7 +195,7 @@ async function getContentAndAddMarking(input){
        const videos =  await SearchContent(input.value)
         console.log(videos)
        videos.data.items.forEach(el=>{
-        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id)) : false
+        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration))) : false
        })
        container.className = 'Main_container dF jcC'
        contVideo.classList.add("dF", "fdC", "gap15P", "w80Procc")
@@ -189,3 +204,24 @@ async function getContentAndAddMarking(input){
 }
 
 
+export async function ListnersSubscribe(ChannelId){
+    const button = document.querySelector(".leftSide_subscribe_button button")
+    let countClick = 0
+    console.log(await userSubscriber(ChannelId))
+    if(await userSubscriber(ChannelId)){
+        changeTextContentAndAddClasslist(button, 'Subscribed', 'subscribed', 0 )
+        countClick = 1
+    }
+    button.onclick = ()=>{
+        if(countClick === 0){
+            changeTextContentAndAddClasslist(button, 'Subscribed', 'subscribed', 0 )
+            addSubscribe(ChannelId)
+            countClick += 1
+
+        }else if(countClick === 1){
+            changeTextContentAndAddClasslist(button, 'Subscribe', 'subscribed', 1 )
+            removeSubscribe(ChannelId)
+            countClick = 0
+        }
+    }
+}

@@ -1,12 +1,13 @@
 import { container } from "./LoadVideo.js"
-import { markingProfile } from "./Marking/MarkingIcon.js"
-import { markingProfile as profileMark } from "./Marking/Marking.js"
-import { forYouVideoMarking, shortVideoMarking } from "./Marking/profileVideoMarking.js"
-import { formatDuration } from "./FromISOToTime.js"
-import { loadVideoInProfile, loadNextVideo } from "./infinityScrollInProfile.js"
-import { checkPageToken } from "./infinityScrollInProfile.js"
+import { markingProfile } from "../Marking/MarkingIcon.js"
+import { markingProfile as profileMark } from "../Marking/Marking.js"
+import { forYouVideoMarking, shortVideoMarking } from "../Marking/profileVideoMarking.js"
+import { formatDuration } from "../untils/FromISOToTime.js"
+import { loadVideoInProfile, loadNextVideo, checkPageToken } from "../infinityScrollInProfile.js"
 import { channelData, moreBtn } from "./loadDataChannel.js"
-import { TakeShortAndLongVideo,navInProfile, checkCountVideoAndGiveMarking } from "./HelpsFunction.js"
+import axios from 'axios'
+
+import { TakeShortAndLongVideo,navInProfile, checkCountVideoAndGiveMarking } from "../untils/HelpsFunction.js"
 
 let profileMarking;//Переменная для сохранения разметки профиля
 
