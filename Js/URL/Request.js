@@ -6,7 +6,6 @@ export async function requestToSeverGet(url, params={}, auth=false){
    
    return await axios.get(url, config)
 }
-export async function requestToServerPD(url, params={}, body=null, auth = false) {
-   console.log(url, body, params)
-   // return await axios.post(url, body, params)
+export async function requestToServerPD(url, body=null, setting={},) {
+   return await axios.post(url, body, setting)
 }
