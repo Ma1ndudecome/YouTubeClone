@@ -1,8 +1,9 @@
-import { changeProfile,state } from "../features/changeData.js";
-import { channelData } from "../features/loadDataChannel.js";
-import { marcinSubscriben } from "../Marking/Marking.js";
+import { changeProfile,state } from "./changeData.js";
+import { channelData } from "./loadDataChannel.js";
+import { marcinSubscriben } from "./Marking/Marking.js";
 import { getAccesToken, getDataAccount, TakeSubscriber } from "./AllApiRequest.js";
-import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "../untils/HelpsFunction.js";
+import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "./HelpsFunction.js";
+
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
     refreshTokenProfile = JSON.parse(localStorage.getItem("dataRefreshToken"))
@@ -20,7 +21,7 @@ if(code){
             const response = await getAccesToken('accessToken')
             saveAcessToken(response.data.access_token) 
            
-            const dataAccount = await getDataAccount()
+            const dataAccount = await getDataAccount(response.data.access_token)
 
             
             if(response.data.refresh_token){
@@ -35,7 +36,7 @@ if(code){
             localStorage.setItem("nameAccount", dataAccount.data.items[0].snippet.title)
             changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
             channelData(response.data.access_token) 
-            loadSubsiber(response.data.access_token,7)
+            loadSubsiber(response.data.access_token,7)  
 
             saveImgAccount(dataAccount.data.items[0].snippet.thumbnails.default.url)
             UserInAccountTrue(true)
@@ -46,10 +47,10 @@ if(code){
                 const response = await getAccesToken('RefreshToken', token)
                 
                 saveAcessToken(response.data.access_token) 
-               
+
                 
                 
-                const dataAccount = await getDataAccount()
+                const dataAccount = await getDataAccount(response.data.access_token)
                 
                 
                 changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
@@ -89,7 +90,7 @@ async function loadSubsiber(access_token = "",countSubscriber){
       
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
     try{
-        const dataSubsribe = await TakeSubscriber(pageTokenSubscribe)
+        const dataSubsribe = await TakeSubscriber(access_token, pageTokenSubscribe,countSubscriber)
         dataSubsribe.data.nextPageToken ?  pageTokenSubscribe = dataSubsribe.data.nextPageToken : buttonMoreSubscriber.remove()
   
         dataSubsribe.data.items.forEach(({snippet})=>{
@@ -106,13 +107,13 @@ async function loadSubsiber(access_token = "",countSubscriber){
  }
 
  //Обновляем подписки на 50 штук 
- //
- 
+
    let dataSubscribe ;
  
   buttonMoreSubscriber.onclick = async () => {
-    dataSubscribe = await loadSubsiber(state.acessToken,50);
-       console.log("1111111111111")
+    dataSubscribe = await loadSubsiber(state.accessToken,50);
+    
+    
     aside_bottom_Show_All_Hide_All();
        show_All_Display_block();
 }
@@ -174,6 +175,19 @@ hide_All.onclick = () => {
         }
     });
         
+    //  loadSubsiber(access_token = "",countSubscriber)
+    //       buttonMoreSubscriber.classList.remove("none");
+
+
+    //       document.querySelector(".aside_SignIn").classList.add("hF","fdC")
+    //  const singIntNone = document.querySelector(".aside_SignIn_Container")
+    //  const removeNonContainer = document.querySelector(".block_list_Sing_int ")
+    
+    //  singIntNone.classList.add("none")
+    //  removeNonContainer.classList.remove("none")
+
+    //  aside_SignIn_buttonMore_2.classList.remove("none")
+    
   
 };
    
