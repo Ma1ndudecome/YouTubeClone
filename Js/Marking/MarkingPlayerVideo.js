@@ -1,4 +1,4 @@
-import { fromLikeToShortLike, fromViewToShortView } from "../ViewToViewLikeToLike.js"
+import { fromLikeToShortLike, fromViewToShortView } from "../untils/ViewToViewLikeToLike.js"
 
 export function MarkingPlayer(id, dateRequests, dataProfile){
     const dateString = dateRequests[0].snippet.publishedAt

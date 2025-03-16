@@ -1,9 +1,11 @@
-import { state } from "./changeData.js"
+import { state } from "./features/changeData.js"
 import { forYouVideoMarking } from "./Marking/profileVideoMarking.js";
-import { formatDuration } from "./FromISOToTime.js";
+import { formatDuration } from "./untils/FromISOToTime.js";
+import axios from 'axios'
 
-import { takeComment } from "./AllApiRequest.js";
-import { addMarkingComent } from "./HelpsFunction.js";
+
+import { takeComment } from "./api/AllApiRequest.js";
+import { addMarkingComent } from "./untils/HelpsFunction.js";
 export async function loadVideoInProfile(accessToken, dataProfile, tokenVideo){
     return await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },
@@ -62,7 +64,7 @@ function element(arr){
 export function LoadMoreComments(id){
   const triger = document.querySelector(".trigerContainer")
 
-
+  console.log(triger)
   const observ = new IntersectionObserver((entries)=>{
     checkEntriesAndTakeResponse(entries, id)
   })

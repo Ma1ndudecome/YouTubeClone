@@ -1,2 +1,4 @@
 Js/APIKEY.js
 node_modules
+dist
+.parcel-cache

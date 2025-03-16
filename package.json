@@ -1,0 +1,30 @@
+{
+  "name": "youtube",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "it's clone YouTube",
+  "main": "main.js",
+  "scripts": {
+    "start": "parcel index.html --port 5501",
+    "build": "parcel build index.html",
+    "preview": "parcel serve dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ma1ndudecome/YouTubeClone.git"
+  },
+  "author": "Main, Vlad, Marina, Evhen, Alexandr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ma1ndudecome/YouTubeClone/issues"
+  },
+  "homepage": "https://github.com/Ma1ndudecome/YouTubeClone#readme",
+  "dependencies": {
+    "axios": "^1.8.2"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  }
+}
