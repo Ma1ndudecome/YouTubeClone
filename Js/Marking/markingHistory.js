@@ -35,7 +35,7 @@ export function markinHistory() {
                                     <path
                                         d="M11 17H9V8h2v9zm4-9h-2v9h2V8zm4-4v1h-1v16H6V5H5V4h4V3h6v1h4zm-2 1H7v15h10V5z">
                                     </path>
-                                </svg></span> Clear all watvh history
+                                </svg></span> Clear all watch history
                         </button>
                         <button class="filter-btn pause-history">
                             <span  style="margin-right: 5px;  height: 24px; width: 24px;" class="filter-btn-icon"><svg style="height: 24px; width: 24px;" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
