@@ -2,7 +2,8 @@ import { state } from "../features/changeData.js";
 import { URL } from "../URL/URL.js";
 import { formatDuration } from "../untils/FromISOToTime.js";
 import { TakeShortAndLongVideo } from "../untils/HelpsFunction.js";
-import { requestToSeverGet } from "../URL/Request.js";
+import { requestToSeverGet, requestToServerPD } from "../URL/Request.js";
+
 import axios from 'axios'
 
 
@@ -107,28 +108,7 @@ export async function getMoreStatisticId(id){
 }
 export async function addSubscribe(channelID) {
     try{
-        return await axios.post(URL.getSubscriberURL, 
-        {
-            snippet:{
-                resourceId:{
-                    kind:"youtube#channel",
-                    channelId:channelID
-                }
-            }
-        },
-        {
-            headers:{
-                'Authorization': `Bearer ${state.acessToken}`,
-                'Content-Type': 'application/json'
-            },
-            params:{
-                part:"snippet",
-                mine:true,
-                key:APIKEY
-            }
-
-        },
-)
+        return await requestToServerPD(URL.getSubscriberURL,{ snippet:{ resourceId:{ kind:"youtube#channel", channelId:channelID} } }, {headers:{'Authorization': `Bearer ${state.acessToken}`,'Content-Type': 'application/json'}, params:{ part:"snippet", mine:true, key:APIKEY }})
     }catch(err){
         console.log(err)
     }
@@ -136,33 +116,11 @@ export async function addSubscribe(channelID) {
 }
 
 export async function removeSubscribe(channelID) {
+    const response = await requestToSeverGet(URL.getSubscriberURL, { part:"id",  forChannelId:channelID, mine:true,  key:APIKEY}, true)
 
-    const response = await axios.get(URL.getSubscriberURL, {
-        headers:{
-            'Authorization':`Bearer ${state.acessToken}`
-        },
-        params:{
-            part:"id",
-            forChannelId:channelID,
-            mine:true,
-            key:APIKEY
-        }
-    })
     const id = response.data.items[0]?.id
 
-    return await axios.delete(URL.getSubscriberURL,
-        {
-            headers:{
-                'Authorization':`Bearer ${state.acessToken}`,
-                "Content-Type":"application/json"
-            },
-            params:{
-                id:id,
-                key:APIKEY
-            }
-        }
-    )
-    
+    return await requestToServerPD(URL.getSubscriberURL,{ headers:{ 'Authorization':`Bearer ${state.acessToken}`, "Content-Type":"application/json" }, params:{ id:id, key:APIKEY } } )
 }
 
 export async function userSubscriber(idChannel) {
@@ -172,47 +130,14 @@ export async function userSubscriber(idChannel) {
 
 export async function putComment(text, videoId, channelId) {
     try{
-        return await axios.post(URL.commentURL, 
-            {
-                snippet: {
-                    channelId:channelId,
-                    videoId:videoId,
-                    topLevelComment:{
-                        snippet:{
-                            textOriginal:text
-                        }
-                    }
-                }
-            },
-            {
-                headers:{
-                    Authorization:`Bearer ${state.acessToken}`,
-                     'Content-Type': 'application/json'
-                },
-                params:{
-                    part:"snippet"
-                }
-            }
-        )
+        return await requestToServerPD(URL.commentURL, { snippet: { channelId:channelId, videoId:videoId, topLevelComment:{ snippet:{textOriginal:text } } } }, { headers:{ Authorization:`Bearer ${state.acessToken}`, 'Content-Type': 'application/json' }, params:{ part:"snippet" } })
     }catch(err){
         console.log(err)
     }
 }
 
 export  function addRateToVideo(IdVideo, rating) {
-     axios.post(URL.addRateToVideoURL,
-        null,
-        {
-            headers: {
-                Authorization: `Bearer ${state.acessToken}`
-            },
-            params:{
-                id:IdVideo,
-                rating:rating
-            }
-        }
-    )
-    
+    requestToServerPD(URL.addRateToVideoURL, null, { headers: { Authorization: `Bearer ${state.acessToken}` }, params:{ id:IdVideo, rating:rating }})
 }
 export async function GetContentGaming(){
     try{
