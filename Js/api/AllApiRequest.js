@@ -1,6 +1,7 @@
 import { params } from "../URL/reExportUrl.js"; 
 import { state } from "../features/ReExportFeatures.js"
 import { TakeShortAndLongVideo } from "../untils/HelpsFunction.js";
+import { TakeShortAndLongVideo, getIdVideo } from "../untils/reExportUntils.js";
 
 import {URL, requestToSeverGet, requestToServerPD, makeParams} from "../URL/reExportUrl.js"
 
@@ -43,7 +44,7 @@ export async function takeMoreInfoChannel(nameChannel) {
 }
 export async  function takeMoreVideoAnyProfile(id){
     const detailInformationVideo = await requestToSeverGet(URL.searchURL, makeParams(params.takeDetailInfoVideo), {channelId:id})
-    const videoIds = detailInformationVideo.data.items.map(el => el.id.videoId).join(',');
+    const videoIds = getIdVideo(detailInformationVideo.data.items)
     const takeDuration = await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoIds}))
 
     return TakeShortAndLongVideo(takeDuration)
@@ -85,14 +86,14 @@ export function TakeSubscriber(pageTokenSubscribe){//!
 export async function TakeTrending() {//!
     const newsData = await requestToSeverGet(URL.searchURL, params.takeVideoTrand)
 
-    const IDVideo = newsData.data.items.map(el => el.id.videoId).join(',')
+    const IDVideo = getIdVideo(newsData.data.items)
     return requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:IDVideo}))
     
 }
 export async function SearchContent(content){//!
     try{
         const videoRequest = await requestToSeverGet(URL.searchURL, makeParams(params.searchContent, {q:content}))
-        const videoId = videoRequest.data.items.map(el=>el.id.videoId).join(',')
+        const videoId = getIdVideo(videoRequest.data.items)
         return  await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoId}))
     }catch(err){
         console.log(err);
@@ -146,7 +147,7 @@ export async function GetContentGaming(){//!
     try{
         const videoRequest = await requestToSeverGet(URL.searchURL, params.getGamingVideo)
        
-        const IDVideo = videoRequest.data.items.map(el=>el.id.videoId).join(',')
+        const IDVideo = getIdVideo(videoRequest.data.items)
 
         const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:IDVideo}))
        
