@@ -1,50 +1,52 @@
+import {URL, requestToSeverGet, requestToServerPD, makeParams, params} from "../URL/reExportUrl.js"
 import { state } from "../features/ReExportFeatures.js"
-import {URL, requestToSeverGet, requestToServerPD } from "../URL/reExportUrl.js"
+
 import axios from 'axios'
 
 export async function takeCountCommentUnderVideo(videoId){
-    const comment = await requestToSeverGet(URL.infoVideoURL, {part: "statistics", id: videoId, key: APIKEY})
+    const comment = await requestToSeverGet(URL.infoVideoURL, makeParams(params.beginInfoVideo, {id:videoId}))
     return comment.data.items[0].statistics.commentCount
 }
 
+
 export  async function  takeComment(videoId) {
     if(state.acessToken){
-        const allComment = await requestToSeverGet(URL.commentURL, {part: "snippet", videoId: videoId, maxResults:20, pageToken:state.PageTokenComment}, true)
-        return allComment.data
-    }else{
-        const allComment = await requestToSeverGet(URL.commentURL, {part: "snippet", videoId: videoId, maxResults:5, pageToken:state.PageTokenComment,key:APIKEY })
+        const allComment = await requestToSeverGet(URL.commentURL, makeParams(params.getCommentAuth, {videoId:videoId}), true)
         return allComment.data
     }
+    const allComment = await requestToSeverGet(URL.commentURL, makeParams(params.getCommentAPI, {videoId:videoId}))
+    return allComment.data
+    
    
 }
 async function takeInfoChannel(nameChannel){
     const name = nameChannel.trim().replaceAll(' ', '+')
-
-    const idChannel = await requestToSeverGet(URL.searchURL, { part:"snippet",  type:"channel",  q:name, key:APIKEY })
-    const moreInfoChannel = await requestToSeverGet(URL.channelURL, {  part:"statistics", id:idChannel.data.items[0].id.channelId,  key:APIKEY})
+   
+    const idChannel = await requestToSeverGet(URL.searchURL, makeParams(params.takeIdChannel, {q:name}))
+    
+    const moreInfoChannel = await requestToSeverGet(URL.channelURL, makeParams(params.takeMoreInfoChannel, {id:idChannel.data.items[0].id.channelId}))
 
     return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount, ChannelId:idChannel.data.items[0].id.channelId}
 }
 export async function takeMoreInfoChannel(nameChannel) {
     const name = nameChannel.replaceAll(' ', '+')
 
-    const idChannel = await requestToSeverGet(URL.searchURL, { part:"snippet", q:name,  key:APIKEY, type:"channel"})
-    const moreInfoChannel = await removeSubscribe(URL.channelURL, { part:"snippet,statistics,brandingSettings", id:idChannel.data.items[0].id.channelId,  key:APIKEY})
+    const idChannel = await requestToSeverGet(URL.searchURL, makeParams(params.takeIdChannel, {q:name}))
+
+    const moreInfoChannel = await requestToSeverGet(URL.channelURL, makeParams(params.getInfoChannel, {id:idChannel.data.items[0].id.channelId}))
     
     return {dataChannel:moreInfoChannel.data.items[0], id:moreInfoChannel.data.items[0].id}
 }
 export async  function takeMoreVideoAnyProfile(id){
-    const detailInformationVideo = await requestToSeverGet(URL.searchURL, { part:"snippet", channelId:id, maxResults:50, pageToken:state.pageTokenProfileVideoAny, order:"date", type:"video", key:APIKEY})
+    const detailInformationVideo = await requestToSeverGet(URL.searchURL, makeParams(params.takeDetailInfoVideo), {channelId:id})
     const videoIds = detailInformationVideo.data.items.map(el => el.id.videoId).join(',');
-    const takeDuration = await requestToSeverGet(URL.infoVideoURL, {part:"contentDetails,snippet,statistics", id:videoIds, key:APIKEY})
+    const takeDuration = await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoIds}))
 
-    const video = TakeShortAndLongVideo(takeDuration)
-
-    return video
+    return TakeShortAndLongVideo(takeDuration)
 }
 export async function ImgAndSubscribeChannel(nameChannel){
-    const response = await takeInfoChannel(nameChannel)
-    return response
+    return await takeInfoChannel(nameChannel)
+   
 }
 
 export function getRatingVideo(videoId){
@@ -54,34 +56,32 @@ function dataObjectAccess(type, token=''){
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     if(type === 'accessToken'){
-        const data = new URLSearchParams({ code:code, client_id: cliendId, client_secret: clientSecret, redirect_uri:redirectUri, grant_type:'authorization_code'})
-        return data
+        return new URLSearchParams(makeParams(params.getAccesToken, {code:code}))
     }else if(type === 'RefreshToken'){
-        const data = new URLSearchParams({client_id: cliendId, client_secret: clientSecret, refresh_token:token[0].refreshToken, grant_type:'refresh_token'})
-        return data
+        return  new URLSearchParams(makeParams(params.getRefreshToken, {refresh_token:token[0].refreshToken}))
     }
 }
 
-export function getAccesToken(type, token){
+export function getAccesToken(type, token){//!
     const data = dataObjectAccess(type, token)
     const setting = {headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
     return axios.post(URL.tokenURL, data, setting)
 }
-export function getDataAccount(){
-    return requestToSeverGet(URL.channelURL, { part:"snippet,statistics", mine:true }, true )
-
+export function getDataAccount(){//!
+    return requestToSeverGet(URL.channelURL, params.getDataAccount, true )
 }
 
-export function TakeSubscriber(pageTokenSubscribe){
-    return requestToSeverGet(URL.getSubscriberURL, { part:"snippet",  mine:true, maxResults:7, pageToken:pageTokenSubscribe}, true)
+export function TakeSubscriber(pageTokenSubscribe){//!
+
+    return requestToSeverGet(URL.getSubscriberURL, makeParams(params.takeSubsriber, {pageToken:pageTokenSubscribe}), true)
 }
 
-export async function TakeTrending() {
-    const newsData = await requestToSeverGet(URL.searchURL, { part:"snippet",  type:"video",  videoCategoryId:20, videoDuration:"short",  chart:"mostPopular",  maxResults:20, key:APIKEY})
+export async function TakeTrending() {//!
+    const newsData = await requestToSeverGet(URL.searchURL, params.takeVideoTrand)
 
     const IDVideo = newsData.data.items.map(el => el.id.videoId).join(',')
-    const detailsInf = requestToSeverGet(URL.infoVideoURL, {part:"snippet, statistics, contentDetails",  id:IDVideo,  key:APIKEY})
-    return detailsInf;
+    return requestToSeverGet(URL.infoVideoURL, {part:"snippet, statistics, contentDetails",  id:IDVideo,  key:APIKEY})
+    
 }
 export async function SearchContent(content){
     try{
@@ -146,3 +146,11 @@ export async function GetContentGaming(){
         console.log(err);
     }
 }
+async function testingFunc() {
+    setTimeout(async ()=>{
+        const a = 
+        console.log(a)
+    },500)
+    
+  }
+  testingFunc()
