@@ -1,4 +1,3 @@
-import { getRatingVideo } from "../api/AllApiRequest";
 
 export const URL = {
     tokenURL:"https://oauth2.googleapis.com/token",

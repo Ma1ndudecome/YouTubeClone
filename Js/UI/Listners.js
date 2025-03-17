@@ -1,11 +1,7 @@
-import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, addMarkingComent} from '../untils/HelpsFunction.js'
-import { state } from '../features/changeData.js'
-import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment, addRateToVideo } from "../api/AllApiRequest.js"
-import { container } from '../features/LoadVideo.js'
-import { markinHistoryVideo } from '../Marking/Marking.js'
-import { fromViewToShortView } from '../untils/ViewToViewLikeToLike.js'
-import { formatDuration } from '../untils/FromISOToTime.js'
-
+import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment, addRateToVideo } from "../api/ReExportAPI.js"
+import {state, container} from "../features/ReExportFeatures.js"
+import { markinHistoryVideo } from '../Marking/reExportMarking.js'
+import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, addMarkingComent, formatDuration, fromViewToShortView } from "../untils/reExportUntils.js"
 
 
 
