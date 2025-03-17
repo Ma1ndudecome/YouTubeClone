@@ -1,11 +1,12 @@
 import { container } from "./ReExportFeatures.js"
-import { markingProfile } from "../Marking/MarkingIcon.js"
+import { markingProfile, markingChangeTheme } from "../Marking/MarkingIcon.js"
 import { markingProfile as profileMark } from "../Marking/Marking.js"
 import { loadVideoInProfile } from "../infinityScrollInProfile.js"
 import { channelData, moreBtn } from "./ReExportFeatures.js"
 import axios from 'axios'
+import { themeChange } from "../UI/HeaderANDAside.js"
 
-import { TakeShortAndLongVideo,navInProfile, checkCountVideoAndGiveMarking } from "../untils/HelpsFunction.js"
+import { TakeShortAndLongVideo, navInProfile, checkCountVideoAndGiveMarking } from "../untils/HelpsFunction.js"
 
 export const state = {//Тут храняться переменные которые изменяються в разныъ файлах
   pageTokenProfileVideo: '',//Сохранение токена для следующей страницы видео
@@ -30,35 +31,39 @@ export let dateProfileVideo = []//При запросе сохраняю все 
 
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
   document.querySelector(".sing_int").innerHTML = markingProfile(profileImg, profileName, profileCustomUrl)
-  document.querySelector("header").addEventListener("click", clickToAvatarUser )
-    
-  document.querySelector(".profileImg_Info").addEventListener("click", (e) => {
+  document.querySelector("header").addEventListener("click", clickToAvatarUser)
+  const youtubeSettings = document.querySelector(".profileImg_Info")
+  youtubeSettings.addEventListener("click", (e) => {
     e.preventDefault()
-    openProfile(e.target, accessToken)
+    openProfile(e.target, accessToken, youtubeSettings)
 
   })
 }
 
-async function openProfile(target, accessToken) {
- const text = target.textContent.trim()
+async function openProfile(target, accessToken, block) {
+  const text = target.textContent.trim()
 
   if (text === 'View your channel') {
     ViewChannel(accessToken)
-  }else if(text === "Switch Account"){
+  } else if (text === "Switch Account") {
     switchAccount()
-  }else if(text === "Sing out"){
+  } else if (text === "Sing out") {
     logout()
+  }
+  else if (text === "Apperance") {
+       block.innerHTML = markingChangeTheme()
+       themeChange(block)
   }
 
 }
-async function ViewChannel(accessToken){
+async function ViewChannel(accessToken) {
   container.innerHTML = ''
   const info = document.querySelector(".profileImg_Info")
   info.classList.remove("show")
   container.classList.remove("grid")
   container.classList.add('block')
 
-  try{
+  try {
     const dataProfile = await channelData(accessToken)
     safeDataInPushState(dataProfile)
 
@@ -70,26 +75,26 @@ async function ViewChannel(accessToken){
     state.pageTokenProfileShorts = videoProfile.data.nextPageToken || ''
 
     const detailInformationVideo = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${APIKEY}`)
-   
+
     renderProfile(dataProfile, detailInformationVideo)
-  }catch(error){
+  } catch (error) {
     console.log(error)
   }
 }
 
-function renderProfile(dataProfile, detailInformationVideo){
+function renderProfile(dataProfile, detailInformationVideo) {
   const profileData = dataProfile.data.items[0];
   const banner = profileData.brandingSettings?.image?.bannerExternalUrl || ''
-  
-  container.insertAdjacentHTML("afterbegin", profileMark(banner, profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title) )
 
-  if(!profileData.brandingSettings.image){
+  container.insertAdjacentHTML("afterbegin", profileMark(banner, profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
+
+  if (!profileData.brandingSettings.image) {
     document.querySelector(".Main_container_Header")?.remove();
   }
   const video = TakeShortAndLongVideo(detailInformationVideo)
-      
+
   checkCountVideoAndGiveMarking(video)
-  
+
   navInProfile(video)
   dateProfileVideo.push(...detailInformationVideo.data.items)
 
@@ -102,10 +107,10 @@ function renderProfile(dataProfile, detailInformationVideo){
   checkCountVideo()
 
 }
-function switchAccount(){
- location.href = 'http://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.force-ssl&redirect_uri=http%3A%2F%2Flocalhost%3A5501&response_type=code&client_id=729574226005-s73fnabnui73ga2vtfa52u87o3qag7f8.apps.googleusercontent.com&access_type=offline&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow'
+function switchAccount() {
+  location.href = 'http://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.force-ssl&redirect_uri=http%3A%2F%2Flocalhost%3A5501&response_type=code&client_id=729574226005-s73fnabnui73ga2vtfa52u87o3qag7f8.apps.googleusercontent.com&access_type=offline&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow'
 }
-function logout(){
+function logout() {
   location.href = redirectUri
   state.Autorization = false
 }
@@ -132,42 +137,42 @@ export function slideToButton() {
   checkAndDelete(count2, containerShorts, document.querySelector(".Shorts_container_title"), leftArrowS, rightArrowS)
 }
 
-function checkAndDelete(count, el, upperEl, arrow1, arrow2, isCont=false){
-  
-  if(count === 0){
+function checkAndDelete(count, el, upperEl, arrow1, arrow2, isCont = false) {
+
+  if (count === 0) {
     upperEl.remove()
     el.remove()
     arrow1.remove()
     arrow2.remove()
     checkWhatDeleteAndRemoveNav(el)
   }
-  if(count <= 4 && isCont){
+  if (count <= 4 && isCont) {
     arrow1.remove()
     arrow2.remove()
-  }else if(count <= 5 && !isCont){
+  } else if (count <= 5 && !isCont) {
     arrow1.remove()
     arrow2.remove()
   }
 
-  arrow1 ? arrow1.onclick = ()=>{RightClick(el)} : false
-  arrow2 ? arrow2.onclick = ()=>{leftClick(el)} : false
+  arrow1 ? arrow1.onclick = () => { RightClick(el) } : false
+  arrow2 ? arrow2.onclick = () => { leftClick(el) } : false
 }
-function RightClick(container){
-    container.scrollLeft += 600
+function RightClick(container) {
+  container.scrollLeft += 600
 }
-function leftClick(container){
+function leftClick(container) {
   console.log()
   container.scrollLeft -= 600
 }
 
-function checkWhatDeleteAndRemoveNav(el){
+function checkWhatDeleteAndRemoveNav(el) {
   console.log(el)
   const nav = document.querySelectorAll(".container_channel_navigation_item")
   console.log(nav)
-  if(el.classList.contains("Shorts_video_container")){
+  if (el.classList.contains("Shorts_video_container")) {
     nav.length === 3 ? nav[2].remove() : nav[1].remove()
   }
-  if(el.classList.contains("ForYou_Container_video")){
+  if (el.classList.contains("ForYou_Container_video")) {
     console.log('delete forYou')
     console.log(nav[1])
     nav[1].remove()
@@ -210,8 +215,12 @@ function clickToAvatarUser(e){
     const info = document.querySelector(".profileImg_Info")
     info.classList.toggle("show")
   }else{
-    const info = document.querySelector(".profileImg_Info")
-    info.classList.remove("show")
+      if(e.target.closest(".theme")){
+        return
+      }
+      const info = document.querySelector(".profileImg_Info")
+        info.classList.remove("show")
+   
   }
 }
 

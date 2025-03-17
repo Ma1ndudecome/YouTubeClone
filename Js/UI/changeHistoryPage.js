@@ -27,7 +27,6 @@ function loadData(conteinerVideo) {
         console.log("not vide0")
     }
 }
-console.log(112)
 
 historyBtn.onclick = (event) => {
     event.preventDefault()

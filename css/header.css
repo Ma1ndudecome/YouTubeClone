@@ -21,7 +21,7 @@ header .menu_icon {
 }
 
 header .menu {
-   
+
     width: 75px;
     height: 60px;
 
@@ -337,7 +337,7 @@ header .sing_int {
 
 .profileImg_Info {
     overflow: hidden;
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: none;
     border-radius: 24px;
     top: 40px;
@@ -374,16 +374,17 @@ header .sing_int {
 .profileInfo_title,
 .profileInfo_customUrl {
     color: var(--bordColor);
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 0.9rem;
 }
-.profileInfo_customUrl{
+
+.profileInfo_customUrl {
     margin-bottom: 10px;
 }
 
 .Info_top_profileInfo a {
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: #3ea6ff;
     font-weight: 400;
     font-size: 0.9rem;
@@ -432,8 +433,10 @@ header .sing_int {
 .Info_account_exit {
     height: 33.333%;
 }
-.Info_account_exit{
-    align-items: center;}
+
+.Info_account_exit {
+    align-items: center;
+}
 
 .left_box {
     width: 25%;
@@ -476,7 +479,9 @@ header .sing_int {
     height: 100%;
     width: 20%;
 }
-.dark_theme,.light_theme{
+
+.dark_theme,
+.light_theme {
     height: 100%;
     width: 20%;
 }
@@ -494,7 +499,9 @@ header .sing_int {
     width: 20%;
     transition: 200ms;
 }
-.theme_arrow:hover,.left_box3:hover{
+
+.theme_arrow:hover,
+.left_box3:hover {
     cursor: pointer;
     background-color: var(--hoverBlack);
 
@@ -532,7 +539,8 @@ header .sing_int {
 
 
 }
-.block_fon{
+
+.block_fon {
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -554,4 +562,20 @@ header .sing_int .svgS:hover {
     border-radius: 24px;
     height: 36px;
     cursor: pointer;
+}
+
+.dark_theme,
+.light_theme {
+    height: 48px;
+    width: 100%;
+    padding-left: 40px;
+    color: var(--bordColor);
+    font-family: Roboto, sans-serif;
+
+}
+
+.dark_theme:hover,
+.light_theme:hover {
+    cursor: pointer;
+    background-color: var(--hoverBlack);
 }
