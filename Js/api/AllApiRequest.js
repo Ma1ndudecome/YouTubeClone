@@ -10,7 +10,7 @@ export async function takeCountCommentUnderVideo(videoId){
 
 export  async function  takeComment(videoId) {
     if(state.acessToken){
-        const allComment = await requestToSeverGet(URL.commentURL, {part: "snippet", videoId: videoId, maxResults:20, pageToken:state.PageTokenComment,}, true)
+        const allComment = await requestToSeverGet(URL.commentURL, {part: "snippet", videoId: videoId, maxResults:20, pageToken:state.PageTokenComment}, true)
         return allComment.data
     }else{
         const allComment = await requestToSeverGet(URL.commentURL, {part: "snippet", videoId: videoId, maxResults:5, pageToken:state.PageTokenComment,key:APIKEY })
