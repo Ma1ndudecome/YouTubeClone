@@ -1,8 +1,9 @@
 import { makeMarkingVideo } from '../Marking/markingVideo.js'
-import { formatDuration, fromViewToShortView, dateTime } from "../untils/reExportUntils.js"
+import { formatDuration, fromViewToShortView, dateTime, getIdVideo } from "../untils/reExportUntils.js"
 import { state } from './ReExportFeatures.js'
 import {URL, requestToSeverGet} from "../URL/reExportUrl.js"
 import { params, makeParams } from '../URL/reExportUrl.js'
+import { getIdVideo } from '../untils/reExportUntils.js'
 
 
 
@@ -18,7 +19,8 @@ async function LoadVideo() {
     try{
         const response = await requestToSeverGet(URL.searchURL, {part:"snippet", maxResults:5, type:"video", eventType:"none", key:APIKEY, pageToken:pageToken, videoDuration:"long"})
         pageToken = response.data.nextPageToken || '';
-        const IDVideo = response.data.items.map(el => el.id.videoId).join(',')
+        
+        const IDVideo = getIdVideo(response.data.items)
         const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.getDetailInfoGaming, {id:IDVideo}))
 
         await MoreStatisticVideo.data.items.forEach(el => {

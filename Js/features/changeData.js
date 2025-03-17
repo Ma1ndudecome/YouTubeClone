@@ -210,8 +210,15 @@ function clickToAvatarUser(e){
     const info = document.querySelector(".profileImg_Info")
     info.classList.toggle("show")
   }else{
-    const info = document.querySelector(".profileImg_Info")
-    info.classList.remove("show")
+    
+   
+
+      if(e.target.closest(".profileImg_Info")){
+        return
+      }
+      const info = document.querySelector(".profileImg_Info")
+        info.classList.remove("show")
+   
   }
 }
 
