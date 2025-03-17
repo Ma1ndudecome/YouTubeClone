@@ -192,11 +192,13 @@ export function slideToButton() {
 }
 
 function checkAndDelete(count, el, upperEl, arrow1, arrow2, isCont=false){
+  
   if(count === 0){
     upperEl.remove()
     el.remove()
     arrow1.remove()
     arrow2.remove()
+    checkWhatDeleteAndRemoveNav(el)
   }
   if(count <= 4 && isCont){
     arrow1.remove()
@@ -206,8 +208,8 @@ function checkAndDelete(count, el, upperEl, arrow1, arrow2, isCont=false){
     arrow2.remove()
   }
 
-  arrow1.onclick = ()=>{RightClick(el)}
-  arrow2.onclick = ()=>{leftClick(el)}
+  arrow1 ? arrow1.onclick = ()=>{RightClick(el)} : false
+  arrow2 ? arrow2.onclick = ()=>{leftClick(el)} : false
 }
 function RightClick(container){
     container.scrollLeft += 600
@@ -217,6 +219,19 @@ function leftClick(container){
   container.scrollLeft -= 600
 }
 
+function checkWhatDeleteAndRemoveNav(el){
+  console.log(el)
+  const nav = document.querySelectorAll(".container_channel_navigation_item")
+  console.log(nav)
+  if(el.classList.contains("Shorts_video_container")){
+    nav.length === 3 ? nav[2].remove() : nav[1].remove()
+  }
+  if(el.classList.contains("ForYou_Container_video")){
+    console.log('delete forYou')
+    console.log(nav[1])
+    nav[1].remove()
+  }
+}
 
 
 function AddClassToContainer(containerVideo, inner) {
@@ -238,12 +253,11 @@ function safeDataInPushState(dataProfile) {
 
 function checkCountVideo() {
   if (state.infoChannel.videoCount === String(0)) {
-    console.log(document.querySelector(".line"))
-    console.log(document.querySelector(".Header_Main_container_video"))
 
 
-    document.querySelector(".line").remove()
-    document.querySelector(".Header_Main_container_video").remove()
+
+    document.querySelector(".line")?.remove()
+    document.querySelector(".Header_Main_container_video")?.remove()
 
     const nav = document.querySelector(".container_channel_navigation")
     nav.innerHTML = `
