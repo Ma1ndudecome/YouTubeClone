@@ -79,10 +79,7 @@ async function loadSubsiber(access_token = "",countSubscriber){
     removeNonContainer.classList.remove("none")
 
        buttonMoreSubscriber.classList.remove("none")
-
-    
-
-      
+       
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
     try{
         const dataSubsribe = await TakeSubscriber(pageTokenSubscribe)

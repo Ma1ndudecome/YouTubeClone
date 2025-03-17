@@ -128,18 +128,12 @@ export function slideToButton() {
   const rightArrowS = document.querySelector(".Shorts_Container_leftArrow")
   const leftArrowS = document.querySelector(".Shorts_Container_rightArrow")
 
-  some(4, containerForYou, document.querySelector(".Header_Main_container_video h1"), rightArrowF, leftArrowF)
-  some(4, containerShorts, document.querySelector(".Shorts_container_title"), rightArrowS, leftArrowS)
+  checkAndDelete(count1, containerForYou, document.querySelector(".Header_Main_container_video_main"), rightArrowF, leftArrowF, true)
+  checkAndDelete(count2, containerShorts, document.querySelector(".Shorts_container_title"), leftArrowS, rightArrowS)
 
 
-  console.log(containerForYou);
-  console.log(containerShorts);
-  console.log(count1);
-  console.log(count2);
-  console.log(rightArrowF);
-  console.log(leftArrowF);
-  console.log(rightArrowS);
-  console.log(leftArrowS);
+
+
   
   
 
@@ -197,17 +191,31 @@ export function slideToButton() {
  
 }
 
-function some(count, el, upperEl, arrow1, arrow2){
+function checkAndDelete(count, el, upperEl, arrow1, arrow2, isCont=false){
   if(count === 0){
-    
     upperEl.remove()
     el.remove()
     arrow1.remove()
     arrow2.remove()
-
   }
-}
+  if(count <= 4 && isCont){
+    arrow1.remove()
+    arrow2.remove()
+  }else if(count <= 5 && !isCont){
+    arrow1.remove()
+    arrow2.remove()
+  }
 
+  arrow1.onclick = ()=>{RightClick(el)}
+  arrow2.onclick = ()=>{leftClick(el)}
+}
+function RightClick(container){
+    container.scrollLeft += 600
+}
+function leftClick(container){
+  console.log()
+  container.scrollLeft -= 600
+}
 
 
 
