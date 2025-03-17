@@ -1,5 +1,5 @@
 
-import "./gaming.js"; import "./features/LoadVideo.js"; import "./api/PostToToken.js"; import "./UI/Listners.js"; import "./features/ReturnPushState.js"; import "./UI/HeaderANDAside.js"; import "./UI/changeHistoryPage.js"
+import "./URL/config.js"; import "./gaming.js"; import "./features/LoadVideo.js"; import "./api/PostToToken.js"; import "./UI/Listners.js"; import "./features/ReturnPushState.js"; import "./UI/HeaderANDAside.js"; import "./UI/changeHistoryPage.js"
 import { markProfile, openVideoEverywere } from "./untils/HelpsFunction.js"
 const main = document.querySelector(".Main_container")
 import { state } from "./features/changeData.js";
@@ -15,6 +15,7 @@ main.addEventListener("click", async (e) => {
     if (e.target.closest(".chooseVideo")) {
         if (e.target.classList.contains("nameChannelSelect")) {
             const nameChannel = e.target.textContent
+            console.log(nameChannel)
             markProfile(main, nameChannel)
             isVideo = true
         } else {

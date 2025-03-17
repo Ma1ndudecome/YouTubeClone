@@ -1,7 +1,7 @@
 export function markingProfile(profileImg, profileName, profileCustomUrl) {
     return `
      <div class="profileImg dF jcE">
-        <img src="${profileImg}" alt="yourIcon">
+        <img src="${profileImg}" alt="yourIcon" class="userImg">
         <div class="profileImg_Info">
             <div class="profileImg_Info_top dF">
                 <div class="Info_top_img dF aiS jcC">

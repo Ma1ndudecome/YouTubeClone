@@ -1,10 +1,11 @@
 import { makeMarkingVideo } from '../Marking/markingVideo.js'
-import { formatDuration, fromViewToShortView } from "../untils/reExportUntils.js"
+import { formatDuration, fromViewToShortView, dateTime } from "../untils/reExportUntils.js"
 import { state } from './ReExportFeatures.js'
-import { requestToSeverGet } from "../URL/Request.js";
-import { URL } from '../URL/URL.js';
 import {URL, requestToSeverGet} from "../URL/reExportUrl.js"
-import axios from 'axios'
+import { params, makeParams } from '../URL/reExportUrl.js'
+
+
+
 
 const triger = document.querySelector(".triger")
 export let dateRequest = []
@@ -18,13 +19,11 @@ async function LoadVideo() {
         const response = await requestToSeverGet(URL.searchURL, {part:"snippet", maxResults:5, type:"video", eventType:"none", key:APIKEY, pageToken:pageToken, videoDuration:"long"})
         pageToken = response.data.nextPageToken || '';
         const IDVideo = response.data.items.map(el => el.id.videoId).join(',')
-        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, {part:"snippet,statistics,contentDetails", id:IDVideo, key:APIKEY})
+        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.getDetailInfoGaming, {id:IDVideo}))
 
         await MoreStatisticVideo.data.items.forEach(el => {
             if (el.snippet.liveBroadcastContent === 'none') {
-                const date = new Date(el.snippet.publishedAt)
-                const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
-                container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), result, formatDuration(el.contentDetails.duration), el.id))
+                container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration), el.id))
                 dateRequest.push(el)
             }
         })
