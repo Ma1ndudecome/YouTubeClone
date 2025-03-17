@@ -33,4 +33,3 @@ export function makeParams(params, change){
     }
     return params
 }
-console.log(makeParams(params.changeComment, {snippet:{channelId:"213", videoId:"some", topLevelComment:{snippet:{textOriginal:"someee"}}}}))

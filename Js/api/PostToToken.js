@@ -1,3 +1,4 @@
+import { params } from "../URL/reExportUrl.js";
 import { changeProfile, channelData, state } from "../features/ReExportFeatures.js" 
 import { marcinSubscriben } from "../Marking/reExportMarking.js";
 import { getAccesToken, getDataAccount, TakeSubscriber } from "./ReExportAPI.js";
@@ -17,6 +18,7 @@ let pageTokenSubscribe = '';
 if(code){
     async function requestToTakeToken() {
         try{
+            console.log(params)
             const response = await getAccesToken('accessToken')
             saveAcessToken(response.data.access_token) 
            
@@ -64,8 +66,10 @@ if(code){
             }
         }
     }
-
-    requestToTakeToken()
+    setTimeout(()=>{
+        requestToTakeToken()
+    })
+    
 }
 
 

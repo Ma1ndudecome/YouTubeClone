@@ -1,5 +1,7 @@
+import { params } from "../URL/reExportUrl.js"; 
 import { state } from "../features/ReExportFeatures.js"
-import {URL, requestToSeverGet, requestToServerPD, makeParams, params} from "../URL/reExportUrl.js"
+
+import {URL, requestToSeverGet, requestToServerPD, makeParams} from "../URL/reExportUrl.js"
 
 
 import axios from 'axios'
@@ -50,12 +52,13 @@ export async function ImgAndSubscribeChannel(nameChannel){
    
 }
 
-export function getRatingVideo(videoId){//check!!
+export function getRatingVideo(videoId){
     return  requestToSeverGet(URL.getRatingVideoURL, {id:videoId}, true)
 }
 function dataObjectAccess(type, token=''){
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
+    
     if(type === 'accessToken'){
         return new URLSearchParams(makeParams(params.getAccesToken, {code:code}))
     }else if(type === 'RefreshToken'){
@@ -64,6 +67,7 @@ function dataObjectAccess(type, token=''){
 }
 
 export function getAccesToken(type, token){//!
+ 
     const data = dataObjectAccess(type, token)
     const setting = {headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
     return axios.post(URL.tokenURL, data, setting)
