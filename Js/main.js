@@ -15,6 +15,7 @@ main.addEventListener("click", async (e) => {
     if (e.target.closest(".chooseVideo")) {
         if (e.target.classList.contains("nameChannelSelect")) {
             const nameChannel = e.target.textContent
+            console.log(nameChannel)
             markProfile(main, nameChannel)
             isVideo = true
         } else {

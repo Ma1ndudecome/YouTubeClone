@@ -130,65 +130,6 @@ export function slideToButton() {
 
   checkAndDelete(count1, containerForYou, document.querySelector(".Header_Main_container_video_main"), rightArrowF, leftArrowF, true)
   checkAndDelete(count2, containerShorts, document.querySelector(".Shorts_container_title"), leftArrowS, rightArrowS)
-
-
-
-
-  
-  
-
-
-
-
-  
-
-  // if (count1 === 0) {
-  //   document.querySelector(".ForYou_Container_video").remove()
-  //   const navItem = document.querySelectorAll(".container_channel_navigation_item")[1]
-  //   if (navItem) {
-  //     navItem.remove()
-  //   }
-  //   rightArrowF.remove()
-  //   leftArrowF.remove()
-  // }
-  // if (count2 === 0) {
-  //   document.querySelector(".Shorts_container").remove()
-  //   const navItem = document.querySelectorAll(".container_channel_navigation_item")[2]
-  //   if (navItem) {
-  //     navItem.remove()
-  //   }
-  //   rightArrowS.remove()
-  //   leftArrowS.remove()
-
-  // }
-
-
-  //   if(rightArrowF && leftArrowF){
-  //     if (count1 < 4) {
-  //       rightArrowF.remove()
-  //       leftArrowF.remove()
-  //     }
-  //     rightArrowF.onclick = () => {
-  //       containerForYou.scrollLeft += 600
-  //     }
-  //     leftArrowF.onclick = () => {
-  //       containerForYou.scrollLeft -= 600
-  //     }
-  //   }
-  //    if(rightArrowS && leftArrowS){
-
-  //     if (count2 < 6) {
-  //       rightArrowS.remove()
-  //       leftArrowS.remove() 
-  //     }
-  //     leftArrowS.onclick = () => {
-  //       containerShorts.scrollLeft += 600
-  //     }
-  //     rightArrowS.onclick = () => {
-  //       containerShorts.scrollLeft -= 600
-  //     }
-  //   }
- 
 }
 
 function checkAndDelete(count, el, upperEl, arrow1, arrow2, isCont=false){
@@ -253,9 +194,6 @@ function safeDataInPushState(dataProfile) {
 
 function checkCountVideo() {
   if (state.infoChannel.videoCount === String(0)) {
-
-
-
     document.querySelector(".line")?.remove()
     document.querySelector(".Header_Main_container_video")?.remove()
 
