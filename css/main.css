@@ -404,22 +404,7 @@ iframe{
     z-index: 999;
     cursor: pointer;
 }
-.ForYou_Container_leftArrow{
-    top:145px;
-    left:-50px;
-}
-.ForYou_Container_rightArrow{
-    right: -50px;
-    top:145px
-}
-.Shorts_Container_leftArrow{
-    top:500px;
-    left:-50px
-}
-.Shorts_Container_rightArrow{
-    top:500px;
-    right: -50px;
-}
+
 .Container_video_preview_duration{
     position: absolute;
     background-color: rgba(0, 0, 0, 0.651);
