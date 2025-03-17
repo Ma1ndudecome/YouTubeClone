@@ -1,5 +1,7 @@
 "use strict"
-import { URL } from "../URL/URL.js"
+import { URL } from "../URL/reExportUrl.js"
+
+
 let glass_adaptation = document.getElementById("glass_adaptation")
 let adaptation = document.getElementById("adaptation")
 let img_adaptation = document.getElementById("img_adaptation")

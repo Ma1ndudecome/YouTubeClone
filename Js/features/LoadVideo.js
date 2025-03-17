@@ -1,9 +1,9 @@
 import { makeMarkingVideo } from '../Marking/markingVideo.js'
-import { formatDuration } from '../untils/FromISOToTime.js'
-import { fromViewToShortView } from '../untils/ViewToViewLikeToLike.js'
-import { state } from './changeData.js'
+import { formatDuration, fromViewToShortView } from "../untils/reExportUntils.js"
+import { state } from './ReExportFeatures.js'
 import { requestToSeverGet } from "../URL/Request.js";
 import { URL } from '../URL/URL.js';
+import {URL, requestToSeverGet} from "../URL/reExportUrl.js"
 import axios from 'axios'
 
 const triger = document.querySelector(".triger")

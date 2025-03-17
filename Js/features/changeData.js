@@ -1,10 +1,8 @@
-import { container } from "./LoadVideo.js"
+import { container } from "./ReExportFeatures.js"
 import { markingProfile } from "../Marking/MarkingIcon.js"
 import { markingProfile as profileMark } from "../Marking/Marking.js"
-import { forYouVideoMarking, shortVideoMarking } from "../Marking/profileVideoMarking.js"
-import { formatDuration } from "../untils/FromISOToTime.js"
-import { loadVideoInProfile, loadNextVideo, checkPageToken } from "../infinityScrollInProfile.js"
-import { channelData, moreBtn } from "./loadDataChannel.js"
+import { loadVideoInProfile } from "../infinityScrollInProfile.js"
+import { channelData, moreBtn } from "./ReExportFeatures.js"
 import axios from 'axios'
 
 import { TakeShortAndLongVideo,navInProfile, checkCountVideoAndGiveMarking } from "../untils/HelpsFunction.js"
@@ -201,10 +199,13 @@ function safeDataInPushState(dataProfile) {
 
 function checkCountVideo() {
   if (state.infoChannel.videoCount === String(0)) {
+    console.log(document.querySelector(".line"))
+    console.log(document.querySelector(".Header_Main_container_video"))
+
 
     document.querySelector(".line").remove()
     document.querySelector(".Header_Main_container_video").remove()
-    document.querySelector(".container_button_load").remove()
+
     const nav = document.querySelector(".container_channel_navigation")
     nav.innerHTML = `
      <div class="noneVideo">Автор поки загрузив жодного відео😥</div>

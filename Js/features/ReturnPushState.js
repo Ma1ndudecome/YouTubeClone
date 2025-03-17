@@ -1,5 +1,4 @@
-import { container } from "./LoadVideo.js"
-import { state } from "./changeData.js"
+import { state, container } from "./ReExportFeatures.js"
 let lastUrl = location.href;//Получаю первоначальное url для popstata
 
 window.addEventListener("popstate", ()=>{
