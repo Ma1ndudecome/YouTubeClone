@@ -237,3 +237,6 @@ export function changeTextContentAndAddClasslist(button, text, clas, addOrRemove
   addOrRemove === 0 ? button.classList.add(clas) : button.classList.remove(clas)
 }
 
+export function getIdVideo(items){
+  return items.map(el=> el.id.videoId).join(',')
+}
