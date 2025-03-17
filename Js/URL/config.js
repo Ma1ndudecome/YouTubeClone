@@ -1,11 +1,11 @@
 import { state } from "../features/ReExportFeatures.js"
 export const params = {
     beginInfoVideo:{part: "statistics", id: videoId, key: APIKEY},
-    takeAllCommentAuth:{part: "snippet", videoId: videoId, maxResults:20, pageToken:state.PageTokenComment},
-    takeAllCommentAPI:{part: "snippet", videoId: videoId, maxResults:5, pageToken:state.PageTokenComment,key:APIKEY },
+    getCommentAuth:{part: "snippet", videoId: videoId, maxResults:20, pageToken:state.PageTokenComment},
+    getCommentAPI:{part: "snippet", videoId: videoId, maxResults:5, pageToken:state.PageTokenComment,key:APIKEY },
     takeIdChannel:{ part:"snippet",  type:"channel",  q:name, key:APIKEY },
     takeMoreInfoChannel:{ part:"statistics", id:idChannel.data.items[0].id.channelId,  key:APIKEY},
-    takeAllInfoChannel:{ part:"snippet,statistics,brandingSettings", id:idChannel.data.items[0].id.channelId,  key:APIKEY},
+    getInfoChannel:{ part:"snippet,statistics,brandingSettings", id:idChannel.data.items[0].id.channelId,  key:APIKEY},
     takeDetailInfoVideo:{ part:"snippet", channelId:id, maxResults:50, pageToken:state.pageTokenProfileVideoAny, order:"date", type:"video", key:APIKEY},
     takeDurationVideo:{part:"contentDetails,snippet,statistics", id:videoIds, key:APIKEY},
     getAccesToken:{ code:code, client_id: cliendId, client_secret: clientSecret, redirect_uri:redirectUri, grant_type:'authorization_code'},
@@ -14,6 +14,12 @@ export const params = {
     takeSubsriber:{ part:"snippet",  mine:true, maxResults:7, pageToken:pageTokenSubscribe},
     takeVideoTrand:{ part:"snippet",  type:"video",  videoCategoryId:20, videoDuration:"short",  chart:"mostPopular",  maxResults:20, key:APIKEY},
     AddSubsribe:{ snippet:{ resourceId:{ kind:"youtube#channel", channelId:channelID} } },
-    
-
+    authParams: {headers:{'Authorization': `Bearer ${state.acessToken}`,'Content-Type': 'application/json'}},
+    shortResponse:{ part:"snippet", mine:true, key:APIKEY },
+    takeIdComment: { part:"id",  forChannelId:channelID, mine:true,  key:APIKEY},
+    getChangedComment:{ id:id, key:APIKEY },
+    isSubscribe:{ part:"id", forChannelId:idChannel, mine:true, key:APIKEY },
+    commentResponse:{ part:"snippet" },
+    getGamingVideo: {part:"snippet", q:"gaming", type:"video", videoCategoryId:20, maxResults:40, key:APIKEY},
+    getDetailInfoGaming:{ part:"snippet,statistics,contentDetails", id:IDVideo, key:APIKEY}
 }
