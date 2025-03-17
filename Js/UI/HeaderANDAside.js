@@ -34,7 +34,7 @@ backdrop.style.display = 'none'
 
 
 glass_adaptation.addEventListener("click",(e)=>{
-    // search.style.position ="fixed"
+    
    
     adaptation.style.display = "flex";
     glass_adaptation.style.display ="none"
@@ -50,6 +50,7 @@ const functionLogin = (e)=>{
 }
 subscriberContainer.onclick = functionLogin
 SingButton.onclick = functionLogin
+
 
 
 

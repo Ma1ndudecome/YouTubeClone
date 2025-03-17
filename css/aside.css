@@ -121,6 +121,44 @@ aside.hidden {
 
 .aside_SignIn_buttonMore_text{
     color: var(--bordColor);
+    margin-left: 13px;
+}
+.aside_bottom_Show_All_Hide_All{
+    width: 100%;
+    padding-left: 40px;
+    margin-top: 20px;
+    display: none;
+    cursor: pointer;
+}
+.show_All{
+    width: 100%;
+    height: 24px;
+    color: var(--bordColor);
+    justify-content: flex-start;
+    font-family: "Roboto", "Arial", sans-serif;
+    gap: 10px;
+}
+.all_subscriptions{
+    padding-left: 12px;
+}
+.hide_All{
+    color: var(--bordColor);
+    font-family: "Roboto", "Arial", sans-serif;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.hide_All_svg{
+    width: 24px;
+    height: 24px;
+}
+
+.hide_All_text{
+    padding-left: 10px;
+}
+
+.d_F{
+    display: flex;
 }
 /* Конец */
 aside.positionFixed{
