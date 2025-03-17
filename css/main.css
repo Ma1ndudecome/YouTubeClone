@@ -404,6 +404,25 @@ iframe{
     z-index: 999;
     cursor: pointer;
 }
+.ForYou_Container_leftArrow{
+    left: -70px;
+    top:120px;
+}
+.ForYou_Container_rightArrow{
+    right: -70px;
+    top:120px;
+}
+.Shorts_Container_leftArrow{
+    top:140px;
+    left: -70px;
+}
+.Shorts_Container_rightArrow{
+    top:140px;
+    right:-70px;
+}
+.Header_Main_container_video_main, .Shorts_container{
+    position: relative;
+}
 
 .Container_video_preview_duration{
     position: absolute;
