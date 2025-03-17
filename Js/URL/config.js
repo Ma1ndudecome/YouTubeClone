@@ -21,9 +21,10 @@ export const params = {
     isSubscribe:{ part:"id", forChannelId:null, mine:true, key:APIKEY },
     commentResponse:{ part:"snippet" },
     getGamingVideo: {part:"snippet", q:"gaming", type:"video", videoCategoryId:20, maxResults:40, key:APIKEY},
-    getDetailInfoGaming:{ part:"snippet,statistics,contentDetails", id:null, key:APIKEY}
+    getDetailInfoGaming:{ part:"snippet,statistics,contentDetails", id:null, key:APIKEY},
+    searchContent:{part:"snippet", maxResults:20, q:null, key:APIKEY},
+    changeComment:{snippet: { channelId:null, videoId:null, topLevelComment:{ snippet:{textOriginal:null } } }}
 }
-const prov = {part:{id:"some", no:"if"}}
 
 export function makeParams(params, change){
     for(const key in change){
@@ -32,3 +33,4 @@ export function makeParams(params, change){
     }
     return params
 }
+console.log(makeParams(params.changeComment, {snippet:{channelId:"213", videoId:"some", topLevelComment:{snippet:{textOriginal:"someee"}}}}))

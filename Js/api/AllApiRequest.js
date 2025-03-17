@@ -1,5 +1,6 @@
-import {URL, requestToSeverGet, requestToServerPD, makeParams, params} from "../URL/reExportUrl.js"
 import { state } from "../features/ReExportFeatures.js"
+import {URL, requestToSeverGet, requestToServerPD, makeParams, params} from "../URL/reExportUrl.js"
+
 
 import axios from 'axios'
 
@@ -49,7 +50,7 @@ export async function ImgAndSubscribeChannel(nameChannel){
    
 }
 
-export function getRatingVideo(videoId){
+export function getRatingVideo(videoId){//check!!
     return  requestToSeverGet(URL.getRatingVideoURL, {id:videoId}, true)
 }
 function dataObjectAccess(type, token=''){
@@ -80,51 +81,54 @@ export async function TakeTrending() {//!
     const newsData = await requestToSeverGet(URL.searchURL, params.takeVideoTrand)
 
     const IDVideo = newsData.data.items.map(el => el.id.videoId).join(',')
-    return requestToSeverGet(URL.infoVideoURL, {part:"snippet, statistics, contentDetails",  id:IDVideo,  key:APIKEY})
+    return requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:IDVideo}))
     
 }
-export async function SearchContent(content){
+export async function SearchContent(content){//!
     try{
-        const videoRequest = await requestToSeverGet(URL.searchURL, {part:"snippet", maxResults:20, q:content, key:APIKEY})
+        const videoRequest = await requestToSeverGet(URL.searchURL, makeParams(params.searchContent, {q:content}))
         const videoId = videoRequest.data.items.map(el=>el.id.videoId).join(',')
-        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, {part:"contentDetails,snippet,statistics", id:videoId, key:APIKEY})
-        return MoreStatisticVideo
+        return  await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoId}))
     }catch(err){
         console.log(err);
     }
 }
-export async function getMoreStatisticId(id){
+export async function getMoreStatisticId(id){//!
     try{
-        return await requestToSeverGet(URL.infoVideoURL, {part:"snippet,statistics,contentDetails", id:id, key:APIKEY})
+        return await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:id}))
     }catch(err){
         console.log(err);
     }
 }
-export async function addSubscribe(channelID) {
+export async function addSubscribe(channelID) {//!!!
     try{
-        return await requestToServerPD(URL.getSubscriberURL,{ snippet:{ resourceId:{ kind:"youtube#channel", channelId:channelID} } }, {headers:{'Authorization': `Bearer ${state.acessToken}`,'Content-Type': 'application/json'}, params:{ part:"snippet", mine:true, key:APIKEY }})
+        const authParam = params.authParams
+        const shortRes = params.shortResponse
+        return await requestToServerPD(URL.getSubscriberURL,makeParams(params.AddSubsribe, {snippet:{resourceId:{...params.AddSubsribe.snippet.resourceId, channelId:"asdsad"}}}), {headers:authParam, params:shortRes})
     }catch(err){
         console.log(err)
     }
     
 }
 
-export async function removeSubscribe(channelID) {
-    const response = await requestToSeverGet(URL.getSubscriberURL, { part:"id",  forChannelId:channelID, mine:true,  key:APIKEY}, true)
+export async function removeSubscribe(channelID) {//!
+    const response = await requestToSeverGet(URL.getSubscriberURL, makeParams(params.isSubscribe, {forChannelId:channelID}), true)
 
     const id = response.data.items[0]?.id
-
-    return await requestToServerPD(URL.getSubscriberURL,{ headers:{ 'Authorization':`Bearer ${state.acessToken}`, "Content-Type":"application/json" }, params:{ id:id, key:APIKEY } } )
+    const authParam = params.authParams
+    return await requestToServerPD(URL.getSubscriberURL,{headers:authParam, params:{ id:id, key:APIKEY } } )
 }
 
-export async function userSubscriber(idChannel) {
-    const response = await requestToSeverGet(URL.getSubscriberURL, { part:"id", forChannelId:idChannel, mine:true, key:APIKEY }, true)
+export async function userSubscriber(idChannel) {//!
+    const response = await requestToSeverGet(URL.getSubscriberURL, makeParams(params.isSubscribe, {forChannelId:idChannel}), true)
     return response.data.items.length > 0
 }
 
-export async function putComment(text, videoId, channelId) {
+export async function putComment(text, videoId, channelId) {//!!!!
     try{
-        return await requestToServerPD(URL.commentURL, { snippet: { channelId:channelId, videoId:videoId, topLevelComment:{ snippet:{textOriginal:text } } } }, { headers:{ Authorization:`Bearer ${state.acessToken}`, 'Content-Type': 'application/json' }, params:{ part:"snippet" } })
+        const authParam = params.authParams
+
+        return await requestToServerPD(URL.commentURL, makeParams(params.changeComment, {snippet:{channelId:channelId, videoId:videoId, topLevelComment:{snippet:{textOriginal:text}}}}), { headers:authParam, params:{ part:"snippet" } })
     }catch(err){
         console.log(err)
     }
@@ -133,24 +137,16 @@ export async function putComment(text, videoId, channelId) {
 export  function addRateToVideo(IdVideo, rating) {
     requestToServerPD(URL.addRateToVideoURL, null, { headers: { Authorization: `Bearer ${state.acessToken}` }, params:{ id:IdVideo, rating:rating }})
 }
-export async function GetContentGaming(){
+export async function GetContentGaming(){//!
     try{
-        const videoRequest = await requestToSeverGet(URL.searchURL, {part:"snippet", q:"gaming", type:"video", videoCategoryId:20, maxResults:40, key:APIKEY})
+        const videoRequest = await requestToSeverGet(URL.searchURL, params.getGamingVideo)
        
         const IDVideo = videoRequest.data.items.map(el=>el.id.videoId).join(',')
 
-        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, { part:"snippet,statistics,contentDetails", id:IDVideo, key:APIKEY})
+        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:IDVideo}))
        
         return MoreStatisticVideo.data.items
     }catch(err){
         console.log(err);
     }
 }
-async function testingFunc() {
-    setTimeout(async ()=>{
-        const a = 
-        console.log(a)
-    },500)
-    
-  }
-  testingFunc()
