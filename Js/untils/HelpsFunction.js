@@ -28,16 +28,28 @@ export function addMarkingComent(data) {
     state.PageTokenComment = data.nextPageToken
   }
 
-  document.querySelectorAll(".AllComment_Container_item_statistic").forEach(el => {
+  getAndShowRatingComment()
+}
+
+function getAndShowRatingComment(){
+  const allComments = document.querySelectorAll(".AllComment_Container_item_statistic")
+
+  allComments.forEach(el=>{
     const rating = el.getAttribute("viewerrating")
-    if (rating === 'like') {
-      el.querySelector(".AllComment_Container_item_statistic_like_svg").querySelector("path").style.fill = liked
-    } else if (rating === "dislike") {
-      el.querySelector(".AllComment_Container_item_statistic_disLike").querySelector("path").style.fill = liked
-    }
+    checkRatingComment(rating, el)
   })
+}
 
-
+function checkRatingComment(rating, el){
+  if(rating === 'like'){
+    showLikeOnVideo(el, '.AllComment_Container_item_statistic_like_svg svg')
+  }else if(rating === 'dislike'){
+    showLikeOnVideo(el, '.AllComment_Container_item_statistic_disLike_svg svg')
+  }
+}
+function showLikeOnVideo(el, rateItem){
+  const svgItem = el.querySelector(rateItem)
+  svgItem.classList.add("Like")
 }
 export function shortLength(element, maxLength) {
   const elem = document.querySelector(element)
@@ -197,8 +209,7 @@ export async function addMarkingVideoAndFunctional(main, el, item, dateRequests,
 
   addMarkingComent(response)
   ListnersToSendComment(id, channelId)
-  lisnerToLike()
-  likeAndDislikeToVideoFunc(id)
+  lisnerToLike(id)
   checkAndShowRatingVideo(id)
   LoadMoreComments(id)
 }

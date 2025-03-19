@@ -211,6 +211,14 @@ iframe{
     display: inherit;
     pointer-events: none;
 }
+.rightSide_emotion_dislike_svg path, .rightSide_emotion_like_svg path{
+   stroke: var(--bordColor);
+   fill: none;
+}
+.Like path, .Dislike path{
+    fill: var(--bordColor);
+}
+
 .rightSide_emotion_like{
     display: flex;
     justify-content: center;
@@ -852,7 +860,7 @@ iframe{
     align-items: center;
 }
 .txtg{
-    color: white;
+    color:var(--bordColor);
     margin-bottom: 10px;
     font-size: 20px;
 }

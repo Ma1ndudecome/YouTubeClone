@@ -10,7 +10,7 @@ html{
     --bgColorTransperentHover:#00000017;
     --bgcolorTransperent:#0000000e;
     --forAllTextWithSmallTransperent:#575656;
-    --colorForDescriptionInProfile:rgb(44, 43, 41); /* цвет для фона описания в профиле */
+    --colorForDescriptionInProfile:rgb(242, 242, 242); /* цвет для фона описания в профиле */
     background-color: var(--WhColor);
 }
 html.black{
@@ -24,6 +24,7 @@ html.black{
     --bgcolorTransperent:#302f2d;
     --bgColorTransperentHover:#d6d6d694;
     --forAllTextWithSmallTransperent:#ffffff91;
+    --colorForDescriptionInProfile:rgb(44, 43, 41);
     background-color: var(--WhColor);
 }
 
@@ -37,7 +38,16 @@ html.black svg path[fill="#FF0033"]{
     fill:red!important;
 }
 .svgLikeEnable path{
-    fill: gray
+    stroke: var(--bordColor);
+    fill:none
+    
+}
+.svgDisLikeEnable path{
+    stroke: var(--bordColor);
+    fill: none;
+}
+.Like path{
+    fill:var(--forAllTextWithSmallTransperent);
 }
 body{
     display: flex;
