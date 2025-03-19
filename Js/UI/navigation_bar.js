@@ -6,9 +6,10 @@ import { fromViewToShortView,  formatDuration} from "../untils/reExportUntils.js
 
 aside.addEventListener('click', async (e) => {
     e.preventDefault()
-    
     const nameSection = e.target.parentNode.querySelector("p").textContent;
     if (nameSection === 'Trending') {
+        container.classList.add('grid');
+        container.classList.remove('block');
         const respone = await TakeTrending();
         console.log(respone)
         respone.data.items.forEach(el=>{

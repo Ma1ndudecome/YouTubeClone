@@ -19,6 +19,7 @@ export function forYouVideoMarking(prewievVideo, durationVideo, titleVideo, coun
 }
 export function shortVideoMarking(previevVideo, titleVideo, countWiev, id) {
     return `
+
          <div class="Shorts_video_item" idVideo="${id}">
         <div class="Shorts_video_item_preview">
             <img src="${previevVideo}" alt="">

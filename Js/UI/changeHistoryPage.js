@@ -27,7 +27,6 @@ function loadData(conteinerVideo) {
         console.log("not vide0")
     }
 }
-console.log(112)
 
 historyBtn.onclick = (event) => {
     event.preventDefault()
@@ -39,7 +38,6 @@ historyBtn.onclick = (event) => {
     let clearHistoryBtn = container.querySelector(".clear-history")
     clearHistoryBtn.onclick = (event) => {
         const containVideo = container.querySelector(".main-history-container");
-        console.log(containVideo)
         containVideo.innerHTML = "";
         arrDataVideo = [];
         localStorage.setItem("history", JSON.stringify(arrDataVideo));

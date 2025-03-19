@@ -1,50 +1,57 @@
+import { params } from "../URL/reExportUrl.js"; 
 import { state } from "../features/ReExportFeatures.js"
-import {URL, requestToSeverGet, requestToServerPD } from "../URL/reExportUrl.js"
+import { TakeShortAndLongVideo } from "../untils/HelpsFunction.js";
+import { TakeShortAndLongVideo, getIdVideo } from "../untils/reExportUntils.js";
+
+import {URL, requestToSeverGet, requestToServerPD, makeParams} from "../URL/reExportUrl.js"
+
+
 import axios from 'axios'
 
 export async function takeCountCommentUnderVideo(videoId){
-    const comment = await requestToSeverGet(URL.infoVideoURL, {part: "statistics", id: videoId, key: APIKEY})
+    const comment = await requestToSeverGet(URL.infoVideoURL, makeParams(params.beginInfoVideo, {id:videoId}))
     return comment.data.items[0].statistics.commentCount
 }
 
+
 export  async function  takeComment(videoId) {
     if(state.acessToken){
-        const allComment = await requestToSeverGet(URL.commentURL, {part: "snippet", videoId: videoId, maxResults:20, pageToken:state.PageTokenComment}, true)
-        return allComment.data
-    }else{
-        const allComment = await requestToSeverGet(URL.commentURL, {part: "snippet", videoId: videoId, maxResults:5, pageToken:state.PageTokenComment,key:APIKEY })
+        const allComment = await requestToSeverGet(URL.commentURL, makeParams(params.getCommentAuth, {videoId:videoId}), true)
         return allComment.data
     }
+    const allComment = await requestToSeverGet(URL.commentURL, makeParams(params.getCommentAPI, {videoId:videoId}))
+    return allComment.data
+    
    
 }
 async function takeInfoChannel(nameChannel){
     const name = nameChannel.trim().replaceAll(' ', '+')
-
-    const idChannel = await requestToSeverGet(URL.searchURL, { part:"snippet",  type:"channel",  q:name, key:APIKEY })
-    const moreInfoChannel = await requestToSeverGet(URL.channelURL, {  part:"statistics", id:idChannel.data.items[0].id.channelId,  key:APIKEY})
+   
+    const idChannel = await requestToSeverGet(URL.searchURL, makeParams(params.takeIdChannel, {q:name}))
+    
+    const moreInfoChannel = await requestToSeverGet(URL.channelURL, makeParams(params.takeMoreInfoChannel, {id:idChannel.data.items[0].id.channelId}))
 
     return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount, ChannelId:idChannel.data.items[0].id.channelId}
 }
 export async function takeMoreInfoChannel(nameChannel) {
     const name = nameChannel.replaceAll(' ', '+')
 
-    const idChannel = await requestToSeverGet(URL.searchURL, { part:"snippet", q:name,  key:APIKEY, type:"channel"})
-    const moreInfoChannel = await removeSubscribe(URL.channelURL, { part:"snippet,statistics,brandingSettings", id:idChannel.data.items[0].id.channelId,  key:APIKEY})
+    const idChannel = await requestToSeverGet(URL.searchURL, makeParams(params.takeIdChannel, {q:name}))
+
+    const moreInfoChannel = await requestToSeverGet(URL.channelURL, makeParams(params.getInfoChannel, {id:idChannel.data.items[0].id.channelId}))
     
     return {dataChannel:moreInfoChannel.data.items[0], id:moreInfoChannel.data.items[0].id}
 }
 export async  function takeMoreVideoAnyProfile(id){
-    const detailInformationVideo = await requestToSeverGet(URL.searchURL, { part:"snippet", channelId:id, maxResults:50, pageToken:state.pageTokenProfileVideoAny, order:"date", type:"video", key:APIKEY})
-    const videoIds = detailInformationVideo.data.items.map(el => el.id.videoId).join(',');
-    const takeDuration = await requestToSeverGet(URL.infoVideoURL, {part:"contentDetails,snippet,statistics", id:videoIds, key:APIKEY})
+    const detailInformationVideo = await requestToSeverGet(URL.searchURL, makeParams(params.takeDetailInfoVideo), {channelId:id})
+    const videoIds = getIdVideo(detailInformationVideo.data.items)
+    const takeDuration = await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoIds}))
 
-    const video = TakeShortAndLongVideo(takeDuration)
-
-    return video
+    return TakeShortAndLongVideo(takeDuration)
 }
 export async function ImgAndSubscribeChannel(nameChannel){
-    const response = await takeInfoChannel(nameChannel)
-    return response
+    return await takeInfoChannel(nameChannel)
+   
 }
 
 export function getRatingVideo(videoId){
@@ -53,78 +60,81 @@ export function getRatingVideo(videoId){
 function dataObjectAccess(type, token=''){
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
+    
     if(type === 'accessToken'){
-        const data = new URLSearchParams({ code:code, client_id: cliendId, client_secret: clientSecret, redirect_uri:redirectUri, grant_type:'authorization_code'})
-        return data
+        return new URLSearchParams(makeParams(params.getAccesToken, {code:code}))
     }else if(type === 'RefreshToken'){
-        const data = new URLSearchParams({client_id: cliendId, client_secret: clientSecret, refresh_token:token[0].refreshToken, grant_type:'refresh_token'})
-        return data
+        return  new URLSearchParams(makeParams(params.getRefreshToken, {refresh_token:token[0].refreshToken}))
     }
 }
 
-export function getAccesToken(type, token){
+export function getAccesToken(type, token){//!
+ 
     const data = dataObjectAccess(type, token)
     const setting = {headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
     return axios.post(URL.tokenURL, data, setting)
 }
-export function getDataAccount(){
-    return requestToSeverGet(URL.channelURL, { part:"snippet,statistics", mine:true }, true )
-
+export function getDataAccount(){//!
+    return requestToSeverGet(URL.channelURL, params.getDataAccount, true )
 }
 
-export function TakeSubscriber(pageTokenSubscribe){
-    return requestToSeverGet(URL.getSubscriberURL, { part:"snippet",  mine:true, maxResults:7, pageToken:pageTokenSubscribe}, true)
+export function TakeSubscriber(pageTokenSubscribe){//!
+
+    return requestToSeverGet(URL.getSubscriberURL, makeParams(params.takeSubsriber, {pageToken:pageTokenSubscribe}), true)
 }
 
-export async function TakeTrending() {
-    const newsData = await requestToSeverGet(URL.searchURL, { part:"snippet",  type:"video",  videoCategoryId:20, videoDuration:"short",  chart:"mostPopular",  maxResults:20, key:APIKEY})
+export async function TakeTrending() {//!
+    const newsData = await requestToSeverGet(URL.searchURL, params.takeVideoTrand)
 
-    const IDVideo = newsData.data.items.map(el => el.id.videoId).join(',')
-    const detailsInf = requestToSeverGet(URL.infoVideoURL, {part:"snippet, statistics, contentDetails",  id:IDVideo,  key:APIKEY})
-    return detailsInf;
+    const IDVideo = getIdVideo(newsData.data.items)
+    return requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:IDVideo}))
+    
 }
-export async function SearchContent(content){
+export async function SearchContent(content){//!
     try{
-        const videoRequest = await requestToSeverGet(URL.searchURL, {part:"snippet", maxResults:20, q:content, key:APIKEY})
-        const videoId = videoRequest.data.items.map(el=>el.id.videoId).join(',')
-        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, {part:"contentDetails,snippet,statistics", id:videoId, key:APIKEY})
-        return MoreStatisticVideo
+        const videoRequest = await requestToSeverGet(URL.searchURL, makeParams(params.searchContent, {q:content}))
+        const videoId = getIdVideo(videoRequest.data.items)
+        return  await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoId}))
     }catch(err){
         console.log(err);
     }
 }
-export async function getMoreStatisticId(id){
+export async function getMoreStatisticId(id){//!
     try{
-        return await requestToSeverGet(URL.infoVideoURL, {part:"snippet,statistics,contentDetails", id:id, key:APIKEY})
+        return await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:id}))
     }catch(err){
         console.log(err);
     }
 }
-export async function addSubscribe(channelID) {
+export async function addSubscribe(channelID) {//!!!
     try{
-        return await requestToServerPD(URL.getSubscriberURL,{ snippet:{ resourceId:{ kind:"youtube#channel", channelId:channelID} } }, {headers:{'Authorization': `Bearer ${state.acessToken}`,'Content-Type': 'application/json'}, params:{ part:"snippet", mine:true, key:APIKEY }})
+        const authParam = params.authParams
+        const shortRes = params.shortResponse
+        return await requestToServerPD(URL.getSubscriberURL,makeParams(params.AddSubsribe, {snippet:{resourceId:{...params.AddSubsribe.snippet.resourceId, channelId:"asdsad"}}}), {headers:authParam, params:shortRes})
     }catch(err){
         console.log(err)
     }
     
 }
 
-export async function removeSubscribe(channelID) {
-    const response = await requestToSeverGet(URL.getSubscriberURL, { part:"id",  forChannelId:channelID, mine:true,  key:APIKEY}, true)
+export async function removeSubscribe(channelID) {//!
+    const response = await requestToSeverGet(URL.getSubscriberURL, makeParams(params.isSubscribe, {forChannelId:channelID}), true)
 
     const id = response.data.items[0]?.id
-
-    return await requestToServerPD(URL.getSubscriberURL,{ headers:{ 'Authorization':`Bearer ${state.acessToken}`, "Content-Type":"application/json" }, params:{ id:id, key:APIKEY } } )
+    const authParam = params.authParams
+    return await requestToServerPD(URL.getSubscriberURL,{headers:authParam, params:{ id:id, key:APIKEY } } )
 }
 
-export async function userSubscriber(idChannel) {
-    const response = await requestToSeverGet(URL.getSubscriberURL, { part:"id", forChannelId:idChannel, mine:true, key:APIKEY }, true)
+export async function userSubscriber(idChannel) {//!
+    const response = await requestToSeverGet(URL.getSubscriberURL, makeParams(params.isSubscribe, {forChannelId:idChannel}), true)
     return response.data.items.length > 0
 }
 
-export async function putComment(text, videoId, channelId) {
+export async function putComment(text, videoId, channelId) {//!!!!
     try{
-        return await requestToServerPD(URL.commentURL, { snippet: { channelId:channelId, videoId:videoId, topLevelComment:{ snippet:{textOriginal:text } } } }, { headers:{ Authorization:`Bearer ${state.acessToken}`, 'Content-Type': 'application/json' }, params:{ part:"snippet" } })
+        const authParam = params.authParams
+
+        return await requestToServerPD(URL.commentURL, makeParams(params.changeComment, {snippet:{channelId:channelId, videoId:videoId, topLevelComment:{snippet:{textOriginal:text}}}}), { headers:authParam, params:{ part:"snippet" } })
     }catch(err){
         console.log(err)
     }
@@ -133,13 +143,13 @@ export async function putComment(text, videoId, channelId) {
 export  function addRateToVideo(IdVideo, rating) {
     requestToServerPD(URL.addRateToVideoURL, null, { headers: { Authorization: `Bearer ${state.acessToken}` }, params:{ id:IdVideo, rating:rating }})
 }
-export async function GetContentGaming(){
+export async function GetContentGaming(){//!
     try{
-        const videoRequest = await requestToSeverGet(URL.searchURL, {part:"snippet", q:"gaming", type:"video", videoCategoryId:20, maxResults:40, key:APIKEY})
+        const videoRequest = await requestToSeverGet(URL.searchURL, params.getGamingVideo)
        
-        const IDVideo = videoRequest.data.items.map(el=>el.id.videoId).join(',')
+        const IDVideo = getIdVideo(videoRequest.data.items)
 
-        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, { part:"snippet,statistics,contentDetails", id:IDVideo, key:APIKEY})
+        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:IDVideo}))
        
         return MoreStatisticVideo.data.items
     }catch(err){
