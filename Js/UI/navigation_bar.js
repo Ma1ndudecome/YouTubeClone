@@ -6,7 +6,6 @@ import { fromViewToShortView,  formatDuration} from "../untils/reExportUntils.js
 
 aside.addEventListener('click', async (e) => {
     e.preventDefault()
-
     const nameSection = e.target.parentNode.querySelector("p").textContent;
     if (nameSection === 'Trending') {
         container.classList.add('grid');

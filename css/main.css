@@ -852,7 +852,7 @@ iframe{
     align-items: center;
 }
 .txtg{
-    color: white;
+    color:var(--bordColor);
     margin-bottom: 10px;
     font-size: 20px;
 }
