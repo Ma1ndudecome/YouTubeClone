@@ -22,7 +22,6 @@ gamingBtn.onclick = (event) => {
     event.preventDefault()
     container.innerHTML = ''
     container.innerHTML = markingGaming()
-    container.className = 'Main_container block'
     const gamingContainer = container.querySelector(".Container-video-gaming ")
     const shortsContainer = container.querySelector(".shorts-video-conteiner")
             

@@ -10,8 +10,10 @@ import {buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, 
 
 
 export function addMarkingComent(data) {
+  console.log(data)
 
   const containerComment = document.querySelector(".AllComment_Container")
+
   if (!data.items) {
     const dates = data.snippet.topLevelComment.snippet
     containerComment.insertAdjacentHTML("afterbegin", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, dateTime(dates.publishedAt), dates.textDisplay, dates.likeCount, dates.viewerRating))

@@ -132,9 +132,11 @@ export async function userSubscriber(idChannel) {//!
 
 export async function putComment(text, videoId, channelId) {//!!!!
     try{
-        const authParam = params.authParams
-
-        return await requestToServerPD(URL.commentURL, makeParams(params.changeComment, {snippet:{channelId:channelId, videoId:videoId, topLevelComment:{snippet:{textOriginal:text}}}}), { headers:authParam, params:{ part:"snippet" } })
+        return await requestToServerPD(URL.commentURL, makeParams(
+            params.changeComment, {snippet:{channelId:channelId, 
+                videoId:videoId, topLevelComment:{snippet:{textOriginal:text}}}}), 
+                {headers:{'Authorization': `Bearer ${state.acessToken}`,'Content-Type': 'application/json'}, 
+                params:{ part:"snippet" } })
     }catch(err){
         console.log(err)
     }
