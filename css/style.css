@@ -39,15 +39,15 @@ html.black svg path[fill="#FF0033"]{
 }
 .svgLikeEnable path{
     stroke: var(--bordColor);
-    fill:none
+    fill: none !important;
     
 }
 .svgDisLikeEnable path{
     stroke: var(--bordColor);
-    fill: none;
+    fill: none !important;
 }
 .Like path{
-    fill:var(--forAllTextWithSmallTransperent);
+    fill:var(--forAllTextWithSmallTransperent) !important;
 }
 body{
     display: flex;

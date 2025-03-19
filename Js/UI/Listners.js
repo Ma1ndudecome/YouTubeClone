@@ -1,8 +1,8 @@
 import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment, addRateToVideo } from "../api/ReExportAPI.js"
 import {state, container} from "../features/ReExportFeatures.js"
 import { markinHistoryVideo } from '../Marking/reExportMarking.js'
-import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, addMarkingComent, formatDuration, fromViewToShortView } from "../untils/reExportUntils.js"
-
+import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, formatDuration, fromViewToShortView } from "../untils/reExportUntils.js"
+import { addMarkingComent } from "./AnyVideoFunc.js"
 
 
 export const uhliked = `rgba(117, 113, 113, 0)`

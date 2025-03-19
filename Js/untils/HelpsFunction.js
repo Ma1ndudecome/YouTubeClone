@@ -1,56 +1,14 @@
 import { inserEl } from "../main.js"
-import { buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe } from "../UI/reExportUI.js"
 import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "../api/ReExportAPI.js"
 import { formatDuration } from "./reExportUntils.js"
 import { LoadMoreComments } from "../infinityScrollInProfile.js"
 import { arrDataVideo } from "../UI/reExportUI.js"
 import {MarkingCommentItem, MarkingPlayerAny, MarkingPlayer, markingShowMore, markingProfile, forYouVideoMarking, shortVideoMarking } from "../Marking/reExportMarking.js"
 import {state, slideToButton, dateRequest } from "../features/ReExportFeatures.js"
-import {buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, likeAndDislikeToVideoFunc, ListnersSubscribe, arrDataVideo} from "../UI/reExportUI.js"
+import {buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, ListnersSubscribe, arrDataVideo, addMarkingComent, listnerToContainerComment} from "../UI/reExportUI.js"
 
 
-export function addMarkingComent(data) {
-  console.log(data)
 
-  const containerComment = document.querySelector(".AllComment_Container")
-
-  if (!data.items) {
-    const dates = data.snippet.topLevelComment.snippet
-    containerComment.insertAdjacentHTML("afterbegin", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, dateTime(dates.publishedAt), dates.textDisplay, dates.likeCount, dates.viewerRating))
-  } else {
-    data.items.forEach(({ snippet }) => {
-      const dates = snippet.topLevelComment.snippet
-      containerComment.insertAdjacentHTML("beforeend", MarkingCommentItem(dates.authorProfileImageUrl, dates.authorDisplayName, dateTime(dates.publishedAt), dates.textDisplay, dates.likeCount, snippet.topLevelComment.snippet.viewerRating))
-    })
-  }
-
-  if (data.nextPageToken) {
-    state.PageTokenComment = data.nextPageToken
-  }
-
-  getAndShowRatingComment()
-}
-
-function getAndShowRatingComment(){
-  const allComments = document.querySelectorAll(".AllComment_Container_item_statistic")
-
-  allComments.forEach(el=>{
-    const rating = el.getAttribute("viewerrating")
-    checkRatingComment(rating, el)
-  })
-}
-
-function checkRatingComment(rating, el){
-  if(rating === 'like'){
-    showLikeOnVideo(el, '.AllComment_Container_item_statistic_like_svg svg')
-  }else if(rating === 'dislike'){
-    showLikeOnVideo(el, '.AllComment_Container_item_statistic_disLike_svg svg')
-  }
-}
-function showLikeOnVideo(el, rateItem){
-  const svgItem = el.querySelector(rateItem)
-  svgItem.classList.add("Like")
-}
 export function shortLength(element, maxLength) {
   const elem = document.querySelector(element)
   const text = elem.textContent
@@ -212,6 +170,8 @@ export async function addMarkingVideoAndFunctional(main, el, item, dateRequests,
   lisnerToLike(id)
   checkAndShowRatingVideo(id)
   LoadMoreComments(id)
+  listnerToContainerComment()
+
 }
 
 export function dateTime(time) {
