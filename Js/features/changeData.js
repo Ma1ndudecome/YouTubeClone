@@ -51,8 +51,9 @@ async function openProfile(target, accessToken, block) {
     logout()
   }
   else if (text === "Apperance") {
-       block.innerHTML = markingChangeTheme()
-       themeChange(block)
+    const oldMark = block.innerHTML
+    block.innerHTML = markingChangeTheme()
+    themeChange(block, oldMark)
   }
 
 }
@@ -210,17 +211,20 @@ function checkCountVideo() {
   }
 }
 
-function clickToAvatarUser(e){
-  if(e.target.classList.contains("userImg")){
+function clickToAvatarUser(e) {
+  if (e.target.classList.contains("userImg")) {
     const info = document.querySelector(".profileImg_Info")
     info.classList.toggle("show")
-  }else{
-      if(e.target.closest(".theme")){
-        return
-      }
-      const info = document.querySelector(".profileImg_Info")
-        info.classList.remove("show")
-   
+  } else {
+    if (e.target.closest(".theme")) {
+      return
+    }
+    if (e.target.closest(".back")) {
+      return
+    }
+    const info = document.querySelector(".profileImg_Info")
+    info.classList.remove("show")
+
   }
 }
 
