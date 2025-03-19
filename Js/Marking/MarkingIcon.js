@@ -75,10 +75,10 @@ export function markingSubribe(img, title) {
 export function markingChangeTheme() {
 
     return `
-        <div class=" dF aiC jcC dark_theme">
+        <div class=" dF aiC  dark_theme">
                       Dark Theme
                     </div>
-                    <div class=" dF aiC jcC light_theme">
+                    <div class=" dF aiC  light_theme">
                       Light Theme
                     </div>
                     `
