@@ -72,16 +72,23 @@ function checkWhereDidClick(situation, target){
     const isDisLike = target.classList.contains("AllComment_Container_item_statistic_disLike_svg")
   
     target.children[0].classList.add("Like")
-    if(LikedElement){
-        LikedElement.classList.remove("Like")
-    }
     
-    if(isLike){
-        target.children[0].classList.contains("Like") ? countLike.textContent = +countLike.textContent + 1 : countLike.textContent = +countLike.textContent - 1
-    }else if(isDisLike){
-        countLike.textContent = +countLike.textContent - 1
+    if(isDisLike){
+      const like = parentElement.querySelector(".AllComment_Container_item_statistic_like_svg  svg")
+      like.classList.contains("Like") ?  DecreaseCountLike(countLike) : false
     }
+
+    LikedElement ?  LikedElement.classList.remove("Like") : false
+    isLike ? target.children[0].classList.contains("Like") ? increaseCountLike(countLike) : DecreaseCountLike(countLike) : false
     
-   
 }
 
+
+function increaseCountLike(Like){
+  const NumLike = +Like.textContent
+  Like.textContent = NumLike + 1
+}
+function DecreaseCountLike(Like){
+  const NumLike = +Like.textContent
+  Like.textContent = NumLike - 1
+}
