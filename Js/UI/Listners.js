@@ -6,44 +6,6 @@ import { URL } from "../URL/URL.js"
 import { addMarkingComent } from "./AnyVideoFunc.js"
 
 
-export const uhliked = `rgba(117, 113, 113, 0)`
-export const liked = `rgba(255, 255, 255, 0.71)`
-export function lisnerToLike(id){
-    
-}
-
-
-
-export function likeAndDislikeToVideoFunc(idVideo){
-    // if(!state.Autorization){
-    //     return
-    // }
-    // const likeContainer = document.querySelector(".rightSide_emotion")
-    // likeContainer.onclick = (e)=>{
-    //      e.target.classList.toggle("activated")
-    
-    //     const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
-    //     const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
-    
-    //     const path = e.target.querySelector("path")
-            
-    //     if(haveClassLike){
-    //         const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
-    //         checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
-    //         HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true, idVideo, 'like')
-    //     }else if(haveClassDisLike){
-    //         const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
-    
-    //         checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
-    //         HaveLikeOrNo(path.style.fill === uhliked, path, e.target, false, idVideo, 'dislike')
-    //     }
-    //     }
-    
-
-}
-
-
-// addRateToVideo(id, 'none')
 export function listnerToInput(){
     const inputCont= document.querySelector(".Comment_input_block_tag input")
     
