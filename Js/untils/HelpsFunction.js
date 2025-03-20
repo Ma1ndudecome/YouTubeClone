@@ -3,7 +3,7 @@ import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfi
 import { formatDuration } from "./reExportUntils.js"
 import { LoadMoreComments } from "../infinityScrollInProfile.js"
 import { arrDataVideo } from "../UI/reExportUI.js"
-import {MarkingCommentItem, MarkingPlayerAny, MarkingPlayer, markingShowMore, markingProfile, forYouVideoMarking, shortVideoMarking } from "../Marking/reExportMarking.js"
+import { MarkingPlayerAny, MarkingPlayer, markingShowMore, markingProfile, forYouVideoMarking, shortVideoMarking } from "../Marking/reExportMarking.js"
 import {state, slideToButton, dateRequest } from "../features/ReExportFeatures.js"
 import {buttonLoadMoreFnc, ListnersToSendComment, ListnersSubscribe, arrDataVideo, addMarkingComent, listnerToContainerComment, FuncLikeAndDisLike} from "../UI/reExportUI.js"
 
