@@ -2,6 +2,7 @@ import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putCommen
 import {state, container} from "../features/ReExportFeatures.js"
 import { markinHistoryVideo } from '../Marking/reExportMarking.js'
 import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, formatDuration, fromViewToShortView } from "../untils/reExportUntils.js"
+import { URL } from "../URL/URL.js"
 import { addMarkingComent } from "./AnyVideoFunc.js"
 
 
@@ -14,29 +15,29 @@ export function lisnerToLike(id){
 
 
 export function likeAndDislikeToVideoFunc(idVideo){
-    if(!state.Autorization){
-        return
-    }
-    const likeContainer = document.querySelector(".rightSide_emotion")
-    likeContainer.onclick = (e)=>{
-         e.target.classList.toggle("activated")
+    // if(!state.Autorization){
+    //     return
+    // }
+    // const likeContainer = document.querySelector(".rightSide_emotion")
+    // likeContainer.onclick = (e)=>{
+    //      e.target.classList.toggle("activated")
     
-        const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
-        const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
+    //     const haveClassLike = e.target.classList.contains("rightSide_emotion_like")
+    //     const haveClassDisLike = e.target.classList.contains("rightSide_emotion_dislike")
     
-        const path = e.target.querySelector("path")
+    //     const path = e.target.querySelector("path")
             
-        if(haveClassLike){
-            const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
-            checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
-            HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true, idVideo, 'like')
-        }else if(haveClassDisLike){
-            const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
+    //     if(haveClassLike){
+    //         const dislikeEl = e.target.parentElement.querySelector(".rightSide_emotion_dislike")
+    //         checkAndGiveClassActivated(dislikeEl.classList.contains("activated"), dislikeEl)
+    //         HaveLikeOrNo(path.style.fill === uhliked, path, e.target, true, idVideo, 'like')
+    //     }else if(haveClassDisLike){
+    //         const like = e.target.parentElement.querySelector(".rightSide_emotion_like")
     
-            checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
-            HaveLikeOrNo(path.style.fill === uhliked, path, e.target, false, idVideo, 'dislike')
-        }
-        }
+    //         checkAndGiveClassActivated(like.classList.contains("activated"), like, true)
+    //         HaveLikeOrNo(path.style.fill === uhliked, path, e.target, false, idVideo, 'dislike')
+    //     }
+    //     }
     
 
 }
@@ -61,6 +62,10 @@ export function listnerToInput(){
 export function ListnersToSendComment(id, channelId){
     const elements = listnerToInput()
     elements.button.onclick = async ()=>{
+        if(!state.Autorization){
+             window.location.href = URL.logInURL;
+            return
+        }
         if(elements.input.value === ''){
             return
         }

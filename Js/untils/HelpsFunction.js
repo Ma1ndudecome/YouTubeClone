@@ -5,7 +5,7 @@ import { LoadMoreComments } from "../infinityScrollInProfile.js"
 import { arrDataVideo } from "../UI/reExportUI.js"
 import {MarkingCommentItem, MarkingPlayerAny, MarkingPlayer, markingShowMore, markingProfile, forYouVideoMarking, shortVideoMarking } from "../Marking/reExportMarking.js"
 import {state, slideToButton, dateRequest } from "../features/ReExportFeatures.js"
-import {buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, ListnersSubscribe, arrDataVideo, addMarkingComent, listnerToContainerComment} from "../UI/reExportUI.js"
+import {buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, ListnersSubscribe, arrDataVideo, addMarkingComent, listnerToContainerComment, FuncLikeAndDisLike} from "../UI/reExportUI.js"
 
 
 
@@ -168,6 +168,7 @@ export async function addMarkingVideoAndFunctional(main, el, item, dateRequests,
   addMarkingComent(response)
   ListnersToSendComment(id, channelId)
   lisnerToLike(id)
+  FuncLikeAndDisLike(id)
   checkAndShowRatingVideo(id)
   LoadMoreComments(id)
   listnerToContainerComment()

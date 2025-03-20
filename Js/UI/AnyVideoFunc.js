@@ -1,6 +1,7 @@
 import { dateTime } from "../untils/reExportUntils"
 import { state } from "../features/ReExportFeatures"
 import { MarkingCommentItem } from "../Marking/MarkingPlayerVideo"
+import { getRatingVideo, addRateToVideo } from "../api/AllApiRequest"
 
 
 
@@ -51,11 +52,11 @@ function showLikeOnVideo(el, rateItem){
 export function listnerToContainerComment(){
     //all comment container
     const containerComment = document.querySelector(".AllComment_Container")
-    containerComment.addEventListener("click", handlingClick)
+    containerComment.addEventListener("click", handlingClickToComment)
 
 }
 
-function handlingClick({target}){
+function handlingClickToComment({target}){
     //save like/dislike class for nice writing code
     const likeClass = 'AllComment_Container_item_statistic_like_svg'
     const DisLikeClass = 'AllComment_Container_item_statistic_disLike_svg'
@@ -83,12 +84,73 @@ function checkWhereDidClick(situation, target){
     
 }
 
-
+//increase Count Like on comment
 function increaseCountLike(Like){
+  if(isNaN(+Like.textContent)){
+    return
+  }
   const NumLike = +Like.textContent
   Like.textContent = NumLike + 1
 }
+//Decrease Count Like on comment
 function DecreaseCountLike(Like){
+  if(isNaN(+Like.textContent)){
+    return
+  }
   const NumLike = +Like.textContent
   Like.textContent = NumLike - 1
+}
+// Logic Like And DisLike To any Video:
+
+export function FuncLikeAndDisLike(id){
+  loadRatingLike(id)
+  const emotionContainer = document.querySelector(".rightSide_emotion")
+  emotionContainer.addEventListener("click", ({target})=>{
+    handlingClickToVideoEmotion(target, id)
+  })
+}
+
+function handlingClickToVideoEmotion(target, id){
+  const like = document.querySelector(".rightSide_emotion_like_svg svg")
+  const dislike = document.querySelector(".rightSide_emotion_dislike_svg svg")
+  const countLike = document.querySelector(".rightSide_emotion_like_count")
+  const isLike = target.classList.contains("rightSide_emotion_like")
+  const isDisLike = target.classList.contains("rightSide_emotion_dislike")
+  const svg = target.querySelector("svg")
+
+  if(isDisLike){
+    like.classList.contains("Like") ? DecreaseCountLike(countLike) : false
+    like.classList.remove("Like")
+    addRateToVideo(id, "dislike")
+  }
+  svg.classList.contains("Like") ? svg.classList.remove("Like") : svg.classList.add("Like")
+
+  if(isLike){
+  
+    svg.classList.contains("Like") ? increaseAndAddRating(countLike, id, "like"):decreaseAndAddRating(countLike, id, "none")
+    dislike.classList.remove("Like")
+
+  }
+}
+
+async function loadRatingLike(id){
+  const like = document.querySelector(".rightSide_emotion_like_svg svg")
+  const dislike = document.querySelector(".rightSide_emotion_dislike_svg svg")
+  const response = await getRatingVideo(id)
+  const rating = response.data.items[0].rating
+
+ rating === "like" ? like.classList.add("Like") : false
+ rating === "dislike" ? dislike.classList.add("Like") : false
+
+}
+
+function increaseAndAddRating(countLike, id, rating){
+  increaseCountLike(countLike)
+  addRateToVideo(id, rating)
+}
+
+function decreaseAndAddRating(countLike, id, rating){
+  DecreaseCountLike(countLike, id, rating)
+  addRateToVideo(id, rating)
+
 }

@@ -244,7 +244,10 @@ iframe{
     font-size: 14px;
     color:var(--bordColor);
     user-select: none;
+    display: inherit;
+    pointer-events: none;
 }
+
 .rightSide_emotion_dislike{
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
