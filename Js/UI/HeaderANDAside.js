@@ -1,5 +1,7 @@
 "use strict"
+import { once } from "process"
 import { URL } from "../URL/reExportUrl.js"
+import { markingProfile } from "../Marking/Marking.js"
 
 
 let glass_adaptation = document.getElementById("glass_adaptation")
@@ -54,26 +56,31 @@ subscriberContainer.onclick = functionLogin
 SingButton.onclick = functionLogin
 
 
-export function themeChange(block) {
+export function themeChange(block, oldMark) {
     block.querySelector(".dark_theme")?.addEventListener("click", () => {
         document.documentElement.classList.add("black");
         document.documentElement.classList.remove("white");
         localStorage.setItem('theme', 'black');
+        block.innerHTML = oldMark
     });
+    block.querySelector(".back")?.addEventListener("click", () => {
+        console.log(oldMark)
+        block.innerHTML = oldMark
+    })
 
     block.querySelector(".light_theme")?.addEventListener("click", () => {
         document.documentElement.classList.add("white");
         document.documentElement.classList.remove("black");
         localStorage.setItem('theme', 'white');
+        block.innerHTML = oldMark
+
     });
 }
 export function loadSavedTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         document.documentElement.removeAttribute('class')
-
         document.documentElement.classList.toggle(savedTheme);
-        console.log(savedTheme)
     } else {
         document.documentElement.removeAttribute('class')
         document.documentElement.classList.add('white');

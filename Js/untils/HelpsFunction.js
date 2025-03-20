@@ -5,7 +5,7 @@ import { LoadMoreComments } from "../infinityScrollInProfile.js"
 import { arrDataVideo } from "../UI/reExportUI.js"
 import {MarkingCommentItem, MarkingPlayerAny, MarkingPlayer, markingShowMore, markingProfile, forYouVideoMarking, shortVideoMarking } from "../Marking/reExportMarking.js"
 import {state, slideToButton, dateRequest } from "../features/ReExportFeatures.js"
-import {buttonLoadMoreFnc, liked, uhliked, ListnersToSendComment, lisnerToLike, ListnersSubscribe, arrDataVideo, addMarkingComent, listnerToContainerComment, FuncLikeAndDisLike} from "../UI/reExportUI.js"
+import {buttonLoadMoreFnc, ListnersToSendComment, ListnersSubscribe, arrDataVideo, addMarkingComent, listnerToContainerComment, FuncLikeAndDisLike} from "../UI/reExportUI.js"
 
 
 
@@ -25,24 +25,7 @@ export function moreBtn(dateRequests, ProfileData, countSubs) {
   descriptionCont.innerHTML = dateRequests[0].snippet.description
   inserEl(descriptionCont, "afterend", markingShowMore(dateRequests, ProfileData, countSubs))
 }
-export async function checkAndShowRatingVideo(id) {
-  if (state.acessToken) {
-    const rating = await getRatingVideo(id)
-    if (rating.data.items[0].rating === 'like') {
-      const containerRating = document.querySelector(".rightSide_emotion_like")
-      containerRating.classList.add('activated')
-      const path = containerRating.querySelector("path")
-      path.style.fill = liked
-    } else if (rating.data.items[0].rating === 'dislike') {
-      const containerRating = document.querySelector(".rightSide_emotion_dislike")
-      containerRating.classList.add('activated')
-      const path = containerRating.querySelector("path")
-      path.style.fill = liked
 
-    }
-  }
-
-}
 
 export function saveAcessToken(access_token) {
   state.acessToken = access_token
@@ -167,7 +150,6 @@ export async function addMarkingVideoAndFunctional(main, el, item, dateRequests,
 
   addMarkingComent(response)
   ListnersToSendComment(id, channelId)
-  lisnerToLike(id)
   FuncLikeAndDisLike(id)
   checkAndShowRatingVideo(id)
   LoadMoreComments(id)
