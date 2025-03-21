@@ -23,6 +23,7 @@ export async function LoadVideo() {
         const IDVideo = getIdVideo(response.data.items)
         const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.getDetailInfoGaming, {id:IDVideo}))
         container.innerHTML = ''
+        container.className = 'Main_container grid'
         await MoreStatisticVideo.data.items.forEach(el => {
             if (el.snippet.liveBroadcastContent === 'none') {
                 container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration), el.id))

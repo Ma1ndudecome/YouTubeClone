@@ -45,7 +45,7 @@ async function openProfile(target, accessToken, block) {
 
   if (text === 'View your channel') {
     addToPushState({namePage:"Profile"}, "/Profile")
-    ViewChannel(accessToken)
+    // ViewChannel(accessToken)
   } else if (text === "Switch Account") {
     switchAccount()
   } else if (text === "Sing out") {
@@ -58,7 +58,7 @@ async function openProfile(target, accessToken, block) {
   }
 
 }
-async function ViewChannel(accessToken) {
+export async function ViewChannel(accessToken) {
   container.innerHTML = ''
   const info = document.querySelector(".profileImg_Info")
   info.classList.remove("show")

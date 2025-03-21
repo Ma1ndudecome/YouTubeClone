@@ -4,7 +4,7 @@ let explore = document.getElementById("explore")
 
 
 
-import { container } from "./features/LoadVideo.js";
+import { container } from "./features/ReExportFeatures.js";
 const gamingBtn = document.querySelector(".gaming")
 import { makeMarkingVideo } from "./Marking/markingVideo.js";
 import { fromViewToShortView } from "./untils/ViewToViewLikeToLike.js";
@@ -20,6 +20,7 @@ import { formatDuration } from "./untils/FromISOToTime.js";
 
 gamingBtn.onclick = (event) => {
     event.preventDefault()
+    replaceState({namePage:"Gaming"}, "gaming")
     container.classList.remove("grid")
     container.classList.add("block")
     container.innerHTML = ''
