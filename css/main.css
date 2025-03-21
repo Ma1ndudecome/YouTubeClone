@@ -440,11 +440,12 @@ iframe{
     background-color: rgba(0, 0, 0, 0.651);
     padding: 5px 10px 5px 10px;
     border-radius: 20px;
-    color:var(--bordColor);
+    color:white;
     right: 10px;
     bottom: 5px;
     font-family: "Roboto", "Arial", sans-serif;
     font-size: 14px;
+
 }
 .Container_video_preview img{
     width: 100%;

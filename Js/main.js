@@ -1,12 +1,18 @@
 
-import "./URL/config.js"; import "./gaming.js"; import "./features/LoadVideo.js"; import "./api/PostToToken.js"; import "./UI/Listners.js"; import "./features/ReturnPushState.js"; import "./UI/HeaderANDAside.js"; import "./UI/changeHistoryPage.js"
+import "./URL/config.js"; import "./gaming.js"; import "./features/LoadVideo.js"; import "./api/PostToToken.js"; import "./UI/Listners.js"; import "./features/ReturnPushState.js"; import "./UI/HeaderANDAside.js"; import "./UI/changeHistoryPage.js"; import "./features/ReturnPushState.js"
+import {addToPushState} from "./features/ReExportFeatures.js"
 import { markProfile, openVideoEverywere } from "./untils/HelpsFunction.js"
 const main = document.querySelector(".Main_container")
-import { state } from "./features/changeData.js";
 import { deleteVideoOnBtn } from "./UI/changeHistoryPage.js";
 import { loadSavedTheme } from "./UI/HeaderANDAside.js";
 
+
+    
+
+
 document.addEventListener('DOMContentLoaded', loadSavedTheme);
+
+addToPushState({namePage:"Home"}, "/Home")
 main.addEventListener("click", async (e) => {
     main.classList.remove("grid")
     if (e.target.classList.contains("delete-video")) {

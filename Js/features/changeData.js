@@ -2,7 +2,7 @@ import { container } from "./ReExportFeatures.js"
 import { markingProfile, markingChangeTheme } from "../Marking/MarkingIcon.js"
 import { markingProfile as profileMark } from "../Marking/Marking.js"
 import { loadVideoInProfile } from "../infinityScrollInProfile.js"
-import { channelData, moreBtn } from "./ReExportFeatures.js"
+import { channelData, moreBtn, addToPushState} from "./ReExportFeatures.js"
 import axios from 'axios'
 import { themeChange } from "../UI/HeaderANDAside.js"
 
@@ -44,6 +44,7 @@ async function openProfile(target, accessToken, block) {
   const text = target.textContent.trim()
 
   if (text === 'View your channel') {
+    addToPushState({namePage:"Profile"}, "/Profile")
     ViewChannel(accessToken)
   } else if (text === "Switch Account") {
     switchAccount()

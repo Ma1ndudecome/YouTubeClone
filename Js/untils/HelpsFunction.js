@@ -151,7 +151,6 @@ export async function addMarkingVideoAndFunctional(main, el, item, dateRequests,
   addMarkingComent(response)
   ListnersToSendComment(id, channelId)
   FuncLikeAndDisLike(id)
-  checkAndShowRatingVideo(id)
   LoadMoreComments(id)
   listnerToContainerComment()
 

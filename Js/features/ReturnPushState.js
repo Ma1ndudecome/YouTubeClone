@@ -1,14 +1,19 @@
-import { state, container } from "./ReExportFeatures.js"
-let lastUrl = location.href;//Получаю первоначальное url для popstata
-
-window.addEventListener("popstate", ()=>{
-  const currentUrl = location.href;
- 
-  if(currentUrl.length === lastUrl.length){
-    history.pushState(null, "", location.href);
-    container.innerHTML = state.prevMarking
-  }else{
+import { LoadVideo } from "./LoadVideo.js"
+export function addToPushState(data, url){
+  const urlPage = window.location.href
+  const checkUrl = urlPage.slice(urlPage.length - 5, urlPage.length)
+  if(checkUrl === url){
     return
   }
- 
+  const ChangedURL = urlPage + url
+  history.pushState(data, '', ChangedURL)
+}
+
+window.addEventListener("popstate", ()=>{
+  if(history.state.namePage === "Home"){
+    LoadVideo()
+  }
+  console.log(history.state)
 })
+
+
