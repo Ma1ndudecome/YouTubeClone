@@ -27,7 +27,7 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                             <div class="rightSide_emotion">
                                 <div class="rightSide_emotion_like">
                                     <div class="rightSide_emotion_like_svg style="pointer-events: none; display: inherit;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" stroke="white" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path  style="fill:rgba(117, 113, 113, 0)"d="M3,11h3v10H3V11z M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11v10h10.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"></path></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg"  enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path d="M3,11h3v10H3V11z M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11v10h10.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"></path></svg>
                                     </div>
                                     <div class="rightSide_emotion_like_count">
                                         ${fromLikeToShortLike(dateRequests[0].statistics.likeCount)}
@@ -35,7 +35,7 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                                 </div>
                                 <div class="rightSide_emotion_dislike">
                                     <div class="rightSide_emotion_dislike_svg style="pointer-events: none; display: inherit;">
-                                        <svg xmlns="http://www.w3.org/2000/svg"  stroke="white" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path  style="fill:rgba(117, 113, 113, 0)" d="M18,4h3v10h-3V4z M5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14V4H6.57 C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14z"></path></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg"  enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path d="M18,4h3v10h-3V4z M5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14V4H6.57 C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14z"></path></svg>
                                     </div>
                                 </div>
                             </div>
@@ -115,13 +115,13 @@ export function MarkingCommentItem(imgComment, userName, date, commentText, coun
             <div class="AllComment_Container_item_statistic dF" viewerRating="${rating}">
                 <div class="AllComment_Container_item_statistic_like dF aiC">
                     <div class="AllComment_Container_item_statistic_like_svg dF aiC jcC">
-                        <svg xmlns="http://www.w3.org/2000/svg" stroke="white" class="svgLikeEnable" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path style="fill:rgba(117,113, 113, 0)" d="M3,11h3v10H3V11z M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11v10h10.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svgLikeEnable" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path d="M3,11h3v10H3V11z M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11v10h10.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"></path></svg>
                     </div>
                     <span class="AllComment_Container_item_statistic_like_count">${countLike}</span>
                 </div>
                 <div class="AllComment_Container_item_statistic_disLike">
                     <div class="AllComment_Container_item_statistic_disLike_svg dF aiC jcC">
-                        <svg xmlns="http://www.w3.org/2000/svg" style="pointer-events: none; display: inherit; width: 100%; height: 100%;" stroke="white" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"><path style="fill: rgba(117, 113, 113, 0);" d="M18,4h3v10h-3V4z M5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14V4H6.57 C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svgDisLikeEnable" style="pointer-events: none; display: inherit; width: 100%; height: 100%;" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true"><path d="M18,4h3v10h-3V4z M5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14V4H6.57 C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14z"></path></svg>
                     </div>
                 </div>
                 <div class="AllComment_Container_item_statistic_repty dF aiC">Repty</div>
@@ -158,7 +158,7 @@ export function MarkingPlayerAny(id, InfoVideo, state, dataChannel){
                             <div class="rightSide_emotion">
                                 <div class="rightSide_emotion_like">
                                     <div class="rightSide_emotion_like_svg style="pointer-events: none; display: inherit;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" stroke="white" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path  style="fill:rgba(117, 113, 113, 0)"d="M3,11h3v10H3V11z M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11v10h10.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"></path></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" stroke="white" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path d="M3,11h3v10H3V11z M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11v10h10.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"></path></svg>
                                     </div>
                                   <div class="rightSide_emotion_like_count">
                                         ${fromLikeToShortLike(InfoVideo[0].statistics.likeCount)}
@@ -166,7 +166,7 @@ export function MarkingPlayerAny(id, InfoVideo, state, dataChannel){
                                 </div>
                                 <div class="rightSide_emotion_dislike">
                                     <div class="rightSide_emotion_dislike_svg style="pointer-events: none; display: inherit;">
-                                        <svg xmlns="http://www.w3.org/2000/svg"  stroke="white" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path  style="fill:rgba(117, 113, 113, 0)" d="M18,4h3v10h-3V4z M5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14V4H6.57 C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14z"></path></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg"  stroke="white" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 100%; height: 100%;"><path d="M18,4h3v10h-3V4z M5.23,14h4.23l-1.52,4.94C7.62,19.97,8.46,21,9.62,21c0.58,0,1.14-0.24,1.52-0.65L17,14V4H6.57 C5.5,4,4.59,4.67,4.38,5.61l-1.34,6C2.77,12.85,3.82,14,5.23,14z"></path></svg>
                                     </div>
                                 </div>
                             </div>

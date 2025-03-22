@@ -1,9 +1,8 @@
-import { params } from "../URL/reExportUrl.js"; 
-import { state } from "../features/ReExportFeatures.js"
+import { state, params, URL } from "../URL/createObject.js"
 import { TakeShortAndLongVideo } from "../untils/HelpsFunction.js";
 import { TakeShortAndLongVideo, getIdVideo } from "../untils/reExportUntils.js";
 
-import {URL, requestToSeverGet, requestToServerPD, makeParams} from "../URL/reExportUrl.js"
+import {requestToSeverGet, requestToServerPD, makeParams} from "../URL/reExportUrl.js"
 
 
 import axios from 'axios'
@@ -28,7 +27,7 @@ async function takeInfoChannel(nameChannel){
     const name = nameChannel.trim().replaceAll(' ', '+')
    
     const idChannel = await requestToSeverGet(URL.searchURL, makeParams(params.takeIdChannel, {q:name}))
-    
+    console.log(idChannel)
     const moreInfoChannel = await requestToSeverGet(URL.channelURL, makeParams(params.takeMoreInfoChannel, {id:idChannel.data.items[0].id.channelId}))
 
     return {imgChannel:idChannel.data.items[0].snippet.thumbnails.default.url, subscriberChannel:moreInfoChannel.data.items[0].statistics.subscriberCount, ChannelId:idChannel.data.items[0].id.channelId}
@@ -132,9 +131,11 @@ export async function userSubscriber(idChannel) {//!
 
 export async function putComment(text, videoId, channelId) {//!!!!
     try{
-        const authParam = params.authParams
-
-        return await requestToServerPD(URL.commentURL, makeParams(params.changeComment, {snippet:{channelId:channelId, videoId:videoId, topLevelComment:{snippet:{textOriginal:text}}}}), { headers:authParam, params:{ part:"snippet" } })
+        return await requestToServerPD(URL.commentURL, makeParams(
+            params.changeComment, {snippet:{channelId:channelId, 
+                videoId:videoId, topLevelComment:{snippet:{textOriginal:text}}}}), 
+                {headers:{'Authorization': `Bearer ${state.acessToken}`,'Content-Type': 'application/json'}, 
+                params:{ part:"snippet" } })
     }catch(err){
         console.log(err)
     }

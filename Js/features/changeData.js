@@ -1,31 +1,14 @@
+import { state } from "../URL/createObject.js"
 import { container } from "./ReExportFeatures.js"
 import { markingProfile, markingChangeTheme } from "../Marking/MarkingIcon.js"
 import { markingProfile as profileMark } from "../Marking/Marking.js"
 import { loadVideoInProfile } from "../infinityScrollInProfile.js"
-import { channelData, moreBtn } from "./ReExportFeatures.js"
+import { channelData, moreBtn} from "./ReExportFeatures.js"
 import axios from 'axios'
 import { themeChange } from "../UI/HeaderANDAside.js"
 
 import { TakeShortAndLongVideo, navInProfile, checkCountVideoAndGiveMarking } from "../untils/HelpsFunction.js"
-
-export const state = {//Тут храняться переменные которые изменяються в разныъ файлах
-  pageTokenProfileVideo: '',//Сохранение токена для следующей страницы видео
-  pageTokenProfileShorts: '',//Сохранение токена для следующей страницы шортса
-  markingVideoPage: '',//Сохранение контейнера видео
-  markingHomePage: '',//Сохранение главной страницы
-  markingShortsPage: '',//Сохранение контейнера шортс
-  isLastVideos: false,//Последнее ли видео
-  isLastShorts: false,//Последнее ли видео
-  prevMarking: '',//Переменная для сохранения при перходе предыдущей разметки
-  infoChannel: { img: 'https://cdn-icons-png.flaticon.com/512/6522/6522516.png' },//Сохранить количество подписчиков и url профиля
-  PageTokenComment: '',
-  Autorization: false,
-  pageTokenProfileVideoAny: ''
-};
-
-
-
-
+import { setNewUrl } from "./routing.js"
 
 export let dateProfileVideo = []//При запросе сохраняю все видео тут для того что бы избавиться от лишних запросов 
 
@@ -44,7 +27,8 @@ async function openProfile(target, accessToken, block) {
   const text = target.textContent.trim()
 
   if (text === 'View your channel') {
-    ViewChannel(accessToken)
+    setNewUrl("/Profile")
+    // ViewChannel(accessToken)
   } else if (text === "Switch Account") {
     switchAccount()
   } else if (text === "Sing out") {
@@ -57,7 +41,7 @@ async function openProfile(target, accessToken, block) {
   }
 
 }
-async function ViewChannel(accessToken) {
+export async function ViewChannel(accessToken) {
   container.innerHTML = ''
   const info = document.querySelector(".profileImg_Info")
   info.classList.remove("show")

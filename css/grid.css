@@ -25,3 +25,24 @@
     grid-template-columns: repeat(5, 1fr);
     row-gap: 50px;
 }
+@media (max-width:1620px) {
+    .Container-video-gaming {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width:1470px) {
+    .Container-video-gaming {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width:1010px) {
+    .Container-video-gaming {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width:760px) {
+    .Container-video-gaming {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

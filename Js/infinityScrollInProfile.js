@@ -1,11 +1,9 @@
-import { state } from "./features/changeData.js"
-import { forYouVideoMarking } from "./Marking/profileVideoMarking.js";
-import { formatDuration } from "./untils/FromISOToTime.js";
+import { state } from "./URL/createObject.js"
 import axios from 'axios'
 
 
 import { takeComment } from "./api/AllApiRequest.js";
-import { addMarkingComent } from "./untils/HelpsFunction.js";
+import { addMarkingComent } from "./UI/AnyVideoFunc.js";
 export async function loadVideoInProfile(accessToken, dataProfile, tokenVideo){
     return await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },
