@@ -1,8 +1,29 @@
+import Navigo from "navigo";
+
+const router = new Navigo('/')
+
+router.on("/Home", ()=>{
+    console.log("Home page")
+})
+router.on("/Gaming", ()=>{
+    console.log("Gaming page")
+})
+router.on("/Profile", ()=>{
+    console.log("ProfilePage page")
+})
+router.resolve()
+
+export function setNewUrl(Page){
+    const url = window.location.search
+    router.navigate(`${Page}${url}`)
+}
+
+
 // import { LoadVideo } from "./LoadVideo.js"
 // import { state, ViewChannel} from "./ReExportFeatures.js"
 
 // let defaultUrl = window.location.href
-// const transitionURL = ['/Home', '/Profile', '/Gaming']
+
 
 // let prevUrl;
 // export function addToPushState(data, url){
@@ -58,4 +79,11 @@
 //   }
 // ]
 
+// export function getClearUrl(){
+//     let currUrl = window.location.pathname
+//     // for(let i = 0; i < transitionURL.length; i+=1){
+//     //     currUrl = currUrl.replaceAll(transitionURL[i], '')
+//     // }
+//     return currUrl
+// }
 

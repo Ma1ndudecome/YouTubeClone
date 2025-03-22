@@ -1,9 +1,6 @@
 
 let explore = document.getElementById("explore")
 
-
-
-
 import { container } from "./features/ReExportFeatures.js";
 const gamingBtn = document.querySelector(".gaming")
 import { makeMarkingVideo } from "./Marking/markingVideo.js";
@@ -11,16 +8,14 @@ import { fromViewToShortView } from "./untils/ViewToViewLikeToLike.js";
 import { markingGaming } from "./Marking/Marking.js";
 import { GetContentGaming } from "./api/AllApiRequest.js";
 import { shortVideoMarking} from "./Marking/profileVideoMarking.js";
-import axios from 'axios'
-import { addToPushState } from "./features/ReExportFeatures.js";
-
 import { formatDuration } from "./untils/FromISOToTime.js";
-
+import { setNewUrl } from "./features/routing.js";
+import axios from 'axios'
 
 
 gamingBtn.onclick = (event) => {
     event.preventDefault()
-    addToPushState({namePage:"Gaming", id:"ufhDJnfh"}, '/Gaming')
+    setNewUrl("/Gaming")
     // container.classList.remove("grid")
     // container.classList.add("block")
     // container.innerHTML = ''
