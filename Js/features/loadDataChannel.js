@@ -1,4 +1,4 @@
-import { state } from "../main.js"
+import { state } from "../URL/createObject.js"
 import { InfoAboutChannel } from "../Marking/reExportMarking.js"
 
 import axios from 'axios'

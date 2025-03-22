@@ -1,6 +1,6 @@
 
 import { changeProfile, channelData } from "../features/ReExportFeatures.js" 
-import { state } from "../main.js";
+import { state } from "../URL/createObject.js"
 import { marcinSubscriben } from "../Marking/reExportMarking.js";
 import { getAccesToken, getDataAccount, TakeSubscriber } from "./ReExportAPI.js";
 import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "../untils/reExportUntils.js";

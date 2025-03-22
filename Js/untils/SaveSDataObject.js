@@ -1,4 +1,4 @@
-import { state } from "../main.js";
+import { state } from "../URL/createObject.js"
 export function createParamsData(){
     return {
         beginInfoVideo:{part: "statistics", id: null, key: APIKEY},

@@ -1,4 +1,4 @@
-import { state } from "../main.js"
+import { state } from "../URL/createObject.js"
 import { inserEl } from "../main.js"
 import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "../api/ReExportAPI.js"
 import { formatDuration } from "./reExportUntils.js"

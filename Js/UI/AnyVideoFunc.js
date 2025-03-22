@@ -1,5 +1,5 @@
 import { dateTime } from "../untils/reExportUntils"
-import { state } from "../main.js"
+import { state } from "../URL/createObject.js"
 import { MarkingCommentItem } from "../Marking/MarkingPlayerVideo"
 import { getRatingVideo, addRateToVideo } from "../api/AllApiRequest"
 

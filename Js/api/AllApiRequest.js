@@ -1,9 +1,8 @@
-import { params } from "../URL/reExportUrl.js"; 
-import { state } from "../main.js"
+import { state, params, URL } from "../URL/createObject.js"
 import { TakeShortAndLongVideo } from "../untils/HelpsFunction.js";
 import { TakeShortAndLongVideo, getIdVideo } from "../untils/reExportUntils.js";
 
-import {URL, requestToSeverGet, requestToServerPD, makeParams} from "../URL/reExportUrl.js"
+import {requestToSeverGet, requestToServerPD, makeParams} from "../URL/reExportUrl.js"
 
 
 import axios from 'axios'

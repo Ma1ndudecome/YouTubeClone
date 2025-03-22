@@ -1,9 +1,8 @@
-import { state } from "../main.js"
+import { state, URL } from "../URL/createObject.js"
 import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment, addRateToVideo } from "../api/ReExportAPI.js"
 import { container} from "../features/ReExportFeatures.js"
 import { markinHistoryVideo } from '../Marking/reExportMarking.js'
 import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, formatDuration, fromViewToShortView } from "../untils/reExportUntils.js"
-import { URL } from "../URL/URL.js"
 import { addMarkingComent } from "./AnyVideoFunc.js"
 
 

@@ -1,4 +1,4 @@
-import { state } from "../main.js"
+import { state } from "../URL/createObject.js"
 import { container } from "./ReExportFeatures.js"
 import { markingProfile, markingChangeTheme } from "../Marking/MarkingIcon.js"
 import { markingProfile as profileMark } from "../Marking/Marking.js"

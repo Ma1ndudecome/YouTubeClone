@@ -1,5 +1,6 @@
-import { state } from "../main.js";
+import { state } from "../URL/createObject.js";
 import Navigo from "navigo";
+import { params, URL} from '../main.js'
 import { LoadVideo } from "./LoadVideo.js";
 import { on } from "process";
 import {ViewChannel } from "./changeData.js";

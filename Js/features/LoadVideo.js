@@ -1,9 +1,10 @@
-import { state } from '../main.js'
+import { params, URL} from '../URL/createObject.js'
+
 import { makeMarkingVideo } from '../Marking/markingVideo.js'
 import { formatDuration, fromViewToShortView, dateTime, getIdVideo } from "../untils/reExportUntils.js"
 
-import {URL, requestToSeverGet} from "../URL/reExportUrl.js"
-import { params, makeParams } from '../URL/reExportUrl.js'
+import {requestToSeverGet} from "../URL/reExportUrl.js"
+import { makeParams } from '../URL/reExportUrl.js'
 import { getIdVideo } from '../untils/reExportUntils.js'
 
 
