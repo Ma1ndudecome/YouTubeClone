@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/Ma1ndudecome/YouTubeClone#readme",
   "dependencies": {
-    "axios": "^1.8.2"
+    "axios": "^1.8.2",
+    "routerjs": "^2.4.5"
   },
   "devDependencies": {
     "buffer": "^6.0.3",

@@ -12,7 +12,7 @@ import { markingGaming } from "./Marking/Marking.js";
 import { GetContentGaming } from "./api/AllApiRequest.js";
 import { shortVideoMarking} from "./Marking/profileVideoMarking.js";
 import axios from 'axios'
-
+import { addToPushState } from "./features/ReExportFeatures.js";
 
 import { formatDuration } from "./untils/FromISOToTime.js";
 
@@ -20,37 +20,37 @@ import { formatDuration } from "./untils/FromISOToTime.js";
 
 gamingBtn.onclick = (event) => {
     event.preventDefault()
-    replaceState({namePage:"Gaming"}, "gaming")
-    container.classList.remove("grid")
-    container.classList.add("block")
-    container.innerHTML = ''
-    container.innerHTML = markingGaming()
-    const gamingContainer = container.querySelector(".Container-video-gaming ")
-    const shortsContainer = container.querySelector(".shorts-video-conteiner")
+    addToPushState({namePage:"Gaming", id:"ufhDJnfh"}, '/Gaming')
+    // container.classList.remove("grid")
+    // container.classList.add("block")
+    // container.innerHTML = ''
+    // container.innerHTML = markingGaming()
+    // const gamingContainer = container.querySelector(".Container-video-gaming ")
+    // const shortsContainer = container.querySelector(".shorts-video-conteiner")
             
-    async function Gaming(){
-        try{
-            const videos = await GetContentGaming(); 
-             return videos;
-         }catch(err){
-            console.log(err);
-        }
-        }
-           Gaming().then((videos)=>{
+    // async function Gaming(){
+    //     try{
+    //         const videos = await GetContentGaming(); 
+    //          return videos;
+    //      }catch(err){
+    //         console.log(err);
+    //     }
+    //     }
+    //        Gaming().then((videos)=>{
 
-    videos.forEach(el=>{
-                let durationVideo = formatDuration(el.contentDetails.duration)
-                 const date = new Date(el.snippet.publishedAt)
-                  const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
+    // videos.forEach(el=>{
+    //             let durationVideo = formatDuration(el.contentDetails.duration)
+    //              const date = new Date(el.snippet.publishedAt)
+    //               const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
                              
-                 if(Number(durationVideo[0]) === 0){
-                     shortsContainer.insertAdjacentHTML("beforeend",shortVideoMarking(el.snippet.thumbnails.standard.url,el.snippet.title,fromViewToShortView(el.statistics.viewCount)))
-                  }else{
-                      gamingContainer.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), result, formatDuration(el.contentDetails.duration), el.id))
-                  }
+    //              if(Number(durationVideo[0]) === 0){
+    //                  shortsContainer.insertAdjacentHTML("beforeend",shortVideoMarking(el.snippet.thumbnails.standard.url,el.snippet.title,fromViewToShortView(el.statistics.viewCount)))
+    //               }else{
+    //                   gamingContainer.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), result, formatDuration(el.contentDetails.duration), el.id))
+    //               }
                             
-                  })
-                })
+    //               })
+    //             })
                            
 }
 

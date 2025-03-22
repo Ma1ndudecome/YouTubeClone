@@ -1,5 +1,5 @@
 
-import "./URL/config.js"; import "./gaming.js"; import "./features/LoadVideo.js"; import "./api/PostToToken.js"; import "./UI/Listners.js"; import "./features/ReturnPushState.js"; import "./UI/HeaderANDAside.js"; import "./UI/changeHistoryPage.js"; import "./features/ReturnPushState.js"
+import "./URL/config.js"; import "./gaming.js"; import "./features/LoadVideo.js"; import "./api/PostToToken.js"; import "./UI/Listners.js"; import "./features/routing.js"; import "./UI/HeaderANDAside.js"; import "./UI/changeHistoryPage.js"; import "./features/routing.js"
 import {addToPushState} from "./features/ReExportFeatures.js"
 import { markProfile, openVideoEverywere } from "./untils/HelpsFunction.js"
 const main = document.querySelector(".Main_container")
