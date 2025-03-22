@@ -1,4 +1,4 @@
-import { state } from "./features/changeData.js"
+import { state } from './main.js';
 import axios from 'axios'
 
 

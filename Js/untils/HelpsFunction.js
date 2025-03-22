@@ -1,10 +1,11 @@
+import { state } from "../main.js"
 import { inserEl } from "../main.js"
 import { getRatingVideo, takeComment, takeMoreInfoChannel, takeMoreVideoAnyProfile, getMoreStatisticId, ImgAndSubscribeChannel } from "../api/ReExportAPI.js"
 import { formatDuration } from "./reExportUntils.js"
 import { LoadMoreComments } from "../infinityScrollInProfile.js"
 import { arrDataVideo } from "../UI/reExportUI.js"
 import { MarkingPlayerAny, MarkingPlayer, markingShowMore, markingProfile, forYouVideoMarking, shortVideoMarking } from "../Marking/reExportMarking.js"
-import {state, slideToButton, dateRequest } from "../features/ReExportFeatures.js"
+import {slideToButton, dateRequest } from "../features/ReExportFeatures.js"
 import {buttonLoadMoreFnc, ListnersToSendComment, ListnersSubscribe, arrDataVideo, addMarkingComent, listnerToContainerComment, FuncLikeAndDisLike} from "../UI/reExportUI.js"
 
 

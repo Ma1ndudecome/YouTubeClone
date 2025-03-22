@@ -1,6 +1,7 @@
+import { state } from '../main.js'
 import { makeMarkingVideo } from '../Marking/markingVideo.js'
 import { formatDuration, fromViewToShortView, dateTime, getIdVideo } from "../untils/reExportUntils.js"
-import { state } from './ReExportFeatures.js'
+
 import {URL, requestToSeverGet} from "../URL/reExportUrl.js"
 import { params, makeParams } from '../URL/reExportUrl.js'
 import { getIdVideo } from '../untils/reExportUntils.js'
@@ -15,7 +16,6 @@ let pageToken = ''
 export const container = document.querySelector(".Main_container")
 
 export async function LoadVideo() {
-    state.pageTokenProfileVideoAny = ''
     try{
         const response = await requestToSeverGet(URL.searchURL, {part:"snippet", maxResults:5, type:"video", eventType:"none", key:APIKEY, pageToken:pageToken, videoDuration:"long"})
         pageToken = response.data.nextPageToken || '';

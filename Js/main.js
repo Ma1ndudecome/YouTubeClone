@@ -1,13 +1,20 @@
+import { createObjectForSave, createUrlRequest, createParamsData } from "./untils/reExportUntils.js";
+
+export const state = createObjectForSave()
+export const URL = createUrlRequest()
+export const params = createParamsData()
 
 //import modules
-import "./URL/config.js"; 
+import "./features/changeData.js"
+import "./api/PostToToken.js"; 
+
 import "./gaming.js"; 
 import "./features/LoadVideo.js"; 
-import "./api/PostToToken.js"; 
 import "./UI/Listners.js"; 
 import "./features/routing.js"; 
 import "./UI/HeaderANDAside.js"; 
 import "./UI/changeHistoryPage.js"; 
+import "./URL/config.js"; 
 //import another func
 import { markProfile, openVideoEverywere } from "./untils/HelpsFunction.js"
 const main = document.querySelector(".Main_container")
