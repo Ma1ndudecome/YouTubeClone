@@ -53,6 +53,9 @@ ol, ul{
 .trigerContainer{
     height: 1px;
 }
+.TrigerSearch{
+    height: 1px;
+}
 .time{
     color: white;
     position: absolute;

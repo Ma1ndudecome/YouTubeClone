@@ -40,7 +40,8 @@ export function createObjectForSave(){
       infoChannel: { img: 'https://cdn-icons-png.flaticon.com/512/6522/6522516.png' },//Сохранить количество подписчиков и url профиля
       PageTokenComment: '',
       Autorization: false,
-      pageTokenProfileVideoAny: ''
+      pageTokenProfileVideoAny: '',
+      searchContantToken:''
     };
 }
 

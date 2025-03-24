@@ -94,7 +94,8 @@ export async function TakeTrending() {//!
 }
 export async function SearchContent(content){//!
     try{
-        const videoRequest = await requestToSeverGet(URL.searchURL, makeParams(params.searchContent, {q:content}))
+        const videoRequest = await requestToSeverGet(URL.searchURL, makeParams(params.searchContent, {q:content, pageToken:state.searchContantToken}))
+        state.searchContantToken = videoRequest.data.nextPageToken
         const videoId = getIdVideo(videoRequest.data.items)
         return  await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoId}))
     }catch(err){
@@ -110,9 +111,25 @@ export async function getMoreStatisticId(id){//!
 }
 export async function addSubscribe(channelID) {//!!!
     try{
-        const authParam = params.authParams
-        const shortRes = params.shortResponse
-        return await requestToServerPD(URL.getSubscriberURL,makeParams(params.AddSubsribe, {snippet:{resourceId:{...params.AddSubsribe.snippet.resourceId, channelId:channelID}}}), {headers:authParam, params:shortRes})
+        return await axios.post(`https://www.googleapis.com/youtube/v3/subscriptions`, {
+            "snippet": {
+                "resourceId": {
+                  "channelId": channelID
+                }
+              }
+        },
+        {
+            params:{
+                part:"snippet"
+            },
+            headers:{
+                'Authorization': `Bearer ${state.acessToken}`
+            }
+            
+        })
+        // const authParam = params.authParams
+        // const shortRes = params.shortResponse
+        // return await requestToServerPD(URL.getSubscriberURL,makeParams(params.AddSubsribe, {snippet:{resourceId:{...params.AddSubsribe.snippet.resourceId, channelId:channelID}}}), {headers:authParam, params:shortRes})
     }catch(err){
         console.log(err)
     }
@@ -120,11 +137,20 @@ export async function addSubscribe(channelID) {//!!!
 }
 
 export async function removeSubscribe(channelID) {//!
-    const response = await requestToSeverGet(URL.getSubscriberURL, makeParams(params.isSubscribe, {forChannelId:channelID}), true)
-
-    const id = response.data.items[0]?.id
-    const authParam = params.authParams
-    return await requestToServerPD(URL.getSubscriberURL,{headers:authParam, params:{ id:id, key:APIKEY } } )
+    const response = await axios.get("https://www.googleapis.com/youtube/v3/subscriptions", { params: { part: "id", mine: true, },
+        headers: {
+            Authorization: `Bearer ${state.acessToken}`
+        }
+    });
+    
+    return await axios.delete("https://www.googleapis.com/youtube/v3/subscriptions", {
+        params:{ id:response.data.items[0]?.id},
+        headers:{ Authorization:`Bearer ${state.acessToken}` }
+    })
+    
+    // const id = response.data.items[0]?.id
+    // const authParam = params.authParams
+    // return await requestToServerPD(URL.getSubscriberURL,{headers:authParam, params:{ id:id, key:APIKEY } } )
 }
 
 export async function userSubscriber(idChannel) {//!

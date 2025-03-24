@@ -4,6 +4,7 @@ import { container, setNewUrl} from "../features/ReExportFeatures.js"
 import { markinHistoryVideo } from '../Marking/reExportMarking.js'
 import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, formatDuration, fromViewToShortView } from "../untils/reExportUntils.js"
 import { addMarkingComent } from "./AnyVideoFunc.js"
+import { infinityScrollSearch } from "../infinityScrollInProfile.js"
 
 
 export function listnerToInput(){
@@ -73,19 +74,27 @@ function SearchListner(){
 SearchListner()
 
 async function getContentAndAddMarking(input){
-    if(input.value !== ''){
-        container.innerHTML = ''
-        container.insertAdjacentHTML('beforeend', `<div class="ContainerVideoSearch mT50p"></div>`)
-        const contVideo = document.querySelector(".ContainerVideoSearch")
-       const videos =  await SearchContent(input.value)
-        console.log(videos)
-       videos.data.items.forEach(el=>{
-        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration))) : false
-       })
-       container.className = 'Main_container dF jcC'
-       contVideo.classList.add("dF", "fdC", "gap15P", "w80Procc")
-    }
+    if(input.value === '')return
    
+    container.innerHTML = ''
+    container.insertAdjacentHTML('beforeend', `<div class="ContainerVideoSearch mT50p w80Procc" ></div>`)
+
+    const triggerContainer = document.querySelector(".ContainerVideoSearch")
+
+    triggerContainer.insertAdjacentHTML('beforeend', `<div class="InnerContainerVideoSearch">`)
+    triggerContainer.insertAdjacentHTML("beforeend", `<div class="TrigerSearch"></div>`)
+
+    const contVideo = document.querySelector(".InnerContainerVideoSearch")
+    const videos =  await SearchContent(input.value)
+        
+    videos.data.items.forEach(el=>{
+        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration))) : false
+    })
+    container.className = 'Main_container dF jcC'
+    contVideo.classList.add("dF", "fdC", "gap15P")
+    setNewUrl(`/Search/:${input.value}/`)
+    infinityScrollSearch(input.value)
+    
 }
 
 

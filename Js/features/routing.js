@@ -27,6 +27,10 @@ function checkUrlRouting(){
     })
     .on("/Profile/:id/", (params, some, some1)=>{
     })
+    .on("/Search/:q/", ()=>{
+        console.log("search")
+    })
+    
     router.resolve()
     }, 0);
     
