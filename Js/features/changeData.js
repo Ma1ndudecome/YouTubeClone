@@ -1,11 +1,11 @@
 import { state, URL } from "../URL/createObject.js"
 import { container, channelData, moreBtn } from "./ReExportFeatures.js"
-import { markingProfile, markingChangeTheme } from "../Marking/MarkingIcon.js"
+import { markingProfile, markingChangeTheme, themeChange } from "../Marking/MarkingIcon.js"
 import { markingProfile as profileMark } from "../Marking/Marking.js"
 import { loadVideoInProfile } from "../infinityScrollInProfile.js"
 import axios from 'axios'
 import { themeChange } from "../UI/HeaderANDAside.js"
-import { TakeShortAndLongVideo, navInProfile, checkCountVideoAndGiveMarking, addClassList, removeClassList, changeInnerHTML, selectElements} from "../untils/HelpsFunction.js"
+import { TakeShortAndLongVideo, navInProfile, checkCountVideoAndGiveMarking, addClassList, removeClassList, changeInnerHTML, selectElements } from "../untils/HelpsFunction.js"
 import { setNewUrl } from "./routing.js"
 
 
@@ -13,7 +13,7 @@ export let dateProfileVideo = []//При запросе сохраняю все 
 
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
   changeInnerHTML(selectElements(document, ".sing_int"), markingProfile(profileImg, profileName, profileCustomUrl))
-  
+
   selectElements(document, "header").addEventListener("click", clickToAvatarUser)
   const youtubeSettings = selectElements(document, ".profileImg_Info")
   youtubeSettings.addEventListener("click", (e) => {
@@ -43,7 +43,7 @@ async function openProfile(target, accessToken, block) {
 }
 export async function ViewChannel(accessToken) {
   changeInnerHTML(container, '')
-  
+
   removeClassList(container, "grid")
   addClassList(container, "block")
 
@@ -74,7 +74,7 @@ function renderProfile(dataProfile, detailInformationVideo) {
 
   if (!profileData.brandingSettings.image) {
     selectElements(document, "Main_container_Header")?.remove();
-    
+
   }
   const video = TakeShortAndLongVideo(detailInformationVideo)
 
@@ -82,7 +82,7 @@ function renderProfile(dataProfile, detailInformationVideo) {
 
   navInProfile(video)
   dateProfileVideo.push(...detailInformationVideo.data.items)
-  
+
   const contVid = selectElements(document, '.Header_Main_container_video')
   profileMarking = contVid.innerHTML
 
@@ -150,7 +150,7 @@ function leftClick(container) {
 }
 
 function checkWhatDeleteAndRemoveNav(el) {
-  const nav =   selectElements(document, ".container_channel_navigation_item")
+  const nav = selectElements(document, ".container_channel_navigation_item")
   if (el.classList.contains("Shorts_video_container")) {
     nav.length === 3 ? nav[2].remove() : nav[1].remove()
   }
@@ -180,12 +180,12 @@ function safeDataInPushState(dataProfile) {
 
 function checkCountVideo() {
   if (state.infoChannel.videoCount === String(0)) {
-    
+
 
     selectElements(document, ".line")?.remove()
     selectElements(document, ".Header_Main_container_video")
     selectElements(document, ".Header_Main_container_video")?.remove()
-    
+
     const nav = selectElements(document, ".container_channel_navigation")
     nav.innerHTML = `
      <div class="noneVideo">Автор поки загрузив жодного відео😥</div>
@@ -205,11 +205,20 @@ function clickToAvatarUser(e) {
     if (e.target.closest(".back")) {
       return
     }
-    
+
 
     const info = selectElements(document, ".profileImg_Info")
     info.classList.remove("show")
 
   }
 }
+const settingsUser = document.querySelector(".block_fon")
+const settingsWindow = document.querySelector(".settings-user")
+console.log(settingsUser)
 
+settingsUser.addEventListener("click", () => {
+  settingsWindow.classList.toggle("block")
+  settingsWindow.innerHTML = markingChangeTheme()
+  themeChange(settingsWindow, `<div class="none" </div> `)
+
+})
