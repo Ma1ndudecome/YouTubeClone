@@ -2,6 +2,7 @@
 import { once } from "process"
 import { URL } from "../URL/createObject.js"
 import { markingProfile } from "../Marking/Marking.js"
+import { TIMEOUT } from "dns"
 
 
 let glass_adaptation = document.getElementById("glass_adaptation")
@@ -62,10 +63,11 @@ export function themeChange(block, oldMark) {
         document.documentElement.classList.remove("white");
         localStorage.setItem('theme', 'black');
         block.innerHTML = oldMark
-    });
+        block.classList.remove("block")
+    }, { once: true });
     block.querySelector(".back")?.addEventListener("click", () => {
-        console.log(oldMark)
         block.innerHTML = oldMark
+      block.classList.remove("block")
     })
 
     block.querySelector(".light_theme")?.addEventListener("click", () => {
@@ -73,8 +75,9 @@ export function themeChange(block, oldMark) {
         document.documentElement.classList.remove("black");
         localStorage.setItem('theme', 'white');
         block.innerHTML = oldMark
+        block.classList.remove("block")
 
-    });
+    }, { once: true });
 }
 export function loadSavedTheme() {
     const savedTheme = localStorage.getItem('theme');
