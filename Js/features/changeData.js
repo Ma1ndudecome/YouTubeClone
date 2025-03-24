@@ -1,19 +1,17 @@
 import { state } from "../URL/createObject.js"
-import { container } from "./ReExportFeatures.js"
+import { container, channelData, moreBtn } from "./ReExportFeatures.js"
 import { markingProfile, markingChangeTheme } from "../Marking/MarkingIcon.js"
 import { markingProfile as profileMark } from "../Marking/Marking.js"
 import { loadVideoInProfile } from "../infinityScrollInProfile.js"
-import { channelData, moreBtn} from "./ReExportFeatures.js"
 import axios from 'axios'
 import { themeChange } from "../UI/HeaderANDAside.js"
-
-import { TakeShortAndLongVideo, navInProfile, checkCountVideoAndGiveMarking } from "../untils/HelpsFunction.js"
+import { TakeShortAndLongVideo, navInProfile, checkCountVideoAndGiveMarking, addClassList, removeClassList, changeInnerHTML} from "../untils/HelpsFunction.js"
 import { setNewUrl } from "./routing.js"
 
 export let dateProfileVideo = []//При запросе сохраняю все видео тут для того что бы избавиться от лишних запросов 
 
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
-  document.querySelector(".sing_int").innerHTML = markingProfile(profileImg, profileName, profileCustomUrl)
+  changeInnerHTML( document.querySelector(".sing_int"), markingProfile(profileImg, profileName, profileCustomUrl))
   document.querySelector("header").addEventListener("click", clickToAvatarUser)
   const youtubeSettings = document.querySelector(".profileImg_Info")
   youtubeSettings.addEventListener("click", (e) => {
@@ -36,16 +34,16 @@ async function openProfile(target, accessToken, block) {
   }
   else if (text === "Apperance") {
     const oldMark = block.innerHTML
-    block.innerHTML = markingChangeTheme()
+    changeInnerHTML(block, markingChangeTheme())
     themeChange(block, oldMark)
   }
 
 }
 export async function ViewChannel(accessToken) {
-  container.innerHTML = ''
+  changeInnerHTML(container, '')
   
-  container.classList.remove("grid")
-  container.classList.add('block')
+  removeClassList(container, "grid")
+  addClassList(container, "block")
 
   try {
     const dataProfile = await channelData(accessToken)
@@ -84,6 +82,7 @@ function renderProfile(dataProfile, detailInformationVideo) {
 
   const contVid = document.querySelector(".Header_Main_container_video")
   profileMarking = contVid.innerHTML
+
 
   slideToButton()
 
@@ -166,7 +165,7 @@ function checkWhatDeleteAndRemoveNav(el) {
 
 function AddClassToContainer(containerVideo, inner) {
   containerVideo.classList.add("grid", "gridTC5", "gap10")
-  containerVideo.innerHTML = inner
+  changeInnerHTML(containerVideo, inner)
 }
 
 
@@ -190,7 +189,7 @@ function checkCountVideo() {
     nav.innerHTML = `
      <div class="noneVideo">Автор поки загрузив жодного відео😥</div>
      `
-    nav.classList.add("jcC")
+    addClassList(nav, "jcC")
   }
 }
 

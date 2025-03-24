@@ -3,7 +3,7 @@ import { changeProfile, channelData } from "../features/ReExportFeatures.js"
 import { state } from "../URL/createObject.js"
 import { marcinSubscriben } from "../Marking/reExportMarking.js";
 import { getAccesToken, getDataAccount, TakeSubscriber } from "./ReExportAPI.js";
-import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "../untils/reExportUntils.js";
+import { saveAcessToken,saveImgAccount, UserInAccountTrue, addClassList, removeClassList} from "../untils/reExportUntils.js";
 
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
@@ -75,11 +75,11 @@ async function loadSubsiber(access_token = "",countSubscriber){
     const singIntNone = document.querySelector(".aside_SignIn_Container")
     const removeNonContainer = document.querySelector(".block_list_Sing_int ")
     
-    singIntNone.classList.add("none")
-    removeNonContainer.classList.remove("none")
+    addClassList(singIntNone, "none")
 
-       buttonMoreSubscriber.classList.remove("none")
-       
+    removeClassList(removeNonContainer, "none")
+    removeClassList(buttonMoreSubscriber, "none")
+
     const subscriberContainer = document.querySelector(".block_list_Sing_int")
     try{
         const dataSubsribe = await TakeSubscriber(pageTokenSubscribe)
