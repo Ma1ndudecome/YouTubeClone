@@ -1,8 +1,8 @@
 import { fromViewToShortView } from "../untils/ViewToViewLikeToLike.js"
-
+import { dateTime } from "../untils/HelpsFunction.js"
 export function forYouVideoMarking(prewievVideo, durationVideo, titleVideo, countWiev, dateV, id) {
-     const date = new Date(dateV)
-    const result = dateFns.formatDistanceToNow(date, { addSuffix: true })
+     
+    const result = dateTime(dateV)
     return `
             <div class="video_box chooseVideoProfile" idVideo="${id}">
         <div class="Container_video_preview">

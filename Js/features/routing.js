@@ -13,16 +13,26 @@ export function setNewUrl(Page){
 
 
 function checkUrlRouting(){
-    router
+    setTimeout(() => {
+        router
     .on("/Home", ()=>{
-        LoadVideo()
+        // LoadVideo()
     })
     .on("/Gaming", ()=>{
         console.log("load gaming video...")
     })
     .on("/Profile", ()=>{
         ViewChannel(state.acessToken)
+        console.log('load profile')
     })
+    .on("/Profile/:id/", (params, some, some1)=>{
+    })
+    .on("/Search/:q/", ()=>{
+        console.log("search")
+    })
+    
     router.resolve()
+    }, 0);
+    
 }
 checkUrlRouting()

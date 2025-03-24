@@ -5,6 +5,7 @@ import axios from 'axios'
 
 
 export async function channelData(accessToken) {
+    console.log(accessToken)
     const response = await axios.get("https://www.googleapis.com/youtube/v3/channels", {
         headers: { 'Authorization': `Bearer ${accessToken}` },
         params: {

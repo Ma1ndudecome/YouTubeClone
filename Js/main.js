@@ -1,16 +1,8 @@
 
 //import modules
-import "./features/changeData.js"
-import "./api/PostToToken.js"; 
-
-import "./gaming.js"; 
-import "./features/LoadVideo.js"; 
-import "./UI/Listners.js"; 
-import "./features/routing.js"; 
-import "./UI/HeaderANDAside.js"; 
-import "./UI/changeHistoryPage.js"; 
-import "./URL/config.js"; 
+import "./features/changeData.js";import "./api/PostToToken.js"; import "./gaming.js"; import "./features/LoadVideo.js"; import "./UI/Listners.js"; import "./features/routing.js"; import "./UI/HeaderANDAside.js"; import "./UI/changeHistoryPage.js"; import "./URL/config.js"; 
 //import another func
+
 import { markProfile, openVideoEverywere } from "./untils/HelpsFunction.js"
 const main = document.querySelector(".Main_container")
 import { deleteVideoOnBtn } from "./UI/changeHistoryPage.js";
@@ -19,7 +11,6 @@ import { loadSavedTheme } from "./UI/HeaderANDAside.js";
 import { setNewUrl } from "./features/routing.js";
 
 setNewUrl("/Home")
-
 document.addEventListener('DOMContentLoaded', loadSavedTheme);
 
 main.addEventListener("click", async (e) => {
@@ -31,8 +22,8 @@ main.addEventListener("click", async (e) => {
     if (e.target.closest(".chooseVideo")) {
         if (e.target.classList.contains("nameChannelSelect")) {
             const nameChannel = e.target.textContent
-            console.log(nameChannel)
             markProfile(main, nameChannel)
+  
             isVideo = true
         } else {
             openVideoEverywere(e, ".chooseVideo", 1, main)

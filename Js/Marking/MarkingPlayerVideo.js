@@ -1,9 +1,6 @@
 import { fromLikeToShortLike, fromViewToShortView } from "../untils/ViewToViewLikeToLike.js"
-
+import { dateTime } from "../untils/HelpsFunction.js";
 export function MarkingPlayer(id, dateRequests, dataProfile){
-    const dateString = dateRequests[0].snippet.publishedAt
-    const parsedDate = dateFns.parseISO(dateString);
-    const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
     return `
     <div class="ContainerPlayerVideo">
      <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="${dateRequests[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -63,7 +60,7 @@ export function MarkingPlayer(id, dateRequests, dataProfile){
                    <div class="Main_container_blockInfo_description">
                         <div class="Main_container_blockInfo_description_viewBlock dF">
                             <span class="Main_container_blockInfo_description_view">${fromViewToShortView(dateRequests[0].statistics.viewCount)} views</span>
-                            <span class="Main_container_blockInfo_description_date">${formattedDate}</span>
+                            <span class="Main_container_blockInfo_description_date">${dateTime(dateRequests[0].snippet.publishedAt)}</span>
                         </div>
                         <div class="Main_container_blockInfo_description_linkBlock">
                             <span class="Main_container_blockInfo_description_link"></span> 
@@ -131,9 +128,6 @@ export function MarkingCommentItem(imgComment, userName, date, commentText, coun
     `
 }
 export function MarkingPlayerAny(id, InfoVideo, state, dataChannel){
-    const dateString = InfoVideo[0].snippet.publishedAt
-    const parsedDate = dateFns.parseISO(dateString);
-    const formattedDate  = dateFns.format(parsedDate, "MMM d, yyyy")
     return `
         <div class="ContainerPlayerVideo">
         <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="${InfoVideo[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -194,7 +188,7 @@ export function MarkingPlayerAny(id, InfoVideo, state, dataChannel){
                    <div class="Main_container_blockInfo_description">
                         <div class="Main_container_blockInfo_description_viewBlock dF">
                              <span class="Main_container_blockInfo_description_view">${fromViewToShortView(InfoVideo[0].statistics.viewCount)} views</span>
-                             <span class="Main_container_blockInfo_description_date">${formattedDate}</span>
+                             <span class="Main_container_blockInfo_description_date">${dateTime(InfoVideo[0].snippet.publishedAt)}</span>
                         </div>
                         <div class="Main_container_blockInfo_description_linkBlock">
                             <span class="Main_container_blockInfo_description_link"></span> 

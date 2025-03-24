@@ -1,9 +1,13 @@
 import { state } from "./URL/createObject.js"
 import axios from 'axios'
-
-
 import { takeComment } from "./api/AllApiRequest.js";
 import { addMarkingComent } from "./UI/AnyVideoFunc.js";
+import { SearchContent } from "./api/AllApiRequest.js";
+import { markinHistoryVideo } from "./Marking/Marking.js";
+import { formatDuration } from "./untils/FromISOToTime.js";
+import { dateTime } from "./untils/HelpsFunction.js";
+import { fromViewToShortView } from "./untils/ViewToViewLikeToLike.js";
+
 export async function loadVideoInProfile(accessToken, dataProfile, tokenVideo){
     return await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },
@@ -81,3 +85,17 @@ function checkEntriesAndTakeResponse(entries, id){
     }
   })
 }
+
+export function infinityScrollSearch(value){
+  const searchTriger = document.querySelector(".TrigerSearch")
+
+  const observ = new IntersectionObserver(async ()=>{
+    const contVideo = document.querySelector(".InnerContainerVideoSearch")
+   const videos =  await SearchContent(value)
+    videos.data.items.forEach(el=>{
+        el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration))) : false
+    })
+  })
+  observ.observe(searchTriger)
+}
+

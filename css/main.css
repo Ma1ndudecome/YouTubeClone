@@ -53,6 +53,9 @@ ol, ul{
 .trigerContainer{
     height: 1px;
 }
+.TrigerSearch{
+    height: 1px;
+}
 .time{
     color: white;
     position: absolute;
@@ -94,9 +97,7 @@ ol, ul{
     color:var(--forAllTextWithSmallTransperent);
     opacity: 1;
 }
-.Main_container_video_title_info_name:hover{
-    color:var(--bordColor);
-}
+
 .date{
     position: relative;
     margin-left: 10px;
@@ -213,12 +214,15 @@ iframe{
 }
 .rightSide_emotion_dislike_svg path, .rightSide_emotion_like_svg path{
    stroke: var(--bordColor);
-   fill: none;
+   fill: none !important;
 }
 .Like path, .Dislike path{
     fill: var(--bordColor);
 }
-
+.nameChannelSelect:hover{
+    color: var(--bordColor);
+    cursor: pointer;
+}
 .rightSide_emotion_like{
     display: flex;
     justify-content: center;
@@ -517,7 +521,10 @@ iframe{
 }
 .Container_video_title, .Container_videos_item_statistic_title, .Shorts_video_item_info_title{
     overflow: hidden;            
-  text-overflow: ellipsis;     
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;     
 }
 .ForYou_Container_video::-webkit-scrollbar,
 .Shorts_video_container::-webkit-scrollbar {

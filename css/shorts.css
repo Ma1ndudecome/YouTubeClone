@@ -141,6 +141,7 @@
 .shorts-video-conteiner{
     overflow-x: scroll;
     color: white;
+    padding-bottom: 20px;
 }
 .iconTxtGaming{
     display: flex; 
