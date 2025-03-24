@@ -13,7 +13,8 @@ export function setNewUrl(Page){
 
 
 function checkUrlRouting(){
-    router
+    setTimeout(() => {
+        router
     .on("/Home", ()=>{
         // LoadVideo()
     })
@@ -21,14 +22,13 @@ function checkUrlRouting(){
         console.log("load gaming video...")
     })
     .on("/Profile", ()=>{
-        console.log(state.acessToken)
         ViewChannel(state.acessToken)
+        console.log('load profile')
     })
     .on("/Profile/:id/", (params, some, some1)=>{
-
-
-
     })
     router.resolve()
+    }, 0);
+    
 }
 checkUrlRouting()

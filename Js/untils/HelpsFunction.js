@@ -212,5 +212,5 @@ export function changeInnerHTML(el, inner){
   el.innerHTML = inner
 }
 export function selectElements(el, selector){
-  return el.querySelector(selector)
+  return el?.querySelector(selector)
 }

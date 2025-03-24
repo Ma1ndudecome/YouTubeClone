@@ -1,19 +1,21 @@
-import { state } from "../URL/createObject.js"
+import { state, URL } from "../URL/createObject.js"
 import { container, channelData, moreBtn } from "./ReExportFeatures.js"
 import { markingProfile, markingChangeTheme } from "../Marking/MarkingIcon.js"
 import { markingProfile as profileMark } from "../Marking/Marking.js"
 import { loadVideoInProfile } from "../infinityScrollInProfile.js"
 import axios from 'axios'
 import { themeChange } from "../UI/HeaderANDAside.js"
-import { TakeShortAndLongVideo, navInProfile, checkCountVideoAndGiveMarking, addClassList, removeClassList, changeInnerHTML} from "../untils/HelpsFunction.js"
+import { TakeShortAndLongVideo, navInProfile, checkCountVideoAndGiveMarking, addClassList, removeClassList, changeInnerHTML, selectElements} from "../untils/HelpsFunction.js"
 import { setNewUrl } from "./routing.js"
+
 
 export let dateProfileVideo = []//При запросе сохраняю все видео тут для того что бы избавиться от лишних запросов 
 
 export function changeProfile(profileImg, profileName, profileCustomUrl, accessToken) {
-  changeInnerHTML( document.querySelector(".sing_int"), markingProfile(profileImg, profileName, profileCustomUrl))
-  document.querySelector("header").addEventListener("click", clickToAvatarUser)
-  const youtubeSettings = document.querySelector(".profileImg_Info")
+  changeInnerHTML(selectElements(document, ".sing_int"), markingProfile(profileImg, profileName, profileCustomUrl))
+  
+  selectElements(document, "header").addEventListener("click", clickToAvatarUser)
+  const youtubeSettings = selectElements(document, ".profileImg_Info")
   youtubeSettings.addEventListener("click", (e) => {
     e.preventDefault()
     openProfile(e.target, accessToken, youtubeSettings)
@@ -71,7 +73,8 @@ function renderProfile(dataProfile, detailInformationVideo) {
   container.insertAdjacentHTML("afterbegin", profileMark(banner, profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
 
   if (!profileData.brandingSettings.image) {
-    document.querySelector(".Main_container_Header")?.remove();
+    selectElements(document, "Main_container_Header")?.remove();
+    
   }
   const video = TakeShortAndLongVideo(detailInformationVideo)
 
@@ -79,8 +82,8 @@ function renderProfile(dataProfile, detailInformationVideo) {
 
   navInProfile(video)
   dateProfileVideo.push(...detailInformationVideo.data.items)
-
-  const contVid = document.querySelector(".Header_Main_container_video")
+  
+  const contVid = selectElements(document, '.Header_Main_container_video')
   profileMarking = contVid.innerHTML
 
 
@@ -91,7 +94,7 @@ function renderProfile(dataProfile, detailInformationVideo) {
 
 }
 function switchAccount() {
-  location.href = 'http://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.force-ssl&redirect_uri=http%3A%2F%2Flocalhost%3A5501&response_type=code&client_id=729574226005-s73fnabnui73ga2vtfa52u87o3qag7f8.apps.googleusercontent.com&access_type=offline&service=lso&o2v=2&ddm=1&flowName=GeneralOAuthFlow'
+  window.location.href = URL.logInURL;
 }
 function logout() {
   location.href = redirectUri
@@ -102,7 +105,6 @@ function logout() {
 
 
 export function slideToButton() {
-
 
   const containerForYou = document.querySelector(".ForYou_Container_video")
   const containerShorts = document.querySelector(".Shorts_video_container")
@@ -144,20 +146,16 @@ function RightClick(container) {
   container.scrollLeft += 600
 }
 function leftClick(container) {
-  console.log()
   container.scrollLeft -= 600
 }
 
 function checkWhatDeleteAndRemoveNav(el) {
-  console.log(el)
-  const nav = document.querySelectorAll(".container_channel_navigation_item")
-  console.log(nav)
+  const nav =   selectElements(document, ".container_channel_navigation_item")
   if (el.classList.contains("Shorts_video_container")) {
     nav.length === 3 ? nav[2].remove() : nav[1].remove()
   }
   if (el.classList.contains("ForYou_Container_video")) {
-    console.log('delete forYou')
-    console.log(nav[1])
+
     nav[1].remove()
   }
 }
@@ -182,10 +180,13 @@ function safeDataInPushState(dataProfile) {
 
 function checkCountVideo() {
   if (state.infoChannel.videoCount === String(0)) {
-    document.querySelector(".line")?.remove()
-    document.querySelector(".Header_Main_container_video")?.remove()
+    
 
-    const nav = document.querySelector(".container_channel_navigation")
+    selectElements(document, ".line")?.remove()
+    selectElements(document, ".Header_Main_container_video")
+    selectElements(document, ".Header_Main_container_video")?.remove()
+    
+    const nav = selectElements(document, ".container_channel_navigation")
     nav.innerHTML = `
      <div class="noneVideo">Автор поки загрузив жодного відео😥</div>
      `
@@ -195,7 +196,7 @@ function checkCountVideo() {
 
 function clickToAvatarUser(e) {
   if (e.target.classList.contains("userImg")) {
-    const info = document.querySelector(".profileImg_Info")
+    const info = selectElements(document, ".profileImg_Info")
     info.classList.toggle("show")
   } else {
     if (e.target.closest(".theme")) {
@@ -204,7 +205,9 @@ function clickToAvatarUser(e) {
     if (e.target.closest(".back")) {
       return
     }
-    const info = document.querySelector(".profileImg_Info")
+    
+
+    const info = selectElements(document, ".profileImg_Info")
     info.classList.remove("show")
 
   }

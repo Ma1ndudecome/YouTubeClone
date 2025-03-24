@@ -41,6 +41,7 @@ if(code){
             return response
         }catch(err){
          const token = JSON.parse(localStorage.getItem("dataRefreshToken")).filter(el=>el.name === localStorage.getItem("nameAccount"))
+           console.log(token)
             try{
                 const response = await getAccesToken('RefreshToken', token)
 
