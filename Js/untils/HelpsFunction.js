@@ -5,9 +5,10 @@ import { formatDuration } from "./reExportUntils.js"
 import { LoadMoreComments } from "../infinityScrollInProfile.js"
 import { arrDataVideo } from "../UI/reExportUI.js"
 import { MarkingPlayerAny, MarkingPlayer, markingShowMore, markingProfile, forYouVideoMarking, shortVideoMarking } from "../Marking/reExportMarking.js"
-import {slideToButton, dateRequest } from "../features/ReExportFeatures.js"
+import {slideToButton, dateRequest, setNewUrl } from "../features/ReExportFeatures.js"
 import {buttonLoadMoreFnc, ListnersToSendComment, ListnersSubscribe, arrDataVideo, addMarkingComent, listnerToContainerComment, FuncLikeAndDisLike} from "../UI/reExportUI.js"
 import { formatDistanceToNow } from "date-fns"
+
 
 
 
@@ -44,9 +45,12 @@ export function UserInAccountTrue(InAccount) {
 
 export async function markProfile(main, nameChannel) {
   const dataChannel = await takeMoreInfoChannel(nameChannel)
+
   const channel = dataChannel.dataChannel
+
   const video = await takeMoreVideoAnyProfile(dataChannel.id)
 
+  setNewUrl(`/Profile:/:${dataChannel.id}/`)
   main.classList.add("block")
 
   if (!channel.brandingSettings.image.bannerExternalUrl) {
@@ -150,7 +154,7 @@ export async function addMarkingVideoAndFunctional(main, el, item, dateRequests,
   buttonLoadMoreFnc(dateRequests, imgChannel, ChannelSubs)
 
   const response = await takeComment(id)
-
+  console.log(response)
   addMarkingComent(response)
   ListnersToSendComment(id, channelId)
   FuncLikeAndDisLike(id)
@@ -197,4 +201,16 @@ export function changeTextContentAndAddClasslist(button, text, clas, addOrRemove
 
 export function getIdVideo(items){
   return items.map(el=> el.id.videoId).join(',')
+}
+export function addClassList(el, clas){
+  el.classList.add(clas)
+}
+export function removeClassList(el, clas){
+  el.classList.remove(clas)
+}
+export function changeInnerHTML(el, inner){
+  el.innerHTML = inner
+}
+export function selectElements(el, selector){
+  return el.querySelector(selector)
 }

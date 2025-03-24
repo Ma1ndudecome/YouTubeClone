@@ -43,8 +43,7 @@ async function openProfile(target, accessToken, block) {
 }
 export async function ViewChannel(accessToken) {
   container.innerHTML = ''
-  const info = document.querySelector(".profileImg_Info")
-  info.classList.remove("show")
+  
   container.classList.remove("grid")
   container.classList.add('block')
 

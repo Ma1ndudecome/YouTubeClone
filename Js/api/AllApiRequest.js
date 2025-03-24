@@ -36,13 +36,16 @@ export async function takeMoreInfoChannel(nameChannel) {
     const name = nameChannel.replaceAll(' ', '+')
 
     const idChannel = await requestToSeverGet(URL.searchURL, makeParams(params.takeIdChannel, {q:name}))
+  
 
     const moreInfoChannel = await requestToSeverGet(URL.channelURL, makeParams(params.getInfoChannel, {id:idChannel.data.items[0].id.channelId}))
     
     return {dataChannel:moreInfoChannel.data.items[0], id:moreInfoChannel.data.items[0].id}
 }
 export async  function takeMoreVideoAnyProfile(id){
-    const detailInformationVideo = await requestToSeverGet(URL.searchURL, makeParams(params.takeDetailInfoVideo), {channelId:id})
+  
+    const detailInformationVideo = await requestToSeverGet(URL.searchURL, makeParams(params.takeDetailInfoVideo, {channelId:id}))
+
     const videoIds = getIdVideo(detailInformationVideo.data.items)
     const takeDuration = await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoIds}))
 
@@ -109,7 +112,7 @@ export async function addSubscribe(channelID) {//!!!
     try{
         const authParam = params.authParams
         const shortRes = params.shortResponse
-        return await requestToServerPD(URL.getSubscriberURL,makeParams(params.AddSubsribe, {snippet:{resourceId:{...params.AddSubsribe.snippet.resourceId, channelId:"asdsad"}}}), {headers:authParam, params:shortRes})
+        return await requestToServerPD(URL.getSubscriberURL,makeParams(params.AddSubsribe, {snippet:{resourceId:{...params.AddSubsribe.snippet.resourceId, channelId:channelID}}}), {headers:authParam, params:shortRes})
     }catch(err){
         console.log(err)
     }

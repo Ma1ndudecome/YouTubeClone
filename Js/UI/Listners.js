@@ -1,6 +1,6 @@
 import { state, URL } from "../URL/createObject.js"
 import { SearchContent, addSubscribe, removeSubscribe, userSubscriber, putComment, addRateToVideo } from "../api/ReExportAPI.js"
-import { container} from "../features/ReExportFeatures.js"
+import { container, setNewUrl} from "../features/ReExportFeatures.js"
 import { markinHistoryVideo } from '../Marking/reExportMarking.js'
 import {moreBtn, shortLength, dateTime, changeTextContentAndAddClasslist, shortLength, formatDuration, fromViewToShortView } from "../untils/reExportUntils.js"
 import { addMarkingComent } from "./AnyVideoFunc.js"
@@ -32,7 +32,8 @@ export function ListnersToSendComment(id, channelId){
             return
         }
         const responseComment = await putComment(elements.input.value, id, channelId)
-        console.log(responseComment)
+        setNewUrl(`/Search:${elements.input.value}`)
+
         addMarkingComent(responseComment.data)
 
     }
