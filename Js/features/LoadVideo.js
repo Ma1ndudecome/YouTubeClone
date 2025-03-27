@@ -6,6 +6,7 @@ import { formatDuration, fromViewToShortView, dateTime, getIdVideo } from "../un
 import {requestToSeverGet} from "../URL/reExportUrl.js"
 import { makeParams } from '../URL/reExportUrl.js'
 import { getIdVideo } from '../untils/reExportUntils.js'
+import { addSavedElements } from '../untils/Cache.js'
 
 
 
@@ -25,6 +26,7 @@ export async function LoadVideo() {
         const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.getDetailInfoGaming, {id:IDVideo}))
         container.innerHTML = ''
         container.className = 'Main_container grid'
+        addSavedElements(createStructureSaved("Video",  MoreStatisticVideo.data))
         await MoreStatisticVideo.data.items.forEach(el => {
             if (el.snippet.liveBroadcastContent === 'none') {
                 container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration), el.id))
