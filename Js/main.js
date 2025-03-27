@@ -7,7 +7,6 @@ import { markProfile, openVideoEverywere } from "./untils/HelpsFunction.js"
 const main = document.querySelector(".Main_container")
 import { deleteVideoOnBtn } from "./UI/changeHistoryPage.js";
 import { loadSavedTheme } from "./UI/HeaderANDAside.js";
-
 import { setNewUrl } from "./features/routing.js";
 
 setNewUrl("/Home")
@@ -34,6 +33,7 @@ main.addEventListener("click", async (e) => {
 
     }
 })
+
 
 
 export function inserEl(el, positon, marking) {

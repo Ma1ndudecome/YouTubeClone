@@ -1,16 +1,24 @@
-import NodeCache from "node-cache";
+
 import { CachedVideo } from "./reExportUntils";
-const cache = new NodeCache({stdTTL:600})
+
 
 export function createStructureSaved(typeVideo, video){
+    console.log('videoT', typeVideo)
+    console.log('video', video)
     return {
         type:typeVideo,
         data:video
     }
 }
 export function addSavedElements(dateOneVideo){
-    console.log('dataVideo', dateOneVideo)
     CachedVideo.push(dateOneVideo)
-    cache.set("cachedData", CachedVideo)
-    console.log(cache.get("cachedData"))
+    localStorage.setItem("ChachedData", JSON.stringify(CachedVideo))
+
+}
+export function checkedType(typeVideo){
+   const arr = JSON.parse(localStorage.getItem("ChachedData"))
+   if(!arr)return
+   const some = arr.filter(({type}) => type === typeVideo)
+   return some.length === 0 ? null : some
+   
 }

@@ -22,8 +22,7 @@
   "dependencies": {
     "axios": "^1.8.2",
     "date-fns": "^4.1.0",
-    "navigo": "^8.11.1",
-    "node-cache": "^5.1.2"
+    "navigo": "^8.11.1"
   },
   "devDependencies": {
     "buffer": "^6.0.3",
