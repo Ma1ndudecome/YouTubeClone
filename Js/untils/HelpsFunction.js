@@ -175,12 +175,14 @@ export async function openVideoEverywere(e, classVideo, call, main) {
     dateRequests = await getMoreStatisticId(id)
     dateRequests = dateRequests.data.items
   }
+ 
+  
 
-  const isHistory = arrDataVideo.some(el => el.id === dateRequests[0].id)
-  if (!isHistory) {
-    arrDataVideo.push(dateRequests[0])
-    localStorage.setItem("history", JSON.stringify(arrDataVideo))
-  }
+  // const isHistory = arrDataVideo.some(el => el.id === dateRequests[0].id)
+  // if (!isHistory) {
+  //   arrDataVideo.push(dateRequests[0])
+  //   localStorage.setItem("history", JSON.stringify(arrDataVideo))
+  // }
   dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
 
   const nameChannel = e.target.closest(`${classVideo}`).querySelector(".nameChannelSelect").textContent

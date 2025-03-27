@@ -4,6 +4,8 @@ import { state } from "../URL/createObject.js"
 import { marcinSubscriben } from "../Marking/reExportMarking.js";
 import { getAccesToken, getDataAccount, TakeSubscriber } from "./ReExportAPI.js";
 import { saveAcessToken,saveImgAccount, UserInAccountTrue, addClassList, removeClassList} from "../untils/reExportUntils.js";
+import { arrDataVideo, checkNameAccountHistory } from "../UI/reExportUI.js";
+
 
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
@@ -31,8 +33,13 @@ if(code){
                     localStorage.setItem("dataRefreshToken", JSON.stringify(refreshTokenProfile))    
                  }
             }
-
-            localStorage.setItem("nameAccount", dataAccount.data.items[0].snippet.title)
+            const nameAccount = dataAccount.data.items[0].snippet.title
+            localStorage.setItem("nameAccount", nameAccount)
+            if(!checkNameAccountHistory(nameAccount)){
+                arrDataVideo.push({name:nameAccount, history:[]})
+                localStorage.setItem("History", JSON.stringify(arrDataVideo))
+            }
+            
             changeProfile(dataAccount.data.items[0].snippet.thumbnails.default.url,dataAccount.data.items[0].snippet.title, dataAccount.data.items[0].snippet.customUrl, response.data.access_token )
             channelData(response.data.access_token) 
             loadSubsiber(response.data.access_token,7)
