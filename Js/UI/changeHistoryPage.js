@@ -1,31 +1,30 @@
 import { container } from "../features/ReExportFeatures.js";
-import { markinHistory, markinHistoryVideo } from "../Marking/reExportMarking.js";
-import { fromViewToShortView } from "../untils/reExportUntils.js";
+import { markinHistory, markinHistoryVideo, markinHistoryVideoHistory } from "../Marking/reExportMarking.js";
+import { formatDuration, fromViewToShortView } from "../untils/reExportUntils.js";
 const historyBtn = document.querySelector(".history")
 export let arrDataVideo = []
 
 
 
-if (localStorage.getItem("history")) {
-    // console.log(localStorage.getItem("history"))
-    arrDataVideo = JSON.parse((localStorage.getItem("history")))
-
+if (localStorage.getItem("History")) {
+    arrDataVideo = JSON.parse((localStorage.getItem("History")))
 }
-// console.log(arrDataVideo)
+const isAcc = checkNameAccountHistory(localStorage.getItem("nameAccount"))
+
 function loadData(conteinerVideo) {
-    try {
-        arrDataVideo.forEach((item) => {
-            conteinerVideo.insertAdjacentHTML("afterbegin", markinHistoryVideo(item.snippet.thumbnails.high.url,
-                item.snippet.title,
-                item.snippet.channelTitle,
-                fromViewToShortView(item.statistics.viewCount),
-                item.snippet.description, item.id))
-        })
+    if (!isAcc) {
+        return
     }
-    catch (err) {
-        console.error(err);
-        console.log("not vide0")
-    }
+
+    isAcc.history.forEach((item) => {
+        conteinerVideo.insertAdjacentHTML("afterbegin", markinHistoryVideoHistory(
+            item.snippet.thumbnails.high.url,
+            item.snippet.title,
+            item.snippet.channelTitle,
+            fromViewToShortView(item.statistics.viewCount),
+            item.snippet.description, item.id
+        ,formatDuration(item.contentDetails.duration)))
+    })
 }
 
 historyBtn.onclick = (event) => {
@@ -39,8 +38,8 @@ historyBtn.onclick = (event) => {
     clearHistoryBtn.onclick = (event) => {
         const containVideo = container.querySelector(".main-history-container");
         containVideo.innerHTML = "";
-        arrDataVideo = [];
-        localStorage.setItem("history", JSON.stringify(arrDataVideo));
+        isAcc.history = [];
+        localStorage.setItem("History", JSON.stringify(arrDataVideo));
 
 
     }
@@ -50,10 +49,13 @@ historyBtn.onclick = (event) => {
 export function deleteVideoOnBtn(e) {
     e.target.closest(".container-video").remove()
     const idForDeleteVideo = e.target.parentElement.parentElement.parentElement.parentElement.attributes[0].nodeValue
-    arrDataVideo = arrDataVideo.filter((el) => el.id !== idForDeleteVideo)
-    localStorage.setItem("history", JSON.stringify(arrDataVideo))
+    isAcc.history = isAcc.history.filter((el) => el.id !== idForDeleteVideo)
+    localStorage.setItem("History", JSON.stringify(arrDataVideo))
 }
 
+export function checkNameAccountHistory(nameAccount) {
+    return arrDataVideo.find(({ name }) => name === nameAccount)
+}
 
 
 
