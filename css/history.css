@@ -199,7 +199,7 @@
     justify-content: space-between;
 }
 
-.chanel_info {
+.chanel-info{
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
