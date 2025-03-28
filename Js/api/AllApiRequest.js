@@ -90,22 +90,23 @@ export async function TakeTrending() {//!
     const newsData = await requestToSeverGet(URL.searchURL, params.takeVideoTrand)
 
     const IDVideo = getIdVideo(newsData.data.items)
-    return requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:IDVideo}))
-    
+
+    return  await getMoreStatiscticVideo(IDVideo, params.takeDurationVideo)
 }
 export async function SearchContent(content){//!
     try{
         const videoRequest = await requestToSeverGet(URL.searchURL, makeParams(params.searchContent, {q:content, pageToken:state.searchContantToken}))
         state.searchContantToken = videoRequest.data.nextPageToken
         const videoId = getIdVideo(videoRequest.data.items)
-        return  await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoId}))
+
+        return await getMoreStatiscticVideo(videoId, params.takeDurationVideo)
     }catch(err){
         console.log(err);
     }
 }
 export async function getMoreStatisticId(id){//!
     try{
-        return await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:id}))
+        return await getMoreStatiscticVideo(id, params.takeDurationVideo)
     }catch(err){
         console.log(err);
     }
