@@ -17,6 +17,7 @@ function checkUrlRouting(){
         router
     .on("/Home", ()=>{
         // LoadVideo()
+        console.log('load home')
     })
     .on("/Gaming", ()=>{
         console.log("load gaming video...")

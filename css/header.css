@@ -377,6 +377,8 @@ header .sing_int {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .profileInfo_customUrl {
@@ -626,4 +628,23 @@ header .sing_int .svgS:hover {
     right: 10px;
     display: none;
     overflow: hidden;
+}
+@media (max-width:980px) {
+    .profileImg_Info{
+        width: 240px;
+        left:-150px
+    }
+}
+@media (max-width:500px) {
+    .profileImg_Info{
+        width: 200px;
+        left:-120px
+    }
+    .left_box1{
+        font-size: 13px;
+    }
+    .Info_top_profileInfo {
+        width: 74%;
+    }
+    
 }

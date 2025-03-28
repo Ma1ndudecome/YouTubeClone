@@ -175,11 +175,16 @@ export async function openVideoEverywere(e, classVideo, call, main) {
     dateRequests = await getMoreStatisticId(id)
     dateRequests = dateRequests.data.items
   }
+<<<<<<< HEAD
+ 
+  
+=======
   const accountHistory = arrDataVideo.find(({name})=>name === localStorage.getItem("nameAccount"))
   if(accountHistory){
     accountHistory.history.push(dateRequests[0])
     localStorage.setItem("History", JSON.stringify(arrDataVideo))
   }
+>>>>>>> main
 
   // const isHistory = arrDataVideo.some(el => el.id === dateRequests[0].id)
   // if (!isHistory) {
