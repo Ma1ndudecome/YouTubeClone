@@ -16,7 +16,8 @@ function checkUrlRouting(){
     setTimeout(() => {
         router
     .on("/Home", ()=>{
-        LoadVideo()
+        // LoadVideo()
+        console.log('load home')
     })
     .on("/Gaming", ()=>{
         console.log("load gaming video...")

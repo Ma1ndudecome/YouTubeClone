@@ -14,27 +14,17 @@ import { addSavedElements, createStructureSaved, checkedType } from '../untils/C
 const triger = document.querySelector(".triger")
 export let dateRequest = []
 let pageToken = ''
-
+let counter = 0
 export const container = document.querySelector(".Main_container")
 
 export async function LoadVideo() {
     try{
-        const savedDates = checkedType("Video")
-        if(savedDates){
-            container.innerHTML = ''
-            container.className = 'Main_container grid'
-            addMarkingOnPage(savedDates[0].data)
-            return
-        }
-       
         const response = await requestToSeverGet(URL.searchURL, {part:"snippet", maxResults:20, type:"video", eventType:"none", key:APIKEY, pageToken:pageToken, videoDuration:"long"})
         pageToken = response.data.nextPageToken || '';
         
         const IDVideo = getIdVideo(response.data.items)
         const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.getDetailInfoGaming, {id:IDVideo}))
-        container.innerHTML = ''
-        container.className = 'Main_container grid'
-        addSavedElements(createStructureSaved("Video",  MoreStatisticVideo.data.items))
+        givingSpecifiMarking()
         addMarkingOnPage(MoreStatisticVideo.data.items)
        
     } catch (error) {
@@ -48,19 +38,29 @@ const observ = new IntersectionObserver((entries)=>{
     }
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            LoadVideo()
+            console.log("here")
+            // LoadVideo()
         }
     }, { root: null, threshold: 0.5 });
 })
 
-// observ.observe(triger)
+observ.observe(triger)
 
 function addMarkingOnPage(data){
+    console.log(data)
     data.forEach(el=>{
         if (!el.snippet.liveBroadcastContent === 'none') {
+            return
+        }
+        if(!el.contentDetails.duration){
             return
         }
         container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration), el.id))
         dateRequest.push(el)
     })
 }
+function givingSpecifiMarking(){
+     container.innerHTML = ''
+     container.className = 'Main_container grid'
+}
+

@@ -3,8 +3,6 @@ import { CachedVideo } from "./reExportUntils";
 
 
 export function createStructureSaved(typeVideo, video){
-    console.log('videoT', typeVideo)
-    console.log('video', video)
     return {
         type:typeVideo,
         data:video

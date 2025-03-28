@@ -4,10 +4,11 @@ import "./features/changeData.js";import "./api/PostToToken.js"; import "./gamin
 //import another func
 
 import { markProfile, openVideoEverywere } from "./untils/HelpsFunction.js"
-const main = document.querySelector(".Main_container")
 import { deleteVideoOnBtn } from "./UI/changeHistoryPage.js";
 import { loadSavedTheme } from "./UI/HeaderANDAside.js";
 import { setNewUrl } from "./features/routing.js";
+const main = document.querySelector(".Main_container")
+
 
 setNewUrl("/Home")
 document.addEventListener('DOMContentLoaded', loadSavedTheme);
