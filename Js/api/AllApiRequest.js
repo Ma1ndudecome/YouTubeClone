@@ -8,7 +8,7 @@ import {requestToSeverGet, requestToServerPD, makeParams} from "../URL/reExportU
 import axios from 'axios'
 
 export async function takeCountCommentUnderVideo(videoId){
-    const comment = await requestToSeverGet(URL.infoVideoURL, makeParams(params.beginInfoVideo, {id:videoId}))
+    const comment = await getMoreStatiscticVideo(videoId, params.beginInfoVideo)
     return comment.data.items[0].statistics.commentCount
 }
 
@@ -47,8 +47,9 @@ export async  function takeMoreVideoAnyProfile(id){
     const detailInformationVideo = await requestToSeverGet(URL.searchURL, makeParams(params.takeDetailInfoVideo, {channelId:id}))
 
     const videoIds = getIdVideo(detailInformationVideo.data.items)
-    const takeDuration = await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:videoIds}))
 
+    const takeDuration = await getMoreStatiscticVideo(videoIds, params.takeDurationVideo)
+  
     return TakeShortAndLongVideo(takeDuration)
 }
 export async function ImgAndSubscribeChannel(nameChannel){
@@ -127,9 +128,6 @@ export async function addSubscribe(channelID) {//!!!
             }
             
         })
-        // const authParam = params.authParams
-        // const shortRes = params.shortResponse
-        // return await requestToServerPD(URL.getSubscriberURL,makeParams(params.AddSubsribe, {snippet:{resourceId:{...params.AddSubsribe.snippet.resourceId, channelId:channelID}}}), {headers:authParam, params:shortRes})
     }catch(err){
         console.log(err)
     }
@@ -147,10 +145,6 @@ export async function removeSubscribe(channelID) {//!
         params:{ id:response.data.items[0]?.id},
         headers:{ Authorization:`Bearer ${state.acessToken}` }
     })
-    
-    // const id = response.data.items[0]?.id
-    // const authParam = params.authParams
-    // return await requestToServerPD(URL.getSubscriberURL,{headers:authParam, params:{ id:id, key:APIKEY } } )
 }
 
 export async function userSubscriber(idChannel) {//!
@@ -179,10 +173,13 @@ export async function GetContentGaming(){//!
        
         const IDVideo = getIdVideo(videoRequest.data.items)
 
-        const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.takeDurationVideo, {id:IDVideo}))
-       
+        const MoreStatisticVideo = await getMoreStatiscticVideo(IDVideo, params.takeDurationVideo)
+
         return MoreStatisticVideo.data.items
     }catch(err){
         console.log(err);
     }
+}
+export async function getMoreStatiscticVideo(idVideo, param){
+    return await requestToSeverGet(URL.infoVideoURL, makeParams(param, {id:idVideo}))
 }
