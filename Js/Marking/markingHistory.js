@@ -53,8 +53,7 @@ export function markinHistoryVideoHistory(videoImg, videoName, chanelName, count
 <div class="video-img-conteiner"><img
         src="${videoImg}"
         alt="">
-          <span class="Container_video_preview_duration">${duration}</span>
-          </div>
+          <span class="Container_video_preview_duration">${duration}</span></div>
 <div class="overview">
 <div class="contain-name-btn" style="display: flex; flex-direction: row;">
   <h3 class="nameVideo" >${videoName}</h3>
