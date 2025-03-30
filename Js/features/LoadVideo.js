@@ -46,7 +46,7 @@ const observ = new IntersectionObserver((entries)=>{
 
 observ.observe(triger)
 
-function addMarkingOnPage(data){
+export function addMarkingOnPage(data){
     console.log(data)
     data.forEach(el=>{
         if (!el.snippet.liveBroadcastContent === 'none') {

@@ -41,7 +41,8 @@ export function createObjectForSave(){
       PageTokenComment: '',
       Autorization: false,
       pageTokenProfileVideoAny: '',
-      searchContantToken:''
+      searchContantToken:'',
+      shortsPageToken:''
     };
 }
 

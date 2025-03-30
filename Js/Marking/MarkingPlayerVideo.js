@@ -3,7 +3,7 @@ import { dateTime } from "../untils/HelpsFunction.js";
 export function MarkingPlayer(id, dateRequests, dataProfile){
     return `
     <div class="ContainerPlayerVideo">
-     <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="${dateRequests[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+     <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}?&autoplay=1" title="${dateRequests[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      <div class="Main_container_blockInfo">
                     <h1>${dateRequests[0].snippet.localized.title}</h1>
                     <div class="Main_container_blockInfo_statistic">

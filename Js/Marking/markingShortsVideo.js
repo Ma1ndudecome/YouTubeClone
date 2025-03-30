@@ -1,28 +1,59 @@
 export function ShortsContainer(){
     return `
-     <div class="shorts-nav-btn">
-                <div class="shorts-btn-up">
+    <div class="shorts-nav-btn">
+        
+            <div class="shorts-btn-up">
+                <a href="">
                     <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotateZ(180deg);">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M1.11598 11.384C0.88153 11.1495 0.749817 10.8316 0.749817 10.5C0.749817 10.1684 0.88153 9.85045 1.11598 9.616C1.35043 9.38155 1.66842 9.24984 1.99998 9.24984C2.33155 9.24984 2.64953 9.38155 2.88398 9.616L7.74998 14.482V1.5C7.74998 1.16848 7.88168 0.850537 8.1161 0.616117C8.35052 0.381696 8.66846 0.25 8.99998 0.25C9.3315 0.25 9.64944 0.381696 9.88387 0.616117C10.1183 0.850537 10.25 1.16848 10.25 1.5V14.482L15.116 9.616C15.3504 9.38155 15.6684 9.24984 16 9.24984C16.3315 9.24984 16.6495 9.38155 16.884 9.616C17.1184 9.85045 17.2501 10.1684 17.2501 10.5C17.2501 10.8316 17.1184 11.1495 16.884 11.384L8.99998 19.268L1.11598 11.384Z"
                             fill="#0F0F0F"/>
                     </svg>
 
-
-                </div>
+                 </a>    
+            </div>
+        
                 <div class="shorts-btn-down">
-
-                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M1.11598 11.384C0.88153 11.1495 0.749817 10.8316 0.749817 10.5C0.749817 10.1684 0.88153 9.85045 1.11598 9.616C1.35043 9.38155 1.66842 9.24984 1.99998 9.24984C2.33155 9.24984 2.64953 9.38155 2.88398 9.616L7.74998 14.482V1.5C7.74998 1.16848 7.88168 0.850537 8.1161 0.616117C8.35052 0.381696 8.66846 0.25 8.99998 0.25C9.3315 0.25 9.64944 0.381696 9.88387 0.616117C10.1183 0.850537 10.25 1.16848 10.25 1.5V14.482L15.116 9.616C15.3504 9.38155 15.6684 9.24984 16 9.24984C16.3315 9.24984 16.6495 9.38155 16.884 9.616C17.1184 9.85045 17.2501 10.1684 17.2501 10.5C17.2501 10.8316 17.1184 11.1495 16.884 11.384L8.99998 19.268L1.11598 11.384Z"
-                            fill="#0F0F0F" />
-                    </svg>
+                    <a href="">
+                        <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M1.11598 11.384C0.88153 11.1495 0.749817 10.8316 0.749817 10.5C0.749817 10.1684 0.88153 9.85045 1.11598 9.616C1.35043 9.38155 1.66842 9.24984 1.99998 9.24984C2.33155 9.24984 2.64953 9.38155 2.88398 9.616L7.74998 14.482V1.5C7.74998 1.16848 7.88168 0.850537 8.1161 0.616117C8.35052 0.381696 8.66846 0.25 8.99998 0.25C9.3315 0.25 9.64944 0.381696 9.88387 0.616117C10.1183 0.850537 10.25 1.16848 10.25 1.5V14.482L15.116 9.616C15.3504 9.38155 15.6684 9.24984 16 9.24984C16.3315 9.24984 16.6495 9.38155 16.884 9.616C17.1184 9.85045 17.2501 10.1684 17.2501 10.5C17.2501 10.8316 17.1184 11.1495 16.884 11.384L8.99998 19.268L1.11598 11.384Z"
+                                fill="#0F0F0F" />
+                        </svg>
+                    </a>
                 </div>
             </div>
-            <div class="shorts-video-inner" id="shorts-video-container">
-               
+    <div class="ShortsContainer dF ">
+    
+    </div>
+    `
+}
+export function innerContentShorts(imgProfile, nameChannel, descriptionVideo, likeCount, commentCount, idVideo){
+    return `
+    <div class="ContainerVideoShorts dF mB20P">
+     <div class="shorts-video-inner" id="${idVideo}">
+               <div class="shorts-video-inner-info">
+                    <div class="shorts-video-inner-info-channel">
+                        <div class="shorts-video-inner-info-channel-picture">
+                            <img src="${imgProfile}" alt="img channel">
+                        </div>
+                        <div class="shorts-video-inner-info-channel-name">
+                            ${nameChannel}
+                        </div>
+                        <div class="shorts-video-inner-info-channel-button">
+                            <button>Subscribe</button>
+                        </div>
+
+
+                    </div>
+                    <div class="shorts-video-inner-info-description">
+                        <p>
+                            ${descriptionVideo}
+                        </p>
+                    </div>
+               </div>
             </div>
-            <div class="shorts-video-conteiner">
+                <div class="shorts-video-conteiner">
                 <div class="shorts-conteiner-control">
                     <div class="shorts-btn-like-conteiner">
                         <div class="shorts-btn-like-conteiner-svg"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -38,7 +69,7 @@ export function ShortsContainer(){
                                     fill="black" />
                             </svg>
                         </div>
-                        <p>Like</p>
+                        <p>${likeCount}</p>
                     </div>
                     <div class="shorts-btn-dislike-conteiner">
                         <div class="shorts-btn-dislike-conteiner-svg">
@@ -61,7 +92,7 @@ export function ShortsContainer(){
                                     fill="black" />
                             </svg>
                         </div>
-                        <p>comment</p>
+                        <p>${commentCount}</p>
                     </div>
                     <div class="shorts-btn-repost-conteiner">
                         <div class="shorts-btn-repost-conteiner-svg" role="text">
@@ -85,27 +116,13 @@ export function ShortsContainer(){
                         </div>
                     </div>
                     <div class="shorts-name-music" style="padding-top: 16px;">
-                        <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="1" y="1" width="37" height="37" rx="5.5" fill="black" fill-opacity="0.6" />
-                            <rect x="1" y="1" width="37" height="37" rx="5.5" stroke="white" />
-                            <path
-                                d="M20.5 10.5C20.5 9.94772 20.0523 9.5 19.5 9.5C18.9477 9.5 18.5 9.94772 18.5 10.5V28.5C18.5 29.0523 18.9477 29.5 19.5 29.5C20.0523 29.5 20.5 29.0523 20.5 28.5V10.5Z"
-                                fill="white" fill-opacity="0.3" />
-                            <path
-                                d="M24.5 14.5C24.5 13.9477 24.0523 13.5 23.5 13.5C22.9477 13.5 22.5 13.9477 22.5 14.5V24.5C22.5 25.0523 22.9477 25.5 23.5 25.5C24.0523 25.5 24.5 25.0523 24.5 24.5V14.5Z"
-                                fill="white" fill-opacity="0.3" />
-                            <path
-                                d="M16.5 14.5C16.5 13.9477 16.0523 13.5 15.5 13.5C14.9477 13.5 14.5 13.9477 14.5 14.5V24.5C14.5 25.0523 14.9477 25.5 15.5 25.5C16.0523 25.5 16.5 25.0523 16.5 24.5V14.5Z"
-                                fill="white" fill-opacity="0.3" />
-                            <path
-                                d="M12.5 18.5C12.5 17.9477 12.0523 17.5 11.5 17.5C10.9477 17.5 10.5 17.9477 10.5 18.5V20.5C10.5 21.0523 10.9477 21.5 11.5 21.5C12.0523 21.5 12.5 21.0523 12.5 20.5V18.5Z"
-                                fill="white" fill-opacity="0.3" />
-                            <path
-                                d="M28.5 18.5C28.5 17.9477 28.0523 17.5 27.5 17.5C26.9477 17.5 26.5 17.9477 26.5 18.5V20.5C26.5 21.0523 26.9477 21.5 27.5 21.5C28.0523 21.5 28.5 21.0523 28.5 20.5V18.5Z"
-                                fill="white" fill-opacity="0.3" />
-                        </svg>
+                        <img src="${imgProfile}" alt="imgProfile" style="width:100%; height:100%">
                     </div>
-
                 </div>
+    </div>
+   
     `
+}
+export function iframePlayerShortsVideo(id, title){
+    return  `<iframe src="https://www.youtube.com/embed/${id}?&autoplay=1&loop=1&playlist=${id}" autoplay="true" autoplay="1" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
 }
