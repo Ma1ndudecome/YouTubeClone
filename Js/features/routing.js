@@ -4,6 +4,7 @@ import { params, URL} from '../main.js'
 import { LoadVideo } from "./LoadVideo.js";
 import { on } from "process";
 import {ViewChannel } from "./changeData.js";
+import { openTranding, openShortsVideo } from "../UI/navigation_bar.js";
 const router = new Navigo('/')
 
 export function setNewUrl(Page){
@@ -31,7 +32,12 @@ function checkUrlRouting(){
     .on("/Search/:q/", ()=>{
         console.log("search")
     })
-    
+    .on("/Trending", ()=>{
+        openTranding()
+    })
+    .on("/Shorts", ()=>{
+        openShortsVideo()
+    })
     router.resolve()
     }, 0);
     

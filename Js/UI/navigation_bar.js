@@ -12,21 +12,24 @@ aside.addEventListener('click', (e) => {
     e.preventDefault()
     const nameSection = e.target.parentNode.querySelector("p").textContent;
     if (nameSection === 'Trending') {
+        // setNewUrl("/Trending")
         openTranding()
     }else if(nameSection === 'Shorts'){
+        // setNewUrl("/Shorts")
         openShortsVideo()
     }
 })
 
 
-async function  openTranding(){
-    addClassList(container, 'grid')
-    removeClassList(container, 'block')
+export async function  openTranding(){
+    container.innerHTML = ''
+    container.className = 'Main_container grid'
     const response = await TakeTrending()
     addMarkingOnPage(response.data.items)
 }
 
-async function openShortsVideo(){
+export async function openShortsVideo(){
+    container.innerHTML = ''
     setNewUrl("/Shorts")
     changeInnerHTML(container, '')
 
