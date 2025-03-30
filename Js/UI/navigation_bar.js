@@ -4,7 +4,7 @@ import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo} from "../
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
 import {  addClassList, removeClassList, changeInnerHTML, fromLikeToShortLike} from "../untils/reExportUntils.js";
 import { state } from "../URL/reExportUrl.js";
- const videoShorts = []
+ let videoShorts = []
 
 
 aside.addEventListener('click', (e) => {
@@ -38,14 +38,15 @@ async function openShortsVideo(){
 
     videoShorts.push(...response.data.items)
 
-    listnersToArrow()
+    listnersToArrowDown()
+    listnersToArrowUp()
     
 }
 export function getElemntAndAddMarking(counterVideo, response){
+    if(!response[counterVideo]) return
     const containerShorts = document.querySelector(".containerShorts")
     const videoData = response[counterVideo]
-    console.log(response[counterVideo])
-    console.log(counterVideo)
+  
 
     containerShorts.insertAdjacentHTML("beforeend", innerContentShorts(videoData.snippet.thumbnails.default.url, videoData.snippet.channelTitle, videoData.snippet.description, fromLikeToShortLike(videoData.statistics.likeCount),  fromLikeToShortLike(videoData.statistics.commentCount), videoData.id))
     
@@ -56,31 +57,58 @@ export function getElemntAndAddMarking(counterVideo, response){
 
 }
 
-function listnersToArrow(){
+function listnersToArrowDown(){
     const arrowDown = document.querySelector(".shorts-btn-down")
-    arrowDown.onclick = (e)=>{arrowDownClick(e)}
+    arrowDown.onclick = arrowDownClick
+}
+function listnersToArrowUp(){
+    const arrowUp = document.querySelector(".shorts-btn-up")
+    arrowUp.onclick = scrollUp
 }
 let counter = 1
-function arrowDownClick(e){
- 
-    e.preventDefault()
+function arrowDownClick(){
+    if(counter > 0){
+        if(document.getElementById(videoShorts[counter].id)){
+            scrollDown()
+            return
+        }
+    }
+
     getElemntAndAddMarking(counter, videoShorts)
     
-    stoppedIFrame()
-    setTimeout(() => {
-        const targetElement = document.getElementById(videoShorts[counter].id);
-            console.log("Target Element:", targetElement);
-         targetElement?.scrollIntoView({ behavior: "smooth" });
-    counter+=1
     
-        
-    }, 0);
+    stoppedIFrame('pauseVideo', counter-1)
+    scrollDown()
 }
-function stoppedIFrame(){
-    const iframe = document.querySelectorAll("iframe")[counter-1].contentWindow;
-    console.log(document.querySelectorAll("iframe")[counter-1].contentWindow)
+function stoppedIFrame(type, count){
+    console.log(count)
+    console.log(document.querySelectorAll("iframe"))
+    const iframe = document.querySelectorAll("iframe")[count].contentWindow;
+    console.log(document.querySelectorAll("iframe")[count].contentWindow)
     iframe.postMessage(
-        '{"event":"command","func":"' + 'pauseVideo' + '","args":""}',
+        '{"event":"command","func":"' + `${type}` + '","args":""}',
         "*"
       );
+}
+
+function scrollDown(){
+    
+    setTimeout(()=>{
+        const targetElement = document.getElementById(videoShorts[counter].id)
+        targetElement?.scrollIntoView({ behavior: "smooth" });
+        counter +=1
+        
+    })
+}
+
+function scrollUp(){
+    
+    stoppedIFrame('pauseVideo', counter-1)
+    stoppedIFrame('playVideo', counter-2)
+
+    setTimeout(()=>{
+        const targetElement = document.getElementById(videoShorts[counter-2].id)
+        targetElement?.scrollIntoView({behavior:"smooth"})
+        counter -= 1
+    },0)
 }

@@ -47,6 +47,7 @@
     border-radius: 20px;
     border: none;
     cursor: pointer;
+    
 }
 .shorts-video-inner-info-channel-button button:hover{
    background-color: #cecbcb;
