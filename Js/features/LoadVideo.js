@@ -38,7 +38,6 @@ const observ = new IntersectionObserver((entries)=>{
     }
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            console.log("here")
             // LoadVideo()
         }
     }, { root: null, threshold: 0.5 });
