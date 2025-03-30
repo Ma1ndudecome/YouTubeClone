@@ -1,0 +1,16 @@
+/* CSS Gaming*/
+
+.boxtxtGaming{
+    margin-left: 20px;
+}
+.txtgaming{
+    color: rgb(182, 0, 0);
+    display: flex;
+    align-items: center;
+}
+.txtg{
+    color:var(--bordColor);
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
