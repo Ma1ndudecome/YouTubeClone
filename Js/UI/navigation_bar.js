@@ -4,6 +4,7 @@ import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo} from "../
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
 import {  addClassList, removeClassList, changeInnerHTML, fromLikeToShortLike} from "../untils/reExportUntils.js";
 import { state } from "../URL/reExportUrl.js";
+import { setNewUrl } from "../features/ReExportFeatures.js";
  let videoShorts = []
 
 
@@ -26,6 +27,7 @@ async function  openTranding(){
 }
 
 async function openShortsVideo(){
+    setNewUrl("/Shorts")
     changeInnerHTML(container, '')
 
     container.className = 'dF containerShorts fdC mT10p'
@@ -33,19 +35,24 @@ async function openShortsVideo(){
     const response = await getShortsVideo()
 
     changeInnerHTML(container, ShortsContainer())
-    getElemntAndAddMarking(0, response.data.items)
-    state.shortsPageToken = response.data.nextPageToken || ''
-
+    await getElemntAndAddMarking(0, response.data.items)
+   
     videoShorts.push(...response.data.items)
 
     listnersToArrowDown()
     listnersToArrowUp()
     
 }
-export function getElemntAndAddMarking(counterVideo, response){
-    if(!response[counterVideo]) return
+export async function getElemntAndAddMarking(counterVideo, response){
+    let videoData = response[counterVideo]
+    if(!videoData){
+        const responseShorts = await getShortsVideo()
+        videoShorts.push(...responseShorts.data.items)
+        videoData = videoShorts[counterVideo]
+    }
+
     const containerShorts = document.querySelector(".containerShorts")
-    const videoData = response[counterVideo]
+    
   
 
     containerShorts.insertAdjacentHTML("beforeend", innerContentShorts(videoData.snippet.thumbnails.default.url, videoData.snippet.channelTitle, videoData.snippet.description, fromLikeToShortLike(videoData.statistics.likeCount),  fromLikeToShortLike(videoData.statistics.commentCount), videoData.id))
@@ -66,25 +73,27 @@ function listnersToArrowUp(){
     arrowUp.onclick = scrollUp
 }
 let counter = 1
-function arrowDownClick(){
+async function arrowDownClick(){
     if(counter > 0){
-        if(document.getElementById(videoShorts[counter].id)){
+        const el = document.getElementById(videoShorts[counter]?.id)
+        console.log(el)
+        if(el){
+            stoppedIFrame('pauseVideo', counter-1)
+            stoppedIFrame('playVideo', counter)
             scrollDown()
             return
         }
     }
-
-    getElemntAndAddMarking(counter, videoShorts)
+    console.log(counter)
+    await getElemntAndAddMarking(counter, videoShorts)
     
     
     stoppedIFrame('pauseVideo', counter-1)
     scrollDown()
 }
 function stoppedIFrame(type, count){
-    console.log(count)
     console.log(document.querySelectorAll("iframe"))
     const iframe = document.querySelectorAll("iframe")[count].contentWindow;
-    console.log(document.querySelectorAll("iframe")[count].contentWindow)
     iframe.postMessage(
         '{"event":"command","func":"' + `${type}` + '","args":""}',
         "*"

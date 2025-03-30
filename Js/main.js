@@ -14,7 +14,6 @@ setNewUrl("/Home")
 document.addEventListener('DOMContentLoaded', loadSavedTheme);
 
 main.addEventListener("click", async (e) => {
-    console.log('123')
     main.classList.remove("grid")
     if (e.target.classList.contains("delete-video")) {
         deleteVideoOnBtn(e)
