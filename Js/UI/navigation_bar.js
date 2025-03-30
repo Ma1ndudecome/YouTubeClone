@@ -4,6 +4,7 @@ import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo} from "../
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
 import {  addClassList, removeClassList, changeInnerHTML, fromLikeToShortLike} from "../untils/reExportUntils.js";
 import { state } from "../URL/reExportUrl.js";
+import { clickGaming,clickNews,clickSports,clickCourses} from "../UI/HeaderANDAside.js";
  const videoShorts = []
 
 
@@ -14,6 +15,14 @@ aside.addEventListener('click', (e) => {
         openTranding()
     }else if(nameSection === 'Shorts'){
         openShortsVideo()
+    }else if(nameSection === 'Gaming'){
+        clickGaming()
+    }else if(nameSection === 'News'){
+        clickNews()
+    }else if(nameSection === 'Sports'){
+        clickSports()
+    }else if(nameSection === 'Courses'){
+        clickCourses()
     }
 })
 

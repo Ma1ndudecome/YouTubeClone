@@ -1,6 +1,6 @@
 
 //import modules
-import "./features/changeData.js";import "./api/PostToToken.js"; import "./gaming.js"; import "./features/LoadVideo.js"; import "./UI/Listners.js"; import "./features/routing.js"; import "./UI/HeaderANDAside.js"; import "./UI/changeHistoryPage.js"; import "./URL/config.js"; 
+import "./features/changeData.js";import "./api/PostToToken.js"; import "./features/LoadVideo.js"; import "./UI/Listners.js"; import "./features/routing.js"; import "./UI/HeaderANDAside.js"; import "./UI/changeHistoryPage.js"; import "./URL/config.js"; 
 //import another func
 
 import { markProfile, openVideoEverywere } from "./untils/HelpsFunction.js"
