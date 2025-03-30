@@ -184,3 +184,20 @@ export async function GetContentGaming(){//!
 export async function getMoreStatiscticVideo(idVideo, param){
     return await requestToSeverGet(URL.infoVideoURL, makeParams(param, {id:idVideo}))
 }
+export async function getShortsVideo() {
+   const response = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
+        params:{
+            part:"snippet",
+            videoDuration:"short",
+            type:"video",
+            key:APIKEY,
+            pageToken:state.shortsPageToken,
+            maxResults:10
+        }
+    })
+    const idVideo = getIdVideo(response.data.items)
+     
+    return await getMoreStatisticId(idVideo)
+
+   
+}

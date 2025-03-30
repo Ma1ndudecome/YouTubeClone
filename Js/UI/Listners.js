@@ -7,6 +7,7 @@ import { addMarkingComent } from "./AnyVideoFunc.js"
 import { infinityScrollSearch } from "../infinityScrollInProfile.js"
 
 
+
 export function listnerToInput(){
     const inputCont= document.querySelector(".Comment_input_block_tag input")
     
@@ -119,3 +120,4 @@ export async function ListnersSubscribe(ChannelId){
         }
     }
 }
+
