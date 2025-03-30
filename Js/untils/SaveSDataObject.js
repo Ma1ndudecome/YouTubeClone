@@ -21,7 +21,7 @@ export function createParamsData(){
         getChangedComment:{ id:null, key:APIKEY },
         isSubscribe:{ part:"id", forChannelId:null, mine:true, key:APIKEY },
         commentResponse:{ part:"snippet" },
-        getGamingVideo: {part:"snippet", q:"gaming", type:"video", videoCategoryId:20, maxResults:40, key:APIKEY},
+        getGamingVideo: {part:"snippet", q:"gaming", type:"video", videoCategoryId:20, maxResults:50, key:APIKEY},
         getDetailInfoGaming:{ part:"snippet,statistics,contentDetails", id:null, key:APIKEY},
         searchContent:{part:"snippet", maxResults:20, q:null, key:APIKEY},
         changeComment:{snippet: { channelId:null, videoId:null, topLevelComment:{ snippet:{textOriginal:null } } }}

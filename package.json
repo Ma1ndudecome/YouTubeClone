@@ -5,7 +5,7 @@
   "description": "it's clone YouTube",
   "main": "main.js",
   "scripts": {
-    "start": "parcel index.html --port 5501",
+    "start": "parcel index.html --port 5500",
     "build": "parcel build index.html",
     "preview": "parcel serve dist"
   },

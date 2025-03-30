@@ -8,7 +8,9 @@ import { dateTime, fromViewToShortView, formatDuration, addClassList, removeClas
 import { shortVideoMarking, markingGaming, makeMarkingVideo } from "./Marking/reExportMarking.js";
 
 
-gamingBtn.onclick = (event) => {
+gamingBtn.onclick = clickGaming
+
+ export async  function  clickGaming(event){
     event.preventDefault()
     setNewUrl("/Gaming")
     removeClassList(container, "grid")
@@ -18,19 +20,11 @@ gamingBtn.onclick = (event) => {
     const gamingContainer = selectElements(container, ".Container-video-gaming")
     const shortsContainer = selectElements(container, ".shorts-video-conteiner")
 
-    async function Gaming() {
-        try {
+   
             const videos = await GetContentGaming();
-            return videos;
-        } catch (err) {
-            console.log(err);
-        }
-    }
-    Gaming().then((videos) => {
-
+            
         videos.forEach(el => {
             if(el.snippet.liveBroadcastContent !== 'none')return
-            console.log(el)
             let durationVideo = formatDuration(el.contentDetails.duration)
 
             if (Number(durationVideo[0]) === 0) {
@@ -40,7 +34,7 @@ gamingBtn.onclick = (event) => {
             }
 
         })
-    })
+
 
 }
 

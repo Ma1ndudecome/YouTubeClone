@@ -21,9 +21,16 @@ aside.addEventListener('click', (e) => {
 })
 
 
+<<<<<<< HEAD
 export async function  openTranding(){
     container.innerHTML = ''
     container.className = 'Main_container grid'
+=======
+async function  openTranding(){
+    container.innerHTML = ""
+    addClassList(container, 'grid')
+    removeClassList(container, 'block')
+>>>>>>> main
     const response = await TakeTrending()
     addMarkingOnPage(response.data.items)
 }
