@@ -58,22 +58,29 @@ export function getElemntAndAddMarking(counterVideo, response){
 
 function listnersToArrow(){
     const arrowDown = document.querySelector(".shorts-btn-down")
-    arrowDown.onclick = (e)=>{arrowDownClick(e, arrowDown)}
+    arrowDown.onclick = (e)=>{arrowDownClick(e)}
 }
 let counter = 1
-function arrowDownClick(e, arrow){
+function arrowDownClick(e){
  
     e.preventDefault()
     getElemntAndAddMarking(counter, videoShorts)
     
-    console.log(arrow)
-    
-    console.log(videoShorts[counter].id)
+    stoppedIFrame()
     setTimeout(() => {
         const targetElement = document.getElementById(videoShorts[counter].id);
             console.log("Target Element:", targetElement);
          targetElement?.scrollIntoView({ behavior: "smooth" });
     counter+=1
-
+    
+        
     }, 0);
+}
+function stoppedIFrame(){
+    const iframe = document.querySelectorAll("iframe")[counter-1].contentWindow;
+    console.log(document.querySelectorAll("iframe")[counter-1].contentWindow)
+    iframe.postMessage(
+        '{"event":"command","func":"' + 'pauseVideo' + '","args":""}',
+        "*"
+      );
 }
