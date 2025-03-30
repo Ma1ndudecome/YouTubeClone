@@ -19,6 +19,7 @@ aside.addEventListener('click', (e) => {
 
 
 async function  openTranding(){
+    container.innerHTML = ""
     addClassList(container, 'grid')
     removeClassList(container, 'block')
     const response = await TakeTrending()
