@@ -185,6 +185,7 @@ export async function getMoreStatiscticVideo(idVideo, param){
     return await requestToSeverGet(URL.infoVideoURL, makeParams(param, {id:idVideo}))
 }
 export async function getShortsVideo() {
+    console.log(state.shortsPageToken)
    const response = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
         params:{
             part:"snippet",
@@ -195,6 +196,7 @@ export async function getShortsVideo() {
             maxResults:10
         }
     })
+    state.shortsPageToken = response.data.nextPageToken || ''
     const idVideo = getIdVideo(response.data.items)
      
     return await getMoreStatisticId(idVideo)
