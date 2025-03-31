@@ -14,11 +14,12 @@
     font-size: 20px;
 }
 #txtTab{
+    color:var(--bordColor);
     font-size: 30px;
 }
 .iconSports{
-    height:60px ;
-    width:60px ;
+    height:64px ;
+    width:64px ;
 }
 @media (max-width:1730px){
     .Container-video-gaming {
