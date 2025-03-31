@@ -4,7 +4,7 @@ import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo} from "../
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
 import {  addClassList, removeClassList, changeInnerHTML, fromLikeToShortLike} from "../untils/reExportUntils.js";
 import { state } from "../URL/reExportUrl.js";
-import { clickGaming,clickNews,clickSports,clickCourses} from "../UI/HeaderANDAside.js";
+import { clickGaming,clickNews,clickSports,clickCourses,clickFashion} from "../UI/HeaderANDAside.js";
 import { setNewUrl } from "../features/ReExportFeatures.js";
  let videoShorts = []
 
@@ -13,10 +13,8 @@ aside.addEventListener('click', (e) => {
     e.preventDefault()
     const nameSection = e.target.parentNode.querySelector("p").textContent;
     if (nameSection === 'Trending') {
-        // setNewUrl("/Trending")
         openTranding()
     }else if(nameSection === 'Shorts'){
-        // setNewUrl("/Shorts")
         openShortsVideo()
     }else if(nameSection === 'Gaming'){
         clickGaming()
@@ -26,6 +24,8 @@ aside.addEventListener('click', (e) => {
         clickSports()
     }else if(nameSection === 'Courses'){
         clickCourses()
+    }else if(nameSection === 'Fashion & Beauty'){
+        clickFashion()
     }
 })
 

@@ -8,7 +8,7 @@ import { TIMEOUT } from "dns"
 import { container, setNewUrl } from "../features/ReExportFeatures.js";
 import { GetContentGaming } from "../api/AllApiRequest.js";
 import { dateTime, fromViewToShortView, formatDuration, addClassList, removeClassList, changeInnerHTML, selectElements } from "../untils/reExportUntils.js";
-import { shortVideoMarking, markingTab, makeMarkingVideo, iconGaming ,iconNews ,iconSports,iconCourses} from "../Marking/reExportMarking.js";
+import { shortVideoMarking, markingTab, makeMarkingVideo, iconGaming ,iconNews ,iconSports,iconCourses,iconFashion} from "../Marking/reExportMarking.js";
 
 let glass_adaptation = document.getElementById("glass_adaptation")
 let adaptation = document.getElementById("adaptation")
@@ -148,5 +148,11 @@ export async function clickCourses() {
     setNewUrl("/Courses")
     tabContainerBlock()
     changeInnerMarkingTab("Courses", iconCourses)
+    fillingContentTab()
+}
+export async function clickFashion() {
+    setNewUrl("/Fashion")
+    tabContainerBlock()
+    changeInnerMarkingTab("Fashion", iconFashion)
     fillingContentTab()
 }
