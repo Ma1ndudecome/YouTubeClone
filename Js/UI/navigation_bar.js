@@ -4,6 +4,7 @@ import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo} from "../
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
 import {  addClassList, removeClassList, changeInnerHTML, fromLikeToShortLike} from "../untils/reExportUntils.js";
 import { state } from "../URL/reExportUrl.js";
+import { clickGaming,clickNews,clickSports,clickCourses} from "../UI/HeaderANDAside.js";
 import { setNewUrl } from "../features/ReExportFeatures.js";
  let videoShorts = []
 
@@ -17,20 +18,21 @@ aside.addEventListener('click', (e) => {
     }else if(nameSection === 'Shorts'){
         // setNewUrl("/Shorts")
         openShortsVideo()
+    }else if(nameSection === 'Gaming'){
+        clickGaming()
+    }else if(nameSection === 'News'){
+        clickNews()
+    }else if(nameSection === 'Sports'){
+        clickSports()
+    }else if(nameSection === 'Courses'){
+        clickCourses()
     }
 })
 
 
-<<<<<<< HEAD
 export async function  openTranding(){
     container.innerHTML = ''
     container.className = 'Main_container grid'
-=======
-async function  openTranding(){
-    container.innerHTML = ""
-    addClassList(container, 'grid')
-    removeClassList(container, 'block')
->>>>>>> main
     const response = await TakeTrending()
     addMarkingOnPage(response.data.items)
 }
