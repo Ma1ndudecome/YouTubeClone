@@ -111,11 +111,10 @@ async function loadMoreVideo(){
         
     })
     const videoContainer = container.querySelectorAll('.shorts-video-inner')
-
+    let j = 0
     for(let i = counter; i < counter + 10; i+=1){
-        for(let j = 0; j < response.data.items; j+=1){
-            videoContainer[i].insertAdjacentHTML("afterbegin", iframePlayerShortsVideo(response.data.items[i].id, response.data.items[i].snippet.title))
-        }
+        videoContainer[i].insertAdjacentHTML("afterbegin", iframePlayerShortsVideo(response.data.items[j].id, response.data.items[j].snippet.title))    
+        j += 1
     }
 
 }

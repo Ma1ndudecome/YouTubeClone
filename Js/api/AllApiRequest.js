@@ -196,9 +196,8 @@ export async function getShortsVideo() {
             maxResults:10
         }
     })
-    console.log(state.shortsPageToken)
-    console.log(response.data.nextPageToken)
-
+   
+    console.log('writing pageToken...')
     state.shortsPageToken = response.data.nextPageToken || ''
     console.log(state.shortsPageToken)
 
