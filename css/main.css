@@ -538,6 +538,67 @@ iframe{
 .ContainerPlayerVideo{
     width: 100%;
 }
+
+.show_All_Subscriptions{
+    width: 98%;
+    height: 280px;
+    grid-column: span 4;
+    border: 1px solid black;
+    align-items: center;
+    flex-direction: column;
+    align-content: flex-start;
+    
+}
+#show_All_Subscrptions{
+    display: none;
+}
+
+.show_All_Subscriptions_Container{
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    width: 100%;
+}
+
+
+.img_Name_Subscriptions{
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.img_subscriptions{
+    width: 200px;
+    height: 200px;
+    border: 1px solid red;
+    border-radius: 50%;
+}
+.name_Subscriptions_text{
+    width: calc(100% - 400px);
+    border: 1px solid blue;
+    flex-direction: column;
+}
+
+.name_Subscriptions{
+    margin-top: 10px;
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+}
+.number_of_Subscriptions{
+    margin-top: 10px;
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+}
+.channel_description{
+    margin-top: 10px;
+    width: 600px;
+    border: 1px solid rebeccapurple;
+    height: 100px;
+}
+
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);
