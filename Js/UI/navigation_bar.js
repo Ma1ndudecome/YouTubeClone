@@ -12,6 +12,7 @@ let videoShorts = []
 
 
 let counter = 0
+let resolving = true
 
 aside.addEventListener('click', (e) => {
     e.preventDefault()
@@ -80,12 +81,14 @@ function listnersToArrowUp(){
     const arrowUp = document.querySelector(".shorts-btn-up")
     arrowUp.onclick = scrollUp
 }
-async function arrowDownClick(){
+function arrowDownClick(){
+    console.log("Функція arrowDownClick викликана!");
     increaseCounter()
     const iframe = takeIframes(1)
   
     iframe.currIframes.scrollIntoView({behavior:"smooth"})
     pauseStartVideo(iframe.currIframes, iframe.nextIframes)
+
 }
 function scrollUp(){
     counter < 0 ? counter = 0 : decreaseCounter()
@@ -94,6 +97,7 @@ function scrollUp(){
     iframe.currIframes.scrollIntoView({behavior:"smooth"})
 
     pauseStartVideo(iframe.currIframes, iframe.nextIframes)
+
 
 }
 function takeIframes(type){
@@ -152,17 +156,43 @@ function scrollToShorts(){
     let lastScroll = 0
 
     window.onscroll = ()=>{
-        window.scrollY > lastScroll ? scrollDownWheel() : scrollUpWheel()
-        lastScroll = window.scrollY
+        console.log(resolving)
+        if(resolving){
+            resolving = false
+            window.scrollY > lastScroll ? debounce(scrollUpWheel) : debounce(scrollDownWheel)
+            lastScroll = window.scrollY
+        }
+        
     }
 }
 function scrollDownWheel(){
-    setTimeout(()=>{
-        console.log("down")
-    },500)
-}
-function scrollUpWheel(){
-    setTimeout(()=>{
-        console.log("up")
-    },500)
-}
+    return new Promise((resolve)=>{
+     setTimeout(()=>{
+        // scrollUp()
+        console.log('up')
+-
+         resolve("succes")
+     },700)
+    })
+ }
+ function scrollUpWheel(){
+    console.log('down')
+     return new Promise((resolve)=>{
+         setTimeout(()=>{
+            arrowDownClick()
+            console.log('here')
+            resolving = true
+             resolve("succes")
+         },700)
+        })
+ }
+
+ function debounce(fnc){
+     new Promise(async (resolve, reject)=>{
+        if(resolving) return
+        
+        fnc().then(() => { 
+            resolving = false; 
+        })
+     })
+ }
