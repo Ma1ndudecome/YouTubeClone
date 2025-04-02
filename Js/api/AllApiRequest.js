@@ -156,3 +156,6 @@ export async function GetContentGaming(){//!
         console.log(err);
     }
 }
+export async function getMoreStatiscticVideo(idVideo, param){
+    return await requestToSeverGet(URL.infoVideoURL, makeParams(param, {id:idVideo}))
+}
