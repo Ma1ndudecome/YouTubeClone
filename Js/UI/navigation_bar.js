@@ -1,15 +1,11 @@
-import { aside } from "./HeaderANDAside.js";
+import { aside, clickGaming, clickNews, clickSports, clickCourses, clickFashion } from "./HeaderANDAside.js";
 import { container, addMarkingOnPage} from "../features/LoadVideo.js";
-import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo} from "../Marking/reExportMarking.js";
+import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo, markingTranding, markinHistoryVideo} from "../Marking/reExportMarking.js";
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
-import {changeInnerHTML, fromLikeToShortLike} from "../untils/reExportUntils.js";
+import {changeInnerHTML, fromLikeToShortLike, fromViewToShortView, dateTime, formatDuration} from "../untils/reExportUntils.js";
 import { observeToTrigerShorts } from "../infinityScrollInProfile.js";
-import { clickGaming,clickNews,clickSports,clickCourses,clickFashion} from "../UI/HeaderANDAside.js";
 import { setNewUrl } from "../features/ReExportFeatures.js";
-
-
 let videoShorts = []
-
 
 let counter = 0
 let resolving = true
@@ -34,12 +30,20 @@ aside.addEventListener('click', (e) => {
     }
 })
 
+function MarkingTabTranding() {
+    changeInnerHTML(container, '');
+    changeInnerHTML(container, markingTranding())
+}
 
 export async function  openTranding(){
-    container.innerHTML = ''
-    container.className = 'Main_container grid'
-    const response = await TakeTrending()
-    addMarkingOnPage(container, response.data.items)
+    MarkingTabTranding();
+    container.className = "Main_container block";
+    const containerTranding = document.querySelector('.container_video_trending');
+    const response = await TakeTrending(0)
+    response.data.items.forEach((el) => {
+        if (!el.snippet.liveBroadcastContent === 'none')  return
+        containerTranding.insertAdjacentHTML("beforeend", markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration)))
+    })
 }
 
 export async function openShortsVideo(){

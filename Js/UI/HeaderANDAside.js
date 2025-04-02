@@ -9,6 +9,7 @@ import { container, setNewUrl } from "../features/ReExportFeatures.js";
 import { GetContentGaming } from "../api/AllApiRequest.js";
 import { dateTime, fromViewToShortView, formatDuration, addClassList, removeClassList, changeInnerHTML, selectElements } from "../untils/reExportUntils.js";
 import { shortVideoMarking, markingTab, makeMarkingVideo, iconGaming ,iconNews ,iconSports,iconCourses,iconFashion} from "../Marking/reExportMarking.js";
+import { TakeTrending } from "../api/AllApiRequest.js"
 
 let glass_adaptation = document.getElementById("glass_adaptation")
 let adaptation = document.getElementById("adaptation")
@@ -105,12 +106,14 @@ function changeInnerMarkingTab(nameTab, iconTab) {
     changeInnerHTML(container, '')
     changeInnerHTML(container, markingTab(nameTab, iconTab))
 }
-async function fillingContentTab() {
+async function fillingContentTab(func) {
     const gamingContainer = selectElements(container, ".Container-video-gaming")
     const shortsContainer = selectElements(container, ".shorts-video-conteiner")
-    const videos = await GetContentGaming();
+    const videos = await func();
+    console.log(videos);
+    
 
-    videos.forEach(el => {
+    videos.data.items.forEach(el => {
         if (el.snippet.liveBroadcastContent !== 'none') return
         let durationVideo = formatDuration(el.contentDetails.duration)
 
@@ -127,7 +130,7 @@ export async function clickGaming() {
     setNewUrl("/Gaming")
     tabContainerBlock()
     changeInnerMarkingTab("Gaming", iconGaming)
-    fillingContentTab()
+    fillingContentTab(() => TakeTrending(20))
 }
 
 export async function clickNews() {
@@ -136,23 +139,23 @@ export async function clickNews() {
     changeInnerMarkingTab("News", iconNews)
     let textNews = document.getElementById("txtTab")
     textNews.style.fontSize = "50px"
-    fillingContentTab()
+    fillingContentTab(() => TakeTrending(25))
 }
 export async function clickSports() {
     setNewUrl("/Sports")
     tabContainerBlock()
     changeInnerMarkingTab("Sports", iconSports)
-    fillingContentTab()
+    fillingContentTab(() => TakeTrending(17))
 }
 export async function clickCourses() {
     setNewUrl("/Courses")
     tabContainerBlock()
     changeInnerMarkingTab("Courses", iconCourses)
-    fillingContentTab()
+    fillingContentTab(() => TakeTrending(24))
 }
 export async function clickFashion() {
     setNewUrl("/Fashion")
     tabContainerBlock()
     changeInnerMarkingTab("Fashion", iconFashion)
-    fillingContentTab()
+    fillingContentTab(() => TakeTrending(26));
 }
