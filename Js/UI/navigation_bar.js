@@ -2,10 +2,12 @@ import { aside } from "./HeaderANDAside.js";
 import { container, addMarkingOnPage} from "../features/LoadVideo.js";
 import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo} from "../Marking/reExportMarking.js";
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
-import {  addClassList, removeClassList, changeInnerHTML, fromLikeToShortLike} from "../untils/reExportUntils.js";
-import { state } from "../URL/reExportUrl.js";
+import {changeInnerHTML, fromLikeToShortLike} from "../untils/reExportUntils.js";
+import { observeToTrigerShorts } from "../infinityScrollInProfile.js";
+import { clickGaming,clickNews,clickSports,clickCourses,clickFashion} from "../UI/HeaderANDAside.js";
 import { setNewUrl } from "../features/ReExportFeatures.js";
- let videoShorts = []
+
+let videoShorts = []
 
 
 let counter = 0
@@ -14,11 +16,19 @@ aside.addEventListener('click', (e) => {
     e.preventDefault()
     const nameSection = e.target.parentNode.querySelector("p").textContent;
     if (nameSection === 'Trending') {
-        // setNewUrl("/Trending")
         openTranding()
     }else if(nameSection === 'Shorts'){
-        // setNewUrl("/Shorts")
         openShortsVideo()
+    }else if(nameSection === 'Gaming'){
+        clickGaming()
+    }else if(nameSection === 'News'){
+        clickNews()
+    }else if(nameSection === 'Sports'){
+        clickSports()
+    }else if(nameSection === 'Courses'){
+        clickCourses()
+    }else if(nameSection === 'Fashion & Beauty'){
+        clickFashion()
     }
 })
 
@@ -27,7 +37,7 @@ export async function  openTranding(){
     container.innerHTML = ''
     container.className = 'Main_container grid'
     const response = await TakeTrending()
-    addMarkingOnPage(response.data.items)
+    addMarkingOnPage(container, response.data.items)
 }
 
 export async function openShortsVideo(){
@@ -38,29 +48,24 @@ export async function openShortsVideo(){
     container.className = 'dF containerShorts fdC mT10p'
 
     const response = await getShortsVideo()
-
+    
     changeInnerHTML(container, ShortsContainer())
     giveShortsVideoOnPage(response.data.items)
-    // await getElemntAndAddMarking(0, response.data.items)
-   
-    // videoShorts.push(...response.data.items)
+
     listnersToArrowDown()
     listnersToArrowUp()
+
+    observeToTrigerShorts(LoadMoreShortsVideo)
+
     
 }
 
 function giveShortsVideoOnPage(data){
-    const containerShorts = document.querySelector(".containerShorts")
-    data.forEach(el=>{
-        containerShorts.insertAdjacentHTML("beforeend", innerContentShorts(el.snippet.thumbnails.default.url, el.snippet.channelTitle, el.snippet.description, fromLikeToShortLike(el.statistics.likeCount),  fromLikeToShortLike(el.statistics.commentCount), el.id))
-    })
+    addContainerOneVideoToPage(data)
     const videoContainer = container.querySelectorAll('.shorts-video-inner')
     for(let i = 0; i < data.length; i+=1){
         videoContainer[i].insertAdjacentHTML("afterbegin", iframePlayerShortsVideo(data[i].id, data[i].snippet.title))
-        if(i === 0){
-            const iframe = videoContainer[i].querySelector("iframe")  
-            iframe.onload = ()=>controlPlayer(iframe,"playVideo")
-        }
+        startFirstVideo(i, videoContainer)
     }
 }
 
@@ -74,26 +79,31 @@ function listnersToArrowUp(){
     arrowUp.onclick = scrollUp
 }
 async function arrowDownClick(){
-    counter += 1
-    const iframe = document.querySelectorAll("iframe")
-
-    const currIframes = iframe[counter]
-    const prevIframes = iframe[counter-1]
-    !currIframes ? await loadMoreVideo() : false
-    currIframes.scrollIntoView({behavior:"smooth"})
-
-    controlPlayer(currIframes, 'playVideo')
-    controlPlayer(prevIframes, 'pauseVideo')
-
+    increaseCounter()
+    const iframe = takeIframes(1)
+  
+    iframe.currIframes.scrollIntoView({behavior:"smooth"})
+    pauseStartVideo(iframe.currIframes, iframe.nextIframes)
 }
 function scrollUp(){
-    counter < 0 ? counter = 0 : counter -= 1
+    counter < 0 ? counter = 0 : decreaseCounter()
+    const iframe = takeIframes(2)
+
+    iframe.currIframes.scrollIntoView({behavior:"smooth"})
+
+    pauseStartVideo(iframe.currIframes, iframe.nextIframes)
+
+}
+function takeIframes(type){
     const iframe =  document.querySelectorAll("iframe")
-    const currIframes = iframe[counter]
-    const nextIframes = iframe[counter+1]
-    currIframes.scrollIntoView({behavior:"smooth"})
-    controlPlayer(currIframes, 'playVideo')
-    controlPlayer(nextIframes, 'pauseVideo')
+    let nextCurrIframe;
+    type === 1 ?  nextCurrIframe = {nextIframes:iframe[counter + 1]} :  nextCurrIframe =  {prevFrames:iframe[counter - 1]}
+    return {currIframes:iframe[counter], ...nextCurrIframe}
+    
+}
+function pauseStartVideo(Iframe1, Iframe2){
+    controlPlayer(Iframe1, 'playVideo')
+    controlPlayer(Iframe2, 'pauseVideo')
 }
 function controlPlayer(el, type){
     const iframe = el.contentWindow;
@@ -102,97 +112,38 @@ function controlPlayer(el, type){
             "*"
           );
 }
-async function loadMoreVideo(){
-    const response = await getShortsVideo()
-    const containerShorts = document.querySelector(".containerShorts")
-
-    response.data.items.forEach(el=>{
-        containerShorts.insertAdjacentHTML("beforeend", innerContentShorts(el.snippet.thumbnails.default.url, el.snippet.channelTitle, el.snippet.description, fromLikeToShortLike(el.statistics.likeCount),  fromLikeToShortLike(el.statistics.commentCount), el.id))
-        
-    })
-    const videoContainer = container.querySelectorAll('.shorts-video-inner')
-    let j = 0
-    for(let i = counter; i < counter + 10; i+=1){
-        videoContainer[i].insertAdjacentHTML("afterbegin", iframePlayerShortsVideo(response.data.items[j].id, response.data.items[j].snippet.title))    
-        j += 1
+function startFirstVideo(i, videoContainer){
+    if(i === 0){
+        const iframe = videoContainer[i].querySelector("iframe")
+        iframe.onload = ()=>controlPlayer(iframe, "playVideo")
     }
-
 }
-// export async function getElemntAndAddMarking(counterVideo, response){
-//     let videoData = response[counterVideo]
-//     console.log(counterVideo)
-//     if(!videoData){
-//         const responseShorts = await getShortsVideo()
-//         videoShorts.push(...responseShorts.data.items)
-//         videoData = videoShorts[counterVideo]
-//     }
+function addContainerOneVideoToPage(data){
+    const containerShorts = document.querySelector(".ShortsContainer")
+    data.forEach(el=>{
+        containerShorts.insertAdjacentHTML("beforeend", innerContentShorts(el.snippet.thumbnails.default.url, el.snippet.channelTitle, el.snippet.description, fromLikeToShortLike(el.statistics.likeCount),  fromLikeToShortLike(el.statistics.commentCount), el.id))
+    })
+}
+function decreaseCounter(){
+    counter -= 1
+}
+function increaseCounter(){
+    counter += 1
+}
+async function LoadMoreShortsVideo(){
 
-//     const containerShorts = document.querySelector(".containerShorts")
-    
-  
+    const response = await getShortsVideo()
+    const data = response.data.items
 
-//     containerShorts.insertAdjacentHTML("beforeend", innerContentShorts(videoData.snippet.thumbnails.default.url, videoData.snippet.channelTitle, videoData.snippet.description, fromLikeToShortLike(videoData.statistics.likeCount),  fromLikeToShortLike(videoData.statistics.commentCount), videoData.id))
-    
-//     const videoContainer = container.querySelectorAll('.shorts-video-inner')[counterVideo]
+    addContainerOneVideoToPage(data)
 
-//     videoContainer.insertAdjacentHTML("afterbegin", iframePlayerShortsVideo(videoData.id, videoData.snippet.title))
+    const videoContainer = container.querySelectorAll('.shorts-video-inner')
 
+    let j = 0 
 
-// }
+    for(let i = counter+1; i < counter + 11; i+=1){
+        videoContainer[i].insertAdjacentHTML("afterbegin", iframePlayerShortsVideo(data[j].id, data[j].snippet.title))
+    j += 1
+    }
+  }
 
-// function listnersToArrowDown(){
-//     const arrowDown = document.querySelector(".shorts-btn-down")
-//     arrowDown.onclick = arrowDownClick
-// }
-// function listnersToArrowUp(){
-//     const arrowUp = document.querySelector(".shorts-btn-up")
-//     arrowUp.onclick = scrollUp
-// }
-// let counter = 1
-// async function arrowDownClick(){
-//     if(counter > 0){
-//         const el = document.getElementById(videoShorts[counter]?.id)
-//         console.log(el)
-//         if(el){
-//             stoppedIFrame('pauseVideo', counter-1)
-//             stoppedIFrame('playVideo', counter)
-//             scrollDown()
-//             return
-//         }
-//     }
-//     await getElemntAndAddMarking(counter, videoShorts)
-    
-    
-//     stoppedIFrame('pauseVideo', counter-1)
-//     scrollDown()
-// }
-// function stoppedIFrame(type, count){
-   
-//     const iframe = document.querySelectorAll("iframe")[count].contentWindow;
-//     iframe.postMessage(
-//         '{"event":"command","func":"' + `${type}` + '","args":""}',
-//         "*"
-//       );
-// }
-
-// function scrollDown(){
-    
-//     setTimeout(()=>{
-//         const targetElement = document.getElementById(videoShorts[counter].id)
-//         targetElement?.scrollIntoView({ behavior: "smooth" });
-//         counter +=1
-        
-//     })
-// }
-
-// function scrollUp(){
-    
-//     stoppedIFrame('pauseVideo', counter-1)
-//     stoppedIFrame('playVideo', counter-2)
-
-//     setTimeout(()=>{
-//         const targetElement = document.getElementById(videoShorts[counter-2].id)
-//         targetElement?.scrollIntoView({behavior:"smooth"})
-//         counter -= 1
-//     },0)
-// }

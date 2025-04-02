@@ -18,9 +18,8 @@ export function ShortsContainer(){
                         </svg>
                 </div>
             </div>
-    <div class="ShortsContainer dF ">
-    
-    </div>
+    <div class="ShortsContainer dF fdC"></div>
+    <div class="ShortsTriger"></div>
     `
 }
 export function innerContentShorts(imgProfile, nameChannel, descriptionVideo, likeCount, commentCount, idVideo){

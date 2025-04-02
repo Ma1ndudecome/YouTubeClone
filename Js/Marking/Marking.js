@@ -159,78 +159,52 @@ export function marcinSubscriben(img_profile, title_profile) {
             <div class="block_list_sing_int_subscription_title">${title_profile}</div>
     </div>`
 }
-export function markingGaming() {
+export function markingTab(tabName,iconTab) {
     return `
         <div class="boxtxtGaming" style=" display: flex" >
                          <div  class="iconTxtGaming">
-                            <svg width='54' height='54' viewBox='0 0 34 34' xmlns='http://www.w3.org/2000/svg'
-                                xmlns:xlink='http://www.w3.org/1999/xlink'>
-                                <rect width='24' height='24' stroke='none' rx="15" padding="10" fill=' #FF0033'
-                                    opacity='6' />
-
-
-                                <g transform="matrix(0.42 0 0 0.42 12 12)">
-
-                                    <g transform="matrix(1 0 0 1 0 -0.03)">
-                                        <path
-                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
-                                            transform=" translate(-24, -23.97)"
-                                            d="M 24.3155 13.7581 C 24.1281 13.8986 23.8719 13.8986 23.6845 13.7581 C 22.7294 13.042 19.6378 10.8398 14.8402 8.53175 C 14.1066 8.17887 13.2774 8.07401 12.4987 8.31112 C 10.7564 8.84165 7.40567 10.1661 4.28404 13.1262 C 3.70164 13.6784 3.34921 14.4214 3.26587 15.2196 C 3.06654 17.1289 2.78999 21.0779 3.25256 25.6124 C 3.34435 26.5122 3.76609 27.338 4.44359 27.9371 C 7.03139 30.2257 14.2162 36.1569 22.6659 39.4986 C 23.523 39.8375 24.477 39.8375 25.3341 39.4986 C 33.7839 36.1568 40.9686 30.2257 43.5564 27.9371 C 44.2339 27.3379 44.6556 26.5122 44.7474 25.6124 C 45.21 21.0778 44.9335 17.1288 44.7341 15.2196 C 44.6508 14.4214 44.2984 13.6784 43.716 13.1262 C 40.5943 10.1661 37.2435 8.84165 35.5013 8.31112 C 34.7226 8.07401 33.8933 8.17887 33.1598 8.53175 C 28.3622 10.8398 25.2706 13.042 24.3155 13.7581 Z"
-                                            stroke-linecap="round" />
-                                    </g>
-                                    <g transform="matrix(1 0 0 1 0 2.88)">
-                                        <path
-                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
-                                            transform=" translate(-24, -26.88)" d="M 24 14 L 24 39.75"
-                                            stroke-linecap="round" />
-                                    </g>
-                                    <g transform="matrix(1 0 0 1 -10 -3)">
-                                        <path
-                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
-                                            transform=" translate(-14, -21)" d="M 14 17 L 14 25"
-                                            stroke-linecap="round" />
-                                    </g>
-                                    <g transform="matrix(1 0 0 1 -10 -3)">
-                                        <path
-                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
-                                            transform=" translate(-14, -21)" d="M 18 21 L 10 21"
-                                            stroke-linecap="round" />
-                                    </g>
-                                    <g transform="matrix(1 0 0 1 12 -6)">
-                                        <path
-                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
-                                            transform=" translate(-36, -18)" d="M 37 18 L 35 18"
-                                            stroke-linecap="round" />
-                                    </g>
-                                    <g transform="matrix(1 0 0 1 8 0)">
-                                        <path
-                                            style="stroke: rgb(255, 255, 255); stroke-width: 3; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
-                                            transform=" translate(-32, -24)" d="M 33 24 L 31 24"
-                                            stroke-linecap="round" />
-                                    </g>
-                                </g>
-
-                            </svg>
-                            <b class="txtg">Gaming</b>
-                        
+                         ${iconTab()}
+                            <b id="txtTab">${tabName}</b>
                         </div>
                     </div>
-                   
                    <div class = "iconTxtGaming">
                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 24 24">
                      <path d="M 15.886719 1 C 14.974131 1 14.077693 1.2286385 13.287109 1.65625 L 5.5664062 5.7207031 L 5.5664062 5.71875 C 3.7637541 6.6652034 2.6367187 8.5322799 2.6367188 10.566406 C 2.6367188 11.911504 3.2225585 13.082394 4.046875 14.046875 C 3.2161002 15.0216 2.6367187 16.195885 2.6367188 17.521484 C 2.6367188 20.532674 5.1018215 23 8.1132812 23 C 9.0303925 23 9.9287625 22.773103 10.716797 22.341797 L 18.292969 18.353516 L 18.259766 18.369141 C 20.151702 17.459981 21.363281 15.531898 21.363281 13.433594 C 21.363281 12.088496 20.777441 10.917606 19.953125 9.953125 C 20.783897 8.9783946 21.363281 7.8041153 21.363281 6.4785156 C 21.363281 3.4673258 18.898179 1 15.886719 1 z M 15.886719 3 C 17.813259 3 19.363281 4.5517054 19.363281 6.4785156 C 19.363281 7.5499776 18.888956 8.5222239 18.080078 9.1777344 L 17.121094 9.9550781 L 18.080078 10.732422 C 18.871608 11.373406 19.363281 12.344494 19.363281 13.433594 C 19.363281 14.75529 18.584642 15.993566 17.392578 16.566406 L 17.376953 16.574219 L 9.7636719 20.583984 L 9.7578125 20.587891 C 9.2778524 20.850605 8.6961702 21 8.1132812 21 C 6.1867412 21 4.6367188 19.448295 4.6367188 17.521484 C 4.6367188 16.450022 5.1110438 15.477776 5.9199219 14.822266 L 6.8789062 14.044922 L 5.9199219 13.267578 C 5.1283915 12.626594 4.6367188 11.655506 4.6367188 10.566406 C 4.6367188 9.266533 5.3427459 8.095781 6.4960938 7.4902344 L 6.4980469 7.4902344 L 14.232422 3.4179688 L 14.238281 3.4140625 C 14.729251 3.1482632 15.309951 3 15.886719 3 z M 10 9 L 10 15 L 15 12 L 10 9 z"></path>
                  </svg>
                   <span class="txtg">    Shorts </span>
                   </div>
-
                     <div class="shorts-video-conteiner" ></div>
-
                     <br>
                     <div class="txtg"> Пропоноване</div>
-                    
                     <div class="Container-video-gaming grid"></div>
                     `
 }
+export function iconGaming(){
+    return `
+    <img class ="iconSports" src ="//yt3.googleusercontent.com/GFc_A-blEltrFJDdN_Hhq7wMxATv1u1LWHF87HZ7duVPBYWfwjeL-mZ8cV2_2hiQfFiHIdM-IXI=s72-c-c0x00ffffff-no-rwa">
+    `
+}
+export function iconNews(){
+    return ``
+}
+export function iconSports(){
+    return `
+  <img class ="iconSports" src ="https://www.theartofcoachingvolleyball.com/wp-content/uploads/2018/01/Premium-Icon-Square.png" alt= "iconSports">
+    `
+}
+export function iconCourses(){
+    return `
+  <img class ="iconSports" src ="https://media.evingo.com.br/skin/frontend/smartwave/default/images/logo_small_po_inverted.png" alt= "iconCourses">
+    `
+}
+export function iconFashion(){
+    return `
+  <img class ="iconSports" src ="//yt3.googleusercontent.com/vgDRIrGv4eFbfcyTiubRSwkhzk8zCaHArieUu4H0DijHaWiNF0kr9dJygRu3X2TquIckGXrktg=s72-c-c0x00ffffff-no-rwa" alt= "iconCourses">
+    `
+}
+
+
+
 
 export function markinHistoryVideo(videoImg, videoName, chanelName, countViews, overview, id, date, duration) {
     return `
