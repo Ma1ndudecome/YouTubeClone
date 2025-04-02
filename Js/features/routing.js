@@ -36,7 +36,7 @@ function checkUrlRouting(){
         openTranding()
     })
     .on("/Shorts", ()=>{
-        openShortsVideo()
+        // openShortsVideo()
     })
     router.resolve()
     }, 0);

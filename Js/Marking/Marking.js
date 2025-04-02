@@ -133,6 +133,21 @@ export function InfoAboutChannel(
     </div>
     `;
 }
+export function markingTranding() {
+    return `
+        <div class="box_Tranding" style="display: flex">
+            <div class="icon_title_Tranding">
+                <img class ="iconSports" src ="https://www.youtube.com/img/trending/avatar/trending_animated.webp">
+                <b id="txtTitle">Tranding</b>
+            </div>
+            <br>
+        </div>
+        <div class="box_video_Tranding">
+            <div class="txtg">Пропоноване</div>
+            <div class="container_video_trending df"></div>
+        </div>
+    `;
+}
 export function markingShowMore(dateRequests, dataProfile, countSubs) {
   return `
     <div class="containerShowMore">
@@ -193,9 +208,6 @@ export function markingTab(tabName, iconTab) {
                     <div class="txtg"> Пропоноване</div>
                     <div class="Container-video-gaming grid"></div>
                     `;
-}
-export function iconTranding() {
-  return `<img class ="iconSports" src ="https://www.youtube.com/img/trending/avatar/trending_animated.webp">`;
 }
 export function iconGaming() {
   return `

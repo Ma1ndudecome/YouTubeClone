@@ -18,9 +18,8 @@ export function ShortsContainer(){
                         </svg>
                 </div>
             </div>
-    <div class="ShortsContainer dF ">
-    
-    </div>
+    <div class="ShortsContainer dF fdC"></div>
+    <div class="ShortsTriger"></div>
     `
 }
 export function innerContentShorts(imgProfile, nameChannel, descriptionVideo, likeCount, commentCount, idVideo){
@@ -119,5 +118,5 @@ export function innerContentShorts(imgProfile, nameChannel, descriptionVideo, li
     `
 }
 export function iframePlayerShortsVideo(id, title){
-    return  `<iframe src="https://www.youtube.com/embed/${id}?&autoplay=1&loop=1&playlist=${id}&enablejsapi=1" autoplay="true" autoplay="1" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+    return  `<iframe src="https://www.youtube.com/embed/${id}?&loop=1&playlist=${id}&enablejsapi=1" autoplay="true" autoplay="1" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
 }
