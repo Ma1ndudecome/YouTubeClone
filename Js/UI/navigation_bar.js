@@ -7,6 +7,7 @@ import { observeToTrigerShorts } from "../infinityScrollInProfile.js";
 import { clickGaming,clickNews,clickSports,clickCourses,clickFashion} from "../UI/HeaderANDAside.js";
 import { setNewUrl } from "../features/ReExportFeatures.js";
 
+
 let videoShorts = []
 
 
@@ -56,6 +57,7 @@ export async function openShortsVideo(){
     listnersToArrowUp()
 
     observeToTrigerShorts(LoadMoreShortsVideo)
+    scrollToShorts()
 
     
 }
@@ -145,5 +147,22 @@ async function LoadMoreShortsVideo(){
         videoContainer[i].insertAdjacentHTML("afterbegin", iframePlayerShortsVideo(data[j].id, data[j].snippet.title))
     j += 1
     }
-  }
+}
+function scrollToShorts(){
+    let lastScroll = 0
 
+    window.onscroll = ()=>{
+        window.scrollY > lastScroll ? scrollDownWheel() : scrollUpWheel()
+        lastScroll = window.scrollY
+    }
+}
+function scrollDownWheel(){
+    setTimeout(()=>{
+        console.log("down")
+    },500)
+}
+function scrollUpWheel(){
+    setTimeout(()=>{
+        console.log("up")
+    },500)
+}
