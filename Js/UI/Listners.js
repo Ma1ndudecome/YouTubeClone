@@ -37,7 +37,7 @@ export function ListnersToSendComment(id, channelId){
         setNewUrl(`/Search:${elements.input.value}`)
 
         addMarkingComent(responseComment.data)
-
+        elements.input.value = ''
     }
 }
 export function buttonLoadMoreFnc(dateRequests, state, countSubs){
@@ -120,7 +120,4 @@ export async function ListnersSubscribe(ChannelId){
         }
     }
 }
-// export function scrollListner(){
-  
-// }
 

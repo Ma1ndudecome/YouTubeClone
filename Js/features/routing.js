@@ -4,7 +4,8 @@ import { params, URL} from '../main.js'
 import { LoadVideo } from "./LoadVideo.js";
 import { on } from "process";
 import {ViewChannel } from "./changeData.js";
-import { openTranding, openShortsVideo } from "../UI/navigation_bar.js";
+import { openTranding, openShortsVideo, clickNews, clickSports, clickCourses, clickFashion, clickGaming} from "../UI/reExportUI.js";
+
 const router = new Navigo('/')
 
 export function setNewUrl(Page){
@@ -21,9 +22,11 @@ function checkUrlRouting(){
         console.log('load home')
     })
     .on("/Gaming", ()=>{
+        clickGaming()
         console.log("load gaming video...")
     })
     .on("/Profile", ()=>{
+       
         ViewChannel(state.acessToken)
         console.log('load profile')
     })
@@ -33,10 +36,35 @@ function checkUrlRouting(){
         console.log("search")
     })
     .on("/Trending", ()=>{
-        openTranding()
+        console.log('load trending')
+        // openTranding()
     })
     .on("/Shorts", ()=>{
+        console.log('load shorts video')
+
         // openShortsVideo()
+    })
+    .on("/News", ()=>{
+        // clickNews()
+
+        console.log("load news")
+    })
+    .on("/Sports", ()=>{
+        // clickSports()
+        
+        console.log("load Sports")
+
+    })
+    .on("/Courses", ()=>{
+        // clickCourses()
+
+        console.log("load Counrses")
+
+    })
+    .on("/Fashion", ()=>{
+        
+        // clickFashion()
+
     })
     router.resolve()
     }, 0);

@@ -1,5 +1,6 @@
 import { fromViewToShortView } from "../untils/ViewToViewLikeToLike.js";
 import { fromLikeToShortLike } from "../untils/ViewToViewLikeToLike.js";
+import { parseISO, fromat } from "date-fns";
 
 export function markingProfile(
   backgorundProfile,
@@ -84,8 +85,8 @@ export function InfoAboutChannel(
   accountCreat
 ) {
   const dateString = accountCreat;
-  const parsedDate = dateFns.parseISO(dateString);
-  const formattedDate = dateFns.format(parsedDate, "MMM d, yyyy");
+  const parsedDate = parseISO(dateString);
+  const formattedDate = format(parsedDate, "MMM d, yyyy");
   return `
    <div class="backdropInfo dF aiC jcC">
         <div class="block_info dF jcC aiC fdC">

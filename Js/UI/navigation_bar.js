@@ -4,7 +4,8 @@ import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo, markingTr
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
 import {changeInnerHTML, fromLikeToShortLike, fromViewToShortView, dateTime, formatDuration} from "../untils/reExportUntils.js";
 import { observeToTrigerShorts } from "../infinityScrollInProfile.js";
-import { setNewUrl } from "../features/ReExportFeatures.js";
+import { setNewUrl, ViewChannel } from "../features/ReExportFeatures.js";
+import { state } from "../URL/reExportUrl.js";
 let videoShorts = []
 
 let counter = 0
@@ -14,20 +15,34 @@ aside.addEventListener('click', (e) => {
     e.preventDefault()
     const nameSection = e.target.parentNode.querySelector("p").textContent;
     if (nameSection === 'Trending') {
-        openTranding()
+        setNewUrl("/Trending")
+
+        // openTranding()
     }else if(nameSection === 'Shorts'){
-        openShortsVideo()
+        setNewUrl("/Shorts")
+
+        // openShortsVideo()
     }else if(nameSection === 'Gaming'){
-        clickGaming()
+        setNewUrl("/Gaming")
+        // clickGaming()
     }else if(nameSection === 'News'){
-        clickNews()
+        setNewUrl("/News")
+        // clickNews()
     }else if(nameSection === 'Sports'){
-        clickSports()
+        setNewUrl("/Sports")
+        // clickSports()
     }else if(nameSection === 'Courses'){
-        clickCourses()
+        setNewUrl("/Courses")
+        // clickCourses()
     }else if(nameSection === 'Fashion & Beauty'){
-        clickFashion()
+        setNewUrl("/Fashion")
+        // clickFashion()
+    }else if (nameSection === 'You'){
+         if(!state.acessToken) return
+        setNewUrl("/Profile")
+
     }
+
 })
 
 function MarkingTabTranding() {
