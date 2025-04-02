@@ -8,6 +8,7 @@ import { setNewUrl } from "../features/ReExportFeatures.js";
 let videoShorts = []
 
 let counter = 0
+let resolving = true
 
 aside.addEventListener('click', (e) => {
     e.preventDefault()
@@ -84,32 +85,37 @@ function listnersToArrowUp(){
     const arrowUp = document.querySelector(".shorts-btn-up")
     arrowUp.onclick = scrollUp
 }
-async function arrowDownClick(){
+function arrowDownClick(){
     increaseCounter()
     const iframe = takeIframes(1)
-  
+    console.log(iframe)
     iframe.currIframes.scrollIntoView({behavior:"smooth"})
+
     pauseStartVideo(iframe.currIframes, iframe.nextIframes)
+
 }
 function scrollUp(){
     counter < 0 ? counter = 0 : decreaseCounter()
     const iframe = takeIframes(2)
-
+    console.log(iframe)
+    
     iframe.currIframes.scrollIntoView({behavior:"smooth"})
 
-    pauseStartVideo(iframe.currIframes, iframe.nextIframes)
+    pauseStartVideo(iframe.currIframes, iframe.prevFrames)
 
 }
 function takeIframes(type){
     const iframe =  document.querySelectorAll("iframe")
+
     let nextCurrIframe;
     type === 1 ?  nextCurrIframe = {nextIframes:iframe[counter + 1]} :  nextCurrIframe =  {prevFrames:iframe[counter - 1]}
     return {currIframes:iframe[counter], ...nextCurrIframe}
     
 }
 function pauseStartVideo(Iframe1, Iframe2){
-    controlPlayer(Iframe1, 'playVideo')
-    controlPlayer(Iframe2, 'pauseVideo')
+    Iframe1 ? controlPlayer(Iframe1, 'playVideo') : false
+    Iframe2 ? controlPlayer(Iframe2, 'pauseVideo') : false
+    
 }
 function controlPlayer(el, type){
     const iframe = el.contentWindow;
@@ -156,17 +162,42 @@ function scrollToShorts(){
     let lastScroll = 0
 
     window.onscroll = ()=>{
-        window.scrollY > lastScroll ? scrollDownWheel() : scrollUpWheel()
-        lastScroll = window.scrollY
+        window.scrollY > lastScroll ? debounce(scrollDownWheel)  :  debounce(scrollUpWheel)
+        lastScroll = window.scrollY;
     }
 }
 function scrollDownWheel(){
+
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            arrowDownClick()
+           
+            resolve()
+        },500)
+    })
+ }
+ function scrollUpWheel(){
+    console.log("scroll up")
+   return new Promise((resolve)=>{
     setTimeout(()=>{
-        console.log("down")
+        console.log(1)
+        scrollUp()
+        resolve()
     },500)
-}
-function scrollUpWheel(){
-    setTimeout(()=>{
-        console.log("up")
-    },500)
-}
+   })
+ }
+
+ async function debounce(fnc){
+    
+    try{
+        if(!resolving) return
+        resolving = false
+        await fnc()
+        setTimeout(()=>{
+            resolving = true
+        },500)
+    }catch(err){
+        console.log(err);
+        
+    }
+ }
