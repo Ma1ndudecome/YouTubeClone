@@ -86,12 +86,16 @@ export function TakeSubscriber(pageTokenSubscribe){//!
     return requestToSeverGet(URL.getSubscriberURL, makeParams(params.takeSubsriber, {pageToken:pageTokenSubscribe}), true)
 }
 
-export async function TakeTrending() {//!
-    const newsData = await requestToSeverGet(URL.searchURL, params.takeVideoTrand)
-
-    const IDVideo = getIdVideo(newsData.data.items)
-
-    return  await getMoreStatiscticVideo(IDVideo, params.takeDurationVideo)
+export async function TakeTrending(categoryId) {//!
+    return await axios.get("https://www.googleapis.com/youtube/v3/videos", {
+        params: {
+            part: 'snippet,statistics,contentDetails',
+            chart: 'mostPopular',
+            videoCategoryId: categoryId,
+            maxResults: 20,
+            key: APIKEY
+        }
+    });
 }
 export async function SearchContent(content){//!
     try{

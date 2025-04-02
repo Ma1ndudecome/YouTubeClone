@@ -6,8 +6,7 @@ import {  addClassList, removeClassList, changeInnerHTML, fromLikeToShortLike} f
 import { state } from "../URL/reExportUrl.js";
 import { clickGaming,clickNews,clickSports,clickCourses,clickFashion} from "../UI/HeaderANDAside.js";
 import { setNewUrl } from "../features/ReExportFeatures.js";
- let videoShorts = []
-
+let videoShorts = []
 
 aside.addEventListener('click', (e) => {
     e.preventDefault()
@@ -33,7 +32,7 @@ aside.addEventListener('click', (e) => {
 export async function  openTranding(){
     container.innerHTML = ''
     container.className = 'Main_container grid'
-    const response = await TakeTrending()
+    const response = await TakeTrending(0)
     addMarkingOnPage(response.data.items)
 }
 
