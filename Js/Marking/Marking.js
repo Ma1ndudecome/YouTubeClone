@@ -135,16 +135,18 @@ export function InfoAboutChannel(
 }
 export function markingTranding() {
     return `
-        <div class="box_Tranding" style="display: flex">
-            <div class="icon_title_Tranding">
-                <img class ="iconSports" src ="https://www.youtube.com/img/trending/avatar/trending_animated.webp">
-                <b id="txtTitle">Tranding</b>
+        <div class="container_Tranding">
+            <div class="box_Tranding dF fdC">
+                <div class="icon_title_Tranding dF aiC">
+                    <img class ="iconSports" src ="https://www.youtube.com/img/trending/avatar/trending_animated.webp">
+                    <h3 id="txtTitle" style="margin-left: 10px;">Tranding</h3>
+                </div>
+                <br>
             </div>
-            <br>
-        </div>
-        <div class="box_video_Tranding">
-            <div class="txtg">Пропоноване</div>
-            <div class="container_video_trending df"></div>
+            <div class="box_video_Tranding">
+                <div class="txtg">Пропоноване</div>
+                <div class="container_video_trending dF fdC" style="width: 70%; gap: 10px;"></div>
+            </div>
         </div>
     `;
 }
