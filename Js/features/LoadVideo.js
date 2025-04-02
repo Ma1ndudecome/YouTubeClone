@@ -25,7 +25,7 @@ export async function LoadVideo() {
         const IDVideo = getIdVideo(response.data.items)
         const MoreStatisticVideo = await requestToSeverGet(URL.infoVideoURL, makeParams(params.getDetailInfoGaming, {id:IDVideo}))
         givingSpecifiMarking()
-        addMarkingOnPage(MoreStatisticVideo.data.items)
+        addMarkingOnPage(container, MoreStatisticVideo.data.items)
        
     } catch (error) {
         console.log(error)
@@ -45,8 +45,7 @@ const observ = new IntersectionObserver((entries)=>{
 
 observ.observe(triger)
 
-export function addMarkingOnPage(data){
-    console.log(data)
+export function addMarkingOnPage(cont, data){
     data.forEach(el=>{
         if (!el.snippet.liveBroadcastContent === 'none') {
             return
@@ -54,7 +53,7 @@ export function addMarkingOnPage(data){
         if(!el.contentDetails.duration){
             return
         }
-        container.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration), el.id))
+        cont.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration), el.id))
         dateRequest.push(el)
     })
 }

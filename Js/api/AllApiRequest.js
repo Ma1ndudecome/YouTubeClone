@@ -196,7 +196,11 @@ export async function getShortsVideo() {
             maxResults:10
         }
     })
+   
+    console.log('writing pageToken...')
     state.shortsPageToken = response.data.nextPageToken || ''
+    console.log(state.shortsPageToken)
+
     const idVideo = getIdVideo(response.data.items)
      
     return await getMoreStatisticId(idVideo)
