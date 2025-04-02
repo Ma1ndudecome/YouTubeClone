@@ -5,9 +5,6 @@ import { getAccesToken, getDataAccount, TakeSubscriber } from "./ReExportAPI.js"
 import { saveAcessToken,saveImgAccount, UserInAccountTrue } from "../untils/reExportUntils.js";
  import {  aside_bottom_Show_All_Hide_All} from "../UI/HeaderANDAside.js"
  import { show_All_Display_block} from "../UI/HeaderANDAside.js"
- import {  getIdVideo } from "../untils/reExportUntils.js";
- import{getMoreStatiscticVideo} from "../api/AllApiRequest.js"
- import { params } from "../URL/config.js";
 let refreshTokenProfile = []
 if(localStorage.getItem("dataRefreshToken")){
     refreshTokenProfile = JSON.parse(localStorage.getItem("dataRefreshToken"))
@@ -74,7 +71,7 @@ if(code){
 
 
 
-export async function loadSubsiber(access_token = "",countSubscriber){
+async function loadSubsiber(access_token = "",countSubscriber){
     document.querySelector(".aside_SignIn").classList.add("hF","fdC")
     const singIntNone = document.querySelector(".aside_SignIn_Container")
     const removeNonContainer = document.querySelector(".block_list_Sing_int ")
@@ -94,9 +91,7 @@ export async function loadSubsiber(access_token = "",countSubscriber){
         })
 
          if(countSubscriber === 50){
-            dataSubsribe.data.items.map(el =>el.snippet.title);
-             return dataSubsribe.data.items.map(el =>el.snippet.title);
-            
+            return dataSubsribe.data.items.map(el =>el.snippet.title);
          }
     }catch(error){
         console.log(error)
@@ -108,18 +103,13 @@ export async function loadSubsiber(access_token = "",countSubscriber){
 let dataSubscribe ;
  
 buttonMoreSubscriber.onclick = async () => {
-     dataSubscribe = await loadSubsiber(state.acessToken,50);
+  dataSubscribe = await loadSubsiber(state.acessToken,50);
   aside_bottom_Show_All_Hide_All();
      show_All_Display_block();
-    // let a = await id_Subscribe()
-
 };
-//  export async function id_Subscribe() {
-//     dataSubscribe = await loadSubsiber(state.acessToken,50);
-//     return dataSubscribe;
-//  }
 
-// dataSubscribe = await loadSubsiber(state.acessToken,50);
+
+
 
 
    
