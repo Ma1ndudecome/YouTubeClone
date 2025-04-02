@@ -1,8 +1,8 @@
 import { aside, clickGaming, clickNews, clickSports, clickCourses, clickFashion } from "./HeaderANDAside.js";
 import { container, addMarkingOnPage} from "../features/LoadVideo.js";
-import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo, markingTranding} from "../Marking/reExportMarking.js";
+import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo, markingTranding, markinHistoryVideo} from "../Marking/reExportMarking.js";
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
-import {changeInnerHTML, fromLikeToShortLike} from "../untils/reExportUntils.js";
+import {changeInnerHTML, fromLikeToShortLike, fromViewToShortView, dateTime, formatDuration} from "../untils/reExportUntils.js";
 import { observeToTrigerShorts } from "../infinityScrollInProfile.js";
 import { setNewUrl } from "../features/ReExportFeatures.js";
 let videoShorts = []
@@ -36,9 +36,13 @@ function MarkingTabTranding() {
 
 export async function  openTranding(){
     MarkingTabTranding();
+    container.className = "Main_container block";
     const containerTranding = document.querySelector('.container_video_trending');
     const response = await TakeTrending(0)
-    addMarkingOnPage(containerTranding, response.data.items)
+    response.data.items.forEach((el) => {
+        if (!el.snippet.liveBroadcastContent === 'none')  return
+        containerTranding.insertAdjacentHTML("beforeend", markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration)))
+    })
 }
 
 export async function openShortsVideo(){
