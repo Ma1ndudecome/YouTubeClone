@@ -191,7 +191,7 @@ function scrollDownWheel(){
         await fnc()
         setTimeout(()=>{
             resolving = true
-        },700)
+        },500)
     }catch(err){
         console.log(err);
         
