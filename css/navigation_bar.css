@@ -1,0 +1,86 @@
+body{
+    height: 1px;
+}
+.txtTitle{
+    font-family: Roboto, serif;
+}
+@media (max-width:1500px) {
+    .iconSports{
+        height:48px ;
+        width:48px ;
+    }
+    .txtTitle{
+        font-size: 20px;
+    }
+}
+@media (max-width: 1200px) {
+    .container-video{
+        height: 200px;
+    }
+    .txtTitle{
+        font-size: 18px;
+    }
+    .txtg{
+        font-size: 18px;
+    }
+    .nameVideo{
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .overview-video{
+        font-size: 15px;
+    }
+}
+@media (max-width: 968px) {
+    .container-video{
+        height: 180px;
+    }
+    .nameVideo{
+        font-size: 18px;
+    }
+    .txtg{
+        font-size: 16px;
+    }
+    .name-chanel{
+        font-size: 14px;
+    }
+    .fS14 {
+        font-size: 13px;
+    }
+    .overview-video{
+        font-size: 14px;
+    }
+}
+@media (max-width: 768px) {
+    .container-video{
+        height: 150px;
+    }
+    .iconSports {
+        width: 32px;
+        height: 32px;
+    }
+    .txtTitle{
+        font-size: 16px;
+    }
+    .nameVideo{
+        font-size: 13px;
+    }
+    .name-chanel{
+        font-size: 14px;
+    }
+    .fS14 {
+        font-size: 13px;
+    }
+    .overview-video{
+        font-size: 14px;
+    }
+    .mT10p {
+        margin-top: 5px;
+    }
+    .chanel-info {
+        margin-bottom: 5px;
+    }
+}
+@media (max-width: 768px) {
+
+}

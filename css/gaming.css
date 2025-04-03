@@ -9,11 +9,13 @@
     align-items: center;
 }
 .txtg{
+    font-family: "Roboto", "Arial", sans-serif;
     color:var(--bordColor);
     margin-bottom: 10px;
     font-size: 20px;
 }
 #txtTab{
+    font-family: Roboto, serif;
     color:var(--bordColor);
     font-size: 30px;
 }
