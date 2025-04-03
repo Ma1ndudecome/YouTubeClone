@@ -103,10 +103,13 @@ function listnersToArrowUp(){
 function arrowDownClick(){
     increaseCounter()
     const iframe = takeIframes(1)
-    console.log(iframe)
-    iframe.currIframes.scrollIntoView({behavior:"smooth"})
 
-    pauseStartVideo(iframe.currIframes, iframe.nextIframes)
+    iframe.currIframes.scrollIntoView({behavior:"smooth"})
+    
+    controlPlayer(iframe.currIframes, 'playVideo')
+    controlPlayer(iframe.prevFrame, 'pauseVideo')
+
+    // pauseStartVideo(iframe.currIframes, iframe.prevFrames)
 
 }
 function scrollUp(){
@@ -115,15 +118,18 @@ function scrollUp(){
     console.log(iframe)
     
     iframe.currIframes.scrollIntoView({behavior:"smooth"})
+   console.log(iframe.prevFrames)
+    controlPlayer(iframe.currIframes, 'playVideo')
+    controlPlayer(iframe.prevFrames, 'pauseVideo')
 
-    pauseStartVideo(iframe.currIframes, iframe.prevFrames)
+    // pauseStartVideo(iframe.currIframes, iframe.prevFrames)
 
 }
 function takeIframes(type){
     const iframe =  document.querySelectorAll("iframe")
 
     let nextCurrIframe;
-    type === 1 ?  nextCurrIframe = {nextIframes:iframe[counter + 1]} :  nextCurrIframe =  {prevFrames:iframe[counter - 1]}
+    type === 1 ?  nextCurrIframe = {nextIframes:iframe[counter + 1], prevFrame:iframe[counter -1]} :  nextCurrIframe =  {prevFrames:iframe[counter + 1]}
     return {currIframes:iframe[counter], ...nextCurrIframe}
     
 }
@@ -133,6 +139,7 @@ function pauseStartVideo(Iframe1, Iframe2){
     
 }
 function controlPlayer(el, type){
+    if(!el) return
     const iframe = el.contentWindow;
         iframe.postMessage(
             '{"event":"command","func":"' + `${type}` + '","args":""}',
@@ -174,6 +181,7 @@ async function LoadMoreShortsVideo(){
     }
 }
 function scrollToShorts(){
+   
     let lastScroll = 0
 
     window.onscroll = ()=>{
