@@ -150,7 +150,7 @@ function leftClick(container) {
 }
 
 function checkWhatDeleteAndRemoveNav(el) {
-  const nav = selectElements(document, ".container_channel_navigation_item")
+  const nav = document.querySelectorAll(".container_channel_navigation_item")
   if (el.classList.contains("Shorts_video_container")) {
     nav.length === 3 ? nav[2]?.remove() : nav[1]?.remove()
   }

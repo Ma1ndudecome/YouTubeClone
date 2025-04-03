@@ -557,6 +557,62 @@ iframe{
 .ContainerPlayerVideo{
     width: 100%;
 }
+
+.show_All_Subscriptions{
+    width: 98%;
+    height: 280px;
+    grid-column: span 4;
+    
+    align-items: center;
+    flex-direction: column;
+    align-content: flex-start;
+    
+}
+#show_All_Subscrptions{
+    display: none;
+}
+
+.show_All_Subscriptions_Container{
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    width: 100%;
+}
+
+
+.img_Name_Subscriptions{
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.img_subscriptions{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.name_Subscriptions_text{
+    width: calc(100% - 400px);
+    flex-direction: column;
+}
+
+.name_Subscriptions{
+    margin-top: 10px;
+    width: 300px;
+    height: 30px;
+}
+.number_of_Subscriptions{
+    margin-top: 10px;
+    width: 300px;
+    height: 30px;
+}
+.channel_description{
+    margin-top: 10px;
+    width: 600px;
+    height: 100px;
+}
+
 @media (max-width:1900px){
     .Main_container{
         grid-template-columns: repeat(4, 1fr);

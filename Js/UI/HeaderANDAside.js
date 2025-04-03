@@ -96,6 +96,61 @@ export function loadSavedTheme() {
     }
 }
 
+ 
+  const show_All_Hide_All = document.querySelector(".aside_bottom_Show_All_Hide_All")
+  const show_All = document.querySelector(".show_All")
+  const hide_All = document.querySelector(".hide_All")
+
+ export function aside_bottom_Show_All_Hide_All () {
+     show_All_Hide_All.style.display = "block"
+     console.log("1")
+  }
+
+ export function show_All_Display_block  () {
+      show_All.style.display = "flex"
+    
+      
+  }
+ function show_All_none_Hide_All_none  () {
+    show_All.style.display = "none"
+    show_All_Hide_All.style.display = "none"
+    
+  }
+
+
+
+show_All.onclick = show_All_none_Hide_All_none()
+    
+
+const aside_SignIn_buttonMore_2 = document.getElementsByClassName("aside_SignIn_buttonMore_2")
+
+hide_All.onclick = () => {
+    show_All_none_Hide_All_none();
+   
+    const dataSubscribeSet = new Set(dataSubscribe);
+
+    const blockListSing = document.querySelectorAll(".block_list_sing_int_subscription_title");
+    blockListSing.forEach((el) => {
+        if (dataSubscribeSet.has(el.textContent)) {
+            el.parentElement.remove();
+        }
+    });
+        
+  
+};
+
+
+const show_All_Subscriptions = document.getElementById("show_All_Subscriptions") // Основной блок пдписок
+
+const img_subscriptions = document.getElementById("img_subscriptions") //фоторафия подписки
+
+const name_Subscriptions = document.getElementById("name_Subscriptions")//Название канала
+
+const number_of_Subscriptions = document.getElementById("number_of_Subscriptions") //количество подписок
+
+const channel_description = document.getElementById("channel_description") // Описание канала
+
+
 // TAB
 
 function tabContainerBlock() {
