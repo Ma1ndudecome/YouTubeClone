@@ -22,9 +22,16 @@ header .menu_icon {
 
 header .menu {
 
-    width: 75px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    margin-left: 15px;
+    box-sizing: border-box;
 
+}
+.menu:hover{
+    border-radius: 50%;
+    background-color: var(--hovColor);
 }
 
 header .menu_icon .icon {
@@ -35,15 +42,15 @@ header .menu .burger {
     display: flex;
     position: relative;
     align-items: center;
-    width: 25px;
-    height: 15px;
+    width: 18px;
+    height: 13px;
     cursor: pointer;
     position: relative;
 }
 
 header .menu .burger span {
     height: 1px;
-    width: 70%;
+    width: 100%;
     border-radius: 3px;
     background-color: var(--bordColor);
     transform: scale(1);
@@ -55,7 +62,7 @@ header .menu .burger::before,
     content: '';
     position: absolute;
 
-    width: 70%;
+    width: 100%;
     background-color: var(--bordColor)
 }
 
