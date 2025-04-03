@@ -5,17 +5,18 @@ import { LoadVideo } from "./LoadVideo.js";
 import { on } from "process";
 import {ViewChannel } from "./changeData.js";
 import { openTranding, openShortsVideo, clickNews, clickSports, clickCourses, clickFashion, clickGaming} from "../UI/reExportUI.js";
-
+import { getContentAndAddMarking } from "../UI/reExportUI.js";
 const router = new Navigo('/')
 
 export function setNewUrl(Page){
+    console.log('urlAdded', Page)
     const url = window.location.search
     router.navigate(`${Page}${url}`)
 }
 
 
 function checkUrlRouting(){
-    setTimeout(() => {
+   
         router
     .on("/Home", ()=>{
         // LoadVideo()
@@ -31,9 +32,17 @@ function checkUrlRouting(){
         console.log('load profile')
     })
     .on("/Profile/:id/", (params, some, some1)=>{
+        
     })
-    .on("/Search/:q/", ()=>{
-        console.log("search")
+    .on("/Search/:q/", (value)=>{
+        const text = value.data.q
+        const inputValue = text.slice(1, text.length)
+        console.log('text', text)
+        console.log('inputValue', inputValue)
+
+      getContentAndAddMarking(inputValue)
+
+        console.log('load seatch')
     })
     .on("/Trending", ()=>{
         console.log('load trending')
@@ -66,8 +75,6 @@ function checkUrlRouting(){
         // clickFashion()
 
     })
-    router.resolve()
-    }, 0);
-    
+    router.resolve() 
 }
 checkUrlRouting()

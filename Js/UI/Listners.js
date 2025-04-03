@@ -34,7 +34,7 @@ export function ListnersToSendComment(id, channelId){
             return
         }
         const responseComment = await putComment(elements.input.value, id, channelId)
-        setNewUrl(`/Search:${elements.input.value}`)
+        
 
         addMarkingComent(responseComment.data)
         elements.input.value = ''
@@ -63,19 +63,21 @@ function SearchListner(){
     const input = document.querySelector(".search input")
     const buttonSearch = document.querySelector(".glass")
     buttonSearch.onclick = ()=>{
-        getContentAndAddMarking(input)
+        if(input.value === '')return
+        getContentAndAddMarking(input.value)
+        setNewUrl(`/Search/:${input.value}/`)
     }
     window.addEventListener("keydown", (e)=>{
-        if(e.key !== 'Enter'){
-            return 
-        }
-        getContentAndAddMarking(input)
+        if(e.key !== 'Enter' || input.value === '' )return 
+        getContentAndAddMarking(input.value)
+        setNewUrl(`/Search/:${input.value}/`)
     })
+    
 }
 SearchListner()
 
-async function getContentAndAddMarking(input){
-    if(input.value === '')return
+export async function getContentAndAddMarking(value){
+    
    
     container.innerHTML = ''
     container.insertAdjacentHTML('beforeend', `<div class="ContainerVideoSearch mT50p w80Procc" ></div>`)
@@ -86,15 +88,15 @@ async function getContentAndAddMarking(input){
     triggerContainer.insertAdjacentHTML("beforeend", `<div class="TrigerSearch"></div>`)
 
     const contVideo = document.querySelector(".InnerContainerVideoSearch")
-    const videos =  await SearchContent(input.value)
+    const videos =  await SearchContent(value)
         
     videos.data.items.forEach(el=>{
         el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration))) : false
     })
     container.className = 'Main_container dF jcC'
     contVideo.classList.add("dF", "fdC", "gap15P")
-    setNewUrl(`/Search/:${input.value}/`)
-    infinityScrollSearch(input.value)
+   
+    infinityScrollSearch(value)
     
 }
 

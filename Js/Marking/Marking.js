@@ -1,6 +1,6 @@
 import { fromViewToShortView } from "../untils/ViewToViewLikeToLike.js";
 import { fromLikeToShortLike } from "../untils/ViewToViewLikeToLike.js";
-import { parseISO, fromat } from "date-fns";
+import { parseISO, format } from "date-fns";
 
 export function markingProfile(
   backgorundProfile,
