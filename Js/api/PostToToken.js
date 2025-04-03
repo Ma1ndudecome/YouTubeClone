@@ -110,10 +110,11 @@ async function loadSubsiber(access_token = "", countSubscriber) {
     }
 
 }
-let dataSubscribe ;
+export let dataSubscribe ;
  
 buttonMoreSubscriber.onclick = async () => {
-  dataSubscribe = await loadSubsiber(state.acessToken,50);
+document.querySelector(".aside_SignIn").classList.remove("hideSub")
+ dataSubscribe = await loadSubsiber(state.acessToken,50);
   aside_bottom_Show_All_Hide_All();
      show_All_Display_block();
 };
