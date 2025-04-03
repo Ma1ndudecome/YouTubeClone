@@ -2,14 +2,14 @@ import { fromViewToShortView } from "../untils/ViewToViewLikeToLike.js";
 import { fromLikeToShortLike } from "../untils/ViewToViewLikeToLike.js";
 
 export function markingProfile(
-  backgorundProfile,
-  profileImg,
-  customUrl,
-  subscribers,
-  countVideos,
-  titleChannel
+    backgorundProfile,
+    profileImg,
+    customUrl,
+    subscribers,
+    countVideos,
+    titleChannel
 ) {
-  return `
+    return `
                        <div class="container_channel dF aiC fdC">
                     <div class="Main_container_Header">
                         <img src="${backgorundProfile}" alt="">
@@ -78,15 +78,15 @@ export function markingProfile(
 }
 
 export function InfoAboutChannel(
-  countSubscribe,
-  countVideo,
-  countViews,
-  accountCreat
+    countSubscribe,
+    countVideo,
+    countViews,
+    accountCreat
 ) {
-  const dateString = accountCreat;
-  const parsedDate = dateFns.parseISO(dateString);
-  const formattedDate = dateFns.format(parsedDate, "MMM d, yyyy");
-  return `
+    const dateString = accountCreat;
+    const parsedDate = dateFns.parseISO(dateString);
+    const formattedDate = dateFns.format(parsedDate, "MMM d, yyyy");
+    return `
    <div class="backdropInfo dF aiC jcC">
         <div class="block_info dF jcC aiC fdC">
             <div class="block_info_header dF jcsB aiC">
@@ -151,7 +151,7 @@ export function markingTranding() {
     `;
 }
 export function markingShowMore(dateRequests, dataProfile, countSubs) {
-  return `
+    return `
     <div class="containerShowMore">
       <div class="TranscriptVideo dF fdC">
             <h1>Transcript</h1>
@@ -163,12 +163,11 @@ export function markingShowMore(dateRequests, dataProfile, countSubs) {
                 <img src="${dataProfile}" alt="">
              </div>
             <div class="description_channel_container">
-                <div class="description_channel_container_title">${
-                  dateRequests[0].snippet.channelTitle
-                }</div>
+                <div class="description_channel_container_title">${dateRequests[0].snippet.channelTitle
+        }</div>
                 <div class="description_channel_container_subscribers">${fromLikeToShortLike(
-                  countSubs
-                )} subscribers</div>
+            countSubs
+        )} subscribers</div>
             </div>
         </div>
         <div class="containerShowMore_aboutChannel dF">
@@ -185,14 +184,20 @@ export function markingShowMore(dateRequests, dataProfile, countSubs) {
     `;
 }
 export function marcinSubscriben(img_profile, title_profile) {
-  return `
-    <div class="block_list_sing_int_subscription dF aiC">
-         <img class="block_list_sing_int_subscription_img" src="${img_profile}" alt="">
+    return `
+    <div class="block_list_sing_int_subscription dF aiC ">
+        <div class="block_list_sing_int_subscription_contain">
+        <img class="block_list_sing_int_subscription_img" src="${img_profile}" alt="">
+        </div>
             <div class="block_list_sing_int_subscription_title">${title_profile}</div>
     </div>`;
 }
+
+export function markibngSubContainer() {
+
+}
 export function markingTab(tabName, iconTab) {
-  return `
+    return `
         <div class="boxtxtGaming" style=" display: flex" >
                          <div  class="iconTxtGaming">
                          ${iconTab()}
@@ -212,40 +217,40 @@ export function markingTab(tabName, iconTab) {
                     `;
 }
 export function iconGaming() {
-  return `
+    return `
     <img class ="iconSports" src ="//yt3.googleusercontent.com/GFc_A-blEltrFJDdN_Hhq7wMxATv1u1LWHF87HZ7duVPBYWfwjeL-mZ8cV2_2hiQfFiHIdM-IXI=s72-c-c0x00ffffff-no-rwa">
     `;
 }
 export function iconNews() {
-  return ``;
+    return ``;
 }
 export function iconSports() {
-  return `
+    return `
   <img class ="iconSports" src ="https://www.theartofcoachingvolleyball.com/wp-content/uploads/2018/01/Premium-Icon-Square.png" alt= "iconSports">
     `;
 }
 export function iconCourses() {
-  return `
+    return `
   <img class ="iconSports" src ="https://media.evingo.com.br/skin/frontend/smartwave/default/images/logo_small_po_inverted.png" alt= "iconCourses">
     `;
 }
 export function iconFashion() {
-  return `
+    return `
   <img class ="iconSports" src ="//yt3.googleusercontent.com/vgDRIrGv4eFbfcyTiubRSwkhzk8zCaHArieUu4H0DijHaWiNF0kr9dJygRu3X2TquIckGXrktg=s72-c-c0x00ffffff-no-rwa" alt= "iconCourses">
     `;
 }
 
 export function markinHistoryVideo(
-  videoImg,
-  videoName,
-  chanelName,
-  countViews,
-  overview,
-  id,
-  date,
-  duration
+    videoImg,
+    videoName,
+    chanelName,
+    countViews,
+    overview,
+    id,
+    date,
+    duration
 ) {
-  return `
+    return `
     <div idvideo=${id} class="container-video chooseVideo" style="display: flex; height: 260px;">
         <div class="video-img-conteiner H100 w36P">
             <img src="${videoImg}" alt="">
