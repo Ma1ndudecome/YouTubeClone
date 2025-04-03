@@ -146,7 +146,7 @@ export function markingTranding() {
             </div>
             <div class="box_video_Tranding">
                 <div class="txtg">Пропоноване</div>
-                <div class="container_video_trending dF fdC" style="width: 70%; gap: 10px;"></div>
+                <div class="container_video_trending dF fdC"></div>
             </div>
         </div>
     `;
@@ -247,8 +247,8 @@ export function markinHistoryVideo(
   duration
 ) {
   return `
-    <div idvideo=${id} class="container-video chooseVideo" style="display: flex; height: 260px;">
-        <div class="video-img-conteiner H100 w36P">
+<div idvideo=${id} class="container-video chooseVideo" style="display: flex;">
+     <div class="video-img-conteiner H100 w36P">
             <img src="${videoImg}" alt="">
             <span class="Container_video_preview_duration">${duration}</span>
         </div>
@@ -262,6 +262,7 @@ export function markinHistoryVideo(
             <span class="name-chanel nameChannelSelect">${chanelName}</span>
         </div>
     <p class="overview-video mT10p">${overview}</p>
+    </div>
 </div>
 `;
 }

@@ -46,7 +46,7 @@ function checkUrlRouting(){
     })
     .on("/Trending", ()=>{
         console.log('load trending')
-        // openTranding()
+        openTranding()
     })
     .on("/Shorts", ()=>{
         console.log('load shorts video')
