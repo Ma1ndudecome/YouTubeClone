@@ -141,7 +141,7 @@ export function markingTranding() {
                     <img class ="iconSports" src ="https://www.youtube.com/img/trending/avatar/trending_animated.webp">
                     <h3 id="txtTitle" style="margin-left: 10px;">Tranding</h3>
                 </div>
-                <br>
+                <hr>
             </div>
             <div class="box_video_Tranding">
                 <div class="txtg">Пропоноване</div>
