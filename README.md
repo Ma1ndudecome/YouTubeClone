@@ -20,6 +20,7 @@
 3. Включите **YouTube Data API v3**.  
 4. Создайте **OAuth 2.0 Client ID и Client Secret**.  
 5. Добавьте **scope**:  https://www.googleapis.com/auth/youtube.force-ssl
+6. щоб додати scope перейдіть в DataAccess та добавте youtube.force-ssl
 
 ### 2️⃣ Создайте файл `APIKEY.js`  
 
@@ -33,12 +34,11 @@ const CLIENT_SECRET = "ВАШ_CLIENT_SECRET";
 ```
 3️⃣ Установите зависимости
 Запустите команду:
-
-bash
-
+```
 npm install
-
+```
 4️⃣ Запустите проект
 bash
-
+```
 npm run start
+```
