@@ -5,7 +5,7 @@ import { formatDuration } from "./reExportUntils.js"
 import { LoadMoreComments } from "../infinityScrollInProfile.js"
 import { arrDataVideo } from "../UI/reExportUI.js"
 import { MarkingPlayerAny, MarkingPlayer, markingShowMore, markingProfile, forYouVideoMarking, shortVideoMarking } from "../Marking/reExportMarking.js"
-import {slideToButton, dateRequest, setNewUrl } from "../features/ReExportFeatures.js"
+import {slideToButton, dateRequest, setNewUrl, container } from "../features/ReExportFeatures.js"
 import {buttonLoadMoreFnc, ListnersToSendComment, ListnersSubscribe, arrDataVideo, addMarkingComent, listnerToContainerComment, FuncLikeAndDisLike} from "../UI/reExportUI.js"
 import { formatDistanceToNow } from "date-fns"
 
@@ -50,7 +50,7 @@ export async function markProfile(main, nameChannel) {
 
   const video = await takeMoreVideoAnyProfile(dataChannel.id)
 
-  setNewUrl(`/Profile:/:${dataChannel.id}/`)
+  setNewUrl(`/Profile/:${nameChannel}/`)
   main.classList.add("block")
 
   if (!channel.brandingSettings.image.bannerExternalUrl) {
@@ -181,11 +181,6 @@ export async function openVideoEverywere(e, classVideo, call, main) {
     localStorage.setItem("History", JSON.stringify(arrDataVideo))
   }
 
-  // const isHistory = arrDataVideo.some(el => el.id === dateRequests[0].id)
-  // if (!isHistory) {
-  //   arrDataVideo.push(dateRequests[0])
-  //   localStorage.setItem("history", JSON.stringify(arrDataVideo))
-  // }
   dateRequests[0].snippet.description = dateRequests[0].snippet.description.replace(/\n/g, '<br>')
 
   const nameChannel = e.target.closest(`${classVideo}`).querySelector(".nameChannelSelect").textContent
@@ -193,11 +188,12 @@ export async function openVideoEverywere(e, classVideo, call, main) {
   const dataChannel = await ImgAndSubscribeChannel(nameChannel)
   console.log(dataChannel)
 
-
+  setNewUrl(`/Video/:${id}`)
   call === 1 ? main.innerHTML = MarkingPlayerAny(id, dateRequests, state, dataChannel) : main.innerHTML = MarkingPlayer(id, dateRequests, state.infoChannel)
 
   call === 1 ? addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, dataChannel.imgChannel, dataChannel.subscriberChannel, id, dataChannel.ChannelId) : addMarkingVideoAndFunctional(main, document.querySelector(".Main_container_blockInfo_description_link"), dateRequests[0].snippet.description, dateRequests, state.infoChannel.img, state.infoChannel.subscriberCount, id, dataChannel.ChannelId)
   call === 2 ? document.querySelector(".leftSide_subscribe_button").remove() : ListnersSubscribe(dataChannel.ChannelId)
+  state.videMarking = main.innerHTML
 }
 export function changeTextContentAndAddClasslist(button, text, clas, addOrRemove) {
   button.textContent = text
