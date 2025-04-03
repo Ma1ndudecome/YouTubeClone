@@ -84,17 +84,10 @@ export function InfoAboutChannel(
     countViews,
     accountCreat
 ) {
-<<<<<<< HEAD
   const dateString = accountCreat;
   const parsedDate = parseISO(dateString);
   const formattedDate = format(parsedDate, "MMM d, yyyy");
   return `
-=======
-    const dateString = accountCreat;
-    const parsedDate = dateFns.parseISO(dateString);
-    const formattedDate = dateFns.format(parsedDate, "MMM d, yyyy");
-    return `
->>>>>>> main
    <div class="backdropInfo dF aiC jcC">
         <div class="block_info dF jcC aiC fdC">
             <div class="block_info_header dF jcsB aiC">
@@ -258,15 +251,9 @@ export function markinHistoryVideo(
     date,
     duration
 ) {
-<<<<<<< HEAD
   return `
 <div idvideo=${id} class="container-video chooseVideo" style="display: flex;">
      <div class="video-img-conteiner H100 w36P">
-=======
-    return `
-    <div idvideo=${id} class="container-video chooseVideo" style="display: flex; height: 260px;">
-        <div class="video-img-conteiner H100 w36P">
->>>>>>> main
             <img src="${videoImg}" alt="">
             <span class="Container_video_preview_duration">${duration}</span>
         </div>

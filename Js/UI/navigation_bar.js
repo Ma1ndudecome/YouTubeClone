@@ -39,7 +39,7 @@ aside.addEventListener('click', (e) => {
         // clickFashion()
     }else if (nameSection === 'You'){
          if(!state.acessToken) return
-        setNewUrl("/Profile")
+        setNewUrl("/Profile", {some:'sadsa'})
 
     }
 
