@@ -18,9 +18,10 @@
 1. Перейдите в [Google Cloud Console](https://console.cloud.google.com/).  
 2. Создайте новый проект.  
 3. Включите **YouTube Data API v3**.  
-4. Создайте **OAuth 2.0 Client ID и Client Secret**.  
-5. Добавьте **scope**:  https://www.googleapis.com/auth/youtube.force-ssl
-6. щоб додати scope перейдіть cridentails виберіть oAuth 2.0 виберіть dataAccess и добавте scope
+4. Создайте **OAuth 2.0 Client ID и Client Secret**.
+5. Додайте scope. Перейдіть cridentails виберіть oAuth 2.0 виберіть dataAccess и добавте scope:https://www.googleapis.com/auth/youtube.force-ssl
+
+
 
 ### 2️⃣ Создайте файл `APIKEY.js`  
 
