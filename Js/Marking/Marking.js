@@ -1,5 +1,6 @@
 import { fromViewToShortView } from "../untils/ViewToViewLikeToLike.js";
 import { fromLikeToShortLike } from "../untils/ViewToViewLikeToLike.js";
+import { parseISO, format } from "date-fns";
 
 export function markingProfile(
     backgorundProfile,
@@ -83,10 +84,10 @@ export function InfoAboutChannel(
     countViews,
     accountCreat
 ) {
-    const dateString = accountCreat;
-    const parsedDate = dateFns.parseISO(dateString);
-    const formattedDate = dateFns.format(parsedDate, "MMM d, yyyy");
-    return `
+  const dateString = accountCreat;
+  const parsedDate = parseISO(dateString);
+  const formattedDate = format(parsedDate, "MMM d, yyyy");
+  return `
    <div class="backdropInfo dF aiC jcC">
         <div class="block_info dF jcC aiC fdC">
             <div class="block_info_header dF jcsB aiC">
@@ -145,7 +146,7 @@ export function markingTranding() {
             </div>
             <div class="box_video_Tranding">
                 <div class="txtg">Пропоноване</div>
-                <div class="container_video_trending dF fdC" style="width: 70%; gap: 10px;"></div>
+                <div class="container_video_trending dF fdC"></div>
             </div>
         </div>
     `;
@@ -250,9 +251,9 @@ export function markinHistoryVideo(
     date,
     duration
 ) {
-    return `
-    <div idvideo=${id} class="container-video chooseVideo" style="display: flex; height: 260px;">
-        <div class="video-img-conteiner H100 w36P">
+  return `
+<div idvideo=${id} class="container-video chooseVideo" style="display: flex;">
+     <div class="video-img-conteiner H100 w36P">
             <img src="${videoImg}" alt="">
             <span class="Container_video_preview_duration">${duration}</span>
         </div>
@@ -266,6 +267,7 @@ export function markinHistoryVideo(
             <span class="name-chanel nameChannelSelect">${chanelName}</span>
         </div>
     <p class="overview-video mT10p">${overview}</p>
+    </div>
 </div>
 `;
 }

@@ -28,6 +28,15 @@
         grid-template-columns: repeat(4, 1fr);
     }
 }
+@media (max-width:1500px) {
+    .iconSports{
+        height:48px ;
+        width:48px ;
+    }
+    .txtTitle{
+        font-size: 20px;
+    }
+}
 @media (max-width:1115px){
     .Container-video-gaming {
         grid-template-columns: repeat(3, 1fr);

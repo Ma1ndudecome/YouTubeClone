@@ -130,7 +130,7 @@ export function MarkingCommentItem(imgComment, userName, date, commentText, coun
 export function MarkingPlayerAny(id, InfoVideo, state, dataChannel){
     return `
         <div class="ContainerPlayerVideo">
-        <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}" title="${InfoVideo[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="1236" height="695" src="https://www.youtube.com/embed/${id}?&autoplay=1" title="${InfoVideo[0].snippet.localized.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <div class="Main_container_blockInfo">
                      <h1>${InfoVideo[0].snippet.title}</h1>
                     <div class="Main_container_blockInfo_statistic">

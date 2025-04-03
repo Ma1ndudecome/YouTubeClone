@@ -4,7 +4,8 @@ import { ShortsContainer, innerContentShorts, iframePlayerShortsVideo, markingTr
 import { TakeTrending, getShortsVideo } from "../api/AllApiRequest.js";
 import {changeInnerHTML, fromLikeToShortLike, fromViewToShortView, dateTime, formatDuration} from "../untils/reExportUntils.js";
 import { observeToTrigerShorts } from "../infinityScrollInProfile.js";
-import { setNewUrl } from "../features/ReExportFeatures.js";
+import { setNewUrl, ViewChannel } from "../features/ReExportFeatures.js";
+import { state } from "../URL/reExportUrl.js";
 let videoShorts = []
 
 let counter = 0
@@ -14,23 +15,34 @@ aside.addEventListener('click', (e) => {
     e.preventDefault()
     const nameSection = e.target.parentNode.querySelector("p").textContent;
     if (nameSection === 'Trending') {
-        openTranding()
+        setNewUrl("/Trending")
+
+        // openTranding()
     }else if(nameSection === 'Shorts'){
-        openShortsVideo()
+        setNewUrl("/Shorts")
+
+        // openShortsVideo()
     }else if(nameSection === 'Gaming'){
-        clickGaming()
+        setNewUrl("/Gaming")
+        // clickGaming()
     }else if(nameSection === 'News'){
-        clickNews()
+        setNewUrl("/News")
+        // clickNews()
     }else if(nameSection === 'Sports'){
-        clickSports()
+        setNewUrl("/Sports")
+        // clickSports()
     }else if(nameSection === 'Courses'){
-        clickCourses()
+        setNewUrl("/Courses")
+        // clickCourses()
     }else if(nameSection === 'Fashion & Beauty'){
-        clickFashion()
+        setNewUrl("/Fashion")
+        // clickFashion()
+    }else if (nameSection === 'You'){
+         if(!state.acessToken) return
+        setNewUrl("/Profile", {some:'sadsa'})
+
     }
-    else{
-        console.log("none Click")
-    }
+
 })
 
 function MarkingTabTranding() {
@@ -91,10 +103,13 @@ function listnersToArrowUp(){
 function arrowDownClick(){
     increaseCounter()
     const iframe = takeIframes(1)
-    console.log(iframe)
-    iframe.currIframes.scrollIntoView({behavior:"smooth"})
 
-    pauseStartVideo(iframe.currIframes, iframe.nextIframes)
+    iframe.currIframes.scrollIntoView({behavior:"smooth"})
+    
+    controlPlayer(iframe.currIframes, 'playVideo')
+    controlPlayer(iframe.prevFrame, 'pauseVideo')
+
+    // pauseStartVideo(iframe.currIframes, iframe.prevFrames)
 
 }
 function scrollUp(){
@@ -103,15 +118,18 @@ function scrollUp(){
     console.log(iframe)
     
     iframe.currIframes.scrollIntoView({behavior:"smooth"})
+   console.log(iframe.prevFrames)
+    controlPlayer(iframe.currIframes, 'playVideo')
+    controlPlayer(iframe.prevFrames, 'pauseVideo')
 
-    pauseStartVideo(iframe.currIframes, iframe.prevFrames)
+    // pauseStartVideo(iframe.currIframes, iframe.prevFrames)
 
 }
 function takeIframes(type){
     const iframe =  document.querySelectorAll("iframe")
 
     let nextCurrIframe;
-    type === 1 ?  nextCurrIframe = {nextIframes:iframe[counter + 1]} :  nextCurrIframe =  {prevFrames:iframe[counter - 1]}
+    type === 1 ?  nextCurrIframe = {nextIframes:iframe[counter + 1], prevFrame:iframe[counter -1]} :  nextCurrIframe =  {prevFrames:iframe[counter + 1]}
     return {currIframes:iframe[counter], ...nextCurrIframe}
     
 }
@@ -121,6 +139,7 @@ function pauseStartVideo(Iframe1, Iframe2){
     
 }
 function controlPlayer(el, type){
+    if(!el) return
     const iframe = el.contentWindow;
         iframe.postMessage(
             '{"event":"command","func":"' + `${type}` + '","args":""}',
@@ -162,6 +181,7 @@ async function LoadMoreShortsVideo(){
     }
 }
 function scrollToShorts(){
+   
     let lastScroll = 0
 
     window.onscroll = ()=>{

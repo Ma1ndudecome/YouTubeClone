@@ -41,9 +41,6 @@ export function inserEl(el, positon, marking) {
     el.insertAdjacentHTML(positon, marking)
 }
 
-window.addEventListener("popstate", (event)=>{
-    console.log(event.state)
-})
 
 
 

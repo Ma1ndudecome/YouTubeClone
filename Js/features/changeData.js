@@ -73,7 +73,7 @@ function renderProfile(dataProfile, detailInformationVideo) {
   container.insertAdjacentHTML("afterbegin", profileMark(banner, profileData.snippet.thumbnails.default.url, profileData.snippet.customUrl, profileData.statistics.subscriberCount, profileData.statistics.videoCount, profileData.brandingSettings.channel.title))
 
   if (!profileData.brandingSettings.image) {
-    selectElements(document, "Main_container_Header")?.remove();
+    selectElements(document, ".Main_container_Header")?.remove();
 
   }
   const video = TakeShortAndLongVideo(detailInformationVideo)
@@ -150,9 +150,9 @@ function leftClick(container) {
 }
 
 function checkWhatDeleteAndRemoveNav(el) {
-  const nav = selectElements(document, ".container_channel_navigation_item")
+  const nav = document.querySelectorAll(".container_channel_navigation_item")
   if (el.classList.contains("Shorts_video_container")) {
-    nav.length === 3 ? nav[2].remove() : nav[1].remove()
+    nav.length === 3 ? nav[2]?.remove() : nav[1]?.remove()
   }
   if (el.classList.contains("ForYou_Container_video")) {
 
