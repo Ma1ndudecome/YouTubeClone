@@ -3,12 +3,12 @@ import { once } from "process"
 import { URL } from "../URL/createObject.js"
 import { markingProfile } from "../Marking/Marking.js"
 import { TIMEOUT } from "dns"
-
+import { dataSubscribe } from "../api/PostToToken.js"
 // gaming
 import { container, setNewUrl } from "../features/ReExportFeatures.js";
 import { GetContentGaming } from "../api/AllApiRequest.js";
 import { dateTime, fromViewToShortView, formatDuration, addClassList, removeClassList, changeInnerHTML, selectElements } from "../untils/reExportUntils.js";
-import { shortVideoMarking, markingTab, makeMarkingVideo, iconGaming ,iconNews ,iconSports,iconCourses,iconFashion} from "../Marking/reExportMarking.js";
+import { shortVideoMarking, markingTab, makeMarkingVideo, iconGaming, iconNews, iconSports, iconCourses, iconFashion } from "../Marking/reExportMarking.js";
 import { TakeTrending } from "../api/AllApiRequest.js"
 
 let glass_adaptation = document.getElementById("glass_adaptation")
@@ -73,7 +73,7 @@ export function themeChange(block, oldMark) {
     }, { once: true });
     block.querySelector(".back")?.addEventListener("click", () => {
         block.innerHTML = oldMark
-      block.classList.remove("block")
+        block.classList.remove("block")
     })
 
     block.querySelector(".light_theme")?.addEventListener("click", () => {
@@ -96,37 +96,45 @@ export function loadSavedTheme() {
     }
 }
 
- 
-  const show_All_Hide_All = document.querySelector(".aside_bottom_Show_All_Hide_All")
-  const show_All = document.querySelector(".show_All")
-  const hide_All = document.querySelector(".hide_All")
 
- export function aside_bottom_Show_All_Hide_All () {
-     show_All_Hide_All.style.display = "block"
-     console.log("1")
-  }
+const show_All_Hide_All = document.querySelector(".aside_bottom_Show_All_Hide_All")
+const show_All = document.querySelector(".show_All")
+const hide_All = document.querySelector(".hide_All")
 
- export function show_All_Display_block  () {
-      show_All.style.display = "flex"
-    
-      
-  }
- function show_All_none_Hide_All_none  () {
+export function aside_bottom_Show_All_Hide_All() {
+    show_All_Hide_All.style.display = "block"
+    console.log("1")
+}
+
+export function show_All_Display_block() {
+    show_All.style.display = "flex"
+
+
+}
+function show_All_none_Hide_All_none() {
     show_All.style.display = "none"
     show_All_Hide_All.style.display = "none"
-    
-  }
+
+}
+
+function showLessSub() {
+    const asideLess = document.querySelector(".aside_SignIn")
+    asideLess.classList.add("hideSub")
+    show_All.style.display = "none"
+    console.log(123)
+
+}
 
 
 
 show_All.onclick = show_All_none_Hide_All_none()
-    
+
 
 const aside_SignIn_buttonMore_2 = document.getElementsByClassName("aside_SignIn_buttonMore_2")
 
 hide_All.onclick = () => {
-    show_All_none_Hide_All_none();
-   
+    // show_All_none_Hide_All_none()
+
     const dataSubscribeSet = new Set(dataSubscribe);
 
     const blockListSing = document.querySelectorAll(".block_list_sing_int_subscription_title");
@@ -135,8 +143,8 @@ hide_All.onclick = () => {
             el.parentElement.remove();
         }
     });
-        
-  
+
+
 };
 
 
@@ -166,7 +174,7 @@ async function fillingContentTab(func) {
     const shortsContainer = selectElements(container, ".shorts-video-conteiner")
     const videos = await func();
     console.log(videos);
-    
+
 
     videos.data.items.forEach(el => {
         if (el.snippet.liveBroadcastContent !== 'none') return
@@ -177,7 +185,7 @@ async function fillingContentTab(func) {
         } else {
             gamingContainer.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), dateTime(el.snippet.publishedAt), durationVideo, el.id))
         }
-        
+
     })
 }
 

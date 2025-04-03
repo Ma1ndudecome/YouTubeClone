@@ -28,6 +28,9 @@ aside.addEventListener('click', (e) => {
     }else if(nameSection === 'Fashion & Beauty'){
         clickFashion()
     }
+    else{
+        console.log("none Click")
+    }
 })
 
 function MarkingTabTranding() {

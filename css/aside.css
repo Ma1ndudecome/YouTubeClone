@@ -103,7 +103,7 @@ aside.hidden {
 }
 
 .block_list_sing_int_subscription {
-    gap: 25px;
+    gap: 20px;
 
 }
 
@@ -266,4 +266,9 @@ aside.wow .menu_Explore.down {
     aside {
         display: none;
     }
+}
+
+.hideSub{
+    height: 400px !important;
+    overflow: hidden;
 }
