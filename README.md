@@ -36,12 +36,10 @@ const SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"];
 Запустите команду:
 
 bash
-Копировать
-Редактировать
+
 npm install
 
 4️⃣ Запустите проект
 bash
-Копировать
-Редактировать
+
 npm run start
