@@ -26,8 +26,9 @@ if (code) {
             const response = await getAccesToken('accessToken')
             saveAcessToken(response.data.access_token)
             const dataAccount = await getDataAccount()
-
+            console.log(response)
             if (response.data.refresh_token) {
+                console.log(response.data)
 
                 const check = refreshTokenProfile.some(el => el.name === dataAccount.data.items[0].snippet.title)
                 if (!check) {

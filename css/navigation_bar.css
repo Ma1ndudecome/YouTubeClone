@@ -1,17 +1,16 @@
-body{
-    height: 1px;
-}
+
 .txtTitle{
     font-family: Roboto, serif;
 }
-@media (max-width:1500px) {
-    .iconSports{
-        height:48px ;
-        width:48px ;
-    }
-    .txtTitle{
-        font-size: 20px;
-    }
+.container_video_trending{
+    width: 100%;
+    gap:20px;
+}
+hr{
+    margin-top: 20px;
+}
+.box_video_Tranding{
+    margin-top: 10px;
 }
 @media (max-width: 1200px) {
     .container-video{
@@ -51,36 +50,44 @@ body{
         font-size: 14px;
     }
 }
-@media (max-width: 768px) {
-    .container-video{
-        height: 150px;
-    }
-    .iconSports {
-        width: 32px;
-        height: 32px;
-    }
-    .txtTitle{
-        font-size: 16px;
-    }
+
+@media (max-width:720px){
     .nameVideo{
-        font-size: 13px;
-    }
-    .name-chanel{
-        font-size: 14px;
-    }
-    .fS14 {
-        font-size: 13px;
-    }
-    .overview-video{
-        font-size: 14px;
-    }
-    .mT10p {
-        margin-top: 5px;
-    }
-    .chanel-info {
-        margin-bottom: 5px;
+        font-size: 18px;
     }
 }
-@media (max-width: 768px) {
-
+@media (max-width:630px) {
+    .nameVideo{
+        font-size: 16px;
+    }
+}
+@media (max-width:570px) {
+    .container-video{
+        flex-direction: column;
+        height: 330px;
+        align-items: center;
+    }
+    .video-img-conteiner {
+        width: 80% !important;
+        height: 70% !important;
+    }
+    .overview{
+        width: 83%;
+    }
+}
+@media (max-width:470px) {
+    .video-img-conteiner{
+        width: 100% !important;
+        margin-right: 0px;
+    }
+    .overview{
+        width: 100%;
+        padding-left: 20px;
+    }
+    
+}
+@media (max-width:380px) {
+    .nameVideo{
+        font-size: 14px;
+    }
 }

@@ -97,6 +97,10 @@ aside.hidden {
 /* Блок на кого подписан профиль */
 .aside_SignIn .block_list_Sing_int {
     width: 90%;
+<<<<<<< HEAD
+   padding: 15px 0px 15px 20px;
+=======
+>>>>>>> main
     padding-left: 20px;
     gap: 20px;
 
