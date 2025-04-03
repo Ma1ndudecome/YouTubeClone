@@ -15,7 +15,8 @@
     font-size: 16px;
     font-weight: 500;
     padding-left: 10px;
-    color:var(--bordColor)
+    color:var(--bordColor);
+    margin-top: 10px;
 }
 .Explore_element_menu{
     display: flex;

@@ -1,4 +1,4 @@
-aside{
+aside {
     position: fixed;
     width: 250px;
     max-height: 100vh;
@@ -6,53 +6,63 @@ aside{
     background-color: var(--WhColor);
     overflow-x: hidden;
     left: 0;
-    top:50px;
+    top: 50px;
     z-index: 999;
-    
+
 }
+
 aside::-webkit-scrollbar {
-    width: 10px;
-    
+    width: 7px;
+
+
 }
+
 aside:hover::-webkit-scrollbar-thumb {
-    background-color:var(--hovColor)
+    background-color: var(--headerColor)
 }
+
 aside::-webkit-scrollbar-thumb {
     background-color: transparent;
     border-radius: 10px;
 }
-aside::-webkit-scrollbar-thumb:hover{
-    background-color: var(--hovSing)
-    
-}
-aside.hidden {
-    transform: translateX(-100%); /* Скрыто за экраном */
-}
-    
 
-.aside_SignIn{
+aside::-webkit-scrollbar-thumb:hover {
+    background-color: var(--hovSing)
+}
+
+aside.hidden {
+    transform: translateX(-100%);
+    /* Скрыто за экраном */
+}
+
+
+.aside_SignIn {
     display: flex;
     justify-content: start;
     align-items: center;
     height: 120px;
     border-bottom: 2px solid rgba(0, 0, 0, 0.13);
 }
-.aside_SignIn_Container{
+
+.aside_SignIn_Container {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding-left: 25px;
 }
-.SignIn_paragraph{
+
+.SignIn_paragraph {
     font-family: "Poppins", serif;
     font-weight: 400;
     font-size: 14px;
-    color:var(--bordColor)
+    color: var(--bordColor)
 }
-.aside_SignIn_Container{
+
+.aside_SignIn_Container {
     width: 180px;
 }
-.SignIn_element{
+
+.SignIn_element {
     width: 100px;
     border: 1px solid rgba(0, 0, 0, 0.13);
     border-radius: 30px;
@@ -63,74 +73,103 @@ aside.hidden {
     gap: 10px;
     cursor: pointer;
 }
-.SignIn_element:hover{
-    background-color:var(--hovSing)
 
+.SignIn_element:hover {
+    background-color: var(--hovSing)
 }
-.SignIn_element a{
+
+.SignIn_element a {
     text-decoration: none;
-    color:#065FD4;
+    color: #065FD4;
     font-family: "Poppins", serif;
     font-weight: 500;
     font-size: 14px;
 }
-.mok1{
+
+.mok1 {
     height: 145px;
 }
-.mok2{
+
+.mok2 {
     height: 105px;
 }
+
 /* Блок на кого подписан профиль */
-.aside_SignIn .block_list_Sing_int{
+.aside_SignIn .block_list_Sing_int {
     width: 90%;
+<<<<<<< HEAD
    padding: 15px 0px 15px 20px;
+=======
+>>>>>>> main
     padding-left: 20px;
     gap: 20px;
-    
-  
-
-}
-.block_list_sing_int_subscription{
-    gap: 10px;
 
 }
 
-.block_list_sing_int_subscription_img{
-    width: 35px;
-    height: 35px;
+.block_list_sing_int_subscription {
+    gap: 25px;
+
+}
+
+.block_list_sing_int_subscription_img {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
-.block_list_sing_int_subscription_title{
+
+.block_list_sing_int_subscription_contain {
+    width: 24px;
+    height: 24px;
+}
+.block_list_sing_int_subscription_title {
     color: var(--bordColor);
     font-family: "Roboto", "Arial", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    font-weight: 500;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     max-width: 130px;
 }
-.aside_SignIn_buttonMore_text{
+h3{
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: 500;
+    overflow: hidden;
+    color: var(--bordColor);
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+
+.aside_SignIn_buttonMore_text {
     padding-left: 10px;
 }
-.aside_SignIn_buttonMore{
+
+.aside_SignIn_buttonMore {
     width: 100%;
     padding-left: 40px;
     cursor: pointer;
     margin-top: 20px;
     font-family: "Roboto", "Arial", sans-serif;
+    padding-bottom: 10px;
 }
 
-.aside_SignIn_buttonMore_text{
+.aside_SignIn_buttonMore_text {
     color: var(--bordColor);
     margin-left: 13px;
 }
-.aside_bottom_Show_All_Hide_All{
+
+.aside_bottom_Show_All_Hide_All {
     width: 100%;
     padding-left: 40px;
     margin-top: 20px;
     display: none;
     cursor: pointer;
 }
-.show_All{
+
+.show_All {
     width: 100%;
     height: 24px;
     color: var(--bordColor);
@@ -138,49 +177,57 @@ aside.hidden {
     font-family: "Roboto", "Arial", sans-serif;
     gap: 10px;
 }
-.all_subscriptions{
+
+.all_subscriptions {
     padding-left: 12px;
 }
-.hide_All{
+
+.hide_All {
     color: var(--bordColor);
     font-family: "Roboto", "Arial", sans-serif;
     gap: 12px;
     margin-top: 20px;
 }
 
-.hide_All_svg{
+.hide_All_svg {
     width: 24px;
     height: 24px;
 }
 
-.hide_All_text{
+.hide_All_text {
     padding-left: 10px;
 }
 
-.d_F{
+.d_F {
     display: flex;
 }
+
 /* Конец */
-aside.positionFixed{
+aside.positionFixed {
     z-index: 999;
-    top:55px;
+    top: 55px;
 }
 
 aside.wow .Explore_element_menu li a {
     flex-direction: row;
 }
-aside.wow{
+
+aside.wow {
     width: 230px;
 }
-aside.wow .SignIn_paragraph{
+
+aside.wow .SignIn_paragraph {
     display: block;
 }
-aside.wow .Sign_In_button{
+
+aside.wow .Sign_In_button {
     display: block;
 }
+
 aside.wow .aside_SignIn {
     display: block;
 }
+
 aside.wow .menu_Explore.down {
     display: block;
 }
@@ -189,18 +236,23 @@ aside.wow .menu_Explore.down {
     .Explore_element_menu li a {
         flex-direction: column;
     }
-    aside{
+
+    aside {
         width: 100px;
     }
-    .explore_Container{
+
+    .explore_Container {
         padding: 10px;
     }
-    .SignIn_paragraph{
+
+    .SignIn_paragraph {
         display: none;
     }
-    .Sign_In_button{
+
+    .Sign_In_button {
         display: none;
     }
+
     .aside_SignIn {
         height: 90px;
         display: none;
@@ -213,8 +265,9 @@ aside.wow .menu_Explore.down {
         padding-top: 5px;
     }
 }
+
 @media (max-width:720px) {
-    aside{
+    aside {
         display: none;
     }
 }
