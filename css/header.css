@@ -93,7 +93,7 @@ header .search {
     width: 100%;
     min-width: 100px;
     height: 40px;
-    border: 1px solid var(--hoverBlack);
+    border: 1px solid var(--hovColor);
     border-radius: 24px 24px 24px 24px;
     transition: max-width 0.3s ease-in-out;
     cursor: text;
@@ -133,7 +133,6 @@ header .search_adaptation {
     display: flex;
     align-items: center;
     width: calc(100% - 40px);
-
     height: 40px;
     border: 1px solid var(--bordColor);
     border-radius: 15px 15px 15px 15px;
@@ -296,7 +295,6 @@ header .search input {
 }
 
 header .search .glass {
-    border: 1px solid hsl(0, 0%, 18.82%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -313,7 +311,7 @@ header .glass:hover {
 }
 
 header .micro {
-    border: 1px solid black;
+    border: 1px solid var(--hovColor);
     border-radius: 50%;
     width: 40px;
     height: 40px;
