@@ -1,6 +1,15 @@
 "use strict"
-import { URL } from "../URL/reExportUrl.js"
+import { once } from "process"
+import { URL } from "../URL/createObject.js"
+import { markingProfile } from "../Marking/Marking.js"
+import { TIMEOUT } from "dns"
 
+// gaming
+import { container, setNewUrl } from "../features/ReExportFeatures.js";
+import { GetContentGaming } from "../api/AllApiRequest.js";
+import { dateTime, fromViewToShortView, formatDuration, addClassList, removeClassList, changeInnerHTML, selectElements } from "../untils/reExportUntils.js";
+import { shortVideoMarking, markingTab, makeMarkingVideo, iconGaming ,iconNews ,iconSports,iconCourses,iconFashion} from "../Marking/reExportMarking.js";
+import { TakeTrending } from "../api/AllApiRequest.js"
 
 let glass_adaptation = document.getElementById("glass_adaptation")
 let adaptation = document.getElementById("adaptation")
@@ -54,26 +63,33 @@ subscriberContainer.onclick = functionLogin
 SingButton.onclick = functionLogin
 
 
-export function themeChange(block) {
+export function themeChange(block, oldMark) {
     block.querySelector(".dark_theme")?.addEventListener("click", () => {
         document.documentElement.classList.add("black");
         document.documentElement.classList.remove("white");
         localStorage.setItem('theme', 'black');
-    });
+        block.innerHTML = oldMark
+        block.classList.remove("block")
+    }, { once: true });
+    block.querySelector(".back")?.addEventListener("click", () => {
+        block.innerHTML = oldMark
+      block.classList.remove("block")
+    })
 
     block.querySelector(".light_theme")?.addEventListener("click", () => {
         document.documentElement.classList.add("white");
         document.documentElement.classList.remove("black");
         localStorage.setItem('theme', 'white');
-    });
+        block.innerHTML = oldMark
+        block.classList.remove("block")
+
+    }, { once: true });
 }
 export function loadSavedTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         document.documentElement.removeAttribute('class')
-
         document.documentElement.classList.toggle(savedTheme);
-        console.log(savedTheme)
     } else {
         document.documentElement.removeAttribute('class')
         document.documentElement.classList.add('white');
@@ -135,3 +151,66 @@ const number_of_Subscriptions = document.getElementById("number_of_Subscriptions
 const channel_description = document.getElementById("channel_description") // Описание канала
 
 
+// TAB
+
+function tabContainerBlock() {
+    removeClassList(container, "grid")
+    addClassList(container, "block")
+}
+function changeInnerMarkingTab(nameTab, iconTab) {
+    changeInnerHTML(container, '')
+    changeInnerHTML(container, markingTab(nameTab, iconTab))
+}
+async function fillingContentTab(func) {
+    const gamingContainer = selectElements(container, ".Container-video-gaming")
+    const shortsContainer = selectElements(container, ".shorts-video-conteiner")
+    const videos = await func();
+    console.log(videos);
+    
+
+    videos.data.items.forEach(el => {
+        if (el.snippet.liveBroadcastContent !== 'none') return
+        let durationVideo = formatDuration(el.contentDetails.duration)
+
+        if (Number(durationVideo[0]) === 0) {
+            shortsContainer.insertAdjacentHTML("beforeend", shortVideoMarking(el.snippet.thumbnails.standard.url, el.snippet.title, el.statistics.viewCount, el.id))
+        } else {
+            gamingContainer.insertAdjacentHTML("beforeend", makeMarkingVideo(el.snippet.thumbnails.high.url, el.snippet.thumbnails.default.url, el.snippet.title, el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), dateTime(el.snippet.publishedAt), durationVideo, el.id))
+        }
+        
+    })
+}
+
+export async function clickGaming() {
+    setNewUrl("/Gaming")
+    tabContainerBlock()
+    changeInnerMarkingTab("Gaming", iconGaming)
+    fillingContentTab(() => TakeTrending(20))
+}
+
+export async function clickNews() {
+    setNewUrl("/News")
+    tabContainerBlock()
+    changeInnerMarkingTab("News", iconNews)
+    let textNews = document.getElementById("txtTab")
+    textNews.style.fontSize = "50px"
+    fillingContentTab(() => TakeTrending(25))
+}
+export async function clickSports() {
+    setNewUrl("/Sports")
+    tabContainerBlock()
+    changeInnerMarkingTab("Sports", iconSports)
+    fillingContentTab(() => TakeTrending(17))
+}
+export async function clickCourses() {
+    setNewUrl("/Courses")
+    tabContainerBlock()
+    changeInnerMarkingTab("Courses", iconCourses)
+    fillingContentTab(() => TakeTrending(24))
+}
+export async function clickFashion() {
+    setNewUrl("/Fashion")
+    tabContainerBlock()
+    changeInnerMarkingTab("Fashion", iconFashion)
+    fillingContentTab(() => TakeTrending(26));
+}

@@ -3,7 +3,7 @@
     border-radius: 12px;
     position: relative;
     gap: 10px;
-    overflow: hidden;
+    overflow-x: scroll;
 }
 
 .shorts-video-inner {
@@ -14,8 +14,58 @@
     align-items: center;
     width: calc((100vh - 96px) * 0.5625);
     height: calc(100vh - 96px);
+    position: relative;
+    overflow: hidden;
 }
+.shorts-video-inner-info{
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
 
+    gap: 10px;
+    left: 30px;
+}
+.shorts-video-inner-info-channel{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.shorts-video-inner-info-channel-picture{
+    width: 34px;
+    height: 34px;
+}
+.shorts-video-inner-info-channel-picture img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.shorts-video-inner-info-channel-button button{
+    color:black;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    
+}
+.shorts-video-inner-info-channel-button button:hover{
+   background-color: #cecbcb;
+}
+.shorts-video-inner-info-channel-name, .shorts-video-inner-info-description{
+    color:var(--bordColor);
+    font-family: "Roboto", "Arial", sans-serif;
+    font-weight: 500;
+}
+.shorts-video-inner-info-description{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    max-width: 400px;
+}
 .Main {
     display: flex;
     flex-direction: row;
@@ -45,6 +95,9 @@
     align-items: center;
     gap: 4px;
     font-size: 18px;
+    color:var(--bordColor);
+    font-family: "Roboto", "Arial", sans-serif;
+    font-weight: 500;
 }
 
 .shorts-btn-like-conteiner-svg,
@@ -61,6 +114,7 @@
     background-color: rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
     transition: 400ms;
+    
 }
 
 
@@ -88,7 +142,7 @@
 }
 
 .shorts-nav-btn {
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -108,7 +162,7 @@
 }
 .shorts-video-inner iframe{
     width: 100%;
-    height: 100%;
+    height: 130%;
 }
 
 /* shorts gaming*/
@@ -139,12 +193,16 @@
     font-size: 18px;
 }
 .shorts-video-conteiner{
-    overflow-x: scroll;
+    
     color: white;
+    padding-bottom: 20px;
 }
 .iconTxtGaming{
     display: flex; 
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+}
+.ShortsTriger{
+    height: 1px;
 }

@@ -75,6 +75,14 @@ export function markingSubribe(img, title) {
 export function markingChangeTheme() {
 
     return `
+         <div class="back dF">
+                        <div class="arrow_back dF jcC">
+                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" aria-hidden="true" style="pointer-events: none; display: inherit; width: 24px; height: 24px;"><path d="M21 11v1H5.64l6.72 6.72-.71.71-7.93-7.93 7.92-7.92.71.71L5.64 11H21z"></path></svg>
+                        </div>
+                       <div class="back_appear dF aiC">
+                            <p>Appearance</p>
+                       </div>
+                    </div>
         <div class=" dF aiC  dark_theme">
                       Dark Theme
                     </div>
@@ -83,3 +91,4 @@ export function markingChangeTheme() {
                     </div>
                     `
 }
+

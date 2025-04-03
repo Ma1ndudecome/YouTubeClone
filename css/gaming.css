@@ -1,0 +1,45 @@
+/* CSS Gaming*/
+
+.boxtxtGaming{
+    margin-left: 20px;
+}
+.txtgaming{
+    color: rgb(182, 0, 0);
+    display: flex;
+    align-items: center;
+}
+.txtg{
+    color:var(--bordColor);
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+#txtTab{
+    color:var(--bordColor);
+    font-size: 30px;
+}
+.iconSports{
+    height:64px ;
+    width:64px ;
+}
+@media (max-width:1730px){
+    .Container-video-gaming {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (max-width:1115px){
+    .Container-video-gaming {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width:865px){
+    .Container-video-gaming {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width:590px){
+    .Container-video-gaming {
+        justify-items: center;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+

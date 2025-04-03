@@ -1,3 +1,3 @@
 export * from "./Request.js"
-export * from "./URL.js"
+export * from "./createObject.js"
 export * from "./config.js"

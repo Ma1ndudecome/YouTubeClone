@@ -49,6 +49,12 @@ padding: 0;
 .mT10p{
   margin-top: 10px;
 }
+.mB100P{
+  margin-bottom: 100px;
+}
+.mB20P{
+  margin-bottom: 20px;
+}
 .gap15P{
   gap: 15px;
 }

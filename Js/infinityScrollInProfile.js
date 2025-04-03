@@ -1,11 +1,12 @@
-import { state } from "./features/changeData.js"
-import { forYouVideoMarking } from "./Marking/profileVideoMarking.js";
-import { formatDuration } from "./untils/FromISOToTime.js";
+import { state } from "./URL/createObject.js"
 import axios from 'axios'
+import { takeComment, SearchContent } from "./api/ReExportAPI.js";
+import { markinHistoryVideo } from "./Marking/Marking.js";
+import { formatDuration, dateTime } from "./untils/reExportUntils.js";
+import { fromViewToShortView } from "./untils/ViewToViewLikeToLike.js";
+import {  addMarkingComent} from "./UI/reExportUI.js";
 
 
-import { takeComment } from "./api/AllApiRequest.js";
-import { addMarkingComent } from "./untils/HelpsFunction.js";
 export async function loadVideoInProfile(accessToken, dataProfile, tokenVideo){
     return await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems`, {
         headers: { 'Authorization': `Bearer ${accessToken}` },
@@ -82,4 +83,31 @@ function checkEntriesAndTakeResponse(entries, id){
       }
     }
   })
+}
+
+export function infinityScrollSearch(value){
+  const searchTriger = document.querySelector(".TrigerSearch")
+
+  const observ = new IntersectionObserver( ()=>{
+    loadMoreInSearch(value)
+  })
+  observ.observe(searchTriger)
+}
+async function loadMoreInSearch(value){
+  const contVideo = document.querySelector(".InnerContainerVideoSearch")
+  const videos =  await SearchContent(value)
+   videos.data.items.forEach(el=>{
+       el.snippet.liveBroadcastContent === 'none' ? contVideo.insertAdjacentHTML('beforeend', markinHistoryVideo(el.snippet.thumbnails.high.url, el.snippet.title,el.snippet.channelTitle, fromViewToShortView(el.statistics.viewCount), el.snippet.description, el.id, dateTime(el.snippet.publishedAt), formatDuration(el.contentDetails.duration))) : false
+   })
+}
+
+export function observeToTrigerShorts(fnc){
+  const ShortsTriger = document.getElementsByClassName("ShortsTriger")[0]
+  const observ = new IntersectionObserver((entry)=>{
+    if(entry[0].isIntersecting){
+      fnc()
+    }
+  })
+  observ.observe(ShortsTriger)
+
 }
