@@ -27,10 +27,12 @@
 Создайте в корне проекта файл **`APIKEY.js`** и добавьте в него свои ключи:  
 
 ```js
-const API_KEY = "ВАШ_API_КЛЮЧ";
-const CLIENT_ID = "ВАШ_CLIENT_ID";
-const CLIENT_SECRET = "ВАШ_CLIENT_SECRET";
+const APIKEY = 'YOUR API'
+const cliendId = 'Your clientId'
+const clientSecret = 'Your Client'
+const redirectUri = 'your Redirect'
 
+let isVideo = false
 ```
 3️⃣ Установите зависимости
 Запустите команду:
