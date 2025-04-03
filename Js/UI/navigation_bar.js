@@ -181,7 +181,7 @@ async function LoadMoreShortsVideo(){
     }
 }
 function scrollToShorts(){
-    return
+   
     let lastScroll = 0
 
     window.onscroll = ()=>{
